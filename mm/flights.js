@@ -1,37 +1,5 @@
-// auto generated!!
+// auto generated, do not manually edit this!!
 var flight = new Array;
-//--- Logs start ---
-//      creating ORD-HKG with CX77A
-//      creating HKG-ORD with CX77A
-//      adding QF744 to SYD-PER (from DB: QF332|QF73H|QF763), now=QF332|QF73H|QF763|QF744
-//      removing HKG-JFK as last service CX773 was removed
-//      removing JFK-HKG as last service CX773 was removed
-//      removing HKG-YYZ as last service CX773 was removed
-//      removing YYZ-HKG as last service CX773 was removed
-//      creating HKG-YYZ with CX77A
-//      creating YYZ-HKG with CX77A
-//      creating HKG-JFK with CX77A
-//      creating JFK-HKG with CX77A
-//      creating ORD-ANC with AA757
-//      creating ANC-ORD with AA757
-//      creating FUK-FSZ with JLEMJ
-//      creating FSZ-FUK with JLEMJ
-//      creating CTS-FSZ with JLEMJ
-//      creating FSZ-CTS with JLEMJ
-//      creating LCY-GVA with BAAR1
-//      creating GVA-LCY with BAAR1
-//      creating LCY-LYS with BAAR1
-//      creating LYS-LCY with BAAR1
-//      creating YUL-UVF with AA738
-//      creating LAX-YUL with AAM80
-//      removeall HEL-TKU (was AYAT7|AYATR)
-//      removeall HEL-TLL (was AY320|AYAT7|AYATR)
-//      removeall HEL-TMP (was AYAT7)
-//      removeall TKU-HEL (was AYAT7|AYATR)
-//      removeall TLL-HEL (was AY320|AYAT7|AYATR)
-//      removeall TMP-HEL (was AYAT7)
-//--- Logs  end  ---
-
 flight["AAN-AMM"] = "RJE95,jy";
 flight["AAQ-DME"] = "S7319,y";
 flight["AAQ-OVB"] = "S7320,y";
