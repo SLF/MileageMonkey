@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html><head><!-- saved from url=(0036)http://jph.bytestacker.com/award.htm -->
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>MileageMonkey 0.95001</title>
+<title>MileageMonkey 0.95002</title>
 <style>
 TABLE {
         FONT-FAMILY: sans-serif ; font-size: 8pt
@@ -118,11 +118,21 @@ function setmap(route)
   window.open("http://gc.kls2.com/cgi-bin/gcmap?PATH="+route+"&PATH-UNITS=mi&RANGE_STYLE=best",'maparea','');
 }
 
-function setemap(mapper, map, str)
+function setemap(mapper, map, str, ri)
 {
   earn_mapper = mapper;
   earn_map    = map;
   earn_help   = str;
+
+// now save the earnings preference to a cookie, but only if changed
+  if(ri != readEPCookie()) {
+  		var expires = new Date();
+  		expires.setTime(3*365*86400*1000 + expires.getTime());
+		document.cookie =
+			"setearn=" + ri +
+			";domain=slfft.allhyper.com;expires=" +
+			expires.toGMTString();
+	}
 }
 
 //===============================================
@@ -134,12 +144,38 @@ function setearn()
   var radio2 = document.earnradioform.earn;
   for(var ri=0; ri<radio2.length; ri++) {
     if (radio2[ri].checked) {
-      if (ri == 0) setemap(findmap, qf_oldscmap, qf_oldhelp);
-      if (ri == 1) setemap(findmap, qf_newscmap, qf_newhelp);
-      if (ri == 2) setemap(findmap, ba_tcmap, ba_help);
-      if (ri == 3) setemap(aamap,   1,        aa_help2);
+      if (ri == 0) setemap(findmap, qf_oldscmap, qf_oldhelp, ri);
+      if (ri == 1) setemap(findmap, qf_newscmap, qf_newhelp, ri);
+      if (ri == 2) setemap(findmap, ba_tcmap, ba_help, ri);
+      if (ri == 3) setemap(aamap,   1,        aa_help2, ri);
     }
   }
+}
+
+
+//===============================================
+// Initialize mile/point earning perference -
+//       called at page load, use cookie value if
+//       it has been set
+//===============================================
+function readEPCookie()
+{
+	var patt = "setearn=";
+	var ss = document.cookie.indexOf(patt);
+	if(ss > -1) return document.cookie.substr(ss + patt.length,1);
+	return 1;	// default to QF post May 2005
+}
+
+
+function loadearn()
+{
+	var earnpref = readEPCookie();
+
+	var radio2 = document.earnradioform.earn;
+	for(var ri=0; ri<radio2.length; ri++) {
+	  	radio2[ri].checked = false;
+    }
+  	radio2[earnpref].checked = true;
 }
 
 //=============================
@@ -1137,8 +1173,7 @@ function toggleLayer(whichLayer)
   style2.display = (style2.display == "block") ? "none" : "block";
 }
 </script>
-
-<meta content="MSHTML 6.00.2800.1476" name="GENERATOR"></head>
+</head>
 
 <body>
 <p>
@@ -1174,7 +1209,8 @@ bring it more up to date with current schedules/rules.
 <li>For the OWE validator section, permit "//" in addition to "," indicating a surface sector
 <li>For the OWE validator section, permit -xXXX and -oXXX to indicate transit/stopover (note: this information
 	is discarded, i.e. no checks are made whether the number of stopovers is legal - this could be a future enhancement)
-
+<li><b>v0.95002 (2006/08/15):</b>
+<li>Added cookie to remember f/f program earning preference
 
 </ul>
 </div>
@@ -1197,7 +1233,7 @@ var sc_security="b9b2dc33";
 
 </td></tr></table>
 <p><hr>
-MileageMonkey v0.95001 (based on JPH's 0.9 with additions by various FTers)
+MileageMonkey v0.95002 (based on JPH's 0.9 with additions by various FTers)
 <p>This utility will calculate the # of miles needed for a Frequent Flyer award
 </p><p>
 </p><p>Questions/comments: <a href="mailto:jordan_hargrave%3Cdelete%20me%20nospam%3E@hotmail.com">jordan_hargrave
@@ -1212,7 +1248,7 @@ mind if contacting the author, that he may have no knowledge of the modification
    <td colspan="4">
 	    <form name="earnradioform">
    			<input id="earn" value="qfold" name="earn" type="radio">Qantas status credits (pre-May 25,2005)<br>
-                  <input id="earn" checked="checked" value="qfnew" name="earn" type="radio">Qantas status credits (post May 25,2005)<br>
+                  <input id="earn" value="qfnew" name="earn" type="radio">Qantas status credits (post May 25,2005)<br>
                   <input id="earn" value="ba" name="earn" type="radio">British Airways tier points<br>
                   <input id="earn" value="aa" name="earn" type="radio">AAdvantage miles (PLT/EXP)
 	    </form>
@@ -1260,4 +1296,11 @@ mind if contacting the author, that he may have no knowledge of the modification
 <div id="awardarea"></div>
 <p>
 </p><div id="routearea"></div>
-<p></p></body></html>
+<p></p>
+
+<script language="javascript" type="text/javascript">
+// read cookie and set frequent flyer earning program preference
+loadearn();
+</script>
+
+</body></html>
