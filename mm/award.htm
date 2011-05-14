@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html><head><!-- saved from url=(0036)http://jph.bytestacker.com/award.htm -->
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>MileageMonkey 0.95</title>
+<title>MileageMonkey 0.95001</title>
 <style>
 TABLE {
         FONT-FAMILY: sans-serif ; font-size: 8pt
@@ -76,8 +76,8 @@ var earn_help   = qf_oldhelp;
 
 function findElement(id)
 {
-  if (document.all) return document.all(id);
   if (document.getElementById) return document.getElementById(id);
+  if (document.all) return document.all(id);
   return null;
 }
 
@@ -130,7 +130,8 @@ function setemap(mapper, map, str)
 //===============================================
 function setearn()
 {
-  var radio2 = findElement('earn');
+//  var radio2 = findElement('earn');
+  var radio2 = document.earnradioform.earn;
   for(var ri=0; ri<radio2.length; ri++) {
     if (radio2[ri].checked) {
       if (ri == 0) setemap(findmap, qf_oldscmap, qf_oldhelp);
@@ -728,6 +729,14 @@ function getcitylist(id)
   var cities = new Array;
   var ncities = 0;
 
+// remove any whitespace in the route, as that confuses things
+  citylist = citylist.replace(/\s/g, "");
+// permit "//" in addition to "," indicating a surface sector
+  citylist = citylist.replace(/\/\//g, ",");
+// permit -xXXX and -oXXX to indicate transit/stopover
+  citylist = citylist.replace(/\-[oxOX](\w\w\w)/g, "-$1");
+
+
   setmap(citylist);
 
   var bob = citylist.split(',');
@@ -1121,16 +1130,28 @@ function oweplanhelp()
 
 </script>
 
+<script language="javascript" type="text/javascript">
+function toggleLayer(whichLayer)
+{
+  var style2 = findElement(whichLayer).style;
+  style2.display = (style2.display == "block") ? "none" : "block";
+}
+</script>
+
 <meta content="MSHTML 6.00.2800.1476" name="GENERATOR"></head>
 
 <body>
 <p>
 <hr>
 <table border=1 bgcolor="#ffff00"><tr><td><font size="+2">Note - this is an archived copy of the tool, loaded into place by <a href="http://www.flyertalk.com/forum/private.php?do=newpm&u=41952" target="_blank">SLF</a>.</font><br>
-&nbsp;<br>&nbsp;<br>&nbsp;<br>
-This version was never issued by JPH.  This version is based on 0.9, but various changes have been made by FTers to
-bring it more up to date with current schedules/rules:
+This version was never issued by JPH.  This version is based on 0.9, but various
+<a href="javascript:toggleLayer('changes');" title="">changes</a>
+have been made by FTers to
+bring it more up to date with current schedules/rules.
+
+<div id="changes" style="display: none">
 <ul>
+<li><b>v0.95:</b>
 <li>Added DFW-ANC
 <li>Added MEL to restricted list (CNS/BNE/SYD) of transcons to PER
 <li>Added MEL/SYD restriction to BME
@@ -1144,8 +1165,19 @@ bring it more up to date with current schedules/rules:
 <li>Added LAX-GRU
 <li>Added LAX-SAT
 <li>Added LAX-SJO
+<li>The <i>Earnings Preference</i> button is now more browser-friendly. Tested on Firefox 1.5.0.5 and IE6.0.2900.
+<li>This list of changes now only appears when you choose the "changes" link above.
+<li><i>gi</i> was missing from <i>owe_europe</i> causing any GIB flight to be treated as intercontinental rather than European
+<li><i>is</i> was missing from <i>owe_europe</i> causing any KEF flight to be treated as intercontinental rather than European
+<li><b>v0.95001 (2006/08/15):</b>
+<li>For the OWE validator section, now ignores any spaces in the route (previously it would fall over if a space was included)
+<li>For the OWE validator section, permit "//" in addition to "," indicating a surface sector
+<li>For the OWE validator section, permit -xXXX and -oXXX to indicate transit/stopover (note: this information
+	is discarded, i.e. no checks are made whether the number of stopovers is legal - this could be a future enhancement)
+
 
 </ul>
+</div>
 
 Please double-check anything which this version of the tool reports.
 <a href="http://jph.bytestacker.com/award.htm" target="_blank">The original site</a> should be checked periodically
@@ -1165,19 +1197,26 @@ var sc_security="b9b2dc33";
 
 </td></tr></table>
 <p><hr>
-MileageMonkey v0.95 (based on JPH's 0.9 with additions by various FTers)
+MileageMonkey v0.95001 (based on JPH's 0.9 with additions by various FTers)
 <p>This utility will calculate the # of miles needed for a Frequent Flyer award
 </p><p>
 </p><p>Questions/comments: <a href="mailto:jordan_hargrave%3Cdelete%20me%20nospam%3E@hotmail.com">jordan_hargrave
-AT hotmail.com</a></p>
+AT hotmail.com</a>
+<br><em>See also <a href="http://www.flyertalk.com/forum/showthread.php?p=5822073#post5822073" target="_blank">this thread on FlyerTalk</a> where modifications to this tool have been discussed.  Please bear in
+mind if contacting the author, that he may have no knowledge of the modifications in this particular version.</em>
+</p>
 <table border="1">
   <tbody>
   <tr>
     <th class="award">Earning Preference</th>
-    <td colspan="4"><input id="earn" checked="checked" value="qfold" name="earn" type="radio">Qantas status credits (pre-May 25,2005)<br>
-                  <input id="earn" value="qfnew" name="earn" type="radio">Qantas status credits (post May 25,2005)<br>
+   <td colspan="4">
+	    <form name="earnradioform">
+   			<input id="earn" value="qfold" name="earn" type="radio">Qantas status credits (pre-May 25,2005)<br>
+                  <input id="earn" checked="checked" value="qfnew" name="earn" type="radio">Qantas status credits (post May 25,2005)<br>
                   <input id="earn" value="ba" name="earn" type="radio">British Airways tier points<br>
-                  <input id="earn" value="aa" name="earn" type="radio">AAdvantage miles (PLT/EXP)</td>
+                  <input id="earn" value="aa" name="earn" type="radio">AAdvantage miles (PLT/EXP)
+	    </form>
+    </td>
     <td rowspan="6">Maps generated by the <a href="http://gc.kls2.com/">Great Circle Mapper</a>&nbsp;- copyright © <a href="http://www.kls2.com/%7Ekarl/">Karl L. Swartz</a>.<br>
         <iframe id="maparea" name="maparea" src="" frameborder="0" height="500" width="510">Go Away</iframe>
     </td>
