@@ -258,8 +258,9 @@ var owe_rulemap = [
  [ 0x03, owe_hawaii, "us|ca|pr|vi", 1, "N.America - Hawaii" ],  /* max one segment to hawaii */ 
  [ 0x13, owe_eastcoast, owe_westcoast, 1, "North America Transcon" ],  /* max one transcon */
  [ 0x03, "gb",  owe_longhaul, 2, "UK <--> Middle East/Eastern Europe/North Africa" ],  /* max two longhaul segments from the UK */
- [ 0x03, "PER", "SYD|CNS|BNE", 1, "Sydney/Cairns/Brisbane - Perth" ], /* max one segment to perth */
+ [ 0x03, "PER", "SYD|CNS|BNE|MEL", 1, "Sydney/Cairns/Brisbane/Melbourne - Perth" ], /* max one segment to perth */
  [ 0x03, "DRW", "MEL|SYD", 1, "Melbourne/Sydney - Darwin" ], /* max one segment to darwin */
+ [ 0x03, "BME", "MEL|SYD", 1, "Melbourne/Sydney - Broome" ], /* max one segment to broome */
 
  /* Intra-Continent segment limits */
  [ 0x13, owe_namerica, owe_namerica, 6, "North America" ],
