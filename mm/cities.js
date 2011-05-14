@@ -14,6 +14,22 @@ citycodes["UEO"] = [ "JP", 26.363506, 126.713806];
 citycodes["UKB"] = [ "JP", 34.632778, 135.223889];
 citycodes["WOL"] = [ "AU", -34.561111, 150.788611];
 
+// the following added 3 July 2008
+citycodes["AGJ"] = [ "JP", 26.589722, 127.23805 ];
+citycodes["AZS"] = [ "DO", 19.270555, -69.736946 ];
+citycodes["CJA"] = [ "PE", -7.142838, -78.489289 ];
+citycodes["KTD"] = [ "JP", 25.943536, 131.325867 ];
+citycodes["MMD"] = [ "JP", 25.841389, 131.24722 ];
+citycodes["NGB"] = [ "CN", 29.866667, 121.51667 ];
+citycodes["OKI"] = [ "JP", 36.166668, 133.31667 ];
+citycodes["OLP"] = [ "AU", 30.485, 136.876667 ];
+citycodes["RMQ"] = [ "TW", 24.265, 120.620834 ];
+citycodes["RNJ"] = [ "JP", 27.040856, 128.399019 ];
+citycodes["ROW"] = [ "US", 33.29972, -104.53 ];
+citycodes["SLM"] = [ "ES", 40.964972, -5.663047 ];
+citycodes["TBP"] = [ "PE", -3.551072, -80.38383 ];
+citycodes["TRA"] = [ "JP", 24.652244, 124.676456 ];
+
 
 // the following came from 0.95010
 citycodes["AAE"] = [ "DZ", 36.822225, 7.809167 ];
@@ -1322,7 +1338,7 @@ citycodes["NAP"] = [ "IT", 40.886033, 14.290781 ];
 citycodes["NAQ"] = [ "GL", 77.489444, -69.332222 ];
 citycodes["NAS"] = [ "BS", 25.038958, -77.466231 ];
 citycodes["NAT"] = [ "BR", -5.911361, -35.248028 ];
-citycodes["NBO"] = [ "KE", -4.079056, 44.001044 ];
+citycodes["NBO"] = [ "KE", -1.330943, 36.925371 ];
 citycodes["NCE"] = [ "FR", 43.660667, 7.217583 ];
 citycodes["NCL"] = [ "GB", 55.037500, -1.691667 ];
 citycodes["NCP"] = [ "PH", 15.189167, 120.555556 ];
@@ -1571,7 +1587,7 @@ citycodes["QRO"] = [ "MX", 20.622778, -100.369444 ];
 //citycodes["QWU"] = [ "DE", 0.000000, 0.000000 ];
 citycodes["QXB"] = [ "FR", 43.533333, 5.433333 ];
 citycodes["QXG"] = [ "FR", 47.466667, 0.550000 ];
-citycodes["QZX"] = [ "ZZ", 41.616667, -88.200000 ];
+///citycodes["QZX"] = [ "ZZ", 41.616667, -88.200000 ]; // IATA reserved code
 citycodes["RAB"] = [ "PG", -4.225000, 152.200000 ];
 citycodes["RAE"] = [ "SA", 30.906389, 41.138056 ];
 citycodes["RAH"] = [ "SA", 29.626111, 43.490556 ];

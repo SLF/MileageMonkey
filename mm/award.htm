@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>MileageMonkey 0.95019</title>
+<title>MileageMonkey 0.95020</title>
 <style>
 TABLE {
         FONT-FAMILY: sans-serif ; font-size: 8pt
@@ -644,6 +644,10 @@ function show_awards(sumit, cabins)
 		hasY = (desc.indexOf("y") >= 0) ? 1 : 0;
 		hasJ = (desc.indexOf("j") >= 0) ? 1 : 0;
 		hasF = (desc.indexOf("f") >= 0) ? 1 : 0;
+
+		if(hasY + hasJ + hasF == 0) {
+			hasY = hasJ = hasF = 1;	// db format screwed up ...
+		}
 	}
 
     newline += Ctdstr(award_tab[i][0], hasY);
@@ -1091,9 +1095,11 @@ function set_gmap(apt) {
             	"Google search: " + airportCode + " + (" +
             			"<a href=\"http://www.google.com/search?q=" + airportCode + "+airport&hl=en\" target=\"_blank\">airport</a>, " +
             			"<a href=\"http://www.google.com/search?q=" + airportCode + "+hotel&hl=en\" target=\"_blank\">hotel</a>" +
-            			")<br>" +
+            			")<br>&nbsp;<br>" +
+            	"<a href=\"https://www.starwoodhotels.com/preferredguest/search/results/simple.html?complexSearchField=" + airportCode + "\" target=\"_blank\">Starwood</a> " +
             	"<a href=\"http://www.theairdb.com/airport/" + airportCode + ".html\" target=\"_blank\">theAirDB</a> " +
             	"<a href=\"http://www.airlinequality.com/Airports/Airport_forum/" + airportCodeLC + ".htm\" target=\"_blank\">SkyTrax reviews</a> " +
+            	"<br>" +
             	"<a href=\"http://www.flightstats.com/go/Airport/airportDetails.do?airportCode=" + airportCode + "\" target=\"_blank\">FlightStats.com</a> " +
             	"<a href=\"http://gc.kls2.com/airport/" + airportCode + "\" target=\"_blank\">gc.kls2.com</a> " +
             	"<a href=\"http://en.wikipedia.org/wiki/" + airportCode + "\" target=\"_blank\">Wikipedia</a> "
@@ -1692,7 +1698,7 @@ function initialize() {
   <TBODY>
 <tr bgcolor="#eeffee">
 <td colspan=5>
-<b>MileageMonkey v0.95019 (based on JPH's <a href="http://slfft.allhyper.com/0.9/award.htm">0.9</a> &amp;
+<b>MileageMonkey v0.95020 (based on JPH's <a href="http://slfft.allhyper.com/0.9/award.htm">0.9</a> &amp;
 <a href="http://slfft.allhyper.com/1.1/award.htm">1.1</a> versions) /
 <a href="javascript:toggleLayer('info');" title="">Tool information</a> /
 <a href="javascript:toggleLayer('changes');" title="">Change log</a> /
@@ -1727,6 +1733,20 @@ Parts copyright &copy; 2006-2008 <a href="http://www.flyertalk.com/forum/private
 <table border=0 bgcolor="#ffff99"><tr><td>
 <b>Changelog:</b>
 <ul>
+<hr><li><u><b>v0.95020 (2008/07/02):</b></u>
+<li>All new database, thanks once again to <b>hauteboy</b>
+<li>New airports added: AGJ(JP) AZS(DO) CJA(PE) KTD(JP) MMD(JP) NGB(CN) OKI(JP) OLP(AU) RMQ(TW) RNJ(JP) ROW(US) SLM(ES) TBP(PE) TRA(JP)
+<li>Added link to Starwood hotels from google map marker
+<li>Moved NBO from somewhere out in the sea, to where it should be
+<li>Added UIO-EZE &amp; v.v. (thanks
+		<a href="http://www.flyertalk.com/forum/showthread.php?t=841286" target="_blank"><b>Mwenenzi</b></a>)
+<li>Added LHR-WAW &amp; v.v. (in 2008/9 winter BA schedule) (thanks
+		<a href="http://www.flyertalk.com/forum/showthread.php?p=10015695#post10015695" target="_blank"><b>PMMMDL</b></a>)
+<li>Re-added BCN-ABC (operated by Denim Air, not a OW affiliate but is treated as Air Nostrum) (thanks
+		<a href="http://www.flyertalk.com/forum/showthread.php?p=10100303#post10100303" target="_blank"><b>malcomkettering</b> &amp; <b>GatoVolador</b></a>)
+<li>Added SCL-YYZ &amp; JFK-YYZ and returns (thanks
+		<a href="http://www.flyertalk.com/forum/showthread.php?p=10109861#post10109861" target="_blank"><b>Gardyloo</b></a>)
+
 <hr><li><u><b>v0.95019 (2008/06/06):</b></u>
 <li>Added link to fare estimate, based on origin country
 <li>Removed "Ignore surface sectors" option, as that was for pre-June 2007 tickets only
