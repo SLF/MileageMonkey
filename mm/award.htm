@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>MileageMonkey 0.95014</title>
+<title>MileageMonkey 0.95015</title>
 <style>
 TABLE {
         FONT-FAMILY: sans-serif ; font-size: 8pt
@@ -38,6 +38,10 @@ TR.ceven {
 <script language="javascript" src="flights.js" type="text/javascript"></script>
 <script language="javascript" src="cities.js"  type="text/javascript"></script>
 <script language="javascript" src="zones.js"   type="text/javascript"></script>
+<script language="javascript" src="owe.js"     type="text/javascript"></script>
+
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAa2p37bDCDkcQAIF9orsX8hRdNJrqZw3sy8ExmlDCE4vTcp1VpxQb81RGTiAxa2YZkOVrqNui0T9T3Q" type="text/javascript">
+</script>
 
 <script language="javascript" type="text/javascript">
 var tblcolor = [ "cevenx", "coddx" ];
@@ -558,14 +562,14 @@ function list_countries()
     var nc=0;
     for(var ac in citycodes) {
       if (citycodes[ac][0] == cc) {
-	if (nc && (nc % 15) == 0) {
+	if (nc && (nc % 21) == 0) {
 	  tstr += "<br>";
 	}
 	else if (nc > 0) {
 	  tstr += ",";
 	}
 	nc++;
-        tstr += ac;
+        tstr += mapify(ac);
       }
     }
     if (nc == 0) {
@@ -725,6 +729,36 @@ function get_synlist(apt)
   return citysyns[apt].split('|');
 }
 
+//===============================
+// Find populate primary synonyms for a city, if they exist
+// this is entirely automatically generated from the citysyns array
+// We end up with "primary_citysyns[]" which contains mappings like:
+//   LHR ==> LON
+//   LGW ==> LON
+//   LTN ==> LON   (etc.)
+//===============================
+
+var primary_citysyns = new Array;
+
+function populate_primcitysyns()
+{
+  for(var i in citysyns) {
+	var syns = citysyns[i].split('|');
+	for (var j in syns) {
+		primary_citysyns[syns[j]] = i;
+	}
+  }
+}
+
+function get_primcitysyn(apt)
+{
+  var psyn = primary_citysyns[apt];
+  if(psyn == null) {
+    return apt;
+  }
+  return psyn;
+}
+
 //=====================================================
 // Checks if a flight exists A->B on certain airlines
 //=====================================================
@@ -789,7 +823,7 @@ function showtrip(cities,type)
     var dist = calcdist(cfr, cto);
     tdist += dist;
 
-    tstr += "<tr class=" + tblcolor[i % 2] + "><td width=60>" + cfr + "</td><td width=60>" + cto + "</td><td>" + dist + "</td></tr>"
+    tstr += "<tr class=" + tblcolor[i % 2] + "><td width=60>" + mapify(cfr) + "</td><td width=60>" + mapify(cto) + "</td><td>" + dist + "</td></tr>"
     scanzones(cfr, cto, i, type);
   }
   tstr += "<tr><td colspan=2>Total</td><td><b>" + tdist + "</b></td></table></td></table>";
@@ -1000,6 +1034,108 @@ function numstr(num)
   return str + sfx;
 }
 
+//==============================================================================
+// mapify - take an airport code (e.g. LHR) as parameter,
+// and return a url to change the map displayed to one centered
+// on the lat./long. of this airport
+//==============================================================================
+function mapify(apt) {
+	return "<a href=\"javascript:void set_gmap('" + apt + "')\" style=\"text-decoration:none\">" + apt + "</a>";
+}
+
+//==============================================================================
+// set_gmap() - take an airport code (e.g. LHR) as parameter,
+// and change the google map to be centered on this location
+//==============================================================================
+function set_gmap(apt) {
+	var lat = citycodes[apt][1];
+	var long = citycodes[apt][2];
+
+	if ((lat != null) && (long != null) && GBrowserIsCompatible()) {
+		var map = new GMap2(document.getElementById("map_canvas"));
+		map.setCenter(new GLatLng(lat, long), 12);
+		map.setMapType(G_HYBRID_MAP);
+		document.getElementById("map_title").innerHTML = "Click Google link in lower left corner to open map in new window";
+
+        // Create a base icon for all of our markers that specifies the
+        // shadow, icon dimensions, etc.
+// I tried this custom icon stuff...it is an API example page (icon-custom) on
+// http://code.google.com/apis/maps/documentation/examples/index.html
+// but it didn't work ... I didn't spend any time investigating...
+//        var baseIcon = new GIcon();
+//        baseIcon.shadow = "http://www.google.com/mapfiles/shadow50.png";
+//        baseIcon.iconSize = new GSize(20, 34);
+//        baseIcon.shadowSize = new GSize(37, 34);
+//        baseIcon.iconAnchor = new GPoint(9, 34);
+//        baseIcon.infoWindowAnchor = new GPoint(9, 2);
+//        baseIcon.infoShadowAnchor = new GPoint(18, 25);
+
+        // Creates a marker whose info window displays the letter corresponding
+        // to the given index.
+        function createMarker(point, airportCode) {
+//          var aptIcon = new GIcon(baseIcon);
+          var aptIcon = new GIcon(G_DEFAULT_ICON);
+
+          // Set up our GMarkerOptions object
+          markerOptions = { icon:aptIcon, title: airportCode };
+          var marker = new GMarker(point, markerOptions);
+
+          GEvent.addListener(marker, "click", function() {
+            marker.openInfoWindowHtml(
+            	"Location: <b>" + airportCode + "</b><br>" +
+            	"<a href=\"http://www.flightstats.com/go/Airport/airportDetails.do?airportCode=" + airportCode + "\" target=\"_blank\">FlightStats.com</a><br>" +
+            	"<a href=\"http://gc.kls2.com/airport/" + airportCode + "\" target=\"_blank\">gc.kls2.com</a><br>" +
+            	"<a href=\"http://en.wikipedia.org/wiki/" + airportCode + "\" target=\"_blank\">Wikipedia</a><br>"
+            	);
+          });
+          return marker;
+        }
+
+
+//		map.openInfoWindow(map.getCenter(),document.createTextNode(apt));
+		map.addOverlay(createMarker(new GLatLng(lat,long), apt));
+		map.addControl(new GSmallZoomControl());
+		map.addControl(new GMapTypeControl());
+		map.addControl(new GScaleControl());
+
+		// find the primary IATA reference here, and add markers for all co-term airports
+		var prim_city = get_primcitysyn(apt);
+		if(prim_city != apt) {
+			var lat = citycodes[prim_city][1];
+			var long = citycodes[prim_city][2];
+			if((lat != null) && (long != null)) {
+				map.addOverlay(createMarker(new GLatLng(lat,long), prim_city));
+			}
+		}
+		var syns = citysyns[prim_city];
+		if (syns != null) {
+			var synloc = syns.split('|');
+			for( var lindex in synloc) {
+				var loc = synloc[lindex];
+				var lat = citycodes[loc][1];
+				var long = citycodes[loc][2];
+				if((lat != null) && (long != null)) {
+					map.addOverlay(createMarker(new GLatLng(lat,long), loc));
+				}
+			}
+		}
+	}
+}
+
+//==============================================================================
+function log_metro_code(apt) {
+	// Have they used a city (non-airport) code? If so, this can get connecting flights wrong, so suggest that
+	// they put in the specific code
+	var syns = get_synlist(apt);
+    for(var j=0; j<syns.length; j++) {
+    	syns[j] = mapify(syns[j]);
+    }
+    var olist = syns.join(' | ');
+	addlog("Note: for maximum accuracy please change " + mapify(apt) + " to a specific airport code: " + syns.join(' | '));
+}
+
+//==============================================================================
+
 var owe_flag;
 
 //==============================================================================
@@ -1023,10 +1159,16 @@ function check_owe_rules(from, to, to2, surface, seg)
   seg++;
 
   if(surface == ",") {
-      addlog(seg + ": " + from + "-" + to + ": surface");
+      addlog(seg + ": " + mapify(from) + "-" + mapify(to) + ": surface");
 	  return -1; // OK
   }
 
+	if(citysyns[from] != null) {
+		log_metro_code(from);
+		if((to != from) && (citysyns[to] != null)) {
+			log_metro_code(to);
+		}
+	}
 
   //addlog("check_owe_rules: from:" + fc + ":" + from + " to:" + tc + ":" + to + " to2:" + to2);
   for(var i=0; i<owe_rulemap.length; i++) {
@@ -1058,8 +1200,10 @@ function check_owe_rules(from, to, to2, surface, seg)
 
     if (flag & 4) {
       /* Check if rule matches from && !to */
-      a = matchrule(from, fc, frule);
-      b = !matchrule(to,  tc, frule);
+      var f2 = get_primcitysyn(from);
+      var t2 = get_primcitysyn(to);
+      a = matchrule(f2, fc, frule);
+      b = !matchrule(t2,  tc, frule);
       if (a && b) rc=1;
     }
 
@@ -1077,7 +1221,7 @@ function check_owe_rules(from, to, to2, surface, seg)
 
       /* Add to log, display index #, route, description */
       if (flag & 0x10) {
-        addlog(pfx+seg + ": " + from + "-" + to + ": " + numstr(owe_count[i]) + " of " + ocount + " (" + odesc + ")");
+        addlog(pfx+seg + ": " + mapify(from) + "-" + mapify(to) + ": " + numstr(owe_count[i]) + " of " + ocount + " (" + odesc + ")");
         pfx="*";
       }
 
@@ -1095,7 +1239,7 @@ function check_owe_rules(from, to, to2, surface, seg)
     }
   }
   if (pfx == "") {
-    addlog(seg + ": " + from + "-" + to + ": intercontinental");
+    addlog(seg + ": " + mapify(from) + "-" + mapify(to) + ": intercontinental");
   }
   return -1;
 }
@@ -1147,6 +1291,8 @@ function validateowe()
   clearall();
   setearn();
 
+  populate_primcitysyns()
+
   /* build list of cities - allow open jaws like: lhr-jfk,dfw-syd etc*/
   var rawcitylist = getTextValue('owecitylist');
   var citylist = getcitylist('owecitylist');
@@ -1176,8 +1322,10 @@ function validateowe()
     owe_count[i] = 0;
   }
 
-  /* Setup fixup for rules - no transit of original country */
-  owe_rulemap[0][1] = map_country(cities[0][0]);
+  /* Setup fixup for rules - no transit of original point or country */
+  owe_rulemap[0][1] = get_primcitysyn(cities[0][0]);
+  owe_rulemap[1][1] = map_country(cities[0][0]);
+  addlog("Origin: "+owe_rulemap[0][1]+" ("+owe_rulemap[1][1]+")");
 
   /* --== Validate rules for each city pair.. ==-- */
   for(var i=0; i<cities.length; i++) {
@@ -1206,7 +1354,7 @@ function validateowe()
 	      add_award(0, 0, 0, flt, s, 0);
 	} else {
 	    /* Check if flight exists A->B */
-	    var flt = flight_exists(cities[i][0], cities[i][1], "AA|BA|CX|AY|IB|QF|LA|JL|JO|RJ|MA|XL", 0);
+	    var flt = flight_exists(cities[i][0], cities[i][1], "AA/AY/BA/CX/EG/IB/JC/JL/JO/KA/LA/LP/MA/NU/QF/RJ/XL/4M", 0);
 	    if (flt == 0) {
 	      addlog("<b>Error!!! No oneworld service exists " + cities[i][0] + "-" + cities[i][1]);
 		  ++fatalerr;
@@ -1483,17 +1631,41 @@ function Querystring_get(key, default_) {
 
 	return value
 }
+
+//=====================================================================================
+// set things up...
+//
+function initialize() {
+	loadearn();
+	var qs = new Querystring();
+	var loadcitylist;
+
+	loadcitylist = qs.get("p2p","");
+	if(loadcitylist.length > 4) {
+		var cl = findElement('citylist');
+		cl.innerHTML = loadcitylist;
+		showp2p();
+	}
+
+	loadcitylist = qs.get("owe","");
+	if(loadcitylist.length > 4) {
+		var ocl = findElement('owecitylist');
+		ocl.innerHTML = loadcitylist;
+		validateowe();
+	}
+}
 //==================================================================================
 </script>
 </head>
 
 <body>
+
 <hr>
 <TABLE border=1 cellspacing=0 cellpadding=1>
   <TBODY>
 <tr bgcolor="#eeffee">
 <td colspan=5>
-<b>MileageMonkey v0.95014 (based on JPH's <a href="http://slfft.allhyper.com/0.9/award.htm">0.9</a> &amp;
+<b>MileageMonkey v0.95015 (based on JPH's <a href="http://slfft.allhyper.com/0.9/award.htm">0.9</a> &amp;
 <a href="http://slfft.allhyper.com/1.1/award.htm">1.1</a> versions) /
 <a href="javascript:toggleLayer('info');" title="">Tool information</a> /
 <a href="javascript:toggleLayer('changes');" title="">Change log</a> /
@@ -1528,10 +1700,31 @@ Parts copyright &copy; 2006-2007 <a href="http://www.flyertalk.com/forum/private
 <table border=0 bgcolor="#ffff99"><tr><td>
 <b>Changelog:</b>
 <ul>
-<li><u><b>v0.95014 (2007/09/10):</b></u>
+<hr><li><u><b>v0.95015 (2007/12/09):</b></u>
+<li>Travel via point of origin no longer permitted; O/D open-jaw no longer permitted within South America, or Bangladesh-SIN/BKK (thanks
+		<b><a href="http://www.flyertalk.com/forum/showthread.php?p=8840368&postcount=98" target="_blank">Mwenenzi</a></b> &amp;
+		<b><a href="http://www.flyertalk.com/forum/showthread.php?p=8839431&postcount=20" target="_blank">Gardyloo</a></b>)
+<li>OWE rules split into a separate file for ease of maintenance
+<li>Fixed lat/long values for LON, MIL, WAS
+<li>Added Google Map function, to show map of airport, city and co-term airports
+<li>Added warning if a city code is used; this becomes important because a co-term connection now counts as a segment (thanks
+<li>Added AMM-BUD &amp; v.v. (thanks
+		<b><a href="http://www.flyertalk.com/forum/showthread.php?p=8937615&postcount=108" target="_blank">KiwiSurfer</a></b>)
+<li>Added JFK-SJO (thanks
+		<b><a href="http://www.flyertalk.com/forum/showthread.php?p=9065436&postcount=113" target="_blank">WearyBizTrvlr</a></b>)
+<li>Added JFK-TPA &amp; v.v. (thanks
+		<b><a href="http://www.flyertalk.com/forum/showthread.php?p=9075022&postcount=114" target="_blank">tt7</a></b>)
+<li>Added google map links to "List Country Codes" section, and removed the underline as it was impossible to read
+	with the links as normal
+<li>Added infobox pop-up on google map markers, with links to three relevant sites
+<li>Removed ORD-ANC, MIA-ANC, SJU-EGE, SIN-HEL, ZRH-DFW (&amp; returns); added PTY-DFW (thanks
+		<b><a href="http://www.flyertalk.com/forum/showthread.php?p=9112629&postcount=117" target="_blank">vxmike</a></b>)
+
+<hr><li><u><b>v0.95014 (2007/09/10):</b></u>
 <li>Fixed earning rate for AA in Y (thanks <b>Moomba</b>)
 <li>Added F to JFK-SYD and SYD-JFK (thanks <b>Serfty</b> &amp; <b>Mwenenzi</b>)
-<li><u><b>v0.95013 (2007/06/30):</b></u>
+
+<hr><li><u><b>v0.95013 (2007/06/30):</b></u>
 <li>Added valid/invalid status indicator next for OWE planner section to allow quick determination of status
 <li>Fixed "link to this itinerary to preserve entered "-x", "-o" values etc.
 <li>Streamlined the layout a little, incl. changing "Submit" to "Go!" and "Help" to "?" on buttons
@@ -1547,8 +1740,8 @@ Parts copyright &copy; 2006-2007 <a href="http://www.flyertalk.com/forum/private
 <li>Added <b>sd</b> (Sudan) to owe_europe list
 <li>Removed <b>ma</b> (Morocco) from the owe_africa/2 lists, as it is part of Europe for OWE purposes (it was already in the owe_europe list)
 <li>Added "Ignore Surface Sectors" into help dialog.
-<hr>
-<li><u><b>v0.95012 (2007/04/13):</b></u>
+
+<hr><li><u><b>v0.95012 (2007/04/13):</b></u>
 <li>Added rule; if two entries to Asia or N.America occur, check that one is a transit (no intra-continent sectors) and
 warn if detected
 <li>When using "link to" function; perform "submit" automatically so that map & validation is done at time of page load
@@ -1560,8 +1753,8 @@ warn if detected
 	<li>Added MEL/SYD restriction to BME
 </ul>
 <li>Added MIA-ANC (thanks <b>vxmike</b>)
-<hr>
-<li><u><b>v0.95011 (2007/04/02):</b></u>
+
+<hr><li><u><b>v0.95011 (2007/04/02):</b></u>
 <li>New flights database - supplied by <b>hauteboy</b> (thanks!)
 <li>Added 11 new cities to database: AAC,ADE, AQJ, NKM, OGN, PCL, RJL, SOB, UEO, UKB, WOL
 <li>Added some experimental functionality to highlight routes which don't have all cabins available.  Useful when
@@ -1571,58 +1764,58 @@ planning an AONEx or DONEx to avoid routes which have no A or D services.
 <li>Added override for class designations for sectors, and added F onto some routes (NRT :- SIN,SFO,FRA,CDG,GRU;
 HKG :- SYD,MEL,JNB; LHR :- CAI,TLV,EWR,PHL,MCT) (thanks <b>WearyBizTrvlr</b>)
 <li>Added filtering of OWEPlanner output by cabin class
-<hr>
-<li><u><b>v0.95010 (2007/01/22):</b></u>
+
+<hr><li><u><b>v0.95010 (2007/01/22):</b></u>
 <li>Added "Link to this itinerary" functionality
 <li>Added HEL-DXB & vv. (thanks <b>barking frog</b>)
-<hr>
-<li><u><b>v0.95009 (2007/01/21):</b></u>
+
+<hr><li><u><b>v0.95009 (2007/01/21):</b></u>
 <li>Merged the changes in 0.95008 with JPH's 1.1 code to produce a new version containing the improvements added in each.
 <li>Added Austria (at) to the OWE-Europe list (thanks <b>tt7</b>)
-<hr>
-<li><u><b>v0.95008 (2007/01/15):</b></u>
+
+<hr><li><u><b>v0.95008 (2007/01/15):</b></u>
 <li>Fixed problem with miles reqd. for BA OW awards - wrong levels for J/F 4001-9000 miles (thanks <b>Alvador</b>)
 <li>Added 25000-35000 entry for BA OW award levels
-<hr>
-<li><u><b>v0.95007 (2007/01/05):</b></u>
+
+<hr><li><u><b>v0.95007 (2007/01/05):</b></u>
 <li>Added HEL-LCA and MAD-OTP &amp; vv. (thanks <b>Cyba</b>)
 <li>Changed FT thread link to new thread
-<hr>
-<li><u><b>v0.95006 (2006/11/20):</b></u>
+
+<hr><li><u><b>v0.95006 (2006/11/20):</b></u>
 <li>Removed <b>Travel via original point of origin not permitted</b> check, it's no longer a
 	restriction of xONEx tickets (thanks <b>serfty</b>)
 <li>Added MAD-GIB &amp; vv.  (IB service starting Dec 2006)
 <li>Removed LHR-GIB &amp; vv.
-<hr>
-<li><u><b>v0.95005 (2006/11/05):</b></u>
+
+<hr><li><u><b>v0.95005 (2006/11/05):</b></u>
 <li>Removed Kenya, Tanzania &amp; Uganda from the "owe_africa2" list, reflecting the addition of these to
     allowable destinations to permit the second Europe entry.
-<hr>
-<li><u><b>v0.95004 (2006/08/25):</b></u>
+
+<hr><li><u><b>v0.95004 (2006/08/25):</b></u>
 <li>Replaced flights database with new version from OW timetable - supplied by <b>hauteboy</b> (thanks!) and merged in
 	by <b>SLF</b>.
 <li>Expanded "Help" info for OWE Validator section
 <li>Fixed a couple of minor Javascript warnings (functions with no return value, undeclared citycode variable)
-<hr>
-<li><u><b>v0.95003 (2006/08/22):</b></u>
+
+<hr><li><u><b>v0.95003 (2006/08/22):</b></u>
 <li>Corrected QF SC earning from 45 to 35 for discount economy, zone 6 (4801-5800 miles), <a
 	href="http://www.qantas.com.au/fflyer/dyn/program/privileges#jump1" target="_blank">as per
 	QF</a> (thanks <b>mrboh</b>)
 <li>Added ESB-LHR (thanks <b>MiamiBeach</b>)
 <li>Added DRW-BOM (thanks <b>ReelChief</b>)
-<hr>
-<li><u><b>v0.95002 (2006/08/15):</b></u>
+
+<hr><li><u><b>v0.95002 (2006/08/15):</b></u>
 <li>Added cookie to remember f/f program earning preference
-<hr>
-<li><u><b>v0.95001 (2006/08/15):</b></u>
+
+<hr><li><u><b>v0.95001 (2006/08/15):</b></u>
 <li>For the OWE validator section, now ignores any spaces in the route (previously it would fall
 	over if a space was included)
 <li>For the OWE validator section, permit "//" in addition to "," indicating a surface sector
 <li>For the OWE validator section, permit -xXXX and -oXXX to indicate transit/stopover
 	(note: this information	is discarded, i.e. no checks are made whether the number of
 	stopovers is legal - this could be a future enhancement)
-<hr>
-<li><u><b>v0.95:</b></u>
+
+<hr><li><u><b>v0.95:</b></u>
 <li>Added DFW-ANC (thanks <b>Viajero</b>)
 <li>Added MEL to restricted list (CNS/BNE/SYD) of transcons to PER
 <li>Added MEL/SYD restriction to BME
@@ -1683,7 +1876,9 @@ var sc_security="b9b2dc33";
     </td>
     <td rowspan=7>Scroll down this page for more detail after hitting <b>Go!</b><br>
     	Maps generated by the <A href="http://gc.kls2.com/">Great Circle Mapper</A>&nbsp;- copyright © <A href="http://www.kls2.com/~karl/">Karl L. Swartz</A>.<br>
-        <IFRAME id=maparea name=maparea src="" frameBorder=0 width=510 height=500>Go Away</IFRAME>
+        <IFRAME id=maparea name=maparea src="" frameBorder=0 width=510 height=300>Go Away</IFRAME>
+        <div id="map_canvas" style="width: 500px; height: 300px"></div>
+        <div id="map_title"  style="width: 500px"></div>
     </td>
 
   <TR>
@@ -1772,26 +1967,18 @@ var sc_security="b9b2dc33";
 </p><div id="routearea"></div>
 <p></p>
 
-
-<script language="javascript" type="text/javascript">
-// read cookie and set frequent flyer earning program preference
-loadearn();
-var qs = new Querystring();
-var loadcitylist;
-
-loadcitylist = qs.get("p2p","");
-if(loadcitylist.length > 4) {
-	var cl = findElement('citylist');
-	cl.innerHTML = loadcitylist;
-	showp2p();
-}
-
-loadcitylist = qs.get("owe","");
-if(loadcitylist.length > 4) {
-	var ocl = findElement('owecitylist');
-	ocl.innerHTML = loadcitylist;
-	validateowe();
+<script type="text/javascript">
+if (window.addEventListener) { //DOM method for binding an event
+	window.addEventListener("load", initialize, false)
+	window.addEventListener("unload", GUnload, false)
+} else if (window.attachEvent) { //IE exclusive method for binding an event
+	window.attachEvent("onload", initialize)
+	window.attachEvent("onunload", GUnload)
+} else if (document.getElementById) { //support older modern browsers
+	window.onload=initialize
+	window.onunload=GUnload
 }
 </script>
+
 
 </body></html>
