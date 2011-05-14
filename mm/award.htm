@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>MileageMonkey 0.95020</title>
+<title>MileageMonkey 0.95021</title>
 <style>
 TABLE {
         FONT-FAMILY: sans-serif ; font-size: 8pt
@@ -83,10 +83,11 @@ var help0="The values in the econ/biz/first columns are the # of miles (in thous
           "Clicking on econ,biz,or first will sort the table<br>"+
           "NOTE:Some awards may not be valid due to routing";
 var qf_help="# of Qantas SC's earned";
-var ba_help="# of BA tier points earned";
+var ba_help="# of BA tier points earned. <a href='http://flyerguide.com/wiki/index.php/Booking_Classes_(BA)' target='_blank'>Note: Economy 'L' class (e.g. LONEx tickets) do not earn BA tier points</a>";
 var aa_help0="# of AAdvantage miles earned (base)";
 var aa_help1="# of AAdvantage miles earned (GLD)";
-var aa_help2="# of AAdvantage miles earned (PLT/EXP)";
+var aa_help2="# of AAdvantage miles earned (PLT/EXP).";
+var aa_elite = "  <a href='http://www.aa.com/aa/i18nForward.do?p=/AAdvantage/programDetails/eliteStatus/bonus.jsp' target='_blank'>Note: Elite Status Bonus miles do not apply to all carriers.</a>";
 var ib_help="# of IberiaPlus points earned";
 var la_help="# of LanPass km earned";
 
@@ -96,12 +97,17 @@ var cookie_domain = "slfft.allhyper.com";
 var earn_mapper = findmap;
 var earn_map    = qf_scmap;
 var earn_help   = qf_help;
+var earn_elite  = "base";  // or ruby, sapphire, emerald
 
 function findElement(id)
 {
   if (document.getElementById) return document.getElementById(id);
   if (document.all) return document.all(id);
   return null;
+}
+
+function isdefined(variable) {
+	return (typeof(variable) == "undefined") ? false : true;
 }
 
 function sethelp(str)
@@ -162,20 +168,26 @@ function setmap(route)
   window.open(baseurl + "gcmap" + opts,'maparea','');
 }
 
-function setemap(earnProg, mapper, map, str)
+function setCookie(name, val)
+{
+	var expires = new Date();
+	expires.setTime(3*365*86400*1000 + expires.getTime());
+	var cc = name + "=" + val +
+		"; domain=" + cookie_domain + "; expires=" +
+			expires.toGMTString();
+//	alert("setting cookie: " + cc);
+	document.cookie = cc;
+}
+
+function setemap(earnProg, mapper, map, str, earnElite)
 {
   earn_mapper = mapper;
   earn_map    = map;
   earn_help   = str;
+  earn_elite  = elite;
 
-  if(earnProg != readEPCookie()) {
-  		var expires = new Date();
-  		expires.setTime(3*365*86400*1000 + expires.getTime());
-		document.cookie =
-			cookie_pattern + "=" + earnProg +
-			";domain=" + cookie_domain + ";expires=" +
-			expires.toGMTString();
-  }
+  if(earnProg  != readCookie("earnprog" )) setCookie("earnprog",  earnProg);
+  if(earnElite != readCookie("earnelite")) setCookie("earnelite", earnElite);
 }
 
 function getRadioSetting(id)
@@ -195,23 +207,48 @@ function getRadioSetting(id)
 function setearn()
 {
   var earnProg = getRadioSetting('earn');
+  var elite = getRadioSetting('elite');
 
-  if (earnProg == "aa")    setemap(earnProg, aamap, 1, aa_help2);
-  if (earnProg == "ba")    setemap(earnProg, findmap, ba_tcmap, ba_help);
-  if (earnProg == "qf")    setemap(earnProg, findmap, qf_scmap, qf_help);
-//  if (earnProg == "ib")    setemap(earnProg, findmap, ib_pointmap, ib_help);
-  if (earnProg == "la")    setemap(earnProg, lamap, 1, la_help);
+  if (earnProg == "aa")    {
+  	var aa_help = aa_help0;
+  	var bonus = 0;	// decimal bonus miles ... 0.25 = 25% extra
+  	if(elite == "emerald") {
+  		aa_help = aa_help2 + aa_elite;
+  		bonus = 1;
+  	} else if(elite == "sapphire") {
+  		aa_help = aa_help2 + aa_elite;
+  		bonus = 1;
+  	} else if(elite == "ruby") {
+  		aa_help = aa_help1 + aa_elite;
+  		bonus = 0.25;
+  	}
+
+  	setemap(earnProg, aamap, bonus, aa_help, elite);
+  } else if (earnProg == "ba")    setemap(earnProg, findmap, ba_tcmap, ba_help, elite);
+  else if (earnProg == "qf")    setemap(earnProg, findmap, qf_scmap, qf_help, elite);
+//  if (earnProg == "ib")    setemap(earnProg, findmap, ib_pointmap, ib_help, elite);
+  else if (earnProg == "la")    setemap(earnProg, lamap, 1, la_help, elite);
 }
 
 //===============================================
-// Read the earning program cookie
+// Read cookie
 //===============================================
-function readEPCookie()
-{
-	var patt = cookie_pattern + "=";
-	var ss = document.cookie.indexOf(patt);
-	if(ss > -1) return document.cookie.substr(ss + patt.length,2);
-	return "qf";	// default to QF
+function readCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) == 0) {
+			var rc = c.substring(nameEQ.length,c.length);
+	//		alert("read cookie " + name + " : " + rc);
+			return rc;
+		}
+	}
+//	alert("couldn't find cookie : " + name);
+	if(name == "earnprog") return "qf";
+	if(name == "earnelite") return "emerald";
+	return "";
 }
 
 
@@ -222,13 +259,24 @@ function readEPCookie()
 //===============================================
 function loadearn()
 {
-  var earnPref = readEPCookie();
+  var earnProg = readCookie("earnprog");
+  var defElite = readCookie("earnelite");
+
+  if(earnProg.length > 2) {
+  	defElite = earnProg.substr(2);
+  	earnPref = earnProg.substr(0,2);
+  }
 
   var radio_array = document.getElementsByName('earn');
-
   for(var i=0, len = radio_array.length; i < len; i++) {
-	radio_array[i].checked = (radio_array[i].value == earnPref) ? true : false;
+	radio_array[i].checked = (radio_array[i].value == earnProg) ? true : false;
   }
+
+  var radio_array = document.getElementsByName('elite');
+  for(var i=0, len = radio_array.length; i < len; i++) {
+	radio_array[i].checked = (radio_array[i].value == defElite) ? true : false;
+  }
+
   return 0;
 }
 
@@ -262,7 +310,10 @@ function findmap(map, val)
 
 function lamap(map, val)
 {
-  return [ 0, Math.floor(val * 1.6 + .5), Math.floor(val * 1.6 + .5), Math.floor(val * 1.6 * 1.25 + .5), Math.floor(val * 1.6 * 1.5 + .5)];
+  return [ 0, 	Math.floor(val * 1.6 + .5),
+  				Math.floor(val * 1.6 + .5),
+  				Math.floor(val * 1.6 * 1.25 + .5),
+  				Math.floor(val * 1.6 * 1.5 + .5) ];
 }
 
 function aamap(map, val)
@@ -499,17 +550,17 @@ function order(a,b)
   if (a > b) return 1;
   return 0;
 }
-function sorty(a,b)   { return order(a[0],b[0]); }
-function sortj(a,b)   { return order(a[1],b[1]); }
-function sortf(a,b)   { return order(a[2],b[2]); }
-function sorta(a,b)   { return order(a[3],b[3]); }
-function sortm(a,b)   { return order(a[5],b[5]); }
-function sortdsc(a,b) { return order(a[4],b[4]); }
+function sort0(a,b)   { return order(a[0],b[0]); }
+function sort1(a,b)   { return order(a[1],b[1]); }
+function sort2(a,b)   { return order(a[2],b[2]); }
+function sort3(a,b)   { return order(a[3],b[3]); }
+function sort4(a,b)   { return order(a[4],b[4]); }
+function sort5(a,b)   { return order(a[5],b[5]); }
 
-function sortme(proc)
+function sortme(proc,cabins)
 {
   award_tab.sort(proc);
-  show_awards(1,0);
+  show_awards(1,cabins);
 }
 
 //==========================================
@@ -535,6 +586,8 @@ function add_award(y,j,f,descr, airline, dist)
   if (airline == null) {
     airline="";
   }
+
+//alert("add_award(" + y + "," + j + "," + f + "," + descr + "," + airline + "," + dist + ")");
 
   award_tab[naward] = [ y, j, f, airline, descr, dist ];
   naward++;
@@ -617,12 +670,19 @@ function show_awards(sumit, cabins)
 
   /* Nice: Add ability to sort awards */
   var tstr = "<table border=1><td><table>";
-  tstr += "<th onclick='javascript:sortme(sorty);'>econ</th>";
-  tstr += "<th onclick='javascript:sortme(sortj);'>biz</th>";
-  tstr += "<th onclick='javascript:sortme(sortf);'>first</th>";
-  tstr += "<th onclick='javascript:sortme(sorta);'>Airlines</th>";
-  tstr += "<th onclick='javascript:sortme(sortm);'>Distance</th>";
-  tstr += "<th onclick='javascript:sortme(sortdsc);'>Description</th>";
+  tstr += "<th onclick='javascript:sortme(sort0,"+cabins+");'>econ</th>";
+  tstr += "<th onclick='javascript:sortme(sort1,"+cabins+");'>biz</th>";
+  tstr += "<th onclick='javascript:sortme(sort2,"+cabins+");'>first</th>";
+  if(cabins) {
+	  tstr += "<th onclick='javascript:sortme(sort3,"+cabins+");'>Continents</th>";
+	  tstr += "<th>A/C types</th>";
+  	  tstr += "<th onclick='javascript:sortme(sort5,"+cabins+");'>Distance</th>";
+  	  tstr += "<th onclick='javascript:sortme(sort4,"+cabins+");'>Sector</th>";
+  } else {
+	  tstr += "<th onclick='javascript:sortme(sort3,"+cabins+");'>Airlines</th>";
+	  tstr += "<th onclick='javascript:sortme(sort5,"+cabins+");'>Distance</th>";
+  	  tstr += "<th onclick='javascript:sortme(sort4,"+cabins+");'>Description</th>";
+  }
 
   for(var i=0; i<naward; i++) {
     var tc = tblcolor[linecount % 2];
@@ -637,13 +697,18 @@ function show_awards(sumit, cabins)
 	var hasJ = 1;
 	var hasF = 1;
 
-	if(cabins) {
-		var desc1 = flight[award_tab[i][4]]; // get classes of service from flight data
-		var desc = (desc1 == undefined) ? "" : desc1.split("|")[2];			// extract just the "---", "fjy", "-jy" etc. part
+	var services = "";
 
-		hasY = (desc.indexOf("y") >= 0) ? 1 : 0;
-		hasJ = (desc.indexOf("j") >= 0) ? 1 : 0;
-		hasF = (desc.indexOf("f") >= 0) ? 1 : 0;
+	if(cabins) {
+		services = flight[award_tab[i][4]]; // get classes of service from flight data
+
+		if(!isdefined(services)) {
+			services = "";
+		}
+
+		hasY = (services.indexOf("y") >= 0) ? 1 : 0;
+		hasJ = (services.indexOf("j") >= 0) ? 1 : 0;
+		hasF = (services.indexOf("f") >= 0) ? 1 : 0;
 
 		if(hasY + hasJ + hasF == 0) {
 			hasY = hasJ = hasF = 1;	// db format screwed up ...
@@ -655,8 +720,26 @@ function show_awards(sumit, cabins)
     newline += Ctdstr(award_tab[i][2], hasF);
 
     newline += "<td>" + award_tab[i][3] + "</td>";
+	if(cabins) {
+	  if(services == "") {
+    	newline += "<td>&nbsp;</td>";
+      } else {
+    	services = services.replace(/(\w\w)(\w\w\w),(\w+)/g, "$1&nbsp;$2&nbsp;($3)");
+    	services = services.replace(/\|/g, "<br>");
+    	newline += "<td>" + services + "</td>";
+      }
+    }
+
     newline += "<td>" + award_tab[i][5] + "</td>";
-    newline += "<td>" + award_tab[i][4] + "</td>";
+	if(cabins) {
+    	newline += "<td>";
+    	var citypair = award_tab[i][4];
+    	newline += mapify(citypair.split(/\-/)[0]) + "-" +
+    			mapify(citypair.split(/\-/)[1]) + "</td>";
+    } else {
+    	newline += "<td>" + award_tab[i][4] + "</td>";
+    }
+
     newline += "</tr>";
 
 	if( (cabins!=2) ||
@@ -671,9 +754,19 @@ function show_awards(sumit, cabins)
 
   }
   if (sumit) {
-    tstr += "<tr><td>" + ny + "</td><td>" + nj + "</td><td>" + nf + "</td><td>&nbsp;</td><td>"+nd+"</td></tr>";
+    tstr += "<tr><td>" + ny + "</td><td>" + nj + "</td><td>" + nf + "</td><td>&nbsp;</td>";
+    if(cabins) {
+    	tstr += "<td>&nbsp;</td>";
+    }
+    tstr += "<td>"+nd+"</td></tr>";
   }
-  tstr += "<tr><td colspan=6>" + linecount + " entries</td></tr>";
+
+  if(cabins) {
+	tstr += "<tr><td colspan=7>" + linecount + " entries</td></tr>";
+  } else {
+	tstr += "<tr><td colspan=6>" + linecount + " entries</td></tr>";
+  }
+
   tstr += "</table></td></table>";
   award.innerHTML = tstr;
 }
@@ -1393,6 +1486,7 @@ function validateowe()
 		  ++fatalerr;
 	      setowestatus(1,1);
 	      if(!ignoreerrs) return -1;
+	      flt = cities[i][0] + "-" + cities[i][1];
 	    }
 
 	    /* Calculate distance A->B and # of points/miles earned */
@@ -1497,6 +1591,14 @@ function matchlone(code, fi)
   return 0;
 }
 
+
+/* map the "from" location using google maps */
+function owemapfrom()
+{
+  var from = getTextValue('owplanfrom');
+  set_gmap(from);
+}
+
 /* List all routes from A->XXX or XXX->B */
 function oweplanner()
 {
@@ -1566,6 +1668,15 @@ function ephelp()
   );
 }
 
+function elitehelp()
+{
+  alert("Choose your elite status level in your frequent flyer program.  " +
+  		"Note, this value is currently only used to adjust AA miles earned.\n\n" +
+  		"If you have cookies enabled " +
+  		"in your browser, this selection will be remembered for next time."
+  );
+}
+
 function owehelp()
 {
   alert("This function tests if a OWE itinerary is valid. Enter a list of cities, eg. LHR-JFK-SYD-LHR." +
@@ -1598,7 +1709,8 @@ function oweplanhelp()
     "\nRestrict by cabins available: if you select 'F only', this will filter out all routes which don't have First class, "+
     "allowing you to make the best use of a AONEx ticket by choosing routes with F. "+
     "Note that this is only an approximation; the data is incomplete - if you notice a "+
-    "discrepancy (e.g. a route on which F is offered but it is shown as Y & J only), please report this."
+    "discrepancy (e.g. a route on which F is offered but it is shown as Y & J only), please report this.\n" +
+    "\nThe 'Map' button will take the city in the 'From' box and produce a Google Map of the location"
     );
 }
 
@@ -1698,7 +1810,7 @@ function initialize() {
   <TBODY>
 <tr bgcolor="#eeffee">
 <td colspan=5>
-<b>MileageMonkey v0.95020 (based on JPH's <a href="http://slfft.allhyper.com/0.9/award.htm">0.9</a> &amp;
+<b>MileageMonkey v0.95021 (based on JPH's <a href="http://slfft.allhyper.com/0.9/award.htm">0.9</a> &amp;
 <a href="http://slfft.allhyper.com/1.1/award.htm">1.1</a> versions) /
 <a href="javascript:toggleLayer('info');" title="">Tool information</a> /
 <a href="javascript:toggleLayer('changes');" title="">Change log</a> /
@@ -1727,12 +1839,37 @@ Parts copyright &copy; 2006-2008 <a href="http://www.flyertalk.com/forum/private
   </td>
 </tr>
 
+<tr bgcolor="#eeffee"><div id="important" style="display: none">
+<td colspan=5>
+<b><font color="#ff3333">Important</font>: Mileage Monkey is now hosted on these site(s):
+<!--<a href="http://slfft.zendfree.com/0.95/award.htm" target="_blank">Zendfree</a> and-->
+<a href="http://slfft.allhyper.com/0.95/award.htm" target="_blank">Allhyper</a>.</b>
+</td></div></tr>
+
 <tr>
   <td colspan=5>
 <div id="changes" style="display: none">
 <table border=0 bgcolor="#ffff99"><tr><td>
 <b>Changelog:</b>
 <ul>
+
+<hr><li><u><b>v0.95021 (2008/09/07):</b></u>
+<li>Thanks to <a href="http://www.flyertalk.com/forum/showthread.php?p=10151204#post10151204"
+		target="_blank"><b>Mwenenzi</b> &amp; <b>QF009</b></a>:
+   <ul>
+   	<li>SVX (Ekaterinburg) moved from Asia to Europe
+   	<li>Warning added for: <i>JL single number through flight to Brazil via USA considered travel through 3 continents</i>
+   </ul>
+<li>Reintroduced cabin advisory; e.g. which routes have F,J,Y.  Also included available aircraft types serving each route
+<li>Fixed minor bug in "expert mode"; not showing table if no flight service exists between two points
+<li>Added 'Map' button to "OWE Planner" section
+<li>Added warning that L fares don't earn BA tier points (thanks
+		<a href="http://www.flyertalk.com/forum/showthread.php?p=10534005#post10534005" target="_blank"><b>satprof</b></a>)
+<li>Added various new services, as per <a href="http://www.oneworld.com/ow/news/details?ObjectID=15559" target="_blank">OW press release 21 October 2008</a> incl.
+		MIA-REC, MIA-CNF, MIA-SSA, LHR-HYD etc.
+<li>Added <b>one</b>world elite status selection; initially only used it for adjusting the AA miles earned value
+
+
 <hr><li><u><b>v0.95020 (2008/07/02):</b></u>
 <li>All new database, thanks once again to <b>hauteboy</b>
 <li>New airports added: AGJ(JP) AZS(DO) CJA(PE) KTD(JP) MMD(JP) NGB(CN) OKI(JP) OLP(AU) RMQ(TW) RNJ(JP) ROW(US) SLM(ES) TBP(PE) TRA(JP)
@@ -2009,6 +2146,18 @@ var sc_security="b9b2dc33";
                   </TD>
     <TD><INPUT onclick=javascript:ephelp(); type=submit value="?">
                   </tr>
+
+  <TR>
+    <TH class=award>oneworld status</TH>
+    <TD colSpan=2><INPUT id=elite type=radio value="emerald" name="elite">Emerald
+                  <INPUT id=elite type=radio value="sapphire" name="elite">Sapphire
+                  <INPUT id=elite type=radio value="ruby" name="elite">Ruby
+                  <INPUT id=elite type=radio CHECKED value="base" name="elite">Base
+                  </TD>
+    <TD><INPUT onclick=javascript:elitehelp(); type=submit value="?">
+                  </tr>
+
+
    <TR>
     <TH class=award>Oneworld Explorer Validator</TH>
     <TD colSpan=2>Enter list of airports:<BR>eg:
@@ -2031,7 +2180,7 @@ var sc_security="b9b2dc33";
     <table border=0 cellspacing=0 cellpadding=0 width="100%">
     	<tr><td>Greater than X miles:</td><td><input id=owplangt size=4></td></tR>
         <tr><td>Less than X miles:</td><td><input id=owplanlt size=4></td></tr>
-		<tr><td>From:</td><td><input id=owplanfrom size=4></td></tr>
+		<tr><td>From: (choose 'Map' to map this)</td><td><input id=owplanfrom size=4></td></tr>
 		<tr><td>To:</td><td><input id=owplanto size=4></td></tr>
 		<tr><td colspan=2>
 			<hr>
@@ -2042,8 +2191,10 @@ var sc_security="b9b2dc33";
 		</td></tr>
 	</table>
 	</td>
-    <TD><INPUT onclick="javascript:oweplanner();"  type=submit value="Go!"><br>
+    <TD>
+    	<INPUT onclick="javascript:oweplanner();"  type=submit value="Go!"><br>
     	<INPUT onclick="javascript:oweplanhelp();" type=submit value="?"><br>
+    	<input onclick="javascript:owemapfrom();" type=submit value="Map"<br>
     	</TD></TR>
 
  <TR>

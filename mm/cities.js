@@ -5,6 +5,7 @@ var citycodes = new Array();
 citycodes["AAC"] = [ "EG", 31.073333, 33.835833 ];
 citycodes["ADE"] = [ "YE", 12.829542, 45.028792 ];
 citycodes["AQJ"] = [ "JO", 29.611619, 35.018067 ];
+citycodes["JAI"] = [ "IN", 26.824192, 75.812161 ];
 citycodes["NKM"] = [ "JP", 35.255000, 136.924444];
 citycodes["OGN"] = [ "JP", 24.466944, 122.977778];
 citycodes["PCL"] = [ "PE", -8.377939, -74.574297];
@@ -14,6 +15,9 @@ citycodes["UEO"] = [ "JP", 26.363506, 126.713806];
 citycodes["UKB"] = [ "JP", 34.632778, 135.223889];
 citycodes["WOL"] = [ "AU", -34.561111, 150.788611];
 
+// the following added 21 October 2008
+citycodes["FSZ"] = [ "JP", 34.796111, 138.189444];
+
 // the following added 3 July 2008
 citycodes["AGJ"] = [ "JP", 26.589722, 127.23805 ];
 citycodes["AZS"] = [ "DO", 19.270555, -69.736946 ];
@@ -22,7 +26,7 @@ citycodes["KTD"] = [ "JP", 25.943536, 131.325867 ];
 citycodes["MMD"] = [ "JP", 25.841389, 131.24722 ];
 citycodes["NGB"] = [ "CN", 29.866667, 121.51667 ];
 citycodes["OKI"] = [ "JP", 36.166668, 133.31667 ];
-citycodes["OLP"] = [ "AU", 30.485, 136.876667 ];
+citycodes["OLP"] = [ "AU", -30.485, 136.876667 ];
 citycodes["RMQ"] = [ "TW", 24.265, 120.620834 ];
 citycodes["RNJ"] = [ "JP", 27.040856, 128.399019 ];
 citycodes["ROW"] = [ "US", 33.29972, -104.53 ];

@@ -22,7 +22,7 @@ var owe_africa_second_eur_entry = "gh|ke|ng|tz|ug";
 // owe_africa:  all African countries (just add the above two together)
 var owe_africa    = owe_africa2 + "|" + owe_africa_second_eur_entry;
 
-var owe_asia      = "af|pk|kz|kg|uz|tm|tj|in|np|bd|bt|bn|mm|id|sg|my|th|kh|la|vn|cn|mn|kr|jp|ph|tw|hk|lk|SVX";
+var owe_asia      = "af|pk|kz|kg|uz|tm|tj|in|np|bd|bt|bn|mm|id|sg|my|th|kh|la|vn|cn|mn|kr|jp|ph|tw|hk|lk";
 var owe_swp       = "au|nz|nc|pg|pf|to|ws";
 
 var owe_tc1       = owe_namerica+"|"+owe_samerica;
@@ -51,6 +51,9 @@ var owe_tc3       = owe_asia+"|"+owe_swp;
  *  0x1000 : namerica
  *  0x2000 : samerica
  *  0x4000 : if city pair is ORD & DEL, then don't process this rule
+ *  0x8000 : AU trans-con rule exception - rule doesn't apply if either:
+ *                   - origin is NZ, and JNB is included, or
+ *                   - origin is PER and one of JNB/BOM/SHA/PEK is included
  *   alist: list of cities/countries
  *   blist: list of cities/countries
  *   count: max # of segments a<-->b
@@ -64,9 +67,11 @@ var owe_rulemap = [
  [ 0x03, owe_hawaii, "us|ca|pr|vi", 1, "N.America - Hawaii" ],  /* max one segment to hawaii */ 
  [ 0x13, owe_eastcoast, owe_westcoast, 1, "North America Transcon" ],  /* max one transcon */
  [ 0x03, "gb",  owe_longhaul, 2, "UK <--> Middle East/Eastern Europe/North Africa" ],  /* max two longhaul segments from the UK */
- [ 0x03, "PER", "SYD|CNS|BNE|MEL", 1, "Sydney/Cairns/Brisbane/Melbourne - Perth" ], /* max one segment to perth */
+ [ 0x8003, "PER", "SYD|CNS|BNE|MEL", 1, "Sydney/Cairns/Brisbane/Melbourne - Perth" ], /* max one segment to perth */
  [ 0x03, "DRW", "MEL|SYD", 1, "Melbourne/Sydney - Darwin" ], /* max one segment to darwin */
  [ 0x03, "BME", "MEL|SYD", 1, "Melbourne/Sydney - Broome" ], /* max one segment to broome */
+ 
+ [ 0x1b, "NRT", "GRU", 1, "Direct NRT-GRU or v.v. service is considered to touch North America, but MM doesn't count this yet - beware!" ],
 
  /* Intra-Continent segment limits */
  [ 0x13, owe_namerica, owe_namerica, 6, "North America" ],
