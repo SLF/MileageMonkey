@@ -9,6 +9,10 @@ flight["SJO-LAX"] = "SJO|LAX|0x00e0";
 flight["LAX-SJO"] = "LAX|SJO|0x00e0";
 flight["GIB-MAD"] = "GIB|MAD|0x00e0";
 flight["MAD-GIB"] = "MAD|GIB|0x00e0";
+flight["OTP-MAD"] = "OTP|MAD|0x00e0";
+flight["MAD-OTP"] = "MAD|OTP|0x00e0";
+flight["HEL-LCA"] = "HEL|LCA|0x00e0";
+flight["LCA-HEL"] = "LCA|HEL|0x00e0";
 
 
 flight["AAL-AAR"] = "AAL|AAR|--y|11Aug2006";
