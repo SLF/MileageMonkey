@@ -120,6 +120,7 @@ var owe_end_rules = [
   "dk|no|se",   /* Denmark/Norway/Sweden are considered one country */
   "hk|cn",      /* between hong kong/china */
   "my|sg",      /* between malaysia/singapore */
+  "mv|in|lk",	/* between Maldives/India/Sri Lanka */
   owe_mideast,  /* within middle east */
   owe_africa    /* within africa */
 ];
