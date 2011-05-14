@@ -221,7 +221,7 @@ var owe_namerica  = "us|ca|mx|bz|gt|sv|hn|ni|cr|pa|aw|tt|gd|bb|lc|mq|dm|gp|ag|kn
 var owe_samerica  = "co|ve|ec|pe|bo|cl|br|py|uy|ar|fk";
 var owe_europe    = "ie|gb|is|no|se|fi|dk|ru|ee|lv|lt|by|ua|am|az|ge|md|ro|bg|tr|gr|mk|al|yu|ba|hr|si|hu|sk|cz|pl|de|ch|it|mt|pt|es|gi|fr|be|nl|lu|ma|dz|tn|eg|cy||"+owe_mideast;
 var owe_africa    = "ao|bj|bw|bf|bi|cm|cv|cf|td|cg|gq|er|et|ga|gm|gh|gn|gw|ci|ke|ls|lr|ly|mg|mw|ml|mr|mu|ma|mz|na|ne|ng|zr|re|rw|sn|sc|sl|so|za|sz|tz|tg|ug|zm|zw";
-var owe_africa2   = "ao|bj|bw|bf|bi|cm|cv|cf|td|cg|gq|er|et|ga|gm|gn|gw|ci|ke|ls|lr|ly|mg|mw|ml|mr|mu|ma|mz|na|ne|zr|re|rw|sn|sc|sl|so|za|sz|tz|tg|ug|zm|zw";
+var owe_africa2   = "ao|bj|bw|bf|bi|cm|cv|cf|td|cg|gq|er|et|ga|gm|gn|gw|ci|ls|lr|ly|mg|mw|ml|mr|mu|ma|mz|na|ne|zr|re|rw|sn|sc|sl|so|za|sz|tg|zm|zw";
 var owe_asia      = "af|pk|kz|kg|uz|tm|tj|in|np|bd|bt|bn|mm|id|sg|my|th|kh|la|vn|cn|mn|kr|jp|ph|tw|hk|lk";
 var owe_swp       = "au|nz|nc|pg|pf|to|ws";
 
@@ -275,7 +275,7 @@ var owe_rulemap = [
  [ 0x03, owe_tc2, owe_tc3, 1, "No backtracking: TC2-TC3" ],   /* max one segment from tc2-tc3 */
  [ 0x43, owe_tc3, owe_tc1, 1, "No backtracking: TC3-TC1" ],   /* max one segment from tc3-tc1 (transpacific) */
 
- [ 3, owe_europe,     owe_africa2, 1, "Ghana/Nigeria transit" ],
+ [ 3, owe_europe,     owe_africa2, 1, "Ghana/Nigeria/Kenya/Uganda/Tanzania transit (second EUR entry?)" ],
 
  /* Max entry/exit per continent */
  [ 0x03, owe_europe,   owe_tc1+"|"+owe_tc3+"|"+owe_africa,   4, "Europe entry/exit" ],
