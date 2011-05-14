@@ -1,13 +1,16 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html><head><!-- saved from url=(0036)http://jph.bytestacker.com/award.htm -->
+<HTML><HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>MileageMonkey 0.95008</title>
+<title>MileageMonkey 0.95009</title>
 <style>
 TABLE {
         FONT-FAMILY: sans-serif ; font-size: 8pt
 }
 TH {
 	WIDTH: 40px; COLOR: white; HEIGHT: 30px; BACKGROUND-COLOR: navy
+}
+TD.cities {
+        FONT-FAMILY: courier
 }
 TD.award {
 	COLOR: white; BACKGROUND-COLOR: navy
@@ -33,19 +36,31 @@ TR.ceven {
 </style>
 
 <script language="javascript" src="flights.js" type="text/javascript"></script>
-<script language="javascript" src="cities.js" type="text/javascript"></script>
-<script language="javascript" src="zones.js" type="text/javascript"></script>
+<script language="javascript" src="cities.js"  type="text/javascript"></script>
+<script language="javascript" src="zones.js"   type="text/javascript"></script>
 
 <script language="javascript" type="text/javascript">
 var tblcolor = [ "cevenx", "coddx" ];
 
 /* MileageMonkey code
  *
- * $Id: award.htm,v 1.6 2005/06/11 01:51:51 root Exp root $
- * $Date: 2005/06/11 01:51:51 $
- * $Revision: 1.6 $
+ * $Id: award.htm,v 1.10 2006/02/23 21:12:23 root Exp root $
+ * $Date: 2006/02/23 21:12:23 $
+ * $Revision: 1.10 $
  *
  * $Log: award.htm,v $
+ * Revision 1.10  2006/02/23 21:12:23  root
+ * *** empty log message ***
+ *
+ * Revision 1.9  2005/08/17 02:51:26  root
+ * Added list country codes feature
+ *
+ * Revision 1.8  2005/08/16 04:58:39  root
+ * *** empty log message ***
+ *
+ * Revision 1.7  2005/06/16 02:19:00  root
+ * Removed old QF mode
+ *
  * Revision 1.6  2005/06/11 01:51:51  root
  * *** empty log message ***
  *
@@ -63,16 +78,20 @@ var tblcolor = [ "cevenx", "coddx" ];
 var help0="The values in the econ/biz/first columns are the # of miles (in thousands) required for the award.<br>"+
           "Clicking on econ,biz,or first will sort the table<br>"+
           "NOTE:Some awards may not be valid due to routing";
-var qf_oldhelp="# of Qantas SC's earned (pre May 25, 2005)";
-var qf_newhelp="# of Qantas SC's earned (post May 25, 2005)";
+var qf_help="# of Qantas SC's earned";
 var ba_help="# of BA tier points earned";
 var aa_help0="# of AAdvantage miles earned (base)";
 var aa_help1="# of AAdvantage miles earned (GLD)";
 var aa_help2="# of AAdvantage miles earned (PLT/EXP)";
+var ib_help="# of IberiaPlus points earned";
+var la_help="# of LanPass km earned";
+
+var cookie_pattern = "setMMearn";
+var cookie_domain = "slfft.allhyper.com";
 
 var earn_mapper = findmap;
-var earn_map    = qf_oldscmap;
-var earn_help   = qf_oldhelp;
+var earn_map    = qf_scmap;
+var earn_help   = qf_help;
 
 function findElement(id)
 {
@@ -89,7 +108,8 @@ function sethelp(str)
 // Retreive text value field (always return upper case)
 function getTextValue(id)
 {
-  return findElement(id).value.toUpperCase();
+  var str = findElement(id).value.toUpperCase();
+  return str.replace(/\s/g,'');
 }
 
 function addlog(logmsg)
@@ -118,21 +138,31 @@ function setmap(route)
   window.open("http://gc.kls2.com/cgi-bin/gcmap?PATH="+route+"&PATH-UNITS=mi&RANGE_STYLE=best",'maparea','');
 }
 
-function setemap(mapper, map, str, ri)
+function setemap(earnProg, mapper, map, str)
 {
   earn_mapper = mapper;
   earn_map    = map;
   earn_help   = str;
 
-// now save the earnings preference to a cookie, but only if changed
-  if(ri != readEPCookie()) {
+  if(earnProg != readEPCookie()) {
   		var expires = new Date();
   		expires.setTime(3*365*86400*1000 + expires.getTime());
 		document.cookie =
-			"setearn=" + ri +
-			";domain=slfft.allhyper.com;expires=" +
+			cookie_pattern + "=" + earnProg +
+			";domain=" + cookie_domain + ";expires=" +
 			expires.toGMTString();
-	}
+  }
+}
+
+function getEarningProg(id)
+{
+  var radio_array = document.getElementsByName(id);
+  for(var i=0, len = radio_array.length; i < len; i++) {
+    if (radio_array[i].checked == true) {
+      return radio_array[i].value;
+    }
+  }
+  return "";
 }
 
 //===============================================
@@ -140,42 +170,42 @@ function setemap(mapper, map, str, ri)
 //===============================================
 function setearn()
 {
-//  var radio2 = findElement('earn');
-  var radio2 = document.earnradioform.earn;
-  for(var ri=0; ri<radio2.length; ri++) {
-    if (radio2[ri].checked) {
-      if (ri == 0) setemap(findmap, qf_oldscmap, qf_oldhelp, ri);
-      if (ri == 1) setemap(findmap, qf_newscmap, qf_newhelp, ri);
-      if (ri == 2) setemap(findmap, ba_tcmap, ba_help, ri);
-      if (ri == 3) setemap(aamap,   1,        aa_help2, ri);
-    }
-  }
+  var earnProg = getEarningProg('earn');
+
+  if (earnProg == "aa")    setemap(earnProg, aamap, 1, aa_help2);
+  if (earnProg == "ba")    setemap(earnProg, findmap, ba_tcmap, ba_help);
+  if (earnProg == "qf")    setemap(earnProg, findmap, qf_scmap, qf_help);
+//  if (earnProg == "ib")    setemap(earnProg, findmap, ib_pointmap, ib_help);
+  if (earnProg == "la")    setemap(earnProg, lamap, 1, la_help);
 }
 
-
 //===============================================
-// Initialize mile/point earning perference -
-//       called at page load, use cookie value if
-//       it has been set
+// Read the earning program cookie
 //===============================================
 function readEPCookie()
 {
-	var patt = "setearn=";
+	var patt = cookie_pattern + "=";
 	var ss = document.cookie.indexOf(patt);
-	if(ss > -1) return document.cookie.substr(ss + patt.length,1);
-	return 1;	// default to QF post May 2005
+	if(ss > -1) return document.cookie.substr(ss + patt.length,2);
+	return "qf";	// default to QF
 }
 
 
+//===============================================
+// Load earning program preference
+//       called at page load, use cookie value if
+//       it has been set. Set radio buttons
+//===============================================
 function loadearn()
 {
-	var earnpref = readEPCookie();
+  var earnPref = readEPCookie();
 
-	var radio2 = document.earnradioform.earn;
-	for(var ri=0; ri<radio2.length; ri++) {
-	  	radio2[ri].checked = false;
-    }
-  	radio2[earnpref].checked = true;
+  var radio_array = document.getElementsByName('earn');
+
+  for(var i=0, len = radio_array.length; i < len; i++) {
+	radio_array[i].checked = (radio_array[i].value == earnPref) ? true : false;
+  }
+  return 0;
 }
 
 //=============================
@@ -204,6 +234,11 @@ function findmap(map, val)
     if (val < map[i][0]) return map[i];
   }
   return null;
+}
+
+function lamap(map, val)
+{
+  return [ 0, Math.floor(val * 1.6 + .5), Math.floor(val * 1.6 + .5), Math.floor(val * 1.6 * 1.25 + .5), Math.floor(val * 1.6 * 1.5 + .5)];
 }
 
 function aamap(map, val)
@@ -407,7 +442,7 @@ function scanzone(from, to, program, scale)
     if (amap == null) continue;
 
     /* Check each entry in the award map for a from<->to match */
-    if ((amap[0] == fz && amap[1] == tz) ||(amap[1] == fz && amap[0] == tz))
+    if ((amap[0] == fz && amap[1] == tz))
     {
       descr = program + "____zone:("+fz+" & "+tz + ") : ";
       if (amap[5] != null) descr += amap[5];
@@ -420,8 +455,6 @@ function scanzone(from, to, program, scale)
 
 function scanzones(from, to, index, type)
 {
-  if ((type & 2) && index) return;
-
   for(var i=0; i<dist_award_zones.length; i++) {
     var dz = dist_award_zones[i];
     if ((dz[0] & type) == type) {
@@ -485,6 +518,48 @@ function add_award(y,j,f,descr, airline, dist)
 function tdstr(val)
 {
   return "<td" + (val < 0 ? " class=gray" : "") + ">" + Math.abs(val) + "</td>";
+}
+
+//========================================
+// Loop through all countries + airports
+//========================================
+function list_countries()
+{
+  var award = findElement('awardarea');
+
+  var tstr = "<table border=1>";
+  tstr += "<th>Code</th><th>OWE Region</th><th>Country Name</th><th>Airport Codes</th>";
+  var i=0;
+  for(var cc in countrycodes) {
+    var tc = tblcolor[i++ % 2];
+
+    tstr += "<tr class=" + tc + ">";
+    tstr += "<td>" + cc.toLowerCase() + "</td>";
+    tstr += "<td>" + countrycodes[cc][1] + "</td>";
+    tstr += "<td>" + countrycodes[cc][2] + "</td>";
+    tstr += "<td class='cities'>";
+    var nc=0;
+    for(var ac in citycodes) {
+      if (citycodes[ac][0] == cc) {
+	if (nc && (nc % 15) == 0) {
+	  tstr += "<br>";
+	}
+	else if (nc > 0) {
+	  tstr += ",";
+	}
+	nc++;
+        tstr += ac;
+      }
+    }
+    if (nc == 0) {
+      tstr += "&nbsp;";
+    }
+    tstr += "</td>";
+    tstr += "</tr>";
+
+  }
+  tstr += "</table>";
+  award.innerHTML = tstr;
 }
 
 //======================
@@ -605,7 +680,7 @@ function flight_exists(from, to, airlines, max_cnx)
   /* Search synonyms for flight */
   for(var i=0; i<fsi.length; i++) {
     for(var j=0; j<tsi.length; j++) {
-      str = fsi[i] + "-" + tsi[j];
+      var str = fsi[i] + "-" + tsi[j];
       if (flight[str] != null) {
         /* Flight exists.. return actual cities of flight segment */
         return str;
@@ -663,7 +738,6 @@ function showtrip(cities,type)
   }
   tstr += "<tr><td colspan=2>Total</td><td><b>" + tdist + "</b></td></table></td></table>";
   tbl.innerHTML = tstr;
-
 
   /* --== Display all distance-based awards ==-- */
   for(var i=0; i<dist_award_zones.length; i++) {
@@ -884,19 +958,19 @@ function check_owe_rules(from, to, seg)
     if (flag & 1) {
       /* Check if rule matches from -> to */
       a = matchrule(from, fc, frule);
-      b = matchrule(to, tc, trule);
+      b = matchrule(to,   tc, trule);
       if (a && b) rc=1;
     }
     if (flag & 2) {
       /* Check if rule matches to <- from */
       a = matchrule(from, fc, trule);
-      b = matchrule(to, tc, frule);
+      b = matchrule(to,   tc, frule);
       if (a && b) rc=1;
     }
     if (flag & 4) {
       /* Check if rule matches from && !to */
       a = matchrule(from, fc, frule);
-      b = !matchrule(to, tc, frule);
+      b = !matchrule(to,  tc, frule);
       if (a && b) rc=1;
     }
     if (rc == 1) {
@@ -993,13 +1067,13 @@ function validateowe()
     }
 
     /* Check if flight exists A->B */
-    flt = flight_exists(cities[i][0], cities[i][1], "AA|BA|CX|AY|IB|QF|LA|EI", 0);
+    var flt = flight_exists(cities[i][0], cities[i][1], "AA|BA|CX|AY|IB|QF|LA|EI", 0);
     if (flt == 0) {
       addlog("<b>Error!!! No oneworld service exists " + cities[i][0] + "-" + cities[i][1]);
       return -1;
     }
 
-    /* Calculate distance A->B and # of Qantas SC's earned */
+    /* Calculate distance A->B and # of points/miles earned */
     dist = calcdist(cities[i][0], cities[i][1]);
     var eamap = earn_mapper(earn_map, dist);
     if (eamap != null) {
@@ -1187,14 +1261,19 @@ function toggleLayer(whichLayer)
 <p>
 <hr>
 <table border=1 bgcolor="#ffff00"><tr><td><font size="+1">This is an updated version of the tool,</font> loaded into place by <a href="http://www.flyertalk.com/forum/private.php?do=newpm&u=41952" target="_blank">SLF</a>.<br>
-This version was never issued by JPH.  This version is based on <a href="http://slfft.allhyper.com/0.9/award.htm">0.9</a>, but various
+This version was never issued by JPH.  This version is based on <a href="http://slfft.allhyper.com/0.9/award.htm">0.9</a> &amp;
+<a href="http://slfft.allhyper.com/1.1/award.htm">1.1</a>,
 <a href="javascript:toggleLayer('changes');" title="">changes</a>
-have been made by FTers to
+with updates to
 bring it more up to date with current schedules/rules.
 
 <div id="changes" style="display: none">
 Please report any problems on <a href="http://www.flyertalk.com/forum/showthread.php?p=5822073#post5822073" target="_blank">the FT thread.</a>
 <ul>
+<li><u><b>v0.95009 (2007/01/21):</b></u>
+<li>Merged the changes in 0.95008 with JPH's 1.1 code to produce a new version containing the improvements added in each.
+<li>Added Austria (at) to the OWE-Europe list (thanks <b>tt7</b>)
+<hr>
 <li><u><b>v0.95008 (2007/01/15):</b></u>
 <li>Fixed problem with miles reqd. for BA OW awards - wrong levels for J/F 4001-9000 miles (thanks <b>Alvador</b>)
 <li>Added 25000-35000 entry for BA OW award levels
@@ -1253,7 +1332,6 @@ Please report any problems on <a href="http://www.flyertalk.com/forum/showthread
 </ul>
 </div>
 
-Please double-check anything which this version of the tool reports.
 <a href="http://jph.bytestacker.com/award.htm" target="_blank">The original site</a> should be checked periodically
 to see if the tool has been reloaded there.  For other versions of the tool, please see <a href="http://slfft.allhyper.com/">here</a>.
 
@@ -1270,66 +1348,69 @@ var sc_security="b9b2dc33";
 <!-- End of StatCounter Code -->
 
 </td></tr></table>
-<p><hr>
-MileageMonkey v0.95008 (based on <a href="http://slfft.allhyper.com/0.9/award.htm">JPH's 0.9</a> with additions by various FTers)
+<P><hr>
+MileageMonkey v0.95009 (based on JPH's <a href="http://slfft.allhyper.com/0.9/award.htm">0.9</a> &amp;
+<a href="http://slfft.allhyper.com/1.1/award.htm">1.1</a> with additions suggested by various FTers)
 <p>This utility will calculate the # of miles needed for a Frequent Flyer award
 </p><p>
-</p><p>Questions/comments: <a href="mailto:jordan_hargrave%3Cdelete%20me%20nospam%3E@hotmail.com">jordan_hargrave
-AT hotmail.com</a>.  <em>See also <a href="http://www.flyertalk.com/forum/showthread.php?p=6954703#post6954703" target="_blank">this thread on FlyerTalk</a> where modifications to this tool have been discussed.  Please bear in
-mind if contacting the author, that he may have no knowledge of the modifications in this particular version.</em>
-</p>
-<table border="1">
-  <tbody>
-  <tr>
-    <th class="award">Earning Preference</th>
-   <td colspan="4">
-	    <form name="earnradioform">
-   			<input id="earn" value="qfold" name="earn" type="radio">Qantas status credits (pre-May 25,2005)<br>
-                  <input id="earn" value="qfnew" name="earn" type="radio">Qantas status credits (post May 25,2005)<br>
-                  <input id="earn" value="ba" name="earn" type="radio">British Airways tier points<br>
-                  <input id="earn" value="aa" name="earn" type="radio">AAdvantage miles (PLT/EXP)
-	    </form>
+
+<em>For questions/comments, please <a href="http://www.flyertalk.com/forum/showthread.php?p=6954703#post6954703"
+target="_blank">visit this thread on FlyerTalk</a> where modifications to this tool have been discussed.  Alternatively, the author
+may be contacted at <a href="mailto:jordan_hargrave%3Cdelete%20me%20nospam%3E@hotmail.com">jordan_hargrave
+AT hotmail.com</a> although please bear in mind that he may have no knowledge of the
+modifications made in this particular version.</em>
+
+</P>
+<TABLE border=1 cellspacing=0 cellpadding=1>
+  <TBODY>
+  <TR>
+    <TH class=award>One-Way</TH>
+    <TD>From:<INPUT id=owfrom size=3 name=owfrom></TD>
+    <TD>To:<INPUT id=owto size=3 name=owto></TD>
+    <TD><INPUT onclick="javascript:showow(); return false;" type=submit value=Submit></TD>
+    <TD rowSpan=3><INPUT onclick=javascript:awardhelp(); type=submit value=Help></TD>
+    <td rowspan=6>Maps generated by the <A href="http://gc.kls2.com/">Great Circle Mapper</A>&nbsp;- copyright © <A href="http://www.kls2.com/~karl/">Karl L. Swartz</A>.<br>
+        <IFRAME id=maparea name=maparea src="" frameBorder=0 width=510 height=500>Go Away</IFRAME>
     </td>
-    <td rowspan="6">Maps generated by the <a href="http://gc.kls2.com/">Great Circle Mapper</a>&nbsp;- copyright © <a href="http://www.kls2.com/%7Ekarl/">Karl L. Swartz</a>.<br>
-        <iframe id="maparea" name="maparea" src="" frameborder="0" height="500" width="510">Go Away</iframe>
-    </td>
-  </tr><tr>
-    <th class="award">One-Way</th>
-    <td>From:<input id="owfrom" size="3" name="owfrom"></td>
-    <td>To:<input id="owto" size="3" name="owto"></td>
-    <td><input onclick="javascript:showow(); return false;" value="Submit" type="submit"></td>
-    <td rowspan="3"><input onclick="javascript:awardhelp();" value="Help" type="submit"></td></tr>
-  <tr>
-    <th class="award">Round-Trip</th>
-    <td>From:<input id="rtfrom" size="3" name="rtfrom"></td>
-    <td>To:<input id="rtto" size="3" name="rtto"></td>
-    <td><input onclick="javascript:showrt(); return false;" value="Submit" type="submit"></td></tr>
-  <tr>
-    <th class="award">Point-to-Point</th>
-    <td colspan="2">Enter list of airports:<br>eg: lhr-jfk-lax-syd-hkg-lhr<br><textarea id="citylist" rows="5" cols="25"></textarea></td>
-    <td><input onclick="javascript:showp2p();" value="Submit" type="submit"></td></tr>
-  <tr>
-    <th class="award">Oneworld Explorer Validator</th>
-    <td colspan="2">Enter list of airports:<br>eg:
-      lhr-jfk-lax-syd,mel-hkg-lhr<br><textarea id="owecitylist" rows="5" cols="25"></textarea></td>
-    <td><input onclick="javascript:validateowe();" value="Submit" type="submit"></td>
-    <td><input onclick="javascript:owehelp();" value="Help" type="submit"></td></tr>
-  <tr>
-    <th class="award">OWE Planner</th>
-    <td colspan="2"><table border="0" cellpadding="0" cellspacing="0">
-        <tbody><tr><td>Greater than X miles:</td><td><input id="owplangt" size="4"></td></tr>
-        <tr><td>Less than X miles:</td><td><input id="owplanlt" size="4"></td></tr>
-	<tr><td>From:</td><td><input id="owplanfrom" size="4"></td></tr>
-	<tr><td>To:</td><td><input id="owplanto" size="4"></td></tr>
-	</tbody></table>
-    </td><td><input onclick="javascript:oweplanner();" value="Submit" type="submit"></td>
-    <td><input onclick="javascript:oweplanhelp();" value="Help" type="submit"></td></tr>
-    </tbody></table>
-<p>
-</p><div id="logarea"></div>
+  <TR>
+    <TH class=award>Round-Trip</TH>
+    <TD>From:<INPUT id=rtfrom size=3 name=rtfrom></TD>
+    <TD>To:<INPUT id=rtto size=3 name=rtto></TD>
+    <TD><INPUT onclick="javascript:showrt(); return false;" type=submit value=Submit></TD></TR>
+  <TR>
+    <TH class=award>Point-to-Point</TH>
+    <TD colSpan=2>Enter list of airports:<BR>eg: lhr-jfk-lax-syd-hkg-lhr<BR><TEXTAREA id=citylist rows=5 cols=25></TEXTAREA></TD>
+    <TD><INPUT onclick=javascript:showp2p(); type=submit value=Submit></TD></TR>
+  <TR>
+    <TH class=award>Earning Preference</TH>
+    <TD colSpan=4><INPUT id=earn type=radio CHECKED value="qf" name="earn">Qantas status credits<BR>
+                  <INPUT id=earn type=radio value="ba" name="earn">British Airways tier points<br>
+<!--                  <INPUT id=earn type=radio value="ib" name="earn">IberiaPlus points<br> -->
+                 <INPUT id=earn type=radio value="la" name="earn">LanPass km<br>
+                  <INPUT id=earn type=radio value="aa" name="earn">AAdvantage miles (PLT/EXP)</TD></tr>
+   <TR>
+    <TH class=award>Oneworld Explorer Validator</TH>
+    <TD colSpan=2>Enter list of airports:<BR>eg:
+      lhr-jfk-lax-syd,mel-hkg-lhr<BR><TEXTAREA wrap=soft id=owecitylist rows=5 cols=25></TEXTAREA></TD>
+    <TD><INPUT onclick=javascript:validateowe(); type=submit value=Submit></TD>
+    <TD><INPUT onclick=javascript:owehelp(); type=submit value=Help></TD></TR>
+  <TR>
+    <TH class=award>OWE Planner</TH>
+    <TD colspan=2><table border=0 cellspacing=0 cellpadding=0>
+        <tr><td>Greater than X miles:</td><td><input id=owplangt size=4></td></tR>
+        <tr><td>Less than X miles:</td><td><input id=owplanlt size=4></td></tr>
+	<tr><td>From:</td><td><input id=owplanfrom size=4></td></tr>
+	<tr><td>To:</td><td><input id=owplanto size=4></td></tr>
+	<tr><td colspan=2><input onclick="javascript:list_countries();" type=submit value="List Country Codes"></td></tr>
+	</table>
+    <TD><INPUT onclick="javascript:oweplanner();"  type=submit value=Submit></td>
+    <TD><INPUT onclick="javascript:oweplanhelp();" type=submit value=Help></TD></TR>
+    </TBODY></TABLE>
+<p></p>
+<div id="logarea"></div>
 <div id="tablearea"></div>
-<p>
-</p><div id="helparea"></div>
+<p></p>
+<div id="helparea"></div>
 <div id="awardarea"></div>
 <p>
 </p><div id="routearea"></div>

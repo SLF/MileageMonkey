@@ -46,13 +46,13 @@ partnermap["aa oneworld"] = [
   [ -1, -1, "AA|BA|LA|LP|EI|IB|AY|CX|QF" ],
 ];
 partnermap["qf oneworld"] = [
-  [ -1, -1, "AA|BA|LA|LP|EI|IB|AY|CX|QF|XL" ],
+  [ -1, -1, "AA|BA|LA|LP|EI|IB|AY|CX|QF" ],
 ];
 partnermap["qf select (r/t)"] = [
- [ -1, -1, "QF|4N|FJ|AA|AO|FQ|BA|BN|JQ|NC|YE|UQ|PH|QantasLink|XR|CQ" ],
+ [ -1, -1, "QF|4N|FJ|AA|AO|FQ|BA|BN|JQ|NC|YE|UQ|PH|XR|CQ" ],
 ];
 partnermap["qf other (r/t)"] = [
-  [ -1, -1, "AZ|CC|LY|LX|PX|SA|SK|TL|US" ]
+  [ -1, -1, "EI|CX|AY|IB|LA|PX|AZ|LY|SK|SA|LX|US" ]
 ];
 partnermap["dl"] = [
  [ -1, -1, "DL|AM|AF|AZ|KE" ]
@@ -63,14 +63,7 @@ partnermap["dl"] = [
  */
 
 /* Qantas status credits map */
-var qf_oldscmap = [
- [ 1000, 10, 20, 30, 30 ],
- [ 2700, 20, 40, 60, 60 ],
- [ 5000, 25, 50, 100,150 ],
- [ 8750, 40, 80, 160,240 ],
- [ 15000,60,120, 220,320 ]
-];
-var qf_newscmap = [
+var qf_scmap = [
  [ 600,  10, 20, 40, 60 ],
  [ 1200, 15, 30, 60, 90 ],
  [ 2400, 20, 40, 80, 120 ],
@@ -92,7 +85,7 @@ distmap["qf select (r/t)"] = [
  [ 30000,110,220,275 ]
 ];
 distmap["qf.new select (o/w)"] = [
- [ 600, 8, 16, 24 ],
+ [ 600,  8, 16, 24 ],
  [ 1200, 12, 24, 36 ],
  [ 2400, 18, 36, 54 ],
  [ 3600, 25, 50, 75 ],
@@ -176,12 +169,12 @@ distmap["asiamiles rt"] = [
  [ 99999,110,145, 210 ]
 ];
 distmap["asiamiles oneworld"] = [
- [ 1000, 30, 55, 70 ],
- [ 1500, 30, 60, 80 ],
- [ 2000, 35, 65, 90 ],
- [ 4000, 35, 70, 95 ],
- [ 7500, 60, 80, 105 ],
- [ 9000, 60, 85, 115 ],
+ [  1000, 30, 55, 70 ],
+ [  1500, 30, 60, 80 ],
+ [  2000, 35, 65, 90 ],
+ [  4000, 35, 70, 95 ],
+ [  7500, 60, 80, 105 ],
+ [  9000, 60, 85, 115 ],
  [ 10000, 65, 95, 130 ],
  [ 14000, 85, 115, 155 ],
  [ 18000, 90, 135, 190 ],
@@ -220,10 +213,10 @@ var owe_longhaul  = "dz|am|az|bh|bg|cy|eg|gr|ge|ir|il|jo|kw|lb|mk|mt|ma|om|FNC|q
 var owe_mideast   = "eg|sd|il|lb|sy|jo|ir|iq|kw|bh|qa|ae|om|ye|sa";
 var owe_namerica  = "us|ca|mx|bz|gt|sv|hn|ni|cr|pa|aw|tt|gd|bb|lc|mq|dm|gp|ag|kn|an|vg|vi|pr|do|ht|jm|cu|ky|bs|bm|ai|tc";
 var owe_samerica  = "co|ve|ec|pe|bo|cl|br|py|uy|ar|fk";
-var owe_europe    = "ie|gb|is|no|se|fi|dk|ru|ee|lv|lt|by|ua|am|az|ge|md|ro|bg|tr|gr|mk|al|yu|ba|hr|si|hu|sk|cz|pl|de|ch|it|mt|pt|es|gi|fr|be|nl|lu|ma|dz|tn|eg|cy||"+owe_mideast;
+var owe_europe    = "ie|gb|is|no|se|fi|dk|ru|ee|lv|lt|by|ua|am|az|ge|md|ro|bg|tr|gr|mk|al|yu|ba|hr|si|hu|sk|cz|pl|de|ch|it|mt|pt|es|gi|fr|be|nl|lu|ma|dz|tn|eg|cy|at|"+owe_mideast;
 var owe_africa    = "ao|bj|bw|bf|bi|cm|cv|cf|td|cg|gq|er|et|ga|gm|gh|gn|gw|ci|ke|ls|lr|ly|mg|mw|ml|mr|mu|ma|mz|na|ne|ng|zr|re|rw|sn|sc|sl|so|za|sz|tz|tg|ug|zm|zw";
 var owe_africa2   = "ao|bj|bw|bf|bi|cm|cv|cf|td|cg|gq|er|et|ga|gm|gn|gw|ci|ls|lr|ly|mg|mw|ml|mr|mu|ma|mz|na|ne|zr|re|rw|sn|sc|sl|so|za|sz|tg|zm|zw";
-var owe_asia      = "af|pk|kz|kg|uz|tm|tj|in|np|bd|bt|bn|mm|id|sg|my|th|kh|la|vn|cn|mn|kr|jp|ph|tw|hk|lk";
+var owe_asia      = "af|pk|kz|kg|uz|tm|tj|in|np|bd|bt|bn|mm|id|sg|my|th|kh|la|vn|cn|mn|kr|jp|ph|tw|hk|lk|SVX";
 var owe_swp       = "au|nz|nc|pg|pf|to|ws";
 
 var owe_tc1       = owe_namerica+"|"+owe_samerica;
@@ -252,15 +245,15 @@ var owe_tc3       = owe_asia+"|"+owe_swp;
  *   descr: Description of rule
  */
 var owe_rulemap = [
+ [ 0x04, "***", "", 1, "Travel via original point of origin not permitted" ], /* filled in with origin airport */
  [ 0x04, "***", "", 1, "One intl departure/arrival from country of origin" ], /* filled in with origin country */
  [ 0x01, "ANC", owe_tc1, 1, "N.America - Anchorage" ],       /* one flight from ANC */
  [ 0x02, "ANC", owe_tc1, 1, "N.America - Anchorage" ],       /* one flight to ANC */
  [ 0x03, owe_hawaii, "us|ca|pr|vi", 1, "N.America - Hawaii" ],  /* max one segment to hawaii */ 
  [ 0x13, owe_eastcoast, owe_westcoast, 1, "North America Transcon" ],  /* max one transcon */
  [ 0x03, "gb",  owe_longhaul, 2, "UK <--> Middle East/Eastern Europe/North Africa" ],  /* max two longhaul segments from the UK */
- [ 0x03, "PER", "SYD|CNS|BNE|MEL", 1, "Sydney/Cairns/Brisbane/Melbourne - Perth" ], /* max one segment to perth */
+ [ 0x03, "PER", "SYD|CNS|BNE", 1, "Sydney/Cairns/Brisbane - Perth" ], /* max one segment to perth */
  [ 0x03, "DRW", "MEL|SYD", 1, "Melbourne/Sydney - Darwin" ], /* max one segment to darwin */
- [ 0x03, "BME", "MEL|SYD", 1, "Melbourne/Sydney - Broome" ], /* max one segment to broome */
 
  /* Intra-Continent segment limits */
  [ 0x13, owe_namerica, owe_namerica, 6, "North America" ],
@@ -275,7 +268,7 @@ var owe_rulemap = [
  [ 0x03, owe_tc2, owe_tc3, 1, "No backtracking: TC2-TC3" ],   /* max one segment from tc2-tc3 */
  [ 0x43, owe_tc3, owe_tc1, 1, "No backtracking: TC3-TC1" ],   /* max one segment from tc3-tc1 (transpacific) */
 
- [ 3, owe_europe,     owe_africa2, 1, "Ghana/Nigeria/Kenya/Uganda/Tanzania transit (second EUR entry?)" ],
+ [ 3, owe_europe,     owe_africa2, 1, "Ghana/Nigeria transit" ],
 
  /* Max entry/exit per continent */
  [ 0x03, owe_europe,   owe_tc1+"|"+owe_tc3+"|"+owe_africa,   4, "Europe entry/exit" ],
@@ -449,7 +442,10 @@ awardmap["ba"] = [
   [ 9,11,160, 320,480 ],
 
   /* Far East -> XXX */
-  [ 10,11, 50, 10, 150 ]
+  [ 10,11, 50, 10, 150 ],
+
+  /* Intra South Africa award */
+  [ -10, "za", 18, 36, 54 ],
 ];
 
 //==============================================
@@ -642,7 +638,7 @@ var nwa_dkb = "NW|KL|CO|MA|UX|XT|A6|DL";
 var nwa_org = "NW|DL|9J|CO|5J|GA|MH|KL|JL";
 var nwa_ltb = "MH|GA";
 
-partnermap["nw"] = [
+partnermap["nw.old"] = [
  [ 0, -1, nwa_red ],
  [ 1, -1, nwa_red ],
  [ 2, -1, nwa_red ],
@@ -658,7 +654,7 @@ partnermap["nw"] = [
  [ 12, -1, nwa_ltb ]
 ];
 
-zonemap["nw"] = [
+zonemap["nw.old"] = [
   /* 0: North America */
     "us|ca",
   /* 1: Caribbean */
@@ -680,14 +676,15 @@ zonemap["nw"] = [
   /* 9: India */
     "bd|np|in|pk|lk",
   /*10: Africa */
-    "dz|ao|bj|bw|bf|bi|cm|cv|cf|td|cg|gq|er|et|ga|gm|gh|gn|gw|ci|ke|ls|lr|ly|mg|mw|ml|mr|mu|ma|mz|na|ne|ng|zr|re|rw|sn|sc|sl|so|za|sd|sz|tz|tg|tn|ug|zm|zw",
+    "dz|ao|bj|bw|bf|bi|cm|cv|cf|td|cg|gq|er|et|ga|gm|gh|gn|gw|ci|ke|ls|lr|ly|mg|mw|ml|mr|mu|ma|mz|na|ne|"+
+    "ng|zr|re|rw|sn|sc|sl|so|za|sd|sz|tz|tg|tn|ug|zm|zw",
   /*11: Middle East */
     "bh|qa|ae|om|ye|sa|ir|iq|lb|sy|jo|kw|kz|kg|tj|uz|tm|af|az|am|ge",
   /*12: Oz/Nz/SWP */
     "au|nz"
 ];
 
-awardmap["nw"] = [
+awardmap["nw.old"] = [
   /* North America -> XXX */
   [ 0, 0, 25, "N/A", 45 ],
   [ 0, 1, 35, "N/A", 60 ],
@@ -800,6 +797,177 @@ awardmap["nw"] = [
   /* Australia/New Zealand/South Pacific -> XXX */
 ];
 
+zonemap["nw"] = [
+  /* 0: North America */
+    "us|ca",
+  /* 1: Caribbean/Mexico */
+    "ag|aw|bs|bb|bm|cu|do|ky|gp|ht|jm|mq|mx|an|pr|tt|tc|vi",
+  /* 2: Hawaii */
+    hawaii,
+  /* 3: Central America */
+    "bz|cr|sv|gt|hn|ni|pa",
+  /* 4: Northern S. America */
+    "co|ec|pe|gf|sr|ve",
+  /* 5: Southern S. America */
+    "ar|br|cl",
+  /* 6: Europe */
+    "al|at|az|be|cy|cz|dk|fi|fr|de|gb|gr|hu|ie|it|lu|mk|mt|nl|no|po|pt|ro|"+
+    "ru|es|se|ch|tr|ua|yu",
+  /* 7: Middle East */
+    "bh|ir|il|jo|kz|kw|lb|om|qa|sa|sy|ae|uz",
+  /* 8: Africa */
+    "dz|ao|bj|bf|bi|cm|cf|td|cg|dj|eg|gq|et|ga|gh|gn|ci|ke|ly|mg|mw|ml|mr|"+
+    "mu|ma|ne|ng|re|rw|sn|sc|za|sd|tz|tg|tn|ug|cd|zm|zw",
+  /* 9: India */
+    "bd|in|mv|np|pk|lk",
+  /* 10: North Asia */
+    "jp|kr|mn",
+  /* 11: South Asia */
+    "bn|my|kh|cn|gu|id|mh|my|fm|pw|ph|ROTA|SPN|sg|tw|th|TINIAN",
+  /* 12: Australia/SWP */
+    "as|au|fj|nz|pf"
+];
+
+awardmap["nw"] = [
+  /* 0: North America -> XXX */
+  [ 0, 0, 25, -1, 45 ],
+  [ 0, 1, 35, -1, 75 ],
+  [ 0, 1, 45, -1, 75, "interisland connection" ],
+  [ 0, 2, 35, -1, 75 ],
+  [ 0, 3, 35, 60, 60 ],
+  [ 0, 4, 35, 70, 70 ],
+  [ 0, 5, 50, -1, 90 ],
+  [ 0, 6, 50, 100, 100 ],
+  [ 0, 7, 90, 120, -1 ],
+  [ 0, 8, 90, 120, -1 ],
+  [ 0, 9, 90, 120, -1 ],
+  [ 0,10, 60, 120, 120 ],
+  [ 0,11, 60, 120, 120 ],
+  [ 0,12, 100, 150, 200 ],
+
+  /* Carib/Mexico -> XXX */
+  [ 1, 1, 20, 40, 40 ],
+  [ 1, 1, 30, 60, 60, "Delta" ],
+  [ 1, 2, 35, -1, 75 ],
+  [ 1, 2, 45, -1, 75, "interisland connection" ],
+  [ 1, 3, 20, 40, 40 ],
+  [ 1, 3, 35, 50, 50, "Delta" ],
+  [ 1, 4, 20, 40, 40 ],
+  [ 1, 4, 35, 70, 70, "Delta" ],
+  [ 1, 5, 40, 80, 80 ],
+  [ 1, 5, 50, 90, 90, "Delta" ],
+  [ 1, 6, 50, 100, 100 ],
+  [ 1, 7, 90, 120, -1 ],
+  [ 1, 8, 90, 120, -1 ],
+  [ 1, 9, 90, 120, -1 ],
+  [ 1,10, 60, 120, 120 ],
+  [ 1,11, 60, 120, 120 ],
+  [ 1,12, 100,150, 200 ],
+
+  /* 2: Hawaii -> XXX */
+  [ 2, 2, 10, -1, -1 ],
+  [ 2, 3, 35, 75, 75 ],
+  [ 2, 4, 35, -1, 75 ],
+  [ 2, 5, 50, -1, 90 ],
+  [ 2, 6, 70, 120, 120 ],
+  [ 2, 7, 110,140, -1 ],
+  [ 2, 8, 110,140, -1 ],
+  [ 2, 9, 110,140, -1 ],
+  [ 2,10, 40, 60, 80 ],
+  [ 2,10, 60, 90, 120, "Korean" ],
+  [ 2,10, 60, 120,120, "Delta" ],
+  [ 2,11, 40, 60, 80 ],
+  [ 2,11, 70, 110, 140, "Korean" ],
+  [ 2,12, 100,150,200 ],
+
+  /* 3: Central America -> XXX */
+  [ 3, 3, 15, 20, 20 ],
+  [ 3, 4, 20, 40, 40 ],
+  [ 3, 5, 40, 80, 80 ],
+  [ 3, 6, 50, 100, 100 ],
+  [ 3, 7, 80, 120, -1 ],
+  [ 3, 8, 80, 120, -1 ],
+  [ 3, 9, 80, 120, -1 ],
+  [ 3,10, 60, 120, 120 ],
+  [ 3,11, 60, 120, 120 ],
+  [ 3,12, 100, 150, 200 ],
+
+  /* 4: Northern S. America -> XXX */
+  [ 4, 4, 20, 40, 40 ],
+  [ 4, 5, 20, 40, 40 ],
+  [ 4, 6, 90, 140, 140 ],
+  [ 4, 7, 120, 210, 210 ],
+  [ 4, 8, 120, 210, 210 ],
+  [ 4, 9, 120, 210, 210 ],
+  [ 4,10, 90, 140, 140 ],
+  [ 4,11, 90, 140, 140 ],
+  [ 4,12, 90, 140, 140 ],
+
+  /* 5: Southern S. America -> XXX */
+  [ 5, 5, 20, 40, 40 ],
+  [ 5, 6, 90, 140, 140 ],
+  [ 5, 7, 120, 210, 210 ],
+  [ 5, 8, 120, 210, 210 ],
+  [ 5, 9, 120, 210, 210 ],
+  [ 5,10, 90, 140, 140 ],
+  [ 5,11, 90, 140, 140 ],
+  [ 5,12, 90, 140, 140 ],
+
+  /* 6: Europe -> XXX */
+  [ 6, 6, 25, 50, 50 ],
+  [ 6, 7, 70, 110, -1 ],
+  [ 6, 8, 70, 110, -1 ],
+  [ 6, 9, 70, 110, -1 ],
+  [ 6,10, 80, 120, 160 ],
+  [ 6,11, 80, 120, 160 ],
+  [ 6,12, 80, 120, -1 ],
+
+  /* 7: Middle East -> XXX */
+  [ 7, 8, 80, 120, 160 ],
+  [ 7,10, 80, 120, 160 ],
+  [ 7,11, 80, 120, 160 ],
+  [ 7,12,110, 170, 220 ],
+
+  /* 8: Africa -> XXX */
+  [ 8, 8, 25, 50, -1 ],
+  [ 8, 9, 80,120,160 ],
+  [ 8,10, 100,150,200 ],
+  [ 8,11, 120,180,240 ],
+  [ 8,12, 120,180,240 ],
+
+  /* 9: India -> XXX */
+  [ 9, 9, 25, 50, -1 ],
+  [ 9,10, 50, 70, 100 ],
+  [ 9,11, 50, 70, 100 ],
+  [ 9,12, 90, 140, 180 ],
+
+  /* 10: N. Asia -> XXX */
+  [ 10,10, 20, 30, 60 ],
+  [ 10,10, 25, 30, 60, "continental" ],
+  [ 10,10, 50, 70, 90, "korean" ],
+  [ 10,11, 20, 30, 60 ],
+  [ 10,11, 25, 30, 60, "continental" ],
+  [ 10,11, 50, 70, 90, "korean" ],
+  [ 10,12, 70,110,140 ],
+
+  /* 11: S. Asia -> XXX */
+  [ 11, 11, 20, 30, 60 ],
+  [ 11, 11, 25, 30, 60, "continental" ],
+  [ 11, 11, 50, 70, 100, "korean" ],
+  [ 11, 12, 70,110,140 ],
+  [ 11, 12, 80,120,160,"Korean" ],
+
+  /* 12: SWP */
+  [ 12, 12, 40, 60, 85 ],
+
+  /* Special Cases *
+   *  -10 - intra-country award (and in same zone)
+   *  -11 - inter-country award (and in same zone)
+   */
+  [ -10, "jp", 15, 19, -1 ],
+  [ -10, "kr", 15, 20, 20 ]
+];
+
 //==============================================
 //
 // American Airlines - AA Awards
@@ -832,32 +1000,38 @@ zonemap["aa"] = [
     "NRT"
 ];
 
+var aa_cbnoff="offpeak Sep 7-Nov 14";
+var aa_camoff="offpeak Jan 16-Jun 14; Sep 7-Nov 14";
+var aa_samoff="offpeak Mar 1-May 31; Aug 16-Nov 30";
+var aa_euroff="offpeak Oct 15-May 15";
+var aa_asaoff="offpeak Oct 1-Apr 30";
+
 awardmap["aa"] = [
   /* North America -> XXX */
   [ 0, 0, 25, 45, 60 ],
-  [ 0, 1, 25, 60, 80, "offpeak" ],
+  [ 0, 1, 25, 60, 80, aa_cbnoff ],
   [ 0, 1, 30, 60, 80 ],
   [ 0, 2, 35, 75, 95 ],
-  [ 0, 3, 30, 60, 80, "offpeak" ],
+  [ 0, 3, 30, 60, 80, aa_camoff ],
   [ 0, 3, 35, 60, 80 ],
-  [ 0, 4, 40, 90, 125, "offpeak" ],
+  [ 0, 4, 40, 90, 125, aa_samoff ],
   [ 0, 4, 60, 90, 125 ],
-  [ 0, 5, 40, 90, 125, "offpeak" ],
+  [ 0, 5, 40, 90, 125, aa_euroff ],
   [ 0, 5, 60, 90, 125 ],
-  [ 0, 6, 50, 90, 125, "offpeak" ],
+  [ 0, 6, 50, 90, 125, aa_asaoff ],
   [ 0, 6, 60, 90, 125 ],
 
   /* Mexico/Cbn -> XXX */
-  [ 1, 1, 25, 60, 60, "offpeak" ],
+  [ 1, 1, 25, 60, 60, aa_cbnoff ],
   [ 1, 1, 30, 60, 60 ],
   [ 1, 2, 35, 75, 95 ],
-  [ 1, 3, 30, 60, 80, "offpeak" ],
+  [ 1, 3, 30, 60, 80, aa_camoff ],
   [ 1, 3, 35, 60, 80 ],
-  [ 1, 4, 40, 90, 125, "offpeak" ],
+  [ 1, 4, 40, 90, 125, aa_samoff ],
   [ 1, 4, 60, 90, 125 ],
-  [ 1, 5, 40, 90, 125, "offpeak" ],
+  [ 1, 5, 40, 90, 125, aa_euroff ],
   [ 1, 5, 60, 90, 125 ],
-  [ 1, 6, 50, 90, 125, "offpeak" ],
+  [ 1, 6, 50, 90, 125, aa_asaoff ],
   [ 1, 6, 60, 90, 125 ],
 
   /* Hawaii -> XXX */
@@ -1192,25 +1366,27 @@ zonemap["dl skyteam"] = [
   /* 5: Southern South America */
     "ar|bo|br|cl|py|uy",
   /* 6: Europe */
-    "al|ad|at|by|be|ba|bg|hr|cy|cz|dk|ee|fi|fr|de|gr|hu|is|ie|it|lv|li|lt|lu|mk|mt|md|mo|nl|no|pl|pt|ro|ru|sm|sk|si|es|se|ch|tr|ua|gb|va|yu",
+    "al|ad|at|by|be|ba|bg|hr|cy|cz|dk|ee|fi|fr|de|gr|hu|is|ie|it|lv|li|lt|"+
+    "lu|mk|mt|md|mo|nl|no|pl|pt|ro|"+
+    "ru|sm|sk|si|es|se|ch|tr|ua|gb|va|yu",
   /* 7: North Africa */
     "dz|eg|ly|ma|tn",
   /* 8: North Asia */
-    "jp|kr|mn|RUSSIAN FAR EAST",
+    "jp|kr|mn|VVO|UUS|KHV|RUSSIAN FAR EAST",
   /* 9: Southeast/Southwest Asia */
-    "bn|kh|cn|id|la|my|mm|pg|ph|sg|tw|th|vn",
+    "bn|kh|cn|id|la|my|mm|pg|ph|sg|tw|th|vn|GUM|SPN|pw|mh|mp|fm",
   /*10: Indian Subcontinent */
     "bd|bt|in|np|pk|lk",
   /*11: Israel/Middle East */
     "af|am|az|bh|ge|ir|iq|il|jo|kz|kw|kg|lb|om|qa|sa|sy|tj|tm|ae|uz|ye",
   /*12: Central Africa/South Africa */
-    "bj|bf|bi|cm|cf|td|cg|ci|zr|dj|gq|er|et|ga|gm|gh|gn|gw|ke|lr|ml|mr|ne|ng|rw|st|sn|sl|so|sd|tz|tg|ug|"+
-    "ao|bw|km|ls|mg|mw|mz|na|za|sz|zm|zw",
+    "bj|bf|bi|cm|cf|td|cg|ci|zr|dj|gq|er|et|ga|gm|gh|gn|gw|ke|lr|ml|mr|ne|"+
+    "ng|rw|st|sn|sl|so|sd|tz|tg|ug|ao|bw|km|ls|mg|mw|mz|na|za|sz|zm|zw",
   /*13: Australia/New Zealand/South Pacific/Indian Ocean */
     "au|nz|"+
-    "as|fm|fj|pf|ki|mh|"+
+    "as|fj|pf|ki|nu|nc|sb|to|tv|vu|ws"+
     "mv|mu|re|sc"
-
+  /* 14: RTW */
 ];
 
 awardmap["dl skyteam"] = [
@@ -1309,8 +1485,8 @@ awardmap["dl skyteam"] = [
   [ 7,13, 100, 150, 200 ],
 
   /* North Asia -> XXX */
-  [ 8, 8, 35, 50, 70 ],
-  [ 8, 9, 50, 70, 100 ],
+  [ 8, 8, 25, 30, 60 ],
+  [ 8, 9, 25, 30, 60 ],
   [ 8,10, 50, 70, 100 ],
   [ 8,11, 80, 120, 160 ],
   [ 8,12, 100,150, 200 ],
@@ -1335,7 +1511,10 @@ awardmap["dl skyteam"] = [
 
   /* Central/South Africa -> XXX */
   [ 12, 12, 80, 120, 160 ],
-  [ 12, 13, 120, 180, 240 ]
+  [ 12, 13, 120, 180, 240 ],
+
+  /* RTW */
+  [ 14, 14, 140, 220, 280 ]
 ];
 
 //==============================================
@@ -1359,8 +1538,8 @@ zonemap["ua star"] = [
   /* 4: South America */
     "ar|bo|br|cl|co|ec|py|pe|uy|ve",
   /* 5: Europe */
-    "al|at|by|be|ba|bg|hr|cy|cz|dk|gb|ee|fi|fr|de|gr|hu|ie|it|kz|lv|lt|lu|mk|mt|md|"+
-    "nl|no|pl|pt|ro|ru|si|es|se|ch|tr|tm|ua|yu",
+    "al|at|by|be|ba|bg|hr|cy|cz|dk|gb|ee|fi|fr|de|gr|hu|ie|it|kz|lv|lt|lu|"+
+    "mk|mt|md|nl|no|pl|pt|ro|ru|si|es|se|ch|tr|tm|ua|yu",
   /* 6: Japan */
     "jp",
   /* 7: North Asia */
@@ -1511,19 +1690,6 @@ awardmap["ua star"] = [
 ];
 
 // List of all zones in this file
-/*
-var award_zones = [
- "ba",
- "ba other",
- "nw",
- "aa",
- "aa all",
- "co",
- "dl skyteam",
- "ua star"
-];
-*/
-
 var fOW = 0x1;
 var fRT = 0x2;
 var fPP = 0x4;
@@ -1533,8 +1699,8 @@ var fZN = 0x8;
  *  flag, divisor, multiplier, code 
  */
 var dist_award_zones = [
- [ fOW, 0.5,1, "ba" ],
- [ fOW, 0.5,1, "ba other" ],
+ [ fOW, 0.5, 1, "ba" ],         //  BA one-way tickets cost 0.5 amt for r/t
+ [ fOW, 0.5, 1, "ba other" ],
 
  [ fRT, 1, 1, "ba" ],
  [ fRT, 1, 1, "ba other" ],
@@ -1547,15 +1713,16 @@ var dist_award_zones = [
  [ fRT, 1, 1, "dl emirates" ],
  [ fRT, 1, 1, "ua star" ],
 
+ // Zone-based awards, amt depends on total length
  [ fOW|fRT|fPP|fZN, 1, 1, "aa oneworld" ],
  [ fOW|fRT|fPP|fZN, 1, 1, "asiamiles oneworld" ],
  [ fOW|fRT|fPP|fZN, 1, 1, "ba oneworld" ],
 
  [ 0xE,      1, 1, "qf oneworld" ],
- [ fRT|fZN,  1, 1, "qf other (r/t)" ],
  [ fRT|fZN,, 1, 1, "qf select (r/t)" ],
+ [ fRT|fZN,  1, 1, "qf other (r/t)" ],
  [ fOW|fZN,  1, 1, "qf.new select (o/w)" ],
- [ fRT,      1, 1, "qf.new select (o/w)" ],
+ [ fRT|fZN,  1, 1, "qf.new select (o/w)" ],
 
  // Asiamiles R/T: based on one-way distance: tdist *= 0.5
  [ fOW|fPP|fZN, 1, 1,   "asiamiles ow" ],
