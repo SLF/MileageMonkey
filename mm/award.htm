@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>MileageMonkey 0.95021</title>
+<title>MileageMonkey 0.95022</title>
 <style>
 TABLE {
         FONT-FAMILY: sans-serif ; font-size: 8pt
@@ -36,11 +36,12 @@ TR.ceven {
 </style>
 
 <script language="javascript" src="flights.js" type="text/javascript"></script>
+<script language="javascript" src="flights-hippo.js" type="text/javascript"></script>
 <script language="javascript" src="cities.js"  type="text/javascript"></script>
 <script language="javascript" src="zones.js"   type="text/javascript"></script>
 <script language="javascript" src="owe.js"     type="text/javascript"></script>
 
-<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAa2p37bDCDkcQAIF9orsX8hRdNJrqZw3sy8ExmlDCE4vTcp1VpxQb81RGTiAxa2YZkOVrqNui0T9T3Q" type="text/javascript">
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAABEV2yaMMjE_f4-tw0ZRh7BRCIXOWMLzpV6CUqT9MJySkZqgXvBTIkQdPI_vtjtDOdZheLJ4q_ztWHQ" type="text/javascript">
 </script>
 
 <script language="javascript" type="text/javascript">
@@ -92,7 +93,7 @@ var ib_help="# of IberiaPlus points earned";
 var la_help="# of LanPass km earned";
 
 var cookie_pattern = "setMMearn";
-var cookie_domain = "slfft.allhyper.com";
+var cookie_domain = "slfft.org";
 
 var earn_mapper = findmap;
 var earn_map    = qf_scmap;
@@ -143,6 +144,16 @@ function setowestatus(info,state)
   showLayer('owestatus',1);
 }
 
+function get_flight(request)
+{
+	if(getRadioSetting('flightdb') == "hippo")
+	{
+		return flight_hippo[request];
+	}
+
+	return flight[request];
+}
+
 function clearall()
 {
   findElement('tablearea').innerHTML = "";
@@ -184,10 +195,12 @@ function setemap(earnProg, mapper, map, str, earnElite)
   earn_mapper = mapper;
   earn_map    = map;
   earn_help   = str;
-  earn_elite  = elite;
+  earn_elite  = earnElite;
+  var flightDatabase = getRadioSetting('flightdb');
 
   if(earnProg  != readCookie("earnprog" )) setCookie("earnprog",  earnProg);
   if(earnElite != readCookie("earnelite")) setCookie("earnelite", earnElite);
+  if(flightDatabase != readCookie("flightdb")) setCookie("flightdb", flightDatabase);
 }
 
 function getRadioSetting(id)
@@ -261,6 +274,7 @@ function loadearn()
 {
   var earnProg = readCookie("earnprog");
   var defElite = readCookie("earnelite");
+  var flightDatabase = readCookie("flightdb");
 
   if(earnProg.length > 2) {
   	defElite = earnProg.substr(2);
@@ -275,6 +289,11 @@ function loadearn()
   var radio_array = document.getElementsByName('elite');
   for(var i=0, len = radio_array.length; i < len; i++) {
 	radio_array[i].checked = (radio_array[i].value == defElite) ? true : false;
+  }
+
+  var radio_array = document.getElementsByName('flightdb');
+  for(var i=0, len = radio_array.length; i < len; i++) {
+	radio_array[i].checked = (radio_array[i].value == flightDatabase) ? true : false;
   }
 
   return 0;
@@ -700,7 +719,7 @@ function show_awards(sumit, cabins)
 	var services = "";
 
 	if(cabins) {
-		services = flight[award_tab[i][4]]; // get classes of service from flight data
+		services = get_flight(award_tab[i][4]); // get classes of service from flight data
 
 		if(!isdefined(services)) {
 			services = "";
@@ -872,7 +891,7 @@ function flight_exists(from, to, airlines, max_cnx)
   for(var i=0; i<fsi.length; i++) {
     for(var j=0; j<tsi.length; j++) {
       var str = fsi[i] + "-" + tsi[j];
-      if (flight[str] != null) {
+      if (get_flight(str) != null) {
         /* Flight exists.. return actual cities of flight segment */
         return str;
       }
@@ -948,7 +967,7 @@ function showtrip(cities,type)
 
       if (cfr == ffr) {
         var str = fto + "-" + cto;
-        if (flight[str] != null) {
+        if (get_flight(str) != null) {
            add_route(fl+","+str, calcdist(cfr,fto), calcdist(fto,cto));
         }
       }
@@ -1429,7 +1448,7 @@ function validateowe()
     return -1;
   }
 
-  var max_segments = findElement("maxsegments20").checked ? 20 : 16;
+  var max_segments = 16;
 
 /* Validate total count of segments */
   if (cities.length > max_segments) {
@@ -1448,9 +1467,9 @@ function validateowe()
   /* Setup fixup for rules - no transit of original point or country */
   owe_rulemap[0][1] = get_primcitysyn(cities[0][0]);
   owe_rulemap[1][1] = map_country(cities[0][0]);
-  addlog("Origin: "+owe_rulemap[0][1]+" ("+owe_rulemap[1][1]+")"
+  addlog("Origin: "+owe_rulemap[0][1]+" ("+owe_rulemap[1][1]+");&nbsp;&nbsp;"
   	+ ' <a href="http://www.oneworld.com/ow/air-travel-options/fare-estimate?showResult=1&productName=oneworld&saleCountry=' +
-  		owe_rulemap[1][1] + '&saleClass=all" target="_blank">xONEx Fare Estimate</a>'
+  		owe_rulemap[1][1] + '&saleClass=all" target="_blank">ex-'+owe_rulemap[0][1]+'&nbsp;&nbsp; xONEx Fare Estimate</a>'
   	);
 
   /* --== Validate rules for each city pair.. ==-- */
@@ -1677,6 +1696,14 @@ function elitehelp()
   );
 }
 
+function flightdbhelp()
+{
+  alert("This option lets you select which flights database you want MM to use for oneworld services.\n\n" +
+  		"Original: this is the older established database\n" +
+  		"hippo: this is a new database supplied by FT user hippo\n"
+  );
+}
+
 function owehelp()
 {
   alert("This function tests if a OWE itinerary is valid. Enter a list of cities, eg. LHR-JFK-SYD-LHR." +
@@ -1687,9 +1714,7 @@ function owehelp()
   	"* '-oAAA' may be used to indicate a stopover at AAA (this is ignored by the tool but is useful for your planning purposes)\n" +
   	"\nThus, another valid itinerary is:  CAI-oLHR//LGW-xMCO-oMIA-  oSFO   ,LAX-oHKG-LHR-DXB\n\n" +
   	"The 'Ignore Errors' option will override the validator's rule checks, allowing the itinerary to be fully parsed. " +
-  	"This should only be used if you suspect an error in the validator, but still want your itinerary to be displayed.\n\n" +
-	"The 'Pre-1 June 2008 ticket' option will permit 20-segment tickets.  Tickets issued after this date " +
-	"are restricted to 16 segments.\n"
+  	"This should only be used if you suspect an error in the validator, but still want your itinerary to be displayed.\n\n"
   	);
 }
 function oweplanhelp()
@@ -1810,7 +1835,7 @@ function initialize() {
   <TBODY>
 <tr bgcolor="#eeffee">
 <td colspan=5>
-<b>MileageMonkey v0.95021 (based on JPH's <a href="http://slfft.allhyper.com/0.9/award.htm">0.9</a> &amp;
+<b>MileageMonkey v0.95022 (based on JPH's <a href="http://slfft.allhyper.com/0.9/award.htm">0.9</a> &amp;
 <a href="http://slfft.allhyper.com/1.1/award.htm">1.1</a> versions) /
 <a href="javascript:toggleLayer('info');" title="">Tool information</a> /
 <a href="javascript:toggleLayer('changes');" title="">Change log</a> /
@@ -1834,16 +1859,33 @@ modifications made in this particular version.
 to see if the tool has been reloaded there.  For other versions of the tool, please see <a href="http://slfft.allhyper.com/" target="_blank">here</a>.</em>
 <br>&nbsp;<br>
 Copyright &copy; 2004-2008 by <a href="mailto:jordan_hargrave%3Cdelete%20me%20nospam%3E@hotmail.com">Jordan Hargrave</a>, All Rights Reserved.<br>
-Parts copyright &copy; 2006-2008 <a href="http://www.flyertalk.com/forum/private.php?do=newpm&u=41952" target="_blank">SLF</a>
+Parts copyright &copy; 2006-2009 <a href="http://www.flyertalk.com/forum/private.php?do=newpm&u=41952" target="_blank">SLF</a>
 </div>
   </td>
 </tr>
+
+<tr><td colspan=5>
+<script type="text/javascript"><!--
+google_ad_client = "pub-5447331349458446";
+/* 468x60, created 10/4/10 */
+google_ad_slot = "7598435257";
+google_ad_width = 468;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</tr></td>
+
+
 
 <tr bgcolor="#eeffee"><div id="important" style="display: none">
 <td colspan=5>
 <b><font color="#ff3333">Important</font>: Mileage Monkey is now hosted on these site(s):
 <!--<a href="http://slfft.zendfree.com/0.95/award.htm" target="_blank">Zendfree</a> and-->
-<a href="http://slfft.allhyper.com/0.95/award.htm" target="_blank">Allhyper</a>.</b>
+<!--a href="http://slfft.allhyper.com/0.95/award.htm" target="_blank">Allhyper</a>.</b>-->
+<a href="http://www.slfft.org/0.95022/award.htm" target="_blank">slfft.org</a>.</b>
 </td></div></tr>
 
 <tr>
@@ -1852,6 +1894,13 @@ Parts copyright &copy; 2006-2008 <a href="http://www.flyertalk.com/forum/private
 <table border=0 bgcolor="#ffff99"><tr><td>
 <b>Changelog:</b>
 <ul>
+
+<hr><li><u><b>v0.95022 (2009/05/15):</b></u>
+<li>Added experimental oneworld flight database (thanks <a href="http://www.flyertalk.com/forum/members/hippo.html" target="_blank">hippo</a>)
+<li>Moved Libya from Europe/Middle East continent group (was Africa)
+<li>Removed "pre-1 June 2008" option which permitted 20-segment tickets
+<li>Removed DPS-PER &amp; v.v. (thanks <a href="http://www.flyertalk.com/forum/oneworld/947342-validator.html#post11644216" target="_blank">Mwenenzi</a>)
+<li>Added BKK-DEL &amp; v.v. (thanks <a href="http://www.flyertalk.com/forum/oneworld/401874-new-oneworld-itinerary-validator-19.html#post11761306" target="_blank">malcolmkettering</a>)
 
 <hr><li><u><b>v0.95021 (2008/09/07):</b></u>
 <li>Thanks to <a href="http://www.flyertalk.com/forum/showthread.php?p=10151204#post10151204"
@@ -2157,6 +2206,13 @@ var sc_security="b9b2dc33";
     <TD><INPUT onclick=javascript:elitehelp(); type=submit value="?">
                   </tr>
 
+  <TR>
+    <TH class=award>oneworld flights db</TH>
+    <TD colSpan=2 bgcolor="#ffff80"><INPUT id=flightdb type=radio CHECKED value="original" name="flightdb">Original
+                  <INPUT id=flightdb type=radio value="hippo" name="flightdb">hippo (experimental)
+                  </TD>
+    <TD><INPUT onclick=javascript:flightdbhelp(); type=submit value="?">
+                  </tr>
 
    <TR>
     <TH class=award>Oneworld Explorer Validator</TH>
@@ -2166,7 +2222,6 @@ var sc_security="b9b2dc33";
     <TEXTAREA wrap=soft id=owecitylist rows=3 cols=25></TEXTAREA>
     <br>
 	<input id="ignoreerrors" type="checkbox" name="ignoreerrors">Ignore errors (for expert users!)<br>
-	<input id="maxsegments20" type="checkbox" name="maxsegments20">Pre-1 June 2008 ticket? (20 segments max.)<br>
     </TD>
 
     <TD><INPUT onclick=javascript:validateowe(); type=submit value="Go!"><br>
@@ -2205,6 +2260,7 @@ var sc_security="b9b2dc33";
      <a href="http://www.oneworld.com/ow/flight-info" target="_blank">Flight Info</a>&nbsp;&nbsp;
      <a href="http://www.innovata-llc.com/onw/rtw/default.asp?show=RTW" target="_blank">Planner</a>&nbsp;&nbsp;
      <a href="http://www.oneworld.com/ow/air-travel-options" target="_blank">Fare rules &amp; prices</a>&nbsp;&nbsp;
+     <a href="http://www.oneworld.com/content/library/oneworld_explorer_rule_sheet.pdf" target="_blank">xONEx Rules</a>&nbsp;&nbsp;
      <a href="http://www.oneworld.com/products/details.cfm?ObjectID=21" target="_blank">OWE Info</a>&nbsp;&nbsp;
 	 <a href="http://www.innovata-llc.com/onw/default.asp?show=MAP" target="_blank">Interactive Map</a>&nbsp;&nbsp;
 	 <a href="http://www.oneworld.com/ow/airports-and-destinations" target="_blank">Airports &amp; Destinations</a>&nbsp;&nbsp;
@@ -2212,7 +2268,6 @@ var sc_security="b9b2dc33";
     Other links:<br>&nbsp;&nbsp;&nbsp;&nbsp;
      WBT: (<a href="http://qsi.cc/users/wbt/RTW%20Fares.xls" target="_blank">fares</a>,
            <a href="http://qsi.cc/users/wbt/oneworldStarFile.txt" target="_blank">starfile</a>)&nbsp;&nbsp;
-	 <a href="http://www.christen.demon.co.uk/CXRule/" target="_blank">christep's CX files</a>&nbsp;&nbsp;
      <a href="http://www.jeah.net/~markdu/OWFiles/" target="_blank">MarkDu's OWFiles</a>
      <br>&nbsp;&nbsp;&nbsp;&nbsp;
     Visa info pages from:

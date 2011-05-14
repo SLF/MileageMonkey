@@ -1,5 +1,76 @@
 // auto generated!!
 var flight = new Array;
+//--- Logs start ---
+//      adding CX773 to DPS-HKG (was CX744)
+//      adding CX773 to HKG-DPS (was CX744)
+//      adding CX77A to HKG-JFK (was CX744|CX773)
+//      adding CX77A to HKG-YYZ (was CX343|CX773)
+//      adding CX77A to JFK-HKG (was CX744|CX773)
+//      adding CX77A to YYZ-HKG (was CX343|CX773)
+//      adding LA763 to JFK-YYZ (was AAER3)
+//      adding LA763 to YYZ-JFK (was AAER3)
+//      creating BGI-BOS with AA757
+//      creating BKK-DEL with CX330
+//      creating BMI-DFW with AAER4
+//      creating CCS-EZE with LP763
+//      creating CNF-MIA with AA763
+//      creating CTS-FSZ with JLM90
+//      creating DEL-BKK with CX330
+//      creating DFW-BMI with AAER4
+//      creating DFW-MAD with AA763
+//      creating EZE-SYD with QF744
+//      creating EZE-UIO with LA320
+//      creating FSZ-CTS with JLM90
+//      creating FSZ-FUK with JLM90
+//      creating FUK-FSZ with JLM90
+//      creating GVA-LCY with BAAR1
+//      creating HAN-HKG with KA320
+//      creating HEL-IST with AY319
+//      creating HKG-HAN with KA320
+//      creating HYD-LHR with BA777
+//      creating ISG-NGO with NU734
+//      creating IST-HEL with AY319
+//      creating JFK-SJO with AAAB6
+//      creating LAX-YUL with AAM80
+//      creating LCY-GVA with BAAR1
+//      creating LCY-LYS with BAAR1
+//      creating LGW-SKB with BA777
+//      creating LHR-HYD with BA777
+//      creating LHR-WAW with BA319
+//      creating LYS-LCY with BAAR1
+//      creating MAD-DFW with AA763
+//      creating MIA-CNF with AA763
+//      creating MIA-REC with AA763
+//      creating MIA-SSA with AA763
+//      creating NGO-ISG with NU734
+//      creating REC-MIA with AA763
+//      creating SCL-YYZ with LA763
+//      creating SFO-LAS with AAM80
+//      creating SJO-JFK with AAAB6
+//      creating SKB-LGW with BA777
+//      creating SSA-MIA with AA763
+//      creating SYD-EZE with QF744
+//      creating UIO-EZE with LA320
+//      creating WAW-LHR with BA319
+//      creating YUL-UVF with AA738
+//      creating YYZ-SCL with LA763
+//      removeall DPS-PER (was QF73H)
+//      removeall HEL-TKU (was AYE70)
+//      removeall HEL-TLL (was AY319)
+//      removeall NAN-SYD (was QF743)
+//      removeall PER-DPS (was QF73H)
+//      removeall SYD-NAN (was QF743)
+//      removeall TKU-HEL (was AYE70)
+//      removeall TLL-HEL (was AY319)
+//      removing CX319 from DUS-LHR (now BA319|BA767)
+//      removing CX737 from LHR-STR (now BA319)
+//      removing CX773 from HKG-JFK (now CX744|CX77A)
+//      removing CX773 from HKG-YYZ (now CX343|CX77A)
+//      removing CX773 from JFK-HKG (now CX744|CX77A)
+//      removing CX773 from YYZ-HKG (now CX343|CX77A)
+//      removing DXB-ALA as last service KA320 was removed
+//--- Logs  end  ---
+
 flight["AAL-AAR"] = "BAD38,y|BAJ31,y";
 flight["AAL-OSL"] = "BAD38,y|BAJ31,y";
 flight["AAN-AMM"] = "RJE95,jy";
@@ -376,6 +447,7 @@ flight["BKI-HKG"] = "KA320,jy";
 flight["BKK-AMM"] = "RJ313,jy";
 flight["BKK-BOM"] = "CX773,jy";
 flight["BKK-CMB"] = "CX773,jy";
+flight["BKK-DEL"] = "CX330,jy";
 flight["BKK-DXB"] = "CX773,jy";
 flight["BKK-FCO"] = "QF743,jy";
 flight["BKK-HEL"] = "AYM11,jy";
@@ -743,7 +815,7 @@ flight["CTL-BNE"] = "QFDH3,y|QFDH8,y";
 flight["CTL-RMA"] = "QFDH3,y";
 flight["CTS-AOJ"] = "JLM81,y|JLM90,y";
 flight["CTS-AXT"] = "JLM81,y|JLM90,y";
-flight["CTS-FSZ"] = "JL000,y";
+flight["CTS-FSZ"] = "JLM90,y";
 flight["CTS-FUK"] = "JL777,fjpy|JLM81,y";
 flight["CTS-GAJ"] = "JLCRJ,y";
 flight["CTS-HIJ"] = "JLM90,y";
@@ -814,6 +886,7 @@ flight["DCA-SNA"] = "AA738,fy";
 flight["DCA-STL"] = "AAM80,fy|AAM83,fy";
 flight["DCA-XNA"] = "AAER3,y";
 flight["DEL-AMM"] = "RJ313,jy";
+flight["DEL-BKK"] = "CX330,jy";
 flight["DEL-HEL"] = "AYM11,jy";
 flight["DEL-HKG"] = "CX330,jy";
 flight["DEL-LHR"] = "BA777,fjpy";
@@ -1022,7 +1095,6 @@ flight["DPO-MEL"] = "QFDH3,y|QFDH8,y";
 flight["DPS-HKG"] = "CX744,jy|CX773,jy";
 flight["DPS-KIX"] = "JO767,jy";
 flight["DPS-NRT"] = "JO744,jy";
-flight["DPS-PER"] = "QF73H,jy";
 flight["DPS-SIN"] = "QF73H,jy";
 flight["DRS-LGW"] = "BA735,jy";
 flight["DRW-ADL"] = "QF73H,jy|QF763,jy";
@@ -1179,13 +1251,13 @@ flight["FRA-SIN"] = "QF744,fjpy";
 flight["FRA-SYD"] = "QF744,fjpy";
 flight["FRA-ZAZ"] = "IBCR2,y";
 flight["FSM-DFW"] = "AAER4,y|AAERD,y";
-flight["FSZ-CTS"] = "JL000,y";
-flight["FSZ-FUK"] = "JL000,y";
+flight["FSZ-CTS"] = "JLM90,y";
+flight["FSZ-FUK"] = "JLM90,y";
 flight["FUE-AGP"] = "IBCR2,y";
 flight["FUE-MAD"] = "IB32S,y";
 flight["FUE-SVQ"] = "IBCR2,y";
 flight["FUK-CTS"] = "JL777,fjpy|JLM81,y";
-flight["FUK-FSZ"] = "JL000,y";
+flight["FUK-FSZ"] = "JLM90,y";
 flight["FUK-HKG"] = "CX330,jy|KA320,jy";
 flight["FUK-HND"] = "JL767,jy|JL777,fjpy";
 flight["FUK-ITM"] = "JL73H,y|JLM90,y";
@@ -1358,8 +1430,6 @@ flight["HEL-RVN"] = "AY320,jy|AYE70,y";
 flight["HEL-STR"] = "AYER4,y";
 flight["HEL-SVL"] = "AY320,jy|AYE70,y";
 flight["HEL-SVO"] = "AY320,jy";
-flight["HEL-TKU"] = "AYE70,y";
-flight["HEL-TLL"] = "AY319,jy";
 flight["HEL-TXL"] = "AY319,jy|AYE90,y";
 flight["HEL-VAA"] = "AYE70,y";
 flight["HEL-VCE"] = "AY319,jy|AY320,jy";
@@ -3012,7 +3082,6 @@ flight["PER-BNE"] = "QF73H,jy|QF763,jy";
 flight["PER-CBR"] = "QF73H,jy";
 flight["PER-CGK"] = "QF73H,jy";
 flight["PER-CNS"] = "QF73H,jy";
-flight["PER-DPS"] = "QF73H,jy";
 flight["PER-DRW"] = "QF73H,jy";
 flight["PER-HKG"] = "CX330,jy|QF333,jy";
 flight["PER-KGI"] = "QF717,y|QF73H,jy";
@@ -3676,9 +3745,7 @@ flight["TIP-LHR"] = "BA320,jy";
 flight["TKN-KOJ"] = "JLM81,y";
 flight["TKS-CTS"] = "JLM81,y";
 flight["TKS-HND"] = "JLAB6,y";
-flight["TKU-HEL"] = "AYE70,y";
 flight["TLH-MIA"] = "AAERD,y";
-flight["TLL-HEL"] = "AY319,jy";
 flight["TLS-LGW"] = "BA734,jy|BA735,jy";
 flight["TLS-MAD"] = "IBCR2,y|IBCR9,y|IBDH3,y";
 flight["TLS-SVQ"] = "IBCR2,y";
