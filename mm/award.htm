@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>MileageMonkey 0.95018</title>
+<title>MileageMonkey 0.95019</title>
 <style>
 TABLE {
         FONT-FAMILY: sans-serif ; font-size: 8pt
@@ -946,7 +946,6 @@ function parseCityList(citylist)
   var cities = new Array;
   var ncities = 0;
   var lastcity="";
-  var ignoresurface = findElement("ignoresurface").checked;
 
   setmap(citylist);
 
@@ -954,7 +953,7 @@ function parseCityList(citylist)
   for(var i=0; i<bob.length; i++) {
     var bc = bob[i].split('-');
     if (!validate(bc)) return null;
-    if(!ignoresurface && (lastcity.length == 3)) {
+    if((lastcity.length == 3)) {
     	cities[ncities++] = [ lastcity, bc[0], "," ];
     }
     for(var j=0; j<bc.length-1; j++) {
@@ -1235,13 +1234,18 @@ function check_owe_rules(from, to, to2, surface, seg)
       if (a && b && c) rc = 1;
     }
 
+    var dohop = '<a href="http://www.dohop.com/#a1=' + from + '&a2=' + to + '&d1=190608" target="_blank">' +
+      			'<img src="dohop.jpg" alt="dohop" border=0></a>';
+
+	dohop = ""; // while we await a response from dohop.com whether it's OK to point at them
+
     if (rc == 1) {
       owe_count[i]++;
       owe_flag |= flag;
 
       /* Add to log, display index #, route, description */
       if (flag & 0x10) {
-        addlog(pfx+seg + ": " + mapify(from) + "-" + mapify(to) + ": " + numstr(owe_count[i]) + " of " + ocount + " (" + odesc + ")");
+        addlog(pfx+seg + ": " + dohop + mapify(from) + "-" + mapify(to) + ": " + numstr(owe_count[i]) + " of " + ocount + " (" + odesc + ")");
         pfx="*";
       }
 
@@ -1259,7 +1263,7 @@ function check_owe_rules(from, to, to2, surface, seg)
     }
   }
   if (pfx == "") {
-    addlog(seg + ": " + mapify(from) + "-" + mapify(to) + ": intercontinental");
+    addlog(seg + ": " + dohop + mapify(from) + "-" + mapify(to) + ": intercontinental");
   }
   return -1;
 }
@@ -1326,14 +1330,14 @@ function validateowe()
     return -1;
   }
 
+  var max_segments = findElement("maxsegments20").checked ? 20 : 16;
+
 /* Validate total count of segments */
-  if (cities.length > 20) {
+  if (cities.length > max_segments) {
     setowestatus(1,1);
-    addlog("<b>Rule violated!!! Maximum segment length is 20!</b>");
+    addlog("<b>Rule violated!!! Maximum number of segments is " + max_segments + "!</b>");
     if(!ignoreerrs) return -1;
     ++fatalerr;
-  } else if (cities.length > 16) {
-  	addlog("<b>Potential problem!!! E-tickets are restricted to 16 segments from tickets issued on/after 1 June 2008</b>");
   }
 
   /* Reset rule error count */
@@ -1345,7 +1349,10 @@ function validateowe()
   /* Setup fixup for rules - no transit of original point or country */
   owe_rulemap[0][1] = get_primcitysyn(cities[0][0]);
   owe_rulemap[1][1] = map_country(cities[0][0]);
-  addlog("Origin: "+owe_rulemap[0][1]+" ("+owe_rulemap[1][1]+")");
+  addlog("Origin: "+owe_rulemap[0][1]+" ("+owe_rulemap[1][1]+")"
+  	+ ' <a href="http://www.oneworld.com/ow/air-travel-options/fare-estimate?showResult=1&productName=oneworld&saleCountry=' +
+  		owe_rulemap[1][1] + '&saleClass=all" target="_blank">xONEx Fare Estimate</a>'
+  	);
 
   /* --== Validate rules for each city pair.. ==-- */
   for(var i=0; i<cities.length; i++) {
@@ -1564,8 +1571,8 @@ function owehelp()
   	"\nThus, another valid itinerary is:  CAI-oLHR//LGW-xMCO-oMIA-  oSFO   ,LAX-oHKG-LHR-DXB\n\n" +
   	"The 'Ignore Errors' option will override the validator's rule checks, allowing the itinerary to be fully parsed. " +
   	"This should only be used if you suspect an error in the validator, but still want your itinerary to be displayed.\n\n" +
-  	"Ignore Surface Sectors - from 1 July 2007, surface sectors need to be counted and will use up a coupon.  Select" +
-  	"this option if you have a ticket issued prior to this date in order to ignore surface sectors.\n\n"
+	"The 'Pre-1 June 2008 ticket' option will permit 20-segment tickets.  Tickets issued after this date " +
+	"are restricted to 16 segments.\n"
   	);
 }
 function oweplanhelp()
@@ -1685,7 +1692,7 @@ function initialize() {
   <TBODY>
 <tr bgcolor="#eeffee">
 <td colspan=5>
-<b>MileageMonkey v0.95018 (based on JPH's <a href="http://slfft.allhyper.com/0.9/award.htm">0.9</a> &amp;
+<b>MileageMonkey v0.95019 (based on JPH's <a href="http://slfft.allhyper.com/0.9/award.htm">0.9</a> &amp;
 <a href="http://slfft.allhyper.com/1.1/award.htm">1.1</a> versions) /
 <a href="javascript:toggleLayer('info');" title="">Tool information</a> /
 <a href="javascript:toggleLayer('changes');" title="">Change log</a> /
@@ -1720,6 +1727,18 @@ Parts copyright &copy; 2006-2008 <a href="http://www.flyertalk.com/forum/private
 <table border=0 bgcolor="#ffff99"><tr><td>
 <b>Changelog:</b>
 <ul>
+<hr><li><u><b>v0.95019 (2008/06/06):</b></u>
+<li>Added link to fare estimate, based on origin country
+<li>Removed "Ignore surface sectors" option, as that was for pre-June 2007 tickets only
+<li>Added option for pre-1 June 2008 tickets (20 sectors permitted), 16 sector maximum now
+<li>Moved ABC and LEN to the right places (thanks
+		<a href="http://www.flyertalk.com/forum/showthread.php?p=9874546#post9874546" target="_blank"><b>skunker</b></a>)
+<li>Removed BCN-ABC (operated by Denim Air, not a OW affiliate)
+<li>Located the following: EAL(MH), MQP(ZA), NAJ(AZ), NRN(DE), YNY(KR)
+<li>Added HKG-AMM, HKG-PUS &amp; v.v. (thanks
+		<a href="http://www.flyertalk.com/forum/showthread.php?p=9899423#post9899423" target="_blank"><b>plane_mad</b></a>)
+
+
 <hr><li><u><b>v0.95018 (2008/05/15):</b></u>
 <li>Removed BA services LGW to/from  ABZ/NCE/PRG/KEF/SPU (thanks
 		<a href="http://www.flyertalk.com/forum/showthread.php?p=9676272#post9676272" target="_blank"><b>Nobby</b></a>)
@@ -1978,7 +1997,7 @@ var sc_security="b9b2dc33";
     <TEXTAREA wrap=soft id=owecitylist rows=3 cols=25></TEXTAREA>
     <br>
 	<input id="ignoreerrors" type="checkbox" name="ignoreerrors">Ignore errors (for expert users!)<br>
-	<input id="ignoresurface" type="checkbox" name="ignoresurface">Ignore surface sectors (pre-July 2007 tkts only)<br>
+	<input id="maxsegments20" type="checkbox" name="maxsegments20">Pre-1 June 2008 ticket? (20 segments max.)<br>
     </TD>
 
     <TD><INPUT onclick=javascript:validateowe(); type=submit value="Go!"><br>
@@ -2058,4 +2077,6 @@ if (window.addEventListener) { //DOM method for binding an event
 	window.onunload=GUnload
 }
 </script>
+
+
 </body></html>
