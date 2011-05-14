@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html><head><!-- saved from url=(0036)http://jph.bytestacker.com/award.htm -->
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>MileageMonkey 0.95005</title>
+<title>MileageMonkey 0.95006</title>
 <style>
 TABLE {
         FONT-FAMILY: sans-serif ; font-size: 8pt
@@ -982,8 +982,7 @@ function validateowe()
   }
 
   /* Setup fixup for rules - no transit of original point or country */
-  owe_rulemap[0][1] = cities[0][0];
-  owe_rulemap[1][1] = map_country(cities[0][0]);
+  owe_rulemap[0][1] = map_country(cities[0][0]);
 
   /* --== Validate rules for each city pair.. ==-- */
   for(var i=0; i<cities.length; i++) {
@@ -1196,6 +1195,11 @@ bring it more up to date with current schedules/rules.
 <div id="changes" style="display: none">
 Please report any problems on <a href="http://www.flyertalk.com/forum/showthread.php?p=5822073#post5822073" target="_blank">the FT thread.</a>
 <ul>
+<li><u><b>v0.95006 (2006/11/20):</b></u>
+<li>Removed <b>Travel via original point of origin not permitted</b> check, it's no longer a
+	restriction of xONEx tickets (thanks <b>serfty</b>)
+<li>Added MAD-GIB & vv.  (IB service starting Dec 2006)
+<li>Removed LHR-GIB & vv.
 <li><u><b>v0.95005 (2006/11/05):</b></u>
 <li>Removed Kenya, Tanzania &amp; Uganda from the "owe_africa2" list, reflecting the addition of these to
     allowable destinations to permit the second Europe entry.
@@ -1261,7 +1265,7 @@ var sc_security="b9b2dc33";
 
 </td></tr></table>
 <p><hr>
-MileageMonkey v0.95005 (based on <a href="http://slfft.allhyper.com/0.9/award.htm">JPH's 0.9</a> with additions by various FTers)
+MileageMonkey v0.95006 (based on <a href="http://slfft.allhyper.com/0.9/award.htm">JPH's 0.9</a> with additions by various FTers)
 <p>This utility will calculate the # of miles needed for a Frequent Flyer award
 </p><p>
 </p><p>Questions/comments: <a href="mailto:jordan_hargrave%3Cdelete%20me%20nospam%3E@hotmail.com">jordan_hargrave

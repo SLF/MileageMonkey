@@ -251,7 +251,6 @@ var owe_tc3       = owe_asia+"|"+owe_swp;
  *   descr: Description of rule
  */
 var owe_rulemap = [
- [ 0x04, "***", "", 1, "Travel via original point of origin not permitted" ], /* filled in with origin airport */
  [ 0x04, "***", "", 1, "One intl departure/arrival from country of origin" ], /* filled in with origin country */
  [ 0x01, "ANC", owe_tc1, 1, "N.America - Anchorage" ],       /* one flight from ANC */
  [ 0x02, "ANC", owe_tc1, 1, "N.America - Anchorage" ],       /* one flight to ANC */

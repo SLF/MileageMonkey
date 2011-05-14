@@ -7,6 +7,8 @@ flight["JNB-MRU"] = "JNB|MRU|0x00e0";
 flight["MRU-JNB"] = "MRU|JNB|0x00e0";
 flight["SJO-LAX"] = "SJO|LAX|0x00e0";
 flight["LAX-SJO"] = "LAX|SJO|0x00e0";
+flight["GIB-MAD"] = "GIB|MAD|0x00e0";
+flight["MAD-GIB"] = "MAD|GIB|0x00e0";
 
 
 flight["AAL-AAR"] = "AAL|AAR|--y|11Aug2006";
@@ -1432,7 +1434,6 @@ flight["GDL-DFW"] = "GDL|DFW|-jy|11Aug2006";
 flight["GGG-DFW"] = "GGG|DFW|--y|11Aug2006";
 flight["GGT-MIA"] = "GGT|MIA|--y|11Aug2006";
 flight["GIB-LGW"] = "GIB|LGW|-jy|11Aug2006";
-flight["GIB-LHR"] = "GIB|LHR|-jy|11Aug2006";
 flight["GIG-GRU"] = "GIG|GRU|-jy|11Aug2006";
 flight["GIG-JFK"] = "GIG|JFK|fjy|11Aug2006";
 flight["GIG-LHR"] = "GIG|LHR|fjy|11Aug2006";
@@ -2255,7 +2256,6 @@ flight["LHR-FCO"] = "LHR|FCO|-jy|11Aug2006";
 flight["LHR-FRA"] = "LHR|FRA|-jy|11Aug2006";
 flight["LHR-FRU"] = "LHR|FRU|-jy|11Aug2006";
 flight["LHR-GCM"] = "LHR|GCM|-jy|11Aug2006";
-flight["LHR-GIB"] = "LHR|GIB|-jy|11Aug2006";
 flight["LHR-GIG"] = "LHR|GIG|fjy|11Aug2006";
 flight["LHR-GLA"] = "LHR|GLA|-jy|11Aug2006";
 flight["LHR-GRU"] = "LHR|GRU|fjy|11Aug2006";
