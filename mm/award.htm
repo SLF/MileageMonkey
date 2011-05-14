@@ -1931,7 +1931,7 @@ function initialize() {
 <b>MileageMonkey v0.95026 (based on JPH's <a href="http://slfft.allhyper.com/0.9/award.htm">0.9</a> &amp;
 <a href="http://slfft.allhyper.com/1.1/award.htm">1.1</a> versions) /
 <a href="javascript:toggleLayer('info');" title="">Copyright &copy; &amp; Tool information</a> /
-<a href="javascript:toggleLayer('changes');" title="">Change log</a> /
+<a href="changelog.htm" target="_blank" title="">Change log</a> /
 Discussion: (
 <a href="http://www.flyertalk.com/forum/showthread.php?p=6954703#post6954703" target="_blank">FT</a>
 <a href="http://milepoint.com/forums/threads/mileage-monkey.2683/" target="_blank">MP</a>
@@ -1957,6 +1957,19 @@ to see if the tool has been reloaded there.  For other versions of the tool, ple
 <br>&nbsp;<br>
 Copyright &copy; 2004-2008 by <a href="mailto:jordan_hargrave%3Cdelete%20me%20nospam%3E@hotmail.com">Jordan Hargrave</a>, All Rights Reserved.<br>
 Parts copyright &copy; 2006-2011 <a href="http://www.flyertalk.com/forum/private.php?do=newpm&u=41952" target="_blank">SLF</a>
+
+<br>Page counter:
+<!-- Start of StatCounter Code -->
+<script type="text/javascript" language="javascript">
+var sc_project=1722342;
+var sc_invisible=0;
+var sc_partition=16;
+var sc_security="b9b2dc33";
+</script>
+
+<script type="text/javascript" language="javascript" src="http://www.statcounter.com/counter/counter.js"></script><noscript><a href="http://www.statcounter.com/" target="_blank"><img  src="http://c17.statcounter.com/counter.php?sc_project=1722342&java=0&security=b9b2dc33&invisible=0" alt="website stat" border="0"></a> </noscript>
+<!-- End of StatCounter Code -->
+
 </div>
   </td>
 </tr>
@@ -1984,285 +1997,6 @@ and on these mirror(s):
 <a href="http://www.mileagemonkey.net/mm/award.htm" target="_blank">mileagemonkey.net</a>.
 </td></div></tr>
 
-<tr>
-  <td colspan=5>
-<div id="changes" style="display: none">
-<table border=0 bgcolor="#ffff99"><tr><td>
-<b>Changelog:</b>
-<ul>
-
-<hr><li><u><b>v0.95026 (2011/05/08):</b></u>
-<li>Updated flights database
-<li>Rule update, extra places added to 2-flight from UK list: Albania, Bosnia/Herzegovina, Croatia, Serbia, Turkey (affects LGW-DBV/TIA & LHR-IST)
-<li>Oz trans-con updates: Added Canberra to Perth & Darwin trans-con rules, and Brisbane into the Broome trans-con rule
-<li>Added a new Karratha (KTA) Australian trans-con rule (SYD/MEL/BNE)
-<li>Removed Tanzania from the list of African countries permitting a second European entry
-
-<hr><li><u><b>v0.95025 (2011/04/30):</b></u>
-<li>New updated flights database
-<li>Code changes to simplify multiple site hosting of MM (one version does all)
-<li>Twitter icon added
-<li>OWEPlanner - can now show routes with premium economy
-<li>OWEPlanner - Great Circle map observes cabin filter, showing routes where cabins are available (try From=FRA, Cabins=F and hit Go)
-<li>Added a DONEx ticket SC/Tier point calculation which takes into account booking into A when no D cabin is available (i.e. in USA domestics)
-
-<hr><li><u><b>v0.95024 (2011/04/10):</b></u>
-<li>New updated flights database
-
-<hr><li><u><b>v0.95023 (2010/??/??):</b></u>
-<li>This version was never released publicly
-
-<hr><li><u><b>v0.95022 (2009/05/15):</b></u>
-<li>Added experimental oneworld flight database (thanks <a href="http://www.flyertalk.com/forum/members/hippo.html" target="_blank">hippo</a>)
-<li>Moved Libya from Europe/Middle East continent group (was Africa)
-<li>Removed "pre-1 June 2008" option which permitted 20-segment tickets
-<li>Removed DPS-PER &amp; v.v. (thanks <a href="http://www.flyertalk.com/forum/oneworld/947342-validator.html#post11644216" target="_blank">Mwenenzi</a>)
-<li>Added BKK-DEL &amp; v.v. (thanks <a href="http://www.flyertalk.com/forum/oneworld/401874-new-oneworld-itinerary-validator-19.html#post11761306" target="_blank">malcolmkettering</a>)
-
-<hr><li><u><b>v0.95021 (2008/09/07):</b></u>
-<li>Thanks to <a href="http://www.flyertalk.com/forum/showthread.php?p=10151204#post10151204"
-		target="_blank"><b>Mwenenzi</b> &amp; <b>QF009</b></a>:
-   <ul>
-   	<li>SVX (Ekaterinburg) moved from Asia to Europe
-   	<li>Warning added for: <i>JL single number through flight to Brazil via USA considered travel through 3 continents</i>
-   </ul>
-<li>Reintroduced cabin advisory; e.g. which routes have F,J,Y.  Also included available aircraft types serving each route
-<li>Fixed minor bug in "expert mode"; not showing table if no flight service exists between two points
-<li>Added 'Map' button to "OWE Planner" section
-<li>Added warning that L fares don't earn BA tier points (thanks
-		<a href="http://www.flyertalk.com/forum/showthread.php?p=10534005#post10534005" target="_blank"><b>satprof</b></a>)
-<li>Added various new services, as per <a href="http://www.oneworld.com/ow/news/details?ObjectID=15559" target="_blank">OW press release 21 October 2008</a> incl.
-		MIA-REC, MIA-CNF, MIA-SSA, LHR-HYD etc.
-<li>Added <b>one</b>world elite status selection; initially only used it for adjusting the AA miles earned value
-
-
-<hr><li><u><b>v0.95020 (2008/07/02):</b></u>
-<li>All new database, thanks once again to <b>hauteboy</b>
-<li>New airports added: AGJ(JP) AZS(DO) CJA(PE) KTD(JP) MMD(JP) NGB(CN) OKI(JP) OLP(AU) RMQ(TW) RNJ(JP) ROW(US) SLM(ES) TBP(PE) TRA(JP)
-<li>Added link to Starwood hotels from google map marker
-<li>Moved NBO from somewhere out in the sea, to where it should be
-<li>Added UIO-EZE &amp; v.v. (thanks
-		<a href="http://www.flyertalk.com/forum/showthread.php?t=841286" target="_blank"><b>Mwenenzi</b></a>)
-<li>Added LHR-WAW &amp; v.v. (in 2008/9 winter BA schedule) (thanks
-		<a href="http://www.flyertalk.com/forum/showthread.php?p=10015695#post10015695" target="_blank"><b>PMMMDL</b></a>)
-<li>Re-added BCN-ABC (operated by Denim Air, not a OW affiliate but is treated as Air Nostrum) (thanks
-		<a href="http://www.flyertalk.com/forum/showthread.php?p=10100303#post10100303" target="_blank"><b>malcomkettering</b> &amp; <b>GatoVolador</b></a>)
-<li>Added SCL-YYZ &amp; JFK-YYZ and returns (thanks
-		<a href="http://www.flyertalk.com/forum/showthread.php?p=10109861#post10109861" target="_blank"><b>Gardyloo</b></a>)
-
-<hr><li><u><b>v0.95019 (2008/06/06):</b></u>
-<li>Added link to fare estimate, based on origin country
-<li>Removed "Ignore surface sectors" option, as that was for pre-June 2007 tickets only
-<li>Added option for pre-1 June 2008 tickets (20 sectors permitted), 16 sector maximum now
-<li>Moved ABC and LEN to the right places (thanks
-		<a href="http://www.flyertalk.com/forum/showthread.php?p=9874546#post9874546" target="_blank"><b>skunker</b></a>)
-<li>Removed BCN-ABC (operated by Denim Air, not a OW affiliate)
-<li>Located the following: EAL(MH), MQP(ZA), NAJ(AZ), NRN(DE), YNY(KR)
-<li>Added HKG-AMM, HKG-PUS &amp; v.v. (thanks
-		<a href="http://www.flyertalk.com/forum/showthread.php?p=9899423#post9899423" target="_blank"><b>plane_mad</b></a>)
-
-
-<hr><li><u><b>v0.95018 (2008/05/15):</b></u>
-<li>Removed BA services LGW to/from  ABZ/NCE/PRG/KEF/SPU (thanks
-		<a href="http://www.flyertalk.com/forum/showthread.php?p=9676272#post9676272" target="_blank"><b>Nobby</b></a>)
-<li>Added BLR-HKG &amp; v.v (thanks
-		<a href="http://www.flyertalk.com/forum/showthread.php?p=9676947#post9676947" target="_blank"><b>mainly tailfirst</b></a>)
-<li>Added SFO-LAS (thanks <b>Mwenenzi</b>)
-<li>Removed BA services LON to/from Morocco (AGA/CMN/FEZ/RAK) (thanks
-		<a href="http://www.flyertalk.com/forum/showthread.php?p=9703811#post9703811" target="_blank"><b>Nobby</b></a>)
-<li>Added DME-ORD &amp; v.v. (thanks
-		<a href="http://www.flyertalk.com/forum/showthread.php?p=9743784#post9743784" target="_blank"><b>Mwenenzi</b></a>)
-<li>Added MAD-WAW &amp; v.v. (thanks
-		<a href="http://www.flyertalk.com/forum/showthread.php?p=9746875#post9746875" target="_blank"><b>AndersB</b></a>)
-<li>Added LAX-YUL &amp; v.v. (thanks
-		<a href="http://www.flyertalk.com/forum/showthread.php?p=9748166#post9748166" target="_blank"><b>QF009</b></a>)
-<li>Added YUL-UVF (thanks
-		<a href="http://www.flyertalk.com/forum/showthread.php?p=9799239#post9799239" target="_blank"><b>Mwenenzi</b></a>)
-
-<hr><li><u><b>v0.95017 (2008/03/26):</b></u>
-<li>DEL-ORD (&amp; v.v.) is now correctly handled as transatlantic, rather than transpacific
-<li>Added LAX-EZE (&amp; v.v.), and CCS-EZE (thanks
-		<a href="http://www.flyertalk.com/forum/showthread.php?p=9466019#post9466019" target="_blank"><b>nielsdc</b>, <b>Viajero</b> &amp; <b>Mwenenzi</b></a>)
-<li>Added JFK-UVF (&amp; v.v.). (thanks
-		<a href="http://www.flyertalk.com/forum/showthread.php?p=9473244#post9473244" target="_blank"><b>satprof</b></a>
-<li>Updated text of warning for more than 16 segment OWE tickets, it's definitely happening from 1 June 2008 (thanks
-		<a href="http://www.flyertalk.com/forum/showthread.php?p=9522270#post9522270" target="_blank"><b>Viajero</b></a>)
-<li>Added F cabin to SYD-SIN (thanks
-		<a href="http://www.flyertalk.com/forum/showthread.php?p=9547261#post9547261" target="_blank"><b>Leumas</b></a>)
-<li>Added LAS-JFK &amp; v.v (thanks <b>Mwenenzi</b>)
-<li>Added HEL-ICN &amp; v.v (thanks
-		<a href="http://www.flyertalk.com/forum/showthread.php?p=9563700#post9563700" target="_blank"><b>Deslok</b></a>)
-<li>Moved SDJ from MX to JP (thanks
-		<a href="http://www.flyertalk.com/forum/showthread.php?p=9593626#post9593626" target="_blank"><b>pandaperth</b></a>)
-<li>Added MIA-YVR (thanks
-		<a href="http://www.flyertalk.com/forum/showthread.php?p=9608794#post9608794" target="_blank"><b>nickvora</b></a>)
-
-<hr><li><u><b>v0.95016 (2008/02/23):</b></u>
-<li>Added link to permit GC map to be opened in a new window/tab (thanks <b>Mwenenzi</b>)
-<li>Added link to <b>christep</b>'s data files (thanks <b>Mwenenzi</b>)
-<li>Updated link to MarkDu's OW Files
-<li>Added ORD-EZE & back  (thanks <b>Mwenenzi</b>)
-<li>Added additional links to main page (to visa advisory pages from VS and DL), and also from the google map marker pop-up
-	to additional info sites - theAirDB, SkyTrax, and google searches for the airport &amp; hotels
-<li>Added a bunch more <b>one</b>world links, including the wonderful new interactive map (thanks <b>serfty</b>)
-<li>Added HKG-KTM &amp; v.v (thanks
-		<b><a href="http://www.flyertalk.com/forum/showthread.php?p=9357064&postcount=132" target="_blank">skunker</a></b>)
-<li>Added SYD-EZE &amp; v.v (thanks
-		<b><a href="http://www.flyertalk.com/forum/showthread.php?p=9398857&postcount=136" target="_blank">Kiwi Flyer</a></b>)
-
-<hr><li><u><b>v0.95015 (2007/12/09):</b></u>
-<li>Travel via point of origin no longer permitted; O/D open-jaw no longer permitted within South America, or Bangladesh-SIN/BKK (thanks
-		<b><a href="http://www.flyertalk.com/forum/showthread.php?p=8840368&postcount=98" target="_blank">Mwenenzi</a></b> &amp;
-		<b><a href="http://www.flyertalk.com/forum/showthread.php?p=8839431&postcount=20" target="_blank">Gardyloo</a></b>)
-<li>OWE rules split into a separate file for ease of maintenance
-<li>Fixed lat/long values for LON, MIL, WAS
-<li>Added Google Map function, to show map of airport, city and co-term airports
-<li>Added warning if a city code is used; this becomes important because a co-term connection now counts as a segment (thanks
-<li>Added AMM-BUD &amp; v.v. (thanks
-		<b><a href="http://www.flyertalk.com/forum/showthread.php?p=8937615&postcount=108" target="_blank">KiwiSurfer</a></b>)
-<li>Added JFK-SJO (thanks
-		<b><a href="http://www.flyertalk.com/forum/showthread.php?p=9065436&postcount=113" target="_blank">WearyBizTrvlr</a></b>)
-<li>Added JFK-TPA &amp; v.v. (thanks
-		<b><a href="http://www.flyertalk.com/forum/showthread.php?p=9075022&postcount=114" target="_blank">tt7</a></b>)
-<li>Added google map links to "List Country Codes" section, and removed the underline as it was impossible to read
-	with the links as normal
-<li>Added infobox pop-up on google map markers, with links to three relevant sites
-<li>Removed ORD-ANC, MIA-ANC, SJU-EGE, SIN-HEL, ZRH-DFW (&amp; returns); added PTY-DFW (thanks
-		<b><a href="http://www.flyertalk.com/forum/showthread.php?p=9112629&postcount=117" target="_blank">vxmike</a></b>)
-
-<hr><li><u><b>v0.95014 (2007/09/10):</b></u>
-<li>Fixed earning rate for AA in Y (thanks <b>Moomba</b>)
-<li>Added F to JFK-SYD and SYD-JFK (thanks <b>Serfty</b> &amp; <b>Mwenenzi</b>)
-
-<hr><li><u><b>v0.95013 (2007/06/30):</b></u>
-<li>Added valid/invalid status indicator next for OWE planner section to allow quick determination of status
-<li>Fixed "link to this itinerary to preserve entered "-x", "-o" values etc.
-<li>Streamlined the layout a little, incl. changing "Submit" to "Go!" and "Help" to "?" on buttons
-<li>Added more information to the help dialogs
-<li>Added an "Ignore errors" checkbox to the OWE planner to allow further validation to continue even if the validator
-     suspects an error (this could be most useful for itins with additional purchased sectors, and/or if the validator
-     is ever wrong on something it will at least allow results to be obtained
-<li>Added a "link to this itinerary" feature to the point-point mappings
-<li>Fix the point-point calculator, which got accidentally broken in 0.95011 ... and no-one noticed!
-<li>Add a section with some useful links.  Other suggestions welcome!
-<li>Count surface sectors against the 20 sector limit, in line with new rules from 1 July.  In order to allow existing tickets
-	to validate correctly, I also added an "Ignore surface sectors" checkbox.
-<li>Added <b>sd</b> (Sudan) to owe_europe list
-<li>Removed <b>ma</b> (Morocco) from the owe_africa/2 lists, as it is part of Europe for OWE purposes (it was already in the owe_europe list)
-<li>Added "Ignore Surface Sectors" into help dialog.
-
-<hr><li><u><b>v0.95012 (2007/04/13):</b></u>
-<li>Added rule; if two entries to Asia or N.America occur, check that one is a transit (no intra-continent sectors) and
-warn if detected
-<li>When using "link to" function; perform "submit" automatically so that map & validation is done at time of page load
-<li>For point-point checks, permit more flexible entry (like OWE section) - i.e. whitespace, "//", -xAAA etc.
-<li>When "No oneworld service" is suspected, treat it as a warning and not a fatal error
-<li>Re-added the following from the original 0.95 which got lost in 0.95009
-<ul>
-	<li>Added MEL to restricted list (CNS/BNE/SYD) of transcons to PER
-	<li>Added MEL/SYD restriction to BME
-</ul>
-<li>Added MIA-ANC (thanks <b>vxmike</b>)
-
-<hr><li><u><b>v0.95011 (2007/04/02):</b></u>
-<li>New flights database - supplied by <b>hauteboy</b> (thanks!)
-<li>Added 11 new cities to database: AAC,ADE, AQJ, NKM, OGN, PCL, RJL, SOB, UEO, UKB, WOL
-<li>Added some experimental functionality to highlight routes which don't have all cabins available.  Useful when
-planning an AONEx or DONEx to avoid routes which have no A or D services.
-<li>Moved SNA from IL to CA (incorrect coords in city DB) (thanks <b>medicus</b>)
-<li>Removed a bunch of duplicates from the city DB
-<li>Added override for class designations for sectors, and added F onto some routes (NRT :- SIN,SFO,FRA,CDG,GRU;
-HKG :- SYD,MEL,JNB; LHR :- CAI,TLV,EWR,PHL,MCT) (thanks <b>WearyBizTrvlr</b>)
-<li>Added filtering of OWEPlanner output by cabin class
-
-<hr><li><u><b>v0.95010 (2007/01/22):</b></u>
-<li>Added "Link to this itinerary" functionality
-<li>Added HEL-DXB & vv. (thanks <b>barking frog</b>)
-
-<hr><li><u><b>v0.95009 (2007/01/21):</b></u>
-<li>Merged the changes in 0.95008 with JPH's 1.1 code to produce a new version containing the improvements added in each.
-<li>Added Austria (at) to the OWE-Europe list (thanks <b>tt7</b>)
-
-<hr><li><u><b>v0.95008 (2007/01/15):</b></u>
-<li>Fixed problem with miles reqd. for BA OW awards - wrong levels for J/F 4001-9000 miles (thanks <b>Alvador</b>)
-<li>Added 25000-35000 entry for BA OW award levels
-
-<hr><li><u><b>v0.95007 (2007/01/05):</b></u>
-<li>Added HEL-LCA and MAD-OTP &amp; vv. (thanks <b>Cyba</b>)
-<li>Changed FT thread link to new thread
-
-<hr><li><u><b>v0.95006 (2006/11/20):</b></u>
-<li>Removed <b>Travel via original point of origin not permitted</b> check, it's no longer a
-	restriction of xONEx tickets (thanks <b>serfty</b>)
-<li>Added MAD-GIB &amp; vv.  (IB service starting Dec 2006)
-<li>Removed LHR-GIB &amp; vv.
-
-<hr><li><u><b>v0.95005 (2006/11/05):</b></u>
-<li>Removed Kenya, Tanzania &amp; Uganda from the "owe_africa2" list, reflecting the addition of these to
-    allowable destinations to permit the second Europe entry.
-
-<hr><li><u><b>v0.95004 (2006/08/25):</b></u>
-<li>Replaced flights database with new version from OW timetable - supplied by <b>hauteboy</b> (thanks!) and merged in
-	by <b>SLF</b>.
-<li>Expanded "Help" info for OWE Validator section
-<li>Fixed a couple of minor Javascript warnings (functions with no return value, undeclared citycode variable)
-
-<hr><li><u><b>v0.95003 (2006/08/22):</b></u>
-<li>Corrected QF SC earning from 45 to 35 for discount economy, zone 6 (4801-5800 miles), <a
-	href="http://www.qantas.com.au/fflyer/dyn/program/privileges#jump1" target="_blank">as per
-	QF</a> (thanks <b>mrboh</b>)
-<li>Added ESB-LHR (thanks <b>MiamiBeach</b>)
-<li>Added DRW-BOM (thanks <b>ReelChief</b>)
-
-<hr><li><u><b>v0.95002 (2006/08/15):</b></u>
-<li>Added cookie to remember f/f program earning preference
-
-<hr><li><u><b>v0.95001 (2006/08/15):</b></u>
-<li>For the OWE validator section, now ignores any spaces in the route (previously it would fall
-	over if a space was included)
-<li>For the OWE validator section, permit "//" in addition to "," indicating a surface sector
-<li>For the OWE validator section, permit -xXXX and -oXXX to indicate transit/stopover
-	(note: this information	is discarded, i.e. no checks are made whether the number of
-	stopovers is legal - this could be a future enhancement)
-
-<hr><li><u><b>v0.95:</b></u>
-<li>Added DFW-ANC (thanks <b>Viajero</b>)
-<li>Added MEL to restricted list (CNS/BNE/SYD) of transcons to PER
-<li>Added MEL/SYD restriction to BME
-<li>Added USH as a city (thanks <b>mrboh</b>)
-<li>Added SCL-USH (thanks <b>mrboh</b>)
-<li>Added SCL-LPB (thanks <b>mrboh</b>)
-<li>Added SYD-SFO-YVR (thanks <b>sdorling</b>)
-<li>Added LGW-KEF (thanks <b>sdorling</b>)
-<li>Added GRU-LIM (thanks <b>sdorling</b>)
-<li>Added JNB-MRU (thanks <b>sdorling</b>)
-<li>Added LAX-GRU (thanks <b>skunker</b>)
-<li>Added LAX-SAT (thanks <b>under the clocks</b>)
-<li>Added LAX-SJO (thanks <b>Viajero</b>, <b>ReelChief</b>)
-<li>The <i>Earnings Preference</i> button is now more browser-friendly. Tested on Firefox 1.5.0.5
-	and IE6.0.2900. (thanks for pointing this out <b>serfty</b>)
-<li>This list of changes now only appears when you choose the "changes" link above.
-<li><i>gi</i> was missing from <i>owe_europe</i> causing any GIB flight to be treated as
-	intercontinental rather than European
-<li><i>is</i> was missing from <i>owe_europe</i> causing any KEF flight to be treated as
-	intercontinental rather than European (thanks <b>sdorling</b>)
-</ul>
-
-<br>Page counter:
-<!-- Start of StatCounter Code -->
-<script type="text/javascript" language="javascript">
-var sc_project=1722342;
-var sc_invisible=0;
-var sc_partition=16;
-var sc_security="b9b2dc33";
-</script>
-
-<script type="text/javascript" language="javascript" src="http://www.statcounter.com/counter/counter.js"></script><noscript><a href="http://www.statcounter.com/" target="_blank"><img  src="http://c17.statcounter.com/counter.php?sc_project=1722342&java=0&security=b9b2dc33&invisible=0" alt="website stat" border="0"></a> </noscript>
-<!-- End of StatCounter Code -->
-
-</td></tr></table>
-</div>
-</td></tr>
 
 
   <TR>
