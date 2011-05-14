@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>MileageMonkey 0.95013</title>
+<title>MileageMonkey 0.95014</title>
 <style>
 TABLE {
         FONT-FAMILY: sans-serif ; font-size: 8pt
@@ -259,8 +259,8 @@ function lamap(map, val)
 
 function aamap(map, val)
 {
-  return [ 0, Math.floor(val * map + .5),
-              Math.floor(val * map + .5),
+  return [ 0, Math.floor(val * (1 + map) + .5),
+              Math.floor(val * (1 + map) + .5),
               Math.floor(val * (1.25 + map) + .5),
               Math.floor(val * (1.5 + map) + .5) ];
 }
@@ -1493,7 +1493,7 @@ function Querystring_get(key, default_) {
   <TBODY>
 <tr bgcolor="#eeffee">
 <td colspan=5>
-<b>MileageMonkey v0.95013 (based on JPH's <a href="http://slfft.allhyper.com/0.9/award.htm">0.9</a> &amp;
+<b>MileageMonkey v0.95014 (based on JPH's <a href="http://slfft.allhyper.com/0.9/award.htm">0.9</a> &amp;
 <a href="http://slfft.allhyper.com/1.1/award.htm">1.1</a> versions) /
 <a href="javascript:toggleLayer('info');" title="">Tool information</a> /
 <a href="javascript:toggleLayer('changes');" title="">Change log</a> /
@@ -1528,6 +1528,9 @@ Parts copyright &copy; 2006-2007 <a href="http://www.flyertalk.com/forum/private
 <table border=0 bgcolor="#ffff99"><tr><td>
 <b>Changelog:</b>
 <ul>
+<li><u><b>v0.95014 (2007/09/10):</b></u>
+<li>Fixed earning rate for AA in Y (thanks <b>Moomba</b>)
+<li>Added F to JFK-SYD and SYD-JFK (thanks <b>Serfty</b> &amp; <b>Mwenenzi</b>)
 <li><u><b>v0.95013 (2007/06/30):</b></u>
 <li>Added valid/invalid status indicator next for OWE planner section to allow quick determination of status
 <li>Fixed "link to this itinerary to preserve entered "-x", "-o" values etc.
