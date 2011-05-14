@@ -87,7 +87,7 @@ init_cabins();
 
 loadfile($inPrimary, 0);	# get database
 loadfile($inOverride, 1); # subsequent invocations are treated as "extras"
-dumpfile($out1, $out2, "flight");
+dumpfile($out1, $out2, "fl");
 
 
 my $header = 1;
@@ -258,7 +258,7 @@ sub dumpfile {
 			my($cto) = $2;
 			my(@services) = split(/\|/, $store{$f} );
 			
-			print OUT qq{${arrayName}["$cfrom-$cto"] = "};
+			print OUT qq{${arrayName}["$cfrom-$cto"]="};
 
 			my($count) = 0;
 			foreach my $service ( sort @services ) {

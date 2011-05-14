@@ -165,7 +165,7 @@ function get_flight(request)
 //		return flight_hippo[request];
 //	}
 //
-	return flight[request];
+	return fl[request];
 }
 
 function clearall()
@@ -1018,15 +1018,15 @@ function showtrip(cities,type)
   }
   if (type & fOW) {
     clear_route();
-    for(var fl in flight) {
-      var fi = fl.split('-');
+    for(var flightiter in fl) {
+      var fi = flightiter.split('-');
       var ffr = fi[0];
       var fto = fi[1];
 
       if (cfr == ffr) {
         var str = fto + "-" + cto;
         if (get_flight(str) != null) {
-           add_route(fl+","+str, calcdist(cfr,fto), calcdist(fto,cto));
+           add_route(flightiter+","+str, calcdist(cfr,fto), calcdist(fto,cto));
         }
       }
     }
@@ -1654,7 +1654,7 @@ function matchlone(code, fi)
    *        	 two characters, match country
    *        	 three characters = match airport
    *        	 four characters = match continent
-   *		fi is an airport code from the flight[] array
+   *		fi is an airport code from the fl[] array
    *
    * Function: determine if 'code' matches 'fi'.  Examples:
    *	code=gb fi=LHR		MATCH
@@ -1727,8 +1727,8 @@ function oweplanner()
   if (to < 0) { return -1; }
 
   /* --== Loop through all flights and match ==-- */
-  for(var fl in flight) {
-    fi = fl.split('-');
+  for(var flightiter in fl) {
+    fi = flightiter.split('-');
     if (matchlone(from, fi[0])) {
       if (matchlone(to, fi[1])) {
 
@@ -1742,7 +1742,7 @@ function oweplanner()
 
 	var emap = earn_mapper(earn_map, d);
 	if (emap != null) {
-	  add_award(emap[1],emap[3],emap[4],fl,"",d);
+	  add_award(emap[1],emap[3],emap[4],flightiter,"",d);
 	  // build GCMAP string
 	  if(count > 0) {
 		destinations += ",";
