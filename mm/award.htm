@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>MileageMonkey 0.95016</title>
+<title>MileageMonkey 0.95017</title>
 <style>
 TABLE {
         FONT-FAMILY: sans-serif ; font-size: 8pt
@@ -1052,13 +1052,13 @@ function mapify(apt) {
 // and change the google map to be centered on this location
 //==============================================================================
 function set_gmap(apt) {
-	var lat = citycodes[apt][1];
-	var long = citycodes[apt][2];
+	var latitude = citycodes[apt][1];
+	var longitude = citycodes[apt][2];
 	var countryCode = find_country(apt);
 
-	if ((lat != null) && (long != null) && GBrowserIsCompatible()) {
+	if ((latitude != null) && (longitude != null) && GBrowserIsCompatible()) {
 		var map = new GMap2(document.getElementById("map_canvas"));
-		map.setCenter(new GLatLng(lat, long), 12);
+		map.setCenter(new GLatLng(latitude, longitude), 12);
 		map.setMapType(G_HYBRID_MAP);
 		document.getElementById("map_title").innerHTML = "Click Google link in lower left corner to open map in new window";
 
@@ -1105,7 +1105,7 @@ function set_gmap(apt) {
 
 
 //		map.openInfoWindow(map.getCenter(),document.createTextNode(apt));
-		map.addOverlay(createMarker(new GLatLng(lat,long), apt));
+		map.addOverlay(createMarker(new GLatLng(latitude,longitude), apt));
 		map.addControl(new GSmallZoomControl());
 		map.addControl(new GMapTypeControl());
 		map.addControl(new GScaleControl());
@@ -1113,10 +1113,10 @@ function set_gmap(apt) {
 		// find the primary IATA reference here, and add markers for all co-term airports
 		var prim_city = get_primcitysyn(apt);
 		if(prim_city != apt) {
-			var lat = citycodes[prim_city][1];
-			var long = citycodes[prim_city][2];
-			if((lat != null) && (long != null)) {
-				map.addOverlay(createMarker(new GLatLng(lat,long), prim_city));
+			var latitude = citycodes[prim_city][1];
+			var longitude = citycodes[prim_city][2];
+			if((latitude != null) && (longitude != null)) {
+				map.addOverlay(createMarker(new GLatLng(latitude,longitude), prim_city));
 			}
 		}
 		var syns = citysyns[prim_city];
@@ -1124,10 +1124,10 @@ function set_gmap(apt) {
 			var synloc = syns.split('|');
 			for( var lindex in synloc) {
 				var loc = synloc[lindex];
-				var lat = citycodes[loc][1];
-				var long = citycodes[loc][2];
-				if((lat != null) && (long != null)) {
-					map.addOverlay(createMarker(new GLatLng(lat,long), loc));
+				var latitude = citycodes[loc][1];
+				var longitude = citycodes[loc][2];
+				if((latitude != null) && (longitude != null)) {
+					map.addOverlay(createMarker(new GLatLng(latitude,longitude), loc));
 				}
 			}
 		}
@@ -1195,6 +1195,14 @@ function check_owe_rules(from, to, to2, surface, seg)
     var a = 0;
     var b = 0;
     var rc = 0;
+
+	if (flag & 0x4000) {
+		/* if city pair is ORD/DEL, then skip this rule */
+		if( (to == "ORD" && from == "DEL") ||
+			(to == "DEL" && from == "ORD") ) {
+			continue;
+		}
+	}
 
     if (flag & 1) {
       /* Check if rule matches from -> to */
@@ -1325,7 +1333,7 @@ function validateowe()
     if(!ignoreerrs) return -1;
     ++fatalerr;
   } else if (cities.length > 16) {
-  	addlog("<b>Potential problem!!! E-tickets could be restricted to 16 segments.</b>");
+  	addlog("<b>Potential problem!!! E-tickets are restricted to 16 segments from tickets issued on/after 1 June 2008</b>");
   }
 
   /* Reset rule error count */
@@ -1677,7 +1685,7 @@ function initialize() {
   <TBODY>
 <tr bgcolor="#eeffee">
 <td colspan=5>
-<b>MileageMonkey v0.95016 (based on JPH's <a href="http://slfft.allhyper.com/0.9/award.htm">0.9</a> &amp;
+<b>MileageMonkey v0.95017 (based on JPH's <a href="http://slfft.allhyper.com/0.9/award.htm">0.9</a> &amp;
 <a href="http://slfft.allhyper.com/1.1/award.htm">1.1</a> versions) /
 <a href="javascript:toggleLayer('info');" title="">Tool information</a> /
 <a href="javascript:toggleLayer('changes');" title="">Change log</a> /
@@ -1700,8 +1708,8 @@ modifications made in this particular version.
 <a href="http://jph.bytestacker.com/award.htm" target="_blank">The original site</a> should be checked periodically
 to see if the tool has been reloaded there.  For other versions of the tool, please see <a href="http://slfft.allhyper.com/" target="_blank">here</a>.</em>
 <br>&nbsp;<br>
-Copyright &copy; 2004-2007 by <a href="mailto:jordan_hargrave%3Cdelete%20me%20nospam%3E@hotmail.com">Jordan Hargrave</a>, All Rights Reserved.<br>
-Parts copyright &copy; 2006-2007 <a href="http://www.flyertalk.com/forum/private.php?do=newpm&u=41952" target="_blank">SLF</a>
+Copyright &copy; 2004-2008 by <a href="mailto:jordan_hargrave%3Cdelete%20me%20nospam%3E@hotmail.com">Jordan Hargrave</a>, All Rights Reserved.<br>
+Parts copyright &copy; 2006-2008 <a href="http://www.flyertalk.com/forum/private.php?do=newpm&u=41952" target="_blank">SLF</a>
 </div>
   </td>
 </tr>
@@ -1712,6 +1720,24 @@ Parts copyright &copy; 2006-2007 <a href="http://www.flyertalk.com/forum/private
 <table border=0 bgcolor="#ffff99"><tr><td>
 <b>Changelog:</b>
 <ul>
+<hr><li><u><b>v0.95017 (2008/03/26):</b></u>
+<li>DEL-ORD (&amp; v.v.) is now correctly handled as transatlantic, rather than transpacific
+<li>Added LAX-EZE (&amp; v.v.), and CCS-EZE (thanks
+		<a href="http://www.flyertalk.com/forum/showthread.php?p=9466019#post9466019" target="_blank"><b>nielsdc</b>, <b>Viajero</b> &amp; <b>Mwenenzi</b></a>)
+<li>Added JFK-UVF (&amp; v.v.). (thanks
+		<a href="http://www.flyertalk.com/forum/showthread.php?p=9473244#post9473244" target="_blank"><b>satprof</b></a>
+<li>Updated text of warning for more than 16 segment OWE tickets, it's definitely happening from 1 June 2008 (thanks
+		<a href="http://www.flyertalk.com/forum/showthread.php?p=9522270#post9522270" target="_blank"><b>Viajero</b></a>)
+<li>Added F cabin to SYD-SIN (thanks
+		<a href="http://www.flyertalk.com/forum/showthread.php?p=9547261#post9547261" target="_blank"><b>Leumas</b></a>)
+<li>Added LAS-JFK &amp; v.v (thanks <b>Mwenenzi</b>)
+<li>Added HEL-ICN &amp; v.v (thanks
+		<a href="http://www.flyertalk.com/forum/showthread.php?p=9563700#post9563700" target="_blank"><b>Deslok</b></a>)
+<li>Moved SDJ from MX to JP (thanks
+		<a href="http://www.flyertalk.com/forum/showthread.php?p=9593626#post9593626" target="_blank"><b>pandaperth</b></a>)
+<li>Added MIA-YVR (thanks
+		<a href="http://www.flyertalk.com/forum/showthread.php?p=9608794#post9608794" target="_blank"><b>nickvora</b></a>)
+
 <hr><li><u><b>v0.95016 (2008/02/23):</b></u>
 <li>Added link to permit GC map to be opened in a new window/tab (thanks <b>Mwenenzi</b>)
 <li>Added link to <b>christep</b>'s data files (thanks <b>Mwenenzi</b>)

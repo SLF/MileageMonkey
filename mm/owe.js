@@ -50,6 +50,7 @@ var owe_tc3       = owe_asia+"|"+owe_swp;
  *   0x800 : swp
  *  0x1000 : namerica
  *  0x2000 : samerica
+ *  0x4000 : if city pair is ORD & DEL, then don't process this rule
  *   alist: list of cities/countries
  *   blist: list of cities/countries
  *   count: max # of segments a<-->b
@@ -75,10 +76,15 @@ var owe_rulemap = [
  [ 0x13, owe_asia,     owe_asia,   4, "Asia" ],
  [ 0x13, owe_swp,      owe_swp,    4, "Southwest Pacific" ],
 
+
+ /* ORD-DEL - (& back) treated as transatlantic */
+ [ 0x23, "DEL", "ORD", 1, "ORD-DEL is transatlantic" ],   /* max one segment (transatlantic) */
+ 
+ 
  /* No backtracking between TC zones */
  [ 0x23, owe_tc1, owe_tc2, 1, "No backtracking: TC1-TC2" ],   /* max one segment from tc1-tc2 (transatlantic) */
  [ 0x03, owe_tc2, owe_tc3, 1, "No backtracking: TC2-TC3" ],   /* max one segment from tc2-tc3 */
- [ 0x43, owe_tc3, owe_tc1, 1, "No backtracking: TC3-TC1" ],   /* max one segment from tc3-tc1 (transpacific) */
+ [ 0x4043, owe_tc3, owe_tc1, 1, "No backtracking: TC3-TC1" ],   /* max one segment from tc3-tc1 (transpacific) */
 
  [ 3, owe_europe,     owe_africa2, 1, "Ghana/Nigeria/Kenya/Uganda/Tanzania transit (second EUR entry?)" ],
 
