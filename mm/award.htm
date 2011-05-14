@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>MileageMonkey 0.95012</title>
+<title>MileageMonkey 0.95013</title>
 <style>
 TABLE {
         FONT-FAMILY: sans-serif ; font-size: 8pt
@@ -118,6 +118,21 @@ function addlog(logmsg)
   log.innerHTML += logmsg + "<br>";
 }
 
+function setowestatus(info,state)
+{
+  var owestatusfield = findElement('owestatus');
+  var color = "ffffff";
+  if(state == 1) color = "ff3333";
+  if(state == 2) color = "33ff33";
+
+  if(info == 1) info = "Invalid";
+
+  owestatusfield.innerHTML =
+  	"<TABLE border=0 cellspacing=0 cellpadding=1><tr bgcolor=\"#"+
+  	color+"\"><td>" + info + "</td></tr></table>";
+  showLayer('owestatus',1);
+}
+
 function clearall()
 {
   findElement('tablearea').innerHTML = "";
@@ -126,6 +141,7 @@ function clearall()
   findElement('routearea').innerHTML = "";
   findElement('helparea').innerHTML = "";
   findElement('maparea').src = "";
+  findElement('owestatus').innerHTML = "&nbsp;";
   clear_awards();
 }
 
@@ -485,7 +501,7 @@ function sortdsc(a,b) { return order(a[4],b[4]); }
 function sortme(proc)
 {
   award_tab.sort(proc);
-  show_awards(1);
+  show_awards(1,0);
 }
 
 //==========================================
@@ -511,6 +527,7 @@ function add_award(y,j,f,descr, airline, dist)
   if (airline == null) {
     airline="";
   }
+
   award_tab[naward] = [ y, j, f, airline, descr, dist ];
   naward++;
 }
@@ -564,8 +581,15 @@ function list_countries()
 
 //======================
 // Display award table
+//  sumit:
+//           0==don't add a summary line;
+//           1=do add a summary line at end
+//  cabins:
+//           0==normal output
+//           1==change colouring for "unavailable" cabins (e.g. if no F)
+//           2==as 1, and also observe "cabins" radio button (i.e. filter output)
 //======================
-function show_awards(sumit)
+function show_awards(sumit, cabins)
 {
   var award = findElement('awardarea');
   var ny=0;
@@ -579,9 +603,9 @@ function show_awards(sumit)
   }
 
   var filter = "";
-//  if(sumit) {
+  if(cabins) {
   	filter = getRadioSetting('cabins');
-//  }
+  }
 
   /* Nice: Add ability to sort awards */
   var tstr = "<table border=1><td><table>";
@@ -591,6 +615,7 @@ function show_awards(sumit)
   tstr += "<th onclick='javascript:sortme(sorta);'>Airlines</th>";
   tstr += "<th onclick='javascript:sortme(sortm);'>Distance</th>";
   tstr += "<th onclick='javascript:sortme(sortdsc);'>Description</th>";
+
   for(var i=0; i<naward; i++) {
     var tc = tblcolor[linecount % 2];
     var newline = "<tr class=" + tc + ">";
@@ -600,11 +625,18 @@ function show_awards(sumit)
     nf += Math.abs(award_tab[i][2]);
     nd += award_tab[i][5];
 
-	var desc1 = flight[award_tab[i][4]]; // get classes of service from flight data
-	var desc = (desc1 == undefined) ? "" : desc1.split("|")[2];			// extract just the "---", "fjy", "-jy" etc. part
-	var hasY = (desc.indexOf("y") >= 0) ? 1 : 0;
-	var hasJ = (desc.indexOf("j") >= 0) ? 1 : 0;
-	var hasF = (desc.indexOf("f") >= 0) ? 1 : 0;
+	var hasY = 1;
+	var hasJ = 1;
+	var hasF = 1;
+
+	if(cabins) {
+		var desc1 = flight[award_tab[i][4]]; // get classes of service from flight data
+		var desc = (desc1 == undefined) ? "" : desc1.split("|")[2];			// extract just the "---", "fjy", "-jy" etc. part
+
+		hasY = (desc.indexOf("y") >= 0) ? 1 : 0;
+		hasJ = (desc.indexOf("j") >= 0) ? 1 : 0;
+		hasF = (desc.indexOf("f") >= 0) ? 1 : 0;
+	}
 
     newline += Ctdstr(award_tab[i][0], hasY);
     newline += Ctdstr(award_tab[i][1], hasJ);
@@ -615,7 +647,7 @@ function show_awards(sumit)
     newline += "<td>" + award_tab[i][4] + "</td>";
     newline += "</tr>";
 
-	if(
+	if( (cabins!=2) ||
 		(filter == "")	||
 		((filter == "y") && hasY) ||
 		((filter == "j") && hasJ) ||
@@ -788,7 +820,7 @@ function showtrip(cities,type)
     }
   }
   show_routes();
-  show_awards(0);
+  show_awards(1,0);
   sethelp(help0);
 
   return tdist;
@@ -875,6 +907,8 @@ function parseCityList(citylist)
 {
   var cities = new Array;
   var ncities = 0;
+  var lastcity="";
+  var ignoresurface = findElement("ignoresurface").checked;
 
   setmap(citylist);
 
@@ -882,38 +916,34 @@ function parseCityList(citylist)
   for(var i=0; i<bob.length; i++) {
     var bc = bob[i].split('-');
     if (!validate(bc)) return null;
+    if(!ignoresurface && (lastcity.length == 3)) {
+    	cities[ncities++] = [ lastcity, bc[0], "," ];
+    }
     for(var j=0; j<bc.length-1; j++) {
-      cities[ncities++] = [ bc[j], bc[j+1] ];
+      cities[ncities++] = [ bc[j], bc[j+1], "-" ];
+      lastcity = bc[j+1];
     }
   }
   return cities;
 }
 
 //=============================
-// Show one-way awards
+// Show one-way or return awards
 //=============================
-function showow()
+function showaward(flag)
 {
   var from   = getTextValue('owfrom');
   var to     = getTextValue('owto');
-  var cities = [ from, to ];
+  var cities;
+
+  if(flag == fRT) {
+	  cities = [ from, to, from ];
+  } else {
+	  cities = [ from, to ];
+  }
 
   // Scan distance-based awards
-  showtrip(cities, fOW);
-  setmap(from+"-"+to);
-}
-
-//=============================
-// Show Round-Trip awards
-//=============================
-function showrt()
-{
-  var from   = getTextValue('rtfrom');
-  var to     = getTextValue('rtto');
-  var cities = [ from, to, from ];
-
-  // Scan distance-based awards
-  showtrip(cities, fRT);
+  showtrip(cities, flag);
   setmap(from+"-"+to);
 }
 
@@ -922,7 +952,12 @@ function showrt()
 //=============================
 function showp2p()
 {
+  var rawcitylist = getTextValue('citylist');
   var citylist = getcitylist('citylist');
+
+  var p2plinkloc = findElement('p2plink');
+  p2plinkloc.innerHTML = '<a href="?p2p=' + escape(rawcitylist) + '">Link to this itinerary</a>';
+  showLayer('p2plink',1);
 
 // replace ',' with '-'; we don't treat surface sectors specially here
   citylist = citylist.replace(/,/g, "-");
@@ -967,15 +1002,32 @@ function numstr(num)
 
 var owe_flag;
 
-function check_owe_rules(from, to, to2, seg)
+//==============================================================================
+// check_owe_rules - run thru the OWE rules for this city pair
+//
+// from - from city
+// to - to city
+// to2 - the city following the to city
+// surface - either "-" (for an air sector), or "," (for a surface sector)
+// seg - segment number of this city pair
+//
+function check_owe_rules(from, to, to2, surface, seg)
 {
   var fc = find_country(from);
   var tc = find_country(to);
   var tc2= "";
   if(to2 != null) tc2 = find_country(to2);
   var pfx = "";
+  var ignoreerrs = findElement("ignoreerrors").checked;
 
   seg++;
+
+  if(surface == ",") {
+      addlog(seg + ": " + from + "-" + to + ": surface");
+	  return -1; // OK
+  }
+
+
   //addlog("check_owe_rules: from:" + fc + ":" + from + " to:" + tc + ":" + to + " to2:" + to2);
   for(var i=0; i<owe_rulemap.length; i++) {
     if (owe_rulemap[i] == null) continue;
@@ -1038,7 +1090,7 @@ function check_owe_rules(from, to, to2, seg)
         }
         addlog(err + "] Max " + owe_rulemap[i][3] +" segment(s): " + owe_rulemap[i][4] + "</b>");
 
-        if(!(flag & 0x08)) return i;
+      if(!ignoreerrs && !(flag & 0x08)) return i;
       }
     }
   }
@@ -1087,14 +1139,20 @@ function validateowe()
 {
   var tdist = 0;
   var dist;
+  var ignoreerrs = findElement("ignoreerrors").checked;
+  var fatalerr = 0;
+
+  setowestatus("Wait...",0);
 
   clearall();
   setearn();
 
   /* build list of cities - allow open jaws like: lhr-jfk,dfw-syd etc*/
+  var rawcitylist = getTextValue('owecitylist');
   var citylist = getcitylist('owecitylist');
 
-  owelink.innerHTML = '<a href="?owe=' + escape(citylist) + '">Link to this itinerary</a>';
+  var owelinkloc = findElement('owelink');
+  owelinkloc.innerHTML = '<a href="?owe=' + escape(rawcitylist) + '">Link to this itinerary</a>';
   showLayer('owelink',1);
 
   var cities = parseCityList(citylist);
@@ -1104,8 +1162,10 @@ function validateowe()
 
 /* Validate total count of segments */
   if (cities.length > 20) {
+    setowestatus(1,1);
     addlog("<b>Rule violated!!! Maximum segment length is 20!</b>");
-    return -1;
+    if(!ignoreerrs) return -1;
+    ++fatalerr;
   } else if (cities.length > 16) {
   	addlog("<b>Potential problem!!! E-tickets could be restricted to 16 segments.</b>");
   }
@@ -1132,26 +1192,37 @@ function validateowe()
     		nextcity = cities[i+1][0];	// a surface sector, choose next-from
     }
 
-    var	badrule = check_owe_rules(cities[i][0], cities[i][1], nextcity, i);
+    var	badrule = check_owe_rules(cities[i][0], cities[i][1], nextcity, cities[i][2], i);
     if (badrule >= 0) {
-      return -1;
+      ++fatalerr;
+      setowestatus(1,1);
+      if(!ignoreerrs) return -1;
     }
 
-    /* Check if flight exists A->B */
-    var flt = flight_exists(cities[i][0], cities[i][1], "AA|BA|CX|AY|IB|QF|LA|JL|JO|RJ|MA|XL", 0);
-    if (flt == 0) {
-      addlog("<b>Error!!! No oneworld service exists " + cities[i][0] + "-" + cities[i][1]);
-//      return -1;
-    }
+	// if it's a surface sector, we don't need to check a flight exists :)
+	if(cities[i][2] == ",") {
+	      var s = find_owe_continent(cities[i][0])+"-"+find_owe_continent(cities[i][1]);
+	      var flt = cities[i][0] + "," + cities[i][1];
+	      add_award(0, 0, 0, flt, s, 0);
+	} else {
+	    /* Check if flight exists A->B */
+	    var flt = flight_exists(cities[i][0], cities[i][1], "AA|BA|CX|AY|IB|QF|LA|JL|JO|RJ|MA|XL", 0);
+	    if (flt == 0) {
+	      addlog("<b>Error!!! No oneworld service exists " + cities[i][0] + "-" + cities[i][1]);
+		  ++fatalerr;
+	      setowestatus(1,1);
+	      if(!ignoreerrs) return -1;
+	    }
 
-    /* Calculate distance A->B and # of points/miles earned */
-    dist = calcdist(cities[i][0], cities[i][1]);
-    var eamap = earn_mapper(earn_map, dist);
-    if (eamap != null) {
-      var s = find_owe_continent(cities[i][0])+"-"+find_owe_continent(cities[i][1]);
-      add_award(eamap[1],eamap[3],eamap[4], flt, s, dist);
-    }
-    tdist += dist;
+	    /* Calculate distance A->B and # of points/miles earned */
+	    dist = calcdist(cities[i][0], cities[i][1]);
+	    var eamap = earn_mapper(earn_map, dist);
+	    if (eamap != null) {
+	      var s = find_owe_continent(cities[i][0])+"-"+find_owe_continent(cities[i][1]);
+	      add_award(eamap[1],eamap[3],eamap[4], flt, s, dist);
+	    }
+	    tdist += dist;
+	 }
   }
 
 
@@ -1162,21 +1233,34 @@ function validateowe()
    */
   if (!(owe_flag & 0x20)) {
     addlog("<b>Rule violated!!! Must cross Atlantic!</b>");
-    return -1;
+	++fatalerr;
+    setowestatus(1,1);
+    if(!ignoreerrs) return -1;
   }
   if (!(owe_flag & 0x40)) {
     addlog("<b>Rule violated!!! Must cross Pacific!</b>");
-    return -1;
+	++fatalerr;
+    setowestatus(1,1);
+    if(!ignoreerrs) return -1;
   }
   if (!check_owe_endrules(cities[0][0], cities[cities.length-1][1])) {
     addlog("<b>Rule violated!!! Must start/end in same region/country!</b>");
-    return -1;
+	++fatalerr;
+    setowestatus(1,1);
+    if(!ignoreerrs) return -1;
   }
 
   /* Success!! */
-  addlog("<h1>Congratulations!! Valid itinerary!!! - (" + tdist + " miles)</h1>");
+  if(fatalerr) {
+      var errtxt = " error" + (fatalerr==1?"":"s");
+  	  setowestatus(fatalerr + errtxt,1);
+  	  addlog("<h1>" + fatalerr + " serious" + errtxt + " detected.  This is likely to be an invalid itinerary ("  + tdist + " miles)</h1>");
+  } else {
+	  setowestatus("Valid!",2);
+	  addlog("<h1>Congratulations!! Valid itinerary!!! - (" + tdist + " miles)</h1>");
+  }
   sethelp(earn_help);
-  show_awards(1);
+  show_awards(1,1);
   return 0;
 }
 
@@ -1284,14 +1368,23 @@ function oweplanner()
     alert("No flights found");
   }
   else {
-    show_awards(0);
+    show_awards(0,2);
   }
   return 0;
 }
 function awardhelp()
 {
-  alert("These functions are used to help plan your award itinerary");
+  alert("These functions are used to help plan your award itinerary by showing the number of miles required for your segments."
+  );
 }
+
+function ephelp()
+{
+  alert("Choose your frequent flyer program.  If you have cookies enabled\n" +
+  		"in your browser, this selection will be remembered for next time."
+  );
+}
+
 function owehelp()
 {
   alert("This function tests if a OWE itinerary is valid. Enter a list of cities, eg. LHR-JFK-SYD-LHR." +
@@ -1300,22 +1393,32 @@ function owehelp()
   	"may be used to designate a surface sector in addition to ','\n"+
   	"* '-xAAA' may be used to indicate a transit at AAA (this is ignored by the tool but is useful for your planning purposes)\n" +
   	"* '-oAAA' may be used to indicate a stopover at AAA (this is ignored by the tool but is useful for your planning purposes)\n" +
-  	"\nThus, another valid itinerary is:  CAI-oLHR//LGW-xMCO-oMIA-  oSFO   ,LAX-oHKG-LHR-DXB"
+  	"\nThus, another valid itinerary is:  CAI-oLHR//LGW-xMCO-oMIA-  oSFO   ,LAX-oHKG-LHR-DXB\n\n" +
+  	"The 'Ignore Errors' option will override the validator's rule checks, allowing the itinerary to be fully parsed. " +
+  	"This should only be used if you suspect an error in the validator, but still want your itinerary to be displayed.\n\n" +
+  	"Ignore Surface Sectors - from 1 July 2007, surface sectors need to be counted and will use up a coupon.  Select" +
+  	"this option if you have a ticket issued prior to this date in order to ignore surface sectors.\n\n"
   	);
 }
 function oweplanhelp()
 {
-  alert("This function can be used to help plan your OWE itinerary.\n"+
-	"You may display all flights from/to a city by leaving one of the fields blank. eg. to display all flights from CMH, select CMH in the From: field, and leave To: blank.\n"+
-	"You may test if a flight exists between two cities by specifying a value in both From: and To: fields.\n"+
-	"You may display all flights to/from a country by specifying a country code instead of an airport code (eg. gr for Greece, gb for Great Britain, etc).\n"+
+  alert("This function can be used to help plan your OWE itinerary, typically by helping you determine where you "+
+    "can get to (on OW services) from a given location.\n"+
+	"\nYou may display all flights from/to a city by leaving one of the fields blank. eg. to display all flights from CMH, select CMH in the From: field, and leave To: blank.\n"+
+	"\nYou may test if a flight exists between two cities by specifying a value in both From: and To: fields.\n"+
+	"\nYou may display all flights to/from a country by specifying a country code instead of an airport code (eg. gr for Greece, gb for Great Britain, etc).\n"+
 	"   Warning- can be very slow if 'us' is selected!\n"+
-	"You may specify continents by using one of the following: ~nam|~sam|~eur|~afr|~asa|~swp\n"+
-	"  for the different OWE regions. (note.. must enter value in From+To otherwise it may be very slow)"+
-	"You may sort the results by clicking on the Miles or Description header\n"+
-        "You may also use an integer in the Greater than/Less than fields\n"+
-        "eg. Show all flights under 900 miles from SCL: From:SCL Less than:900\n"+
-        "Show all flights over 900 miles from SCL: From:SCL Greater than:900");
+	"\nYou may specify continents by using one of the following: ~nam|~sam|~eur|~afr|~asa|~swp\n"+
+	"  for the different OWE regions. (note.. must enter value in From+To otherwise it may be very slow)\n"+
+	"\nYou may sort the results by clicking on the Miles or Description header\n"+
+        "\nYou may also use an integer in the Greater than/Less than fields, e.g.:\n"+
+        "Show all flights under 900 miles from SCL:      From:SCL Less than:900\n"+
+        "Show all flights over 900 miles from SCL:       From:SCL Greater than:900\n" +
+    "\nRestrict by cabins available: if you select 'F only', this will filter out all routes which don't have First class, "+
+    "allowing you to make the best use of a AONEx ticket by choosing routes with F. "+
+    "Note that this is only an approximation; the data is incomplete - if you notice a "+
+    "discrepancy (e.g. a route on which F is offered but it is shown as Y & J only), please report this."
+    );
 }
 
 function toggleLayer(whichLayer)
@@ -1385,17 +1488,63 @@ function Querystring_get(key, default_) {
 </head>
 
 <body>
-<p>
 <hr>
-<table border=1 bgcolor="#ffff00"><tr><td><font size="+1">This is an updated version of the tool,</font> loaded into place by <a href="http://www.flyertalk.com/forum/private.php?do=newpm&u=41952" target="_blank">SLF</a>.<br>
-This version was never issued by JPH.  This version is based on <a href="http://slfft.allhyper.com/0.9/award.htm">0.9</a> &amp;
-<a href="http://slfft.allhyper.com/1.1/award.htm">1.1</a>,
-<a href="javascript:toggleLayer('changes');" title="">changes</a>
-with updates to
-bring it more up to date with current schedules/rules.
+<TABLE border=1 cellspacing=0 cellpadding=1>
+  <TBODY>
+<tr bgcolor="#eeffee">
+<td colspan=5>
+<b>MileageMonkey v0.95013 (based on JPH's <a href="http://slfft.allhyper.com/0.9/award.htm">0.9</a> &amp;
+<a href="http://slfft.allhyper.com/1.1/award.htm">1.1</a> versions) /
+<a href="javascript:toggleLayer('info');" title="">Tool information</a> /
+<a href="javascript:toggleLayer('changes');" title="">Change log</a> /
+<a href="http://www.flyertalk.com/forum/showthread.php?p=6954703#post6954703"
+target="_blank">Flyertalk discussion thread</a> /
+Copyright &copy; (see info)
+</b>
+<div id="info" style="display: none">
+<br>
+<b>This utility will calculate the # of miles needed for a Frequent Flyer award, and also help plan a OneWorld Explorer ticket</b><br>
+&nbsp;<br>
+<em>
+This is an updated version of the tool,
+loaded into place by <a href="http://www.flyertalk.com/forum/private.php?do=newpm&u=41952" target="_blank">SLF</a>.
+This version was never issued by JPH.  The discussion thread above should be used for feedback about this tool.
+Alternatively, the author
+may be contacted at <a href="mailto:jordan_hargrave%3Cdelete%20me%20nospam%3E@hotmail.com">jordan_hargrave
+AT hotmail.com</a> although please bear in mind that he may have no knowledge of the
+modifications made in this particular version.
+<a href="http://jph.bytestacker.com/award.htm" target="_blank">The original site</a> should be checked periodically
+to see if the tool has been reloaded there.  For other versions of the tool, please see <a href="http://slfft.allhyper.com/" target="_blank">here</a>.</em>
+<br>&nbsp;<br>
+Copyright &copy; 2004-2007 by <a href="mailto:jordan_hargrave%3Cdelete%20me%20nospam%3E@hotmail.com">Jordan Hargrave</a>, All Rights Reserved.<br>
+Parts copyright &copy; 2006-2007 <a href="http://www.flyertalk.com/forum/private.php?do=newpm&u=41952" target="_blank">SLF</a>
+</div>
+  </td>
+</tr>
 
+<tr>
+  <td colspan=5>
 <div id="changes" style="display: none">
+<table border=0 bgcolor="#ffff99"><tr><td>
+<b>Changelog:</b>
 <ul>
+<li><u><b>v0.95013 (2007/06/30):</b></u>
+<li>Added valid/invalid status indicator next for OWE planner section to allow quick determination of status
+<li>Fixed "link to this itinerary to preserve entered "-x", "-o" values etc.
+<li>Streamlined the layout a little, incl. changing "Submit" to "Go!" and "Help" to "?" on buttons
+<li>Added more information to the help dialogs
+<li>Added an "Ignore errors" checkbox to the OWE planner to allow further validation to continue even if the validator
+     suspects an error (this could be most useful for itins with additional purchased sectors, and/or if the validator
+     is ever wrong on something it will at least allow results to be obtained
+<li>Added a "link to this itinerary" feature to the point-point mappings
+<li>Fix the point-point calculator, which got accidentally broken in 0.95011 ... and no-one noticed!
+<li>Add a section with some useful links.  Other suggestions welcome!
+<li>Count surface sectors against the 20 sector limit, in line with new rules from 1 July.  In order to allow existing tickets
+	to validate correctly, I also added an "Ignore surface sectors" checkbox.
+<li>Added <b>sd</b> (Sudan) to owe_europe list
+<li>Removed <b>ma</b> (Morocco) from the owe_africa/2 lists, as it is part of Europe for OWE purposes (it was already in the owe_europe list)
+<li>Added "Ignore Surface Sectors" into help dialog.
+<hr>
 <li><u><b>v0.95012 (2007/04/13):</b></u>
 <li>Added rule; if two entries to Asia or N.America occur, check that one is a transit (no intra-continent sectors) and
 warn if detected
@@ -1408,6 +1557,7 @@ warn if detected
 	<li>Added MEL/SYD restriction to BME
 </ul>
 <li>Added MIA-ANC (thanks <b>vxmike</b>)
+<hr>
 <li><u><b>v0.95011 (2007/04/02):</b></u>
 <li>New flights database - supplied by <b>hauteboy</b> (thanks!)
 <li>Added 11 new cities to database: AAC,ADE, AQJ, NKM, OGN, PCL, RJL, SOB, UEO, UKB, WOL
@@ -1418,9 +1568,11 @@ planning an AONEx or DONEx to avoid routes which have no A or D services.
 <li>Added override for class designations for sectors, and added F onto some routes (NRT :- SIN,SFO,FRA,CDG,GRU;
 HKG :- SYD,MEL,JNB; LHR :- CAI,TLV,EWR,PHL,MCT) (thanks <b>WearyBizTrvlr</b>)
 <li>Added filtering of OWEPlanner output by cabin class
+<hr>
 <li><u><b>v0.95010 (2007/01/22):</b></u>
 <li>Added "Link to this itinerary" functionality
 <li>Added HEL-DXB & vv. (thanks <b>barking frog</b>)
+<hr>
 <li><u><b>v0.95009 (2007/01/21):</b></u>
 <li>Merged the changes in 0.95008 with JPH's 1.1 code to produce a new version containing the improvements added in each.
 <li>Added Austria (at) to the OWE-Europe list (thanks <b>tt7</b>)
@@ -1428,30 +1580,37 @@ HKG :- SYD,MEL,JNB; LHR :- CAI,TLV,EWR,PHL,MCT) (thanks <b>WearyBizTrvlr</b>)
 <li><u><b>v0.95008 (2007/01/15):</b></u>
 <li>Fixed problem with miles reqd. for BA OW awards - wrong levels for J/F 4001-9000 miles (thanks <b>Alvador</b>)
 <li>Added 25000-35000 entry for BA OW award levels
+<hr>
 <li><u><b>v0.95007 (2007/01/05):</b></u>
 <li>Added HEL-LCA and MAD-OTP &amp; vv. (thanks <b>Cyba</b>)
 <li>Changed FT thread link to new thread
+<hr>
 <li><u><b>v0.95006 (2006/11/20):</b></u>
 <li>Removed <b>Travel via original point of origin not permitted</b> check, it's no longer a
 	restriction of xONEx tickets (thanks <b>serfty</b>)
 <li>Added MAD-GIB &amp; vv.  (IB service starting Dec 2006)
 <li>Removed LHR-GIB &amp; vv.
+<hr>
 <li><u><b>v0.95005 (2006/11/05):</b></u>
 <li>Removed Kenya, Tanzania &amp; Uganda from the "owe_africa2" list, reflecting the addition of these to
     allowable destinations to permit the second Europe entry.
+<hr>
 <li><u><b>v0.95004 (2006/08/25):</b></u>
 <li>Replaced flights database with new version from OW timetable - supplied by <b>hauteboy</b> (thanks!) and merged in
 	by <b>SLF</b>.
 <li>Expanded "Help" info for OWE Validator section
 <li>Fixed a couple of minor Javascript warnings (functions with no return value, undeclared citycode variable)
+<hr>
 <li><u><b>v0.95003 (2006/08/22):</b></u>
 <li>Corrected QF SC earning from 45 to 35 for discount economy, zone 6 (4801-5800 miles), <a
 	href="http://www.qantas.com.au/fflyer/dyn/program/privileges#jump1" target="_blank">as per
 	QF</a> (thanks <b>mrboh</b>)
 <li>Added ESB-LHR (thanks <b>MiamiBeach</b>)
 <li>Added DRW-BOM (thanks <b>ReelChief</b>)
+<hr>
 <li><u><b>v0.95002 (2006/08/15):</b></u>
 <li>Added cookie to remember f/f program earning preference
+<hr>
 <li><u><b>v0.95001 (2006/08/15):</b></u>
 <li>For the OWE validator section, now ignores any spaces in the route (previously it would fall
 	over if a space was included)
@@ -1459,6 +1618,7 @@ HKG :- SYD,MEL,JNB; LHR :- CAI,TLV,EWR,PHL,MCT) (thanks <b>WearyBizTrvlr</b>)
 <li>For the OWE validator section, permit -xXXX and -oXXX to indicate transit/stopover
 	(note: this information	is discarded, i.e. no checks are made whether the number of
 	stopovers is legal - this could be a future enhancement)
+<hr>
 <li><u><b>v0.95:</b></u>
 <li>Added DFW-ANC (thanks <b>Viajero</b>)
 <li>Added MEL to restricted list (CNS/BNE/SYD) of transcons to PER
@@ -1481,10 +1641,6 @@ HKG :- SYD,MEL,JNB; LHR :- CAI,TLV,EWR,PHL,MCT) (thanks <b>WearyBizTrvlr</b>)
 <li><i>is</i> was missing from <i>owe_europe</i> causing any KEF flight to be treated as
 	intercontinental rather than European (thanks <b>sdorling</b>)
 </ul>
-</div>
-
-<a href="http://jph.bytestacker.com/award.htm" target="_blank">The original site</a> should be checked periodically
-to see if the tool has been reloaded there.  For other versions of the tool, please see <a href="http://slfft.allhyper.com/">here</a>.
 
 <br>Page counter:
 <!-- Start of StatCounter Code -->
@@ -1499,74 +1655,111 @@ var sc_security="b9b2dc33";
 <!-- End of StatCounter Code -->
 
 </td></tr></table>
-<P><hr>
-MileageMonkey v0.95012 (based on JPH's <a href="http://slfft.allhyper.com/0.9/award.htm">0.9</a> &amp;
-<a href="http://slfft.allhyper.com/1.1/award.htm">1.1</a> with additions suggested by various FTers)
-<p>This utility will calculate the # of miles needed for a Frequent Flyer award
-</p><p>
+</div>
+</td></tr>
 
-<em>For questions/comments, please <a href="http://www.flyertalk.com/forum/showthread.php?p=6954703#post6954703"
-target="_blank">visit this thread on FlyerTalk</a> where modifications to this tool have been discussed.  Alternatively, the author
-may be contacted at <a href="mailto:jordan_hargrave%3Cdelete%20me%20nospam%3E@hotmail.com">jordan_hargrave
-AT hotmail.com</a> although please bear in mind that he may have no knowledge of the
-modifications made in this particular version.</em>
 
-</P>
-<TABLE border=1 cellspacing=0 cellpadding=1>
-  <TBODY>
   <TR>
-    <TH class=award>One-Way</TH>
-    <TD>From:<INPUT id=owfrom size=3 name=owfrom></TD>
-    <TD>To:<INPUT id=owto size=3 name=owto></TD>
-    <TD><INPUT onclick="javascript:showow(); return false;" type=submit value=Submit></TD>
-    <TD rowSpan=3><INPUT onclick=javascript:awardhelp(); type=submit value=Help></TD>
-    <td rowspan=6>Maps generated by the <A href="http://gc.kls2.com/">Great Circle Mapper</A>&nbsp;- copyright © <A href="http://www.kls2.com/~karl/">Karl L. Swartz</A>.<br>
+    <TH class=award>Award Miles</TH>
+    <TD colspan=2>
+
+  <table border=0 cellspacing=0 cellpadding=0><tr>
+    <td>
+    <table border=0 cellspacing=0 cellpadding=0>
+    	<tr><td>From:</td><td><INPUT id=owfrom size=3 name=owfrom></td></tr>
+    	<tr><td>To:</td><td><INPUT id=owto size=3 name=owto></td></tr>
+    </table>
+    </td>
+    <TD rowspan=2>&nbsp;&nbsp;&nbsp;
+    	<INPUT onclick="javascript:showaward(fOW); return false;" type=submit value="One-way">
+    	<INPUT onclick="javascript:showaward(fRT); return false;" type=submit value="Return"></td>
+	</table>
+   </td><td>
+    	<INPUT onclick=javascript:awardhelp(); type=submit value="?"></TD>
+
+    </td>
+    <td rowspan=7>Scroll down this page for more detail after hitting <b>Go!</b><br>
+    	Maps generated by the <A href="http://gc.kls2.com/">Great Circle Mapper</A>&nbsp;- copyright © <A href="http://www.kls2.com/~karl/">Karl L. Swartz</A>.<br>
         <IFRAME id=maparea name=maparea src="" frameBorder=0 width=510 height=500>Go Away</IFRAME>
     </td>
-  <TR>
-    <TH class=award>Round-Trip</TH>
-    <TD>From:<INPUT id=rtfrom size=3 name=rtfrom></TD>
-    <TD>To:<INPUT id=rtto size=3 name=rtto></TD>
-    <TD><INPUT onclick="javascript:showrt(); return false;" type=submit value=Submit></TD></TR>
+
   <TR>
     <TH class=award>Point-to-Point</TH>
-    <TD colSpan=2>Enter list of airports:<BR>eg: lhr-jfk-lax-syd-hkg-lhr<BR><TEXTAREA id=citylist rows=5 cols=25></TEXTAREA></TD>
-    <TD><INPUT onclick=javascript:showp2p(); type=submit value=Submit></TD></TR>
+    <TD colSpan=2>Enter list of airports:<BR>eg: lhr-jfk-lax-syd-hkg-lhr<BR>
+      <div id="p2plink" style="display: none"></div>
+    <TEXTAREA id=citylist rows=3 cols=25></TEXTAREA></TD>
+
+    <TD><INPUT onclick=javascript:showp2p(); type=submit value="Go!"><br>
+    	<INPUT onclick=javascript:awardhelp(); type=submit value="?">
+    </TD></TR>
+
   <TR>
     <TH class=award>Earning Preference</TH>
-    <TD colSpan=4><INPUT id=earn type=radio CHECKED value="qf" name="earn">Qantas status credits<BR>
-                  <INPUT id=earn type=radio value="ba" name="earn">British Airways tier points<br>
-<!--                  <INPUT id=earn type=radio value="ib" name="earn">IberiaPlus points<br> -->
-                 <INPUT id=earn type=radio value="la" name="earn">LanPass km<br>
-                  <INPUT id=earn type=radio value="aa" name="earn">AAdvantage miles (PLT/EXP)</TD></tr>
+    <TD colSpan=2><INPUT id=earn type=radio CHECKED value="qf" name="earn">QF
+                  <INPUT id=earn type=radio value="ba" name="earn">BA
+<!--                  <INPUT id=earn type=radio value="ib" name="earn">IB -->
+                 <INPUT id=earn type=radio value="la" name="earn">LA
+                  <INPUT id=earn type=radio value="aa" name="earn">AA
+                  </TD>
+    <TD><INPUT onclick=javascript:ephelp(); type=submit value="?">
+                  </tr>
    <TR>
     <TH class=award>Oneworld Explorer Validator</TH>
     <TD colSpan=2>Enter list of airports:<BR>eg:
       lhr-jfk-lax-syd,mel-hkg-lhr<br>
       <div id="owelink" style="display: none"></div>
-    <TEXTAREA wrap=soft id=owecitylist rows=5 cols=25></TEXTAREA></TD>
-    <TD><INPUT onclick=javascript:validateowe(); type=submit value=Submit></TD>
-    <TD><INPUT onclick=javascript:owehelp(); type=submit value=Help></TD>
+    <TEXTAREA wrap=soft id=owecitylist rows=3 cols=25></TEXTAREA>
+    <br>
+	<input id="ignoreerrors" type="checkbox" name="ignoreerrors">Ignore errors (for expert users!)<br>
+	<input id="ignoresurface" type="checkbox" name="ignoresurface">Ignore surface sectors (pre-July 2007 tkts only)<br>
+    </TD>
 
+    <TD><INPUT onclick=javascript:validateowe(); type=submit value="Go!"><br>
+    	<div id="owestatus">&nbsp;&nbsp;&nbsp;</div><br>
+    	<INPUT onclick=javascript:owehelp(); type=submit value="?"><br>
+		</td>
   </TR>
   <TR>
     <TH class=award>OWE Planner</TH>
-    <TD colspan=2><table border=0 cellspacing=0 cellpadding=0>
-        <tr><td>Greater than X miles:</td><td><input id=owplangt size=4></td></tR>
+    <TD colspan=2>
+    <table border=0 cellspacing=0 cellpadding=0 width="100%">
+    	<tr><td>Greater than X miles:</td><td><input id=owplangt size=4></td></tR>
         <tr><td>Less than X miles:</td><td><input id=owplanlt size=4></td></tr>
-	<tr><td>From:</td><td><input id=owplanfrom size=4></td></tr>
-	<tr><td>To:</td><td><input id=owplanto size=4></td></tr>
-	<tr><td colspan=2>
-		<input id=cabins type=radio CHECKED value="y" name="cabins">Show all sectors<br>
-		<input id=cabins type=radio value="j" name="cabins">Only sectors with J<br>
-		<input id=cabins type=radio value="f" name="cabins">Only sectors with F<br>
-	</td></tr>
-	<tr><td colspan=2><input onclick="javascript:list_countries();" type=submit value="List Country Codes"></td></tr>
+		<tr><td>From:</td><td><input id=owplanfrom size=4></td></tr>
+		<tr><td>To:</td><td><input id=owplanto size=4></td></tr>
+		<tr><td colspan=2>
+			<hr>
+			Restrict by cabins available:<br>
+			<input id="cabins" type="radio" CHECKED value="y" name="cabins">Show all sectors<br>
+			<input id="cabins" type="radio" value="j" name="cabins">Only sectors with J<br>
+			<input id="cabins" type="radio" value="f" name="cabins">Only sectors with F<br>
+		</td></tr>
 	</table>
-    <TD><INPUT onclick="javascript:oweplanner();"  type=submit value=Submit></td>
-    <TD><INPUT onclick="javascript:oweplanhelp();" type=submit value=Help></TD></TR>
+	</td>
+    <TD><INPUT onclick="javascript:oweplanner();"  type=submit value="Go!"><br>
+    	<INPUT onclick="javascript:oweplanhelp();" type=submit value="?"><br>
+    	</TD></TR>
+
+ <TR>
+    <TH class=award>OWE Information</TH>
+    <TD colspan=3>
+    Official OneWorld links:<br>&nbsp;&nbsp;&nbsp;&nbsp;
+     <a href="http://www.oneworld.com/ow/timetables/" target="_blank">Timetables &amp; Planner</a>&nbsp;&nbsp;
+     <a href="http://www.oneworld.com/ow/air-travel-options" target="_blank">Fare rules &amp; prices</a>&nbsp;&nbsp;
+     <a href="http://www.oneworld.com/products/details.cfm?ObjectID=21" target="_blank">OWE Info</a>
+     <br>
+    Other links:<br>&nbsp;&nbsp;&nbsp;&nbsp;
+     WBT: (<a href="http://qsi.cc/users/wbt/RTW%20Fares.xls" target="_blank">fares</a>,
+           <a href="http://qsi.cc/users/wbt/oneworldStarFile.txt" target="_blank">starfile</a>)&nbsp;&nbsp;
+     <a href="http://www.hardlink.com/~markdu/OWFiles/" target="_blank">MarkDu's OWFiles</a>
+     <br>
+
+    <input onclick="javascript:list_countries();" type=submit value="List Country Codes"></td>
+	</TR>
     </TBODY></TABLE>
+
 <p></p>
+<a name="#results"></a>
 <div id="logarea"></div>
 <div id="tablearea"></div>
 <p></p>
@@ -1576,13 +1769,24 @@ modifications made in this particular version.</em>
 </p><div id="routearea"></div>
 <p></p>
 
+
 <script language="javascript" type="text/javascript">
 // read cookie and set frequent flyer earning program preference
 loadearn();
 var qs = new Querystring();
-var loadcitylist = qs.get('owe');
+var loadcitylist;
+
+loadcitylist = qs.get("p2p","");
 if(loadcitylist.length > 4) {
-	owecitylist.innerHTML = loadcitylist;
+	var cl = findElement('citylist');
+	cl.innerHTML = loadcitylist;
+	showp2p();
+}
+
+loadcitylist = qs.get("owe","");
+if(loadcitylist.length > 4) {
+	var ocl = findElement('owecitylist');
+	ocl.innerHTML = loadcitylist;
 	validateowe();
 }
 </script>

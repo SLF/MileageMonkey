@@ -213,9 +213,19 @@ var owe_longhaul  = "dz|am|az|bh|bg|cy|eg|gr|ge|ir|il|jo|kw|lb|mk|mt|ma|om|FNC|q
 var owe_mideast   = "eg|sd|il|lb|sy|jo|ir|iq|kw|bh|qa|ae|om|ye|sa";
 var owe_namerica  = "us|ca|mx|bz|gt|sv|hn|ni|cr|pa|aw|tt|gd|bb|lc|mq|dm|gp|ag|kn|an|vg|vi|pr|do|ht|jm|cu|ky|bs|bm|ai|tc";
 var owe_samerica  = "co|ve|ec|pe|bo|cl|br|py|uy|ar|fk";
-var owe_europe    = "ie|gb|is|no|se|fi|dk|ru|ee|lv|lt|by|ua|am|az|ge|md|ro|bg|tr|gr|mk|al|yu|ba|hr|si|hu|sk|cz|pl|de|ch|it|mt|pt|es|gi|fr|be|nl|lu|ma|dz|tn|eg|cy|at|"+owe_mideast;
-var owe_africa    = "ao|bj|bw|bf|bi|cm|cv|cf|td|cg|gq|er|et|ga|gm|gh|gn|gw|ci|ke|ls|lr|ly|mg|mw|ml|mr|mu|ma|mz|na|ne|ng|zr|re|rw|sn|sc|sl|so|za|sz|tz|tg|ug|zm|zw";
-var owe_africa2   = "ao|bj|bw|bf|bi|cm|cv|cf|td|cg|gq|er|et|ga|gm|gn|gw|ci|ls|lr|ly|mg|mw|ml|mr|mu|ma|mz|na|ne|zr|re|rw|sn|sc|sl|so|za|sz|tg|zm|zw";
+var owe_europe    = "ie|gb|is|no|se|fi|dk|ru|ee|lv|lt|by|ua|am|az|ge|md|ro|bg|tr|gr|mk|al|yu|ba|hr|si|hu|sk|cz|pl|de|ch|it|mt|pt|es|gi|fr|be|nl|lu|ma|dz|tn|eg|cy|at|sd|"+owe_mideast;
+
+// owe_africa2 handles the second permissible European entry from some African countries - look for what is not present:
+
+// owe_africa2:  all "normally" treated African countries
+var owe_africa2   = "ao|bj|bw|bf|bi|cm|cv|cf|td|cg|gq|er|et|ga|gm|gn|gw|ci|ls|lr|ly|mg|mw|ml|mr|mu|mz|na|ne|zr|re|rw|sn|sc|sl|so|za|sz|tg|zm|zw";
+
+// owe_africa_second_eur_entry:	african countries from which a second EUR entry is permissible
+var owe_africa_second_eur_entry = "gh|ke|ng|tz|ug";
+
+// owe_africa:  all African countries (just add the above two together)
+var owe_africa    = owe_africa2 + "|" + owe_africa_second_eur_entry;
+
 var owe_asia      = "af|pk|kz|kg|uz|tm|tj|in|np|bd|bt|bn|mm|id|sg|my|th|kh|la|vn|cn|mn|kr|jp|ph|tw|hk|lk|SVX";
 var owe_swp       = "au|nz|nc|pg|pf|to|ws";
 
