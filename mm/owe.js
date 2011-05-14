@@ -2,24 +2,52 @@
  */ 
 
 var owe_hawaii    = "HNL|OGG|KOA|LIH";
-var owe_westcoast = "LAS|LGB|LAX|OAK|SNA|PDX|SAN|SFO|SEA|SJC|YVR";
+var owe_westcoast = "LAS|LAX|OAK|PDX|SAN|SFO|SJC|SEA|YVR|SNA|LGB";
 var owe_eastcoast = "BWI|BOS|FLL|BDL|MIA|EWR|JFK|LGA|MCO|PHL|SJU|YYZ|IAD|DCA";
 
-/*longhaul - this defines the countries to which only 2 flights are allowed to/from the UK */
-var owe_longhaul  = "dz|am|az|bh|bg|cy|eg|gr|ge|ir|il|jo|kw|lb|ly|mk|mt|ma|om|FNC|qa|ro|ru|sa|sy|tn|ae|ua|yu";
-
 var owe_mideast   = "ae|bh|eg|il|iq|ir|jo|kw|lb|ly|om|qa|sa|sd|sy|ye";
-var owe_namerica  = "us|ca|mx|bz|gt|sv|hn|ni|cr|pa|aw|tt|gd|bb|lc|mq|dm|gp|ag|kn|an|vg|vi|pr|do|ht|jm|cu|ky|bs|bm|ai|tc";
-var owe_samerica  = "co|ve|ec|pe|bo|cl|br|py|uy|ar|fk";
-var owe_europe    = "ie|gb|is|no|se|fi|dk|ru|ee|lv|lt|by|ua|am|az|ge|md|ro|bg|tr|gr|mk|al|yu|ba|hr|si|hu|sk|cz|pl|de|ch|it|mt|pt|es|gi|fr|be|nl|lu|ma|dz|tn|eg|cy|at|sd|"+owe_mideast;
 
-// owe_africa2 handles the second permissible European entry from some African countries - look for what is not present:
+/*longhaul - this defines the countries to which only 2 flights are allowed to/from the UK */
+var owe_longhaul  = owe_mideast + "|" +
+					"al|" + // Albania
+					"am|" + // Armenia
+					"az|" + // Azerbaijan
+					"ba|" + // Bosnia and Herzegovina
+					"bg|" + // Bulgaria
+					"cy|" + // Cyprus
+					"dz|" + // Algeria
+					"FNC|"+ // Madeira / Funchal
+					"gr|" + // Greece
+					"ge|" + // Georgia
+					"hr|" + // Croatia
+					"ly|" + // Libya
+					"mk|" + // Macedonia
+					"ma|" + // Morocco
+					"mt|" + // Malta
+					"ro|" + // Romania
+					"rs|" + // Serbia
+					"ru|" + // Russia
+					"tn|" + // Tunisia
+					"tr|" + // Turkey
+					"ua|" + // Ukraine
+					"yu";	// Yugoslavia
+
+
+var owe_namerica  = "us|ca|mx|bz|gt|sv|hn|ni|cr|pa|aw|tt|gd|bb|lc|mq|dm|" +
+						"gp|ag|kn|an|vg|vi|pr|do|ht|jm|cu|ky|bs|bm|ai|tc";
+var owe_samerica  = "co|ve|ec|pe|bo|cl|br|py|uy|ar|fk";
+var owe_europe    = "ie|gb|is|no|se|fi|dk|ru|ee|lv|lt|by|ua|am|az|ge|md|" +
+						"ro|bg|tr|gr|mk|al|yu|ba|hr|si|hu|sk|cz|pl|de|ch|it|" +
+						"mt|pt|es|gi|fr|be|nl|lu|ma|dz|tn|eg|cy|at|sd|"+owe_mideast;
+
+// owe_africa2 handles the second permissible European entry from some African countries - 
+//	look for what is not present:
 
 // owe_africa2:  all "normally" treated African countries
-var owe_africa2   = "ao|bj|bw|bf|bi|cm|cv|cf|td|cg|gq|er|et|ga|gm|gn|gw|ci|ls|lr|mg|mw|ml|mr|mu|mz|na|ne|zr|re|rw|sn|sc|sl|so|za|sz|tg|zm|zw";
+var owe_africa2   = "ao|bj|bw|bf|bi|cm|cv|cf|td|cg|gq|er|et|ga|gm|gn|gw|ci|ls|lr|mg|mw|ml|mr|mu|mz|na|ne|zr|re|rw|sn|sc|sl|so|za|sz|tg|tz|zm|zw";
 
 // owe_africa_second_eur_entry:	african countries from which a second EUR entry is permissible
-var owe_africa_second_eur_entry = "gh|ke|ng|tz|ug";
+var owe_africa_second_eur_entry = "gh|ke|ng|ug"; // if you change this, you need to change owe_africa2 also
 
 // owe_africa:  all African countries (just add the above two together)
 var owe_africa    = owe_africa2 + "|" + owe_africa_second_eur_entry;
@@ -69,9 +97,10 @@ var owe_rulemap = [
  [ 0x03, owe_hawaii, "us|ca|pr|vi", 1, "N.America - Hawaii" ],  /* max one segment to hawaii */ 
  [ 0x13, owe_eastcoast, owe_westcoast, 1, "North America Transcon" ],  /* max one transcon */
  [ 0x03, "gb",  owe_longhaul, 2, "UK <--> Middle East/Eastern Europe/North Africa" ],  /* max two longhaul segments from the UK */
- [ 0x8003, "PER", "SYD|CNS|BNE|MEL", 1, "Sydney/Cairns/Brisbane/Melbourne - Perth" ], /* max one segment to perth */
- [ 0x03, "DRW", "MEL|SYD", 1, "Melbourne/Sydney - Darwin" ], /* max one segment to darwin */
- [ 0x03, "BME", "MEL|SYD", 1, "Melbourne/Sydney - Broome" ], /* max one segment to broome */
+ [ 0x8003, "PER", "SYD|CBR|CNS|BNE|MEL", 1, "Sydney/Canberra/Cairns/Brisbane/Melbourne - Perth" ], /* max one segment to perth */
+ [ 0x03, "DRW", "MEL|SYD|CBR", 1, "Melbourne/Sydney/Canberra - Darwin (DRW)" ], /* max one segment to darwin */
+ [ 0x03, "BME", "MEL|SYD|BNE", 1, "Melbourne/Sydney/Brisbane - Broome (BME)" ], /* max one segment to broome */
+ [ 0x03, "KTA", "MEL|SYD|BNE", 1, "Melbourne/Sydney/Brisbane - Karratha (KTA)" ], /* max one segment to Karratha */
  
  [ 0x1b, "NRT", "GRU", 1, "Direct NRT-GRU or v.v. service is considered to touch North America, but MM doesn't count this yet - beware!" ],
 
