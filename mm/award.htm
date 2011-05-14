@@ -1,0 +1,1205 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><!-- saved from url=(0036)http://jph.bytestacker.com/award.htm -->
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>MileageMonkey 0.9</title>
+<style>
+TABLE {
+        FONT-FAMILY: sans-serif ; font-size: 8pt
+}
+TH {
+	WIDTH: 40px; COLOR: white; HEIGHT: 30px; BACKGROUND-COLOR: navy
+}
+TD.award {
+	COLOR: white; BACKGROUND-COLOR: navy
+}
+TD.gray {
+        BACKGROUND-COLOR: #afafaf
+}
+TR.green {
+	DISPLAY: none; BACKGROUND-COLOR: gold
+}
+TR.coddx {
+	BACKGROUND-COLOR: #adbee7
+}
+TR.cevenx {
+	BACKGROUND-COLOR: #badcfc
+}
+TR.codd {
+	BACKGROUND-COLOR: gold
+}
+TR.ceven {
+	BACKGROUND-COLOR: goldenrod
+}
+</style>
+
+<script language="javascript" src="flights.js" type="text/javascript"></script>
+<script language="javascript" src="cities.js" type="text/javascript"></script>
+<script language="javascript" src="zones.js" type="text/javascript"></script>
+
+<script language="javascript" type="text/javascript">
+var tblcolor = [ "cevenx", "coddx" ];
+
+/* MileageMonkey code
+ *
+ * $Id: award.htm,v 1.6 2005/06/11 01:51:51 root Exp root $
+ * $Date: 2005/06/11 01:51:51 $
+ * $Revision: 1.6 $
+ *
+ * $Log: award.htm,v $
+ * Revision 1.6  2005/06/11 01:51:51  root
+ * *** empty log message ***
+ *
+ * Revision 1.5  2005/02/21 13:00:34  root
+ * Added searching by continent
+ *
+ * Revision 1.4  2005/02/19 05:43:45  root
+ * Formatting fixes
+ *
+ *
+ * Copyright (C) 2004-2005 by Jordan Hargraphix
+ * All Rights Reserved
+ */
+
+var help0="The values in the econ/biz/first columns are the # of miles (in thousands) required for the award.<br>"+
+          "Clicking on econ,biz,or first will sort the table<br>"+
+          "NOTE:Some awards may not be valid due to routing";
+var qf_oldhelp="# of Qantas SC's earned (pre May 25, 2005)";
+var qf_newhelp="# of Qantas SC's earned (post May 25, 2005)";
+var ba_help="# of BA tier points earned";
+var aa_help0="# of AAdvantage miles earned (base)";
+var aa_help1="# of AAdvantage miles earned (GLD)";
+var aa_help2="# of AAdvantage miles earned (PLT/EXP)";
+
+var earn_mapper = findmap;
+var earn_map    = qf_oldscmap;
+var earn_help   = qf_oldhelp;
+
+function findElement(id)
+{
+  if (document.all) return document.all(id);
+  if (document.getElementById) return document.getElementById(id);
+  return null;
+}
+
+function sethelp(str)
+{
+  findElement('helparea').innerHTML = str;
+}
+
+// Retreive text value field (always return upper case)
+function getTextValue(id)
+{
+  return findElement(id).value.toUpperCase();
+}
+
+function addlog(logmsg)
+{
+  var log = findElement('logarea');
+  log.innerHTML += logmsg + "<br>";
+}
+
+function clearall()
+{
+  findElement('tablearea').innerHTML = "";
+  findElement('logarea').innerHTML = "";
+  findElement('awardarea').innerHTML = "";
+  findElement('routearea').innerHTML = "";
+  findElement('helparea').innerHTML = "";
+  findElement('maparea').src = "";
+  clear_awards();
+}
+
+//========================================
+// Display map from gc.kls2.com
+//========================================
+function setmap(route)
+{
+  var gcmap = findElement('maparea');
+  window.open("http://gc.kls2.com/cgi-bin/gcmap?PATH="+route+"&PATH-UNITS=mi&RANGE_STYLE=best",'maparea','');
+}
+
+function setemap(mapper, map, str)
+{
+  earn_mapper = mapper;
+  earn_map    = map;
+  earn_help   = str;
+}
+
+//===============================================
+// Set mile/point earning perference
+//===============================================
+function setearn()
+{
+  var radio2 = findElement('earn');
+  for(var ri=0; ri<radio2.length; ri++) {
+    if (radio2[ri].checked) {
+      if (ri == 0) setemap(findmap, qf_oldscmap, qf_oldhelp);
+      if (ri == 1) setemap(findmap, qf_newscmap, qf_newhelp);
+      if (ri == 2) setemap(findmap, ba_tcmap, ba_help);
+      if (ri == 3) setemap(aamap,   1,        aa_help2);
+    }
+  }
+}
+
+//=============================
+// Convert degrees to radians
+//=============================
+function deg2rad(deg)
+{
+  with (Math) {
+    return deg * PI / 180.0;
+  }
+}
+
+/* Searches MAP structure.. format is
+*  [ AAA, ...... ],
+*  [ BBB, ..... ],
+*    ...
+*  [ NNN, .......]
+*
+*  Assert: A <= B <= ... <= N
+*
+* Returns first row where val < XXX
+*/
+function findmap(map, val)
+{
+  for(var i=0; i<map.length; i++) {
+    if (val < map[i][0]) return map[i];
+  }
+  return null;
+}
+
+function aamap(map, val)
+{
+  return [ 0, Math.floor(val * map + .5),
+              Math.floor(val * map + .5),
+              Math.floor(val * (1.25 + map) + .5),
+              Math.floor(val * (1.5 + map) + .5) ];
+}
+
+//==============================================
+// Calculate Great Circle distance on a sphere
+//==============================================
+function spheredist(radius,lata,lnga,latb,lngb)
+{
+  var _lata = deg2rad(lata);
+  var _latb = deg2rad(latb);
+  var _lnga = deg2rad(lnga);
+  var _lngb = deg2rad(lngb);
+
+  with (Math) {
+    return radius * acos(sin(_lata) * sin(_latb) + cos(_lata)*cos(_latb)*cos(_lnga-_lngb));
+  }
+}
+
+//==========================================
+// Calculate distance between two airports
+//==========================================
+function calcdist(from,to)
+{
+  var cfr = citycodes[from];
+  var cto = citycodes[to];
+
+  // Earth radius is 6371.2 kms according to gc.kls2.com (3958.88 miles)
+  try {
+    // Radius is 3963.00 seems to work better?
+    return Math.floor(spheredist(3963.00, cfr[1], cfr[2], cto[1], cto[2]));
+  }
+  catch (e) {
+    return 0;
+  }
+}
+
+//==============================================
+// Find country for a given airport
+// Country codes are in lowercase by convention
+//==============================================
+function find_country(airport)
+{
+  var cpt = citycodes[airport];
+  if (cpt == null) {
+    return "xx";
+  }
+  return cpt[0].toLowerCase();
+}
+
+//==============================================
+// Determines OWE continent given a city code
+//==============================================
+function find_owe_continent(airport)
+{
+  var cc = citycodes[airport];
+  if (cc == null) {
+    return "xxx";
+  }
+  var cd = countrycodes[cc[0]];
+  if (cd == null) {
+    return "xxx";
+  }
+  return "~" + cd[1];
+}
+
+//========================================================
+// Match an airport code/country code with zonemap
+// Format of zonemap: arrays of strings, separated by '|'
+//========================================================
+function matchlist(zm, str)
+{
+  var exclude = 0;
+
+  if (zm == null) return -1;
+
+  var zlist = zm.split('|');
+  for(var i=0; i<zlist.length; i++) {
+    var zs = zlist[i];
+
+    if (zs == str) return i;
+  }
+  return -1;
+}
+
+//=================================
+// Matches two strings (apt,country)
+// Returns -1 if neither match
+// Returns 0 if 1st string matches
+// Returns 1 if 2nd string matches
+//=================================
+function matchlist2(list, str0, str1)
+{
+  if (list == null) return -1;
+
+  var zlist = list.split('|');
+  var mc = -1;
+  for(var i=0; i<zlist.length; i++) {
+    if (zlist[i] == str0) return 0;
+    if (zlist[i] == str1) mc=1;
+  }
+  return mc;
+}
+
+//===========================================
+// Lookup Zone Match for airport + country
+// Searches airport+country at same time
+//===========================================
+function findzone2(program, airport, country)
+{
+  var zmap = zonemap[program];
+
+  if (zmap == null) {
+    return -1;
+  }
+  var mc = -1;
+  for(var i=0; i<zmap.length; i++) {
+    var rc = matchlist2(zmap[i], airport, country);
+    if (rc == 0) {
+      return i; // found airport match, we're done
+    }
+    else if (rc == 1) {
+      mc = i;   // found country match, keep searching
+    }
+  }
+  return mc;
+}
+
+//=================================================
+// Determine which zone an airport is located in
+//=================================================
+function findzone(program, airport)
+{
+  var fa = airport.toUpperCase();
+
+  return findzone2(program, fa, find_country(fa));
+}
+
+//===============================
+// Check special case zone maps
+//===============================
+function check_special(zm, from, fz, to, tz)
+{
+  var fc = find_country(from);
+  var tc = find_country(to);
+
+  // Zones must match?
+  if (fz != tz) return 0;
+
+  if (zm == null) return 0;
+  if (zm[0] == -10) {
+    /* Match single country only */
+    if (fc != tc) return 0;
+    if (matchlist(zm[1], fc) == -1) {
+      return 0;
+    }
+    return 1;
+  }
+  if (zm[0] == -11) {
+    /* Match either country */
+    if (matchlist2(zm[1], from, fc) == -1) {
+      return 0;
+    }
+    if (matchlist2(zm[1], to, tc) == -1) {
+      return 0;
+    }
+    return 1;
+  }
+  return 0;
+}
+
+//=======================================
+// Scans zones for a particular program
+//=======================================
+function scanzone(from, to, program, scale)
+{
+  var fz = findzone(program, from);
+  var tz = findzone(program, to);
+  var am = awardmap[program];
+  var air = getpartners(fz, tz, program);
+
+  if (fz < 0 || tz < 0 || am == null) {
+    return;
+  }
+  /* Scan for special cases */
+  for(var i=0; i<am.length; i++) {
+    if (check_special(am[i], from, fz, to, tz)) {
+      add_award(am[i][2]*scale,am[i][3]*scale,am[i][4]*scale,program+"____SPECIAL (" + am[i][1] + ")");
+    }
+  }
+
+  /* Ok.. we have a zone for both city pairs - lookup award values */
+  for(var i=0; i<am.length; i++) {
+    var amap = am[i];
+    if (amap == null) continue;
+
+    /* Check each entry in the award map for a from<->to match */
+    if ((amap[0] == fz && amap[1] == tz) ||(amap[1] == fz && amap[0] == tz))
+    {
+      descr = program + "____zone:("+fz+" & "+tz + ") : ";
+      if (amap[5] != null) descr += amap[5];
+
+      /* Found an award!!!! */
+      add_award(amap[2]*scale,amap[3]*scale,amap[4]*scale,descr, air, calcdist(from, to));
+    }
+  }
+}
+
+function scanzones(from, to, index, type)
+{
+  if ((type & 2) && index) return;
+
+  for(var i=0; i<dist_award_zones.length; i++) {
+    var dz = dist_award_zones[i];
+    if ((dz[0] & type) == type) {
+      scanzone(from, to, dz[3], dz[1]);
+    }
+  }
+}
+
+//==============================================
+// Sorting functions - sort awards by cabin
+//==============================================
+function order(a,b)
+{
+  if (isNaN(a) && !isNaN(b)) return -1;
+  if (isNaN(b) && !isNaN(a)) return 1;
+
+  if (a < b) return -1;
+  if (a > b) return 1;
+  return 0;
+}
+function sorty(a,b)   { return order(a[0],b[0]); }
+function sortj(a,b)   { return order(a[1],b[1]); }
+function sortf(a,b)   { return order(a[2],b[2]); }
+function sorta(a,b)   { return order(a[3],b[3]); }
+function sortm(a,b)   { return order(a[5],b[5]); }
+function sortdsc(a,b) { return order(a[4],b[4]); }
+
+function sortme(proc)
+{
+  award_tab.sort(proc);
+  show_awards(1);
+}
+
+//==========================================
+// Keep track of awards
+//==========================================
+var naward = 0;
+var award_tab = new Array();
+
+function clear_awards()
+{
+  naward = 0;
+  award_tab.length = 0;
+}
+
+//============================
+// Add an award to the array
+//============================
+function add_award(y,j,f,descr, airline, dist)
+{
+  if (y == "") {
+    return;
+  }
+  if (airline == null) {
+    airline="";
+  }
+  award_tab[naward] = [ y, j, f, airline, descr, dist ];
+  naward++;
+}
+
+function tdstr(val)
+{
+  return "<td" + (val < 0 ? " class=gray" : "") + ">" + Math.abs(val) + "</td>";
+}
+
+//======================
+// Display award table
+//======================
+function show_awards(sumit)
+{
+  var award = findElement('awardarea');
+  var ny=0;
+  var nj=0;
+  var nf=0;
+  var nd=0;
+
+  if (naward == 0) {
+    return;
+  }
+  /* Nice: Add ability to sort awards */
+  var tstr = "<table border=1><td><table>";
+  tstr += "<th onclick='javascript:sortme(sorty);'>econ</th>";
+  tstr += "<th onclick='javascript:sortme(sortj);'>biz</th>";
+  tstr += "<th onclick='javascript:sortme(sortf);'>first</th>";
+  tstr += "<th onclick='javascript:sortme(sorta);'>Airlines</th>";
+  tstr += "<th onclick='javascript:sortme(sortm);'>Distance</th>";
+  tstr += "<th onclick='javascript:sortme(sortdsc);'>Description</th>";
+  for(var i=0; i<naward; i++) {
+    var tc = tblcolor[i % 2];
+    tstr += "<tr class=" + tc + ">";
+
+    ny += Math.abs(award_tab[i][0]);
+    nj += Math.abs(award_tab[i][1]);
+    nf += Math.abs(award_tab[i][2]);
+    nd += award_tab[i][5];
+
+    tstr += tdstr(award_tab[i][0]);
+    tstr += tdstr(award_tab[i][1]);
+    tstr += tdstr(award_tab[i][2]);
+
+    tstr += "<td>" + award_tab[i][3] + "</td>";
+    tstr += "<td>" + award_tab[i][5] + "</td>";
+    tstr += "<td>" + award_tab[i][4] + "</td>";
+
+    tstr += "</tr>";
+  }
+  if (sumit) {
+    tstr += "<tr><td>" + ny + "</td><td>" + nj + "</td><td>" + nf + "</td><td>&nbsp;</td><td>"+nd+"</td></tr>";
+  }
+  tstr += "</table></td></table>";
+  award.innerHTML = tstr;
+}
+
+var routes = new Array;
+var nroute = 0;
+
+function sortrt(proc, index) {
+  routes.sort(function(a,b) { return order(a[index], b[index]); });
+  show_routes();
+}
+
+function clear_route()
+{
+  nroute = 0;
+  routes.length = 0;
+}
+
+function add_route(route,da,db)
+{
+  routes[nroute++] = [ route, da, db, da+db ];
+}
+
+function show_routes()
+{
+  var route = findElement('routearea');
+
+  if (nroute == 0) {
+    return;
+  }
+
+  /* Nice: Add ability to sort awards */
+  var tstr = "<table border=1><td><table>";
+  tstr += "<th onclick='javascript:sortrt(sortrt,0);'>Route</th>";
+  tstr += "<th onclick='javascript:sortrt(sortrt,1);'>Distance A-B</th>";
+  tstr += "<th onclick='javascript:sortrt(sortrt,2);'>Distance B-C</th>";
+  tstr += "<th onclick='javascript:sortrt(sortrt,3);'>Distance A-B-C</th>";
+  for(var i=0; i<nroute; i++) {
+    var tc = tblcolor[i % 2];
+    tstr += "<tr class=" + tc + ">";
+
+    tstr += "<td>" + routes[i][0] + "</td>";
+    tstr += "<td>" + routes[i][1] + "</td>";
+    tstr += "<td>" + routes[i][2] + "</td>";
+    tstr += "<td>" + routes[i][3] + "</td>";
+    tstr += "</tr>";
+  }
+  tstr += "</table></td></table>";
+  route.innerHTML = tstr;
+}
+
+
+//===============================
+// Get synonym list for a city
+//===============================
+function get_synlist(apt)
+{
+  if (citysyns[apt] == null) {
+    return [ apt ];
+  }
+  return citysyns[apt].split('|');
+}
+
+//=====================================================
+// Checks if a flight exists A->B on certain airlines
+//=====================================================
+function flight_exists(from, to, airlines, max_cnx)
+{
+  var fsi = get_synlist(from);
+  var tsi = get_synlist(to);
+
+  /* Search synonyms for flight */
+  for(var i=0; i<fsi.length; i++) {
+    for(var j=0; j<tsi.length; j++) {
+      str = fsi[i] + "-" + tsi[j];
+      if (flight[str] != null) {
+        /* Flight exists.. return actual cities of flight segment */
+        return str;
+      }
+    }
+  }
+  return 0;
+}
+
+//=====================================================
+// Validate that the city codes exist in the database
+//=====================================================
+function validate(cities)
+{
+  for(var i=0; i<cities.length; i++) {
+    var cfr = cities[i];
+    if (cfr == "") {
+      alert("Please enter a city");
+      return 0;
+    }
+    if (citycodes[cfr] == null) {
+      alert("Unknown city: " + cfr);
+      return 0;
+    }
+  }
+  return 1;
+}
+
+//=====================================================
+// Display routing A->B,B->C,etc with distances
+//=====================================================
+function showtrip(cities,type)
+{
+  var tbl   = findElement('tablearea');
+  var tdist = 0;
+
+  clearall();
+
+  // Validate list of cities
+  if (!validate(cities)) {
+    return -1;
+  }
+
+  /* Display distances between cities */
+  var tstr = "<table border=1><td><table><th>From</th><th>To</th><th>Distance</th>";
+  for (i=0; i<cities.length-1; i++) {
+    var cfr = cities[i];
+    var cto = cities[i+1];
+
+    var dist = calcdist(cfr, cto);
+    tdist += dist;
+
+    tstr += "<tr class=" + tblcolor[i % 2] + "><td width=60>" + cfr + "</td><td width=60>" + cto + "</td><td>" + dist + "</td></tr>"
+    scanzones(cfr, cto, i, type);
+  }
+  tstr += "<tr><td colspan=2>Total</td><td><b>" + tdist + "</b></td></table></td></table>";
+  tbl.innerHTML = tstr;
+
+
+  /* --== Display all distance-based awards ==-- */
+  for(var i=0; i<dist_award_zones.length; i++) {
+    var dz = dist_award_zones[i];
+    if (!(dz[0] & fZN)) continue;
+
+    if ((dz[0] & type) == type) {
+      showdist_award(dz[3], dz[1], tdist * dz[2]);
+    }
+  }
+  if (type & fOW) {
+    clear_route();
+    for(var fl in flight) {
+      var fi = fl.split('-');
+      var ffr = fi[0];
+      var fto = fi[1];
+
+      if (cfr == ffr) {
+        var str = fto + "-" + cto;
+        if (flight[str] != null) {
+           add_route(fl+","+str, calcdist(cfr,fto), calcdist(fto,cto));
+        }
+      }
+    }
+  }
+  show_routes();
+  show_awards(0);
+  sethelp(help0);
+
+  return tdist;
+}
+
+// merge unique values in s2 into s1
+function smerge(s1,s2)
+{
+  var ns1 = "";
+
+  if (s2 == null) return "";
+  var ss2 = s2.split('|');
+  if (ss2 == null) return "";
+
+  for(var i=0; i<ss2.length; i++) {
+    if (ss2[i] == null) continue;
+
+    var st = s1 + ns1;
+    if (st.match(ss2[i]) == null) {
+      ns1 += "|" + ss2[i];
+    }
+  }
+  return ns1;
+}
+
+//===========================================
+// Determine valid partners for given zones
+//===========================================
+function progmatch(z,i)
+{
+  if (z == -1) return 1;
+  return (z == i);
+}
+
+function getpartners(fz,tz,program)
+{
+  var pm = partnermap[program];
+  if (pm == null) return "";
+  var plist = "";
+
+  for(var i=0; i<pm.length; i++) {
+    var pi = pm[i];
+    if (pi == null) continue;
+
+    //===========================================
+    // Merge airlines if different zones match
+    if ((progmatch(pi[0], fz) && progmatch(pi[1], tz)) ||
+        (progmatch(pi[1], fz) && progmatch(pi[0], tz)))
+    {
+      plist += smerge(plist, pi[2]);
+    }
+  }
+  return plist;
+}
+
+function showdist_award(program, scale, dist)
+{
+  try {
+    var air = getpartners(-1,-1,program);
+    var m = findmap(distmap[program], dist);
+     if (m != null) {
+      add_award(m[1]*scale,m[2]*scale,m[3]*scale,program,air,dist);
+    }
+  }
+  catch(e){
+  }
+}
+
+function getcitylist(id)
+{
+  var citylist = getTextValue(id);
+  var cities = new Array;
+  var ncities = 0;
+
+  setmap(citylist);
+
+  var bob = citylist.split(',');
+  for(var i=0; i<bob.length; i++) {
+    var bc = bob[i].split('-');
+    if (!validate(bc)) return null;
+    for(var j=0; j<bc.length-1; j++) {
+      cities[ncities++] = [ bc[j], bc[j+1] ];
+    }
+  }
+  return cities;
+}
+
+//=============================
+// Show one-way awards
+//=============================
+function showow()
+{
+  var from   = getTextValue('owfrom');
+  var to     = getTextValue('owto');
+  var cities = [ from, to ];
+
+  // Scan distance-based awards
+  showtrip(cities, fOW);
+  setmap(from+"-"+to);
+}
+
+//=============================
+// Show Round-Trip awards
+//=============================
+function showrt()
+{
+  var from   = getTextValue('rtfrom');
+  var to     = getTextValue('rtto');
+  var cities = [ from, to, from ];
+
+  // Scan distance-based awards
+  showtrip(cities, fRT);
+  setmap(from+"-"+to);
+}
+
+//=============================
+// Show point-to-point awards
+//=============================
+function showp2p()
+{
+  var citylist = getTextValue('citylist');
+  var cities   = citylist.split("-");
+
+  showtrip(cities, fPP);
+  setmap(citylist);
+}
+
+//=============================
+// Validate Oneworld Explorer
+//=============================
+var owe_count = new Array;
+
+/* Match airport/country in rule list */
+function matchrule(acode, ccode, rule)
+{
+  var rc = matchlist2(rule, acode, ccode);
+
+  return (rc == -1) ? 0 : 1;
+}
+
+//==========================================
+// Convert number to ordinal string
+// eg. 1 -> 1st, 2 -> 2nd, 13 -> 13th, etc
+//==========================================
+function numstr(num)
+{
+  var str = num;
+  var sfx = 'th';
+
+  num %= 100;
+  if (num < 10 || num > 13) {
+    num %= 10;
+    if (num == 1)      sfx = 'st';
+    else if (num == 2) sfx = 'nd';
+    else if (num == 3) sfx = 'rd';
+  }
+  return str + sfx;
+}
+
+var owe_flag;
+
+function check_owe_rules(from, to, seg)
+{
+  var fc = find_country(from);
+  var tc = find_country(to);
+  var pfx = "";
+
+  seg++;
+  //addlog("checkrule: from:" + fc + ":" + from + " to:" + tc + ":" + to);
+  for(var i=0; i<owe_rulemap.length; i++) {
+    if (owe_rulemap[i] == null) continue;
+
+    var omap   = owe_rulemap[i];
+    var flag   = omap[0];
+    var frule  = omap[1];
+    var trule  = omap[2];
+    var ocount = omap[3];
+    var odesc  = omap[4];
+    var a = 0;
+    var b = 0;
+    var rc = 0;
+
+    if (flag & 1) {
+      /* Check if rule matches from -> to */
+      a = matchrule(from, fc, frule);
+      b = matchrule(to, tc, trule);
+      if (a && b) rc=1;
+    }
+    if (flag & 2) {
+      /* Check if rule matches to <- from */
+      a = matchrule(from, fc, trule);
+      b = matchrule(to, tc, frule);
+      if (a && b) rc=1;
+    }
+    if (flag & 4) {
+      /* Check if rule matches from && !to */
+      a = matchrule(from, fc, frule);
+      b = !matchrule(to, tc, frule);
+      if (a && b) rc=1;
+    }
+    if (rc == 1) {
+      owe_count[i]++;
+      owe_flag |= flag;
+
+      /* Add to log, display index #, route, description */
+      if (flag & 0x10) {
+        addlog(pfx+seg + ": " + from + "-" + to + ": " + numstr(owe_count[i]) + " of " + ocount + " (" + odesc + ")");
+        pfx="*";
+      }
+      /* Rule violated... stop processing */
+      if (owe_count[i] > ocount) {
+        return i;
+      }
+    }
+  }
+  if (pfx == "") {
+    addlog(seg + ": " + from + "-" + to + ": intercontinental");
+  }
+  return -1;
+}
+
+/*=====================================================
+ * Validate OWE start/end rules
+ * Must start or end within the same country or region
+ *=====================================================*/
+function check_owe_endrules(from,to)
+{
+  var fc = find_country(from);
+  var tc = find_country(to);
+
+  /* Setup first rule: start/end in same country */
+  owe_end_rules[0] = fc;
+
+  for(var i=0; i<owe_end_rules.length; i++) {
+    var a = matchlist2(owe_end_rules[i], from, fc);
+    var b = matchlist2(owe_end_rules[i], to, tc);
+
+    // Itinerary start/end are in same region
+    if (a >= 0 && b >= 0) {
+      return 1;
+    }
+  }
+  return 0;
+}
+
+//=========================================
+// Return 'equivalent' countries
+//=========================================
+function map_country(apt)
+{
+  var fc = find_country(apt);
+  if (matchlist("us|ca|pr|vi", fc) >= 0) return "us|ca|pr|vi";
+  if (matchlist("dk|se|no", fc) >= 0)    return "dk|se|no";
+  return fc;
+}
+
+function validateowe()
+{
+  var tdist = 0;
+  var dist;
+
+  clearall();
+  setearn();
+
+  /* build list of cities - allow open jaws like: lhr-jfk,dfw-syd etc*/
+  var cities = getcitylist('owecitylist');
+  if (cities == null) {
+    return -1;
+  }
+
+/* Validate total count of segments */
+  if (cities.length > 20) {
+    addlog("<b>Rule violated!!! Maximum segment length is 20!</b>");
+    return -1;
+  }
+
+  /* Reset rule error count */
+  owe_flag = 0;
+  for(var i=0; i<owe_rulemap.length; i++) {
+    owe_count[i] = 0;
+  }
+
+  /* Setup fixup for rules - no transit of original point or country */
+  owe_rulemap[0][1] = cities[0][0];
+  owe_rulemap[1][1] = map_country(cities[0][0]);
+
+  /* --== Validate rules for each city pair.. ==-- */
+  for(var i=0; i<cities.length; i++) {
+    var badrule = check_owe_rules(cities[i][0], cities[i][1], i);
+    if (badrule >= 0) {
+      addlog("<b>Rule violated!!!! [" + cities[i][0] + "-" + cities[i][1] + "] Max " + owe_rulemap[badrule][3] +" segment(s): " + owe_rulemap[badrule][4] + "</b>");
+      return -1;
+    }
+
+    /* Check if flight exists A->B */
+    flt = flight_exists(cities[i][0], cities[i][1], "AA|BA|CX|AY|IB|QF|LA|EI", 0);
+    if (flt == 0) {
+      addlog("<b>Error!!! No oneworld service exists " + cities[i][0] + "-" + cities[i][1]);
+      return -1;
+    }
+
+    /* Calculate distance A->B and # of Qantas SC's earned */
+    dist = calcdist(cities[i][0], cities[i][1]);
+    var eamap = earn_mapper(earn_map, dist);
+    if (eamap != null) {
+      var s = find_owe_continent(cities[i][0])+"-"+find_owe_continent(cities[i][1]);
+      add_award(eamap[1],eamap[3],eamap[4], flt, s, dist);
+    }
+    tdist += dist;
+  }
+
+  /* Ok.. routing is valid.. check end rules here
+   *   Must start/end in same region
+   *   Must cross both atlantic/pacific (eg: tc1-tc2 == 1, tc3-tc1 == 1)
+   *     bleh.. hardcoded index for tc rules is bad
+   */
+  if (!(owe_flag & 0x20)) {
+    addlog("<b>Rule violated!!! Must cross Atlantic!</b>");
+    return -1;
+  }
+  if (!(owe_flag & 0x40)) {
+    addlog("<b>Rule violated!!! Must cross Pacific!</b>");
+    return -1;
+  }
+  if (!check_owe_endrules(cities[0][0], cities[cities.length-1][1])) {
+    addlog("<b>Rule violated!!! Must start/end in same region/country!</b>");
+    return -1;
+  }
+
+  /* Success!! */
+  addlog("<h1>Congratulations!! Valid itinerary!!! - (" + tdist + " miles)</h1>");
+  sethelp(earn_help);
+  show_awards(1);
+}
+
+function valid_field(str)
+{
+  if (str == "") {
+    return str;
+  }
+  if (str.length == 2) {
+    /* value is a country code.. convert to lowercase */
+    return str.toLowerCase();
+  }
+  if (str.length == 3) {
+    /* Check if city name is not valid */
+    if (!validate([ str ])) return -1;
+    return str;
+  }
+  if (str.length == 4) {
+    /* Value is a continent code */
+    str = str.toLowerCase();
+    if (str == "~nam") return str;
+    if (str == "~sam") return str;
+    if (str == "~afr") return str;
+    if (str == "~eur") return str;
+    if (str == "~swp") return str;
+    if (str == "~asa") return str;
+    alert("Unknown continent: "+str+"\nUse one of:~nam|~sam|~afr|~eur|~swp|~asa");
+  }
+  return -1;
+}
+
+function matchlone(code, fi)
+{
+  var cc = find_country(fi);
+  var tc = find_owe_continent(fi);
+
+  /* Input: code == blank, match anything
+   *        code == two characters, match country
+   *        code == three characters = match airport
+   *        code == four characters = match continent
+   */
+  fi = fi.toUpperCase();
+  if (code == "") return 1;
+  if (code.length == 2 && code == cc) return 1;
+  if (code.length == 4 && code == tc) return 1;
+
+  /* Didn't match country.. check synonyms */
+  var fsi = new Array;
+  fsi = get_synlist(code);
+  for (var i=0; i<fsi.length; i++) {
+    if (fi == fsi[i]) return 1;
+  }
+  return 0;
+}
+
+/* List all routes from A->XXX or XXX->B */
+function oweplanner()
+{
+  var from = getTextValue('owplanfrom');
+  var to   = getTextValue('owplanto');
+  var migt = getTextValue('owplangt');
+  var milt = getTextValue('owplanlt');
+
+  clearall();
+  setearn();
+  sethelp("Click on table header to sort contents");
+
+  /* --== Check input values ==-- */
+  if (from == "" && to == "" && migt == "" && milt == "") {
+    alert("Please enter a value\n");
+    return -1;
+  }
+
+  var count = 0;
+
+  /* Support searching for country */
+  from = valid_field(from);
+  to   = valid_field(to);
+  if (from < 0 || to < 0) {
+    return -1;
+  }
+
+  /* --== Loop through flights and match ==-- */
+  for(var fl in flight) {
+    fi = fl.split('-');
+    if (matchlone(from, fi[0])) {
+      if (matchlone(to, fi[1])) {
+
+	/* Found a matching flight... check distance, add to list */
+	var d = calcdist(fi[0],fi[1]);
+
+	/* Check if out of mile range */
+        if ((migt > 0) && (d < migt)) continue;
+        if ((milt > 0) && (d > milt)) continue;
+
+	var emap = earn_mapper(earn_map, d);
+	if (emap != null) {
+	  add_award(emap[1],emap[3],emap[4],fl,"",d);
+	}
+	count++;
+      }
+    }
+  }
+  if (count == 0) {
+    alert("No flights found");
+  }
+  else {
+    show_awards(0);
+  }
+}
+function awardhelp()
+{
+  alert("These functions are used to help plan your award itinerary");
+}
+function owehelp()
+{
+  alert("This function tests if a OWE itinerary is valid. Enter a list of cities, eg. LHR-JFK-SYD-LHR.  You may also use open jaws, eg. LHR-LAX,JFK-SYD,MEL-LHR");
+}
+function oweplanhelp()
+{
+  alert("This function can be used to help plan your OWE itinerary.\n"+
+	"You may display all flights from/to a city by leaving one of the fields blank. eg. to display all flights from CMH, select CMH in the From: field, and leave To: blank.\n"+
+	"You may test if a flight exists between two cities by specifying a value in both From: and To: fields.\n"+
+	"You may display all flights to/from a country by specifying a country code instead of an airport code (eg. gr for Greece, gb for Great Britain, etc).\n"+
+	"   Warning- can be very slow if 'us' is selected!\n"+
+	"You may specify continents by using one of the following: ~nam|~sam|~eur|~afr|~asa|~swp\n"+
+	"  for the different OWE regions. (note.. must enter value in From+To otherwise it may be very slow)"+
+	"You may sort the results by clicking on the Miles or Description header\n"+
+        "You may also use an integer in the Greater than/Less than fields\n"+
+        "eg. Show all flights under 900 miles from SCL: From:SCL Less than:900\n"+
+        "Show all flights over 900 miles from SCL: From:SCL Greater than:900");
+}
+
+</script>
+
+<meta content="MSHTML 6.00.2800.1476" name="GENERATOR"></head>
+
+<body>
+<p>
+<hr>
+<table border=1 bgcolor="#ffff00"><tr><td><font size="+2">Note - this is an archived copy of the tool, loaded into place by <a href="http://www.flyertalk.com/forum/private.php?do=newpm&u=41952" target="_blank">SLF</a>.</font><br>  I believe this to be a true copy of the original, but
+I've had to recover it and there is the possibility that I may have made a mistake.
+Please double-check anything which this version of the tool reports.  Note also that this version was dated around June 2005, so does not reflect any changes to the rules, or new/old destinations since that time.<br>
+<a href="http://jph.bytestacker.com/award.htm" target="_blank">The original site</a> should be checked periodically
+to see if the tool has been reloaded there.
+
+<br>Page counter:
+<!-- Start of StatCounter Code -->
+<script type="text/javascript" language="javascript">
+var sc_project=1591770;
+var sc_invisible=0;
+var sc_partition=14;
+var sc_security="8a1a2dc0";
+</script>
+
+<script type="text/javascript" language="javascript" src="http://www.statcounter.com/counter/counter.js"></script><noscript><a href="http://www.statcounter.com/" target="_blank"><img  src="http://c15.statcounter.com/counter.php?sc_project=1591770&java=0&security=8a1a2dc0&invisible=0" alt="hitcounter" border="0"></a> </noscript>
+<!-- End of StatCounter Code -->
+
+</td></tr></table>
+<p><hr>
+MileageMonkey v0.9
+<p>This utility will calculate the # of miles needed for a Frequent Flyer award
+</p><p>
+</p><p>Questions/comments: <a href="mailto:jordan_hargrave%3Cdelete%20me%20nospam%3E@hotmail.com">jordan_hargrave
+AT hotmail.com</a></p>
+<table border="1">
+  <tbody>
+  <tr>
+    <th class="award">Earning Preference</th>
+    <td colspan="4"><input id="earn" checked="checked" value="qfold" name="earn" type="radio">Qantas status credits (pre-May 25,2005)<br>
+                  <input id="earn" value="qfnew" name="earn" type="radio">Qantas status credits (post May 25,2005)<br>
+                  <input id="earn" value="ba" name="earn" type="radio">British Airways tier points<br>
+                  <input id="earn" value="aa" name="earn" type="radio">AAdvantage miles (PLT/EXP)</td>
+    <td rowspan="6">Maps generated by the <a href="http://gc.kls2.com/">Great Circle Mapper</a>&nbsp;- copyright © <a href="http://www.kls2.com/%7Ekarl/">Karl L. Swartz</a>.<br>
+        <iframe id="maparea" name="maparea" src="" frameborder="0" height="500" width="510">Go Away</iframe>
+    </td>
+  </tr><tr>
+    <th class="award">One-Way</th>
+    <td>From:<input id="owfrom" size="3" name="owfrom"></td>
+    <td>To:<input id="owto" size="3" name="owto"></td>
+    <td><input onclick="javascript:showow(); return false;" value="Submit" type="submit"></td>
+    <td rowspan="3"><input onclick="javascript:awardhelp();" value="Help" type="submit"></td></tr>
+  <tr>
+    <th class="award">Round-Trip</th>
+    <td>From:<input id="rtfrom" size="3" name="rtfrom"></td>
+    <td>To:<input id="rtto" size="3" name="rtto"></td>
+    <td><input onclick="javascript:showrt(); return false;" value="Submit" type="submit"></td></tr>
+  <tr>
+    <th class="award">Point-to-Point</th>
+    <td colspan="2">Enter list of airports:<br>eg: lhr-jfk-lax-syd-hkg-lhr<br><textarea id="citylist" rows="5" cols="25"></textarea></td>
+    <td><input onclick="javascript:showp2p();" value="Submit" type="submit"></td></tr>
+  <tr>
+    <th class="award">Oneworld Explorer Validator</th>
+    <td colspan="2">Enter list of airports:<br>eg:
+      lhr-jfk-lax-syd,mel-hkg-lhr<br><textarea id="owecitylist" rows="5" cols="25"></textarea></td>
+    <td><input onclick="javascript:validateowe();" value="Submit" type="submit"></td>
+    <td><input onclick="javascript:owehelp();" value="Help" type="submit"></td></tr>
+  <tr>
+    <th class="award">OWE Planner</th>
+    <td colspan="2"><table border="0" cellpadding="0" cellspacing="0">
+        <tbody><tr><td>Greater than X miles:</td><td><input id="owplangt" size="4"></td></tr>
+        <tr><td>Less than X miles:</td><td><input id="owplanlt" size="4"></td></tr>
+	<tr><td>From:</td><td><input id="owplanfrom" size="4"></td></tr>
+	<tr><td>To:</td><td><input id="owplanto" size="4"></td></tr>
+	</tbody></table>
+    </td><td><input onclick="javascript:oweplanner();" value="Submit" type="submit"></td>
+    <td><input onclick="javascript:oweplanhelp();" value="Help" type="submit"></td></tr>
+    </tbody></table>
+<p>
+</p><div id="logarea"></div>
+<div id="tablearea"></div>
+<p>
+</p><div id="helparea"></div>
+<div id="awardarea"></div>
+<p>
+</p><div id="routearea"></div>
+<p></p></body></html>
