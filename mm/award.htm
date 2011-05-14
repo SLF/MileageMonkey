@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html><head><!-- saved from url=(0036)http://jph.bytestacker.com/award.htm -->
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>MileageMonkey 0.95003</title>
+<title>MileageMonkey 0.95004</title>
 <style>
 TABLE {
         FONT-FAMILY: sans-serif ; font-size: 8pt
@@ -1032,6 +1032,7 @@ function validateowe()
   addlog("<h1>Congratulations!! Valid itinerary!!! - (" + tdist + " miles)</h1>");
   sethelp(earn_help);
   show_awards(1);
+  return 0;
 }
 
 function valid_field(str)
@@ -1140,6 +1141,7 @@ function oweplanner()
   else {
     show_awards(0);
   }
+  return 0;
 }
 function awardhelp()
 {
@@ -1147,7 +1149,14 @@ function awardhelp()
 }
 function owehelp()
 {
-  alert("This function tests if a OWE itinerary is valid. Enter a list of cities, eg. LHR-JFK-SYD-LHR.  You may also use open jaws, eg. LHR-LAX,JFK-SYD,MEL-LHR");
+  alert("This function tests if a OWE itinerary is valid. Enter a list of cities, eg. LHR-JFK-SYD-LHR." +
+  	"You may also use open jaws, eg. LHR-LAX,JFK-SYD,MEL-LHR\n\n" +
+  	"Other syntax options permitted are\n* whitespace (spaces, tabs, line breaks) is ignored\n* '//' " +
+  	"may be used to designate a surface sector in addition to ','\n"+
+  	"* '-xAAA' may be used to indicate a transit at AAA (this is ignored by the tool but is useful for your planning purposes)\n" +
+  	"* '-oAAA' may be used to indicate a stopover at AAA (this is ignored by the tool but is useful for your planning purposes)\n" +
+  	"\nThus, another valid itinerary is:  CAI-oLHR//LGW-xMCO-oMIA-  oSFO   ,LAX-oHKG-LHR-DXB"
+  	);
 }
 function oweplanhelp()
 {
@@ -1178,30 +1187,37 @@ function toggleLayer(whichLayer)
 <body>
 <p>
 <hr>
-<table border=1 bgcolor="#ffff00"><tr><td><font size="+2">Note - this is an archived copy of the tool, loaded into place by <a href="http://www.flyertalk.com/forum/private.php?do=newpm&u=41952" target="_blank">SLF</a>.</font><br>
-This version was never issued by JPH.  This version is based on 0.9, but various
+<table border=1 bgcolor="#ffff00"><tr><td><font size="+1">This is an updated version of the tool,</font> loaded into place by <a href="http://www.flyertalk.com/forum/private.php?do=newpm&u=41952" target="_blank">SLF</a>.<br>
+This version was never issued by JPH.  This version is based on <a href="http://slfft.allhyper.com/0.9/award.htm">0.9</a>, but various
 <a href="javascript:toggleLayer('changes');" title="">changes</a>
 have been made by FTers to
 bring it more up to date with current schedules/rules.
 
 <div id="changes" style="display: none">
 <ul>
-<li><b>v0.95003 (2006/08/22):</b>
+<li><u><b>v0.95004 (2006/08/25):</b></u>
+<li>Replaced flights database with new version from OW timetable - supplied by <b>hauteboy</b> (thanks!) and merged in
+	by <b>SLF</b>.  In case of difficulty with this version,
+	<a href="award95003.htm">the 0.95003 version can be accessed here</a>, however I'd appreciate reports of
+	problems - please post these on <a href="http://www.flyertalk.com/forum/showthread.php?p=5822073#post5822073" target="_blank">the FT thread.</a>
+<li>Expanded "Help" info for OWE Validator section
+<li>Fixed a couple of minor Javascript warnings (functions with no return value, undeclared citycode variable)
+<li><u><b>v0.95003 (2006/08/22):</b></u>
 <li>Corrected QF SC earning from 45 to 35 for discount economy, zone 6 (4801-5800 miles), <a
 	href="http://www.qantas.com.au/fflyer/dyn/program/privileges#jump1" target="_blank">as per
 	QF</a> (thanks <b>mrboh</b>)
 <li>Added ESB-LHR (thanks <b>MiamiBeach</b>)
 <li>Added DRW-BOM (thanks <b>ReelChief</b>)
-<li><b>v0.95002 (2006/08/15):</b>
+<li><u><b>v0.95002 (2006/08/15):</b></u>
 <li>Added cookie to remember f/f program earning preference
-<li><b>v0.95001 (2006/08/15):</b>
+<li><u><b>v0.95001 (2006/08/15):</b></u>
 <li>For the OWE validator section, now ignores any spaces in the route (previously it would fall
 	over if a space was included)
 <li>For the OWE validator section, permit "//" in addition to "," indicating a surface sector
 <li>For the OWE validator section, permit -xXXX and -oXXX to indicate transit/stopover
 	(note: this information	is discarded, i.e. no checks are made whether the number of
 	stopovers is legal - this could be a future enhancement)
-<li><b>v0.95:</b>
+<li><u><b>v0.95:</b></u>
 <li>Added DFW-ANC (thanks <b>Viajero</b>)
 <li>Added MEL to restricted list (CNS/BNE/SYD) of transcons to PER
 <li>Added MEL/SYD restriction to BME
@@ -1243,12 +1259,11 @@ var sc_security="b9b2dc33";
 
 </td></tr></table>
 <p><hr>
-MileageMonkey v0.95003 (based on JPH's 0.9 with additions by various FTers)
+MileageMonkey v0.95004 (based on <a href="http://slfft.allhyper.com/0.9/award.htm">JPH's 0.9</a> with additions by various FTers)
 <p>This utility will calculate the # of miles needed for a Frequent Flyer award
 </p><p>
 </p><p>Questions/comments: <a href="mailto:jordan_hargrave%3Cdelete%20me%20nospam%3E@hotmail.com">jordan_hargrave
-AT hotmail.com</a>
-<br><em>See also <a href="http://www.flyertalk.com/forum/showthread.php?p=5822073#post5822073" target="_blank">this thread on FlyerTalk</a> where modifications to this tool have been discussed.  Please bear in
+AT hotmail.com</a>.  <em>See also <a href="http://www.flyertalk.com/forum/showthread.php?p=5822073#post5822073" target="_blank">this thread on FlyerTalk</a> where modifications to this tool have been discussed.  Please bear in
 mind if contacting the author, that he may have no knowledge of the modifications in this particular version.</em>
 </p>
 <table border="1">
