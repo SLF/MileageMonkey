@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>MileageMonkey 0.95009</title>
+<title>MileageMonkey 0.95010</title>
 <style>
 TABLE {
         FONT-FAMILY: sans-serif ; font-size: 8pt
@@ -836,8 +836,6 @@ function showdist_award(program, scale, dist)
 function getcitylist(id)
 {
   var citylist = getTextValue(id);
-  var cities = new Array;
-  var ncities = 0;
 
 // remove any whitespace in the route, as that confuses things
   citylist = citylist.replace(/\s/g, "");
@@ -846,6 +844,13 @@ function getcitylist(id)
 // permit -xXXX and -oXXX to indicate transit/stopover
   citylist = citylist.replace(/\-[oxOX](\w\w\w)/g, "-$1");
 
+  return citylist;
+}
+
+function parseCityList(citylist)
+{
+  var cities = new Array;
+  var ncities = 0;
 
   setmap(citylist);
 
@@ -1038,7 +1043,12 @@ function validateowe()
   setearn();
 
   /* build list of cities - allow open jaws like: lhr-jfk,dfw-syd etc*/
-  var cities = getcitylist('owecitylist');
+  var citylist = getcitylist('owecitylist');
+
+  owelink.innerHTML = '<a href="?owe=' + escape(citylist) + '">Link to this itinerary</a>';
+  showLayer('owelink',1);
+
+  var cities = parseCityList(citylist);
   if (cities == null) {
     return -1;
   }
@@ -1246,14 +1256,69 @@ function oweplanhelp()
         "Show all flights over 900 miles from SCL: From:SCL Greater than:900");
 }
 
-</script>
-
-<script language="javascript" type="text/javascript">
 function toggleLayer(whichLayer)
 {
   var style2 = findElement(whichLayer).style;
   style2.display = (style2.display == "block") ? "none" : "block";
 }
+function showLayer(whichLayer,shown)
+{
+  var style2 = findElement(whichLayer).style;
+  style2.display = shown ? "block" : "none";
+}
+
+//==================================================================================
+/*  Client-side access to querystring name=value pairs
+	Version 1.2.3
+	22 Jun 2005
+	Adam Vandenberg
+	http://adamv.com/dev/javascript/querystring
+
+	I (SLF) emailed Adam asking about copyright etc.  He replied:
+		Use it in any way you see fit.
+		As far as I’m concerned the code is in the public domain,
+		though I could put an explicit BSD style license on it if you want.
+
+*/
+function Querystring(qs) { // optionally pass a querystring to parse
+	this.params = new Object()
+	this.get=Querystring_get
+
+	if (qs == null)
+		qs=location.search.substring(1,location.search.length)
+
+	if (qs.length == 0) return
+
+// Turn <plus> back to <space>
+// See: http://www.w3.org/TR/REC-html40/interact/forms.html#h-17.13.4.1
+	qs = qs.replace(/\+/g, ' ')
+	var args = qs.split('&') // parse out name/value pairs separated via &
+
+// split out each name=value pair
+	for (var i=0;i<args.length;i++) {
+		var value;
+		var pair = args[i].split('=')
+		var name = unescape(pair[0])
+
+		if (pair.length == 2)
+			value = unescape(pair[1])
+		else
+			value = name
+
+		this.params[name] = value
+	}
+}
+
+function Querystring_get(key, default_) {
+	// This silly looking line changes UNDEFINED to NULL
+	if (default_ == null) default_ = null;
+
+	var value=this.params[key]
+	if (value==null) value=default_;
+
+	return value
+}
+//==================================================================================
 </script>
 </head>
 
@@ -1270,6 +1335,9 @@ bring it more up to date with current schedules/rules.
 <div id="changes" style="display: none">
 Please report any problems on <a href="http://www.flyertalk.com/forum/showthread.php?p=5822073#post5822073" target="_blank">the FT thread.</a>
 <ul>
+<li><u><b>v0.95010 (2007/01/22):</b></u>
+<li>Added "Link to this itinerary" functionality
+<li>Added HEL-DXB & vv. (thanks <b>barking frog</b>)
 <li><u><b>v0.95009 (2007/01/21):</b></u>
 <li>Merged the changes in 0.95008 with JPH's 1.1 code to produce a new version containing the improvements added in each.
 <li>Added Austria (at) to the OWE-Europe list (thanks <b>tt7</b>)
@@ -1349,7 +1417,7 @@ var sc_security="b9b2dc33";
 
 </td></tr></table>
 <P><hr>
-MileageMonkey v0.95009 (based on JPH's <a href="http://slfft.allhyper.com/0.9/award.htm">0.9</a> &amp;
+MileageMonkey v0.95010 (based on JPH's <a href="http://slfft.allhyper.com/0.9/award.htm">0.9</a> &amp;
 <a href="http://slfft.allhyper.com/1.1/award.htm">1.1</a> with additions suggested by various FTers)
 <p>This utility will calculate the # of miles needed for a Frequent Flyer award
 </p><p>
@@ -1391,9 +1459,13 @@ modifications made in this particular version.</em>
    <TR>
     <TH class=award>Oneworld Explorer Validator</TH>
     <TD colSpan=2>Enter list of airports:<BR>eg:
-      lhr-jfk-lax-syd,mel-hkg-lhr<BR><TEXTAREA wrap=soft id=owecitylist rows=5 cols=25></TEXTAREA></TD>
+      lhr-jfk-lax-syd,mel-hkg-lhr<br>
+      <div id="owelink" style="display: none"></div>
+    <TEXTAREA wrap=soft id=owecitylist rows=5 cols=25></TEXTAREA></TD>
     <TD><INPUT onclick=javascript:validateowe(); type=submit value=Submit></TD>
-    <TD><INPUT onclick=javascript:owehelp(); type=submit value=Help></TD></TR>
+    <TD><INPUT onclick=javascript:owehelp(); type=submit value=Help></TD>
+
+  </TR>
   <TR>
     <TH class=award>OWE Planner</TH>
     <TD colspan=2><table border=0 cellspacing=0 cellpadding=0>
@@ -1419,6 +1491,8 @@ modifications made in this particular version.</em>
 <script language="javascript" type="text/javascript">
 // read cookie and set frequent flyer earning program preference
 loadearn();
+var qs = new Querystring();
+owecitylist.innerHTML = qs.get('owe');
 </script>
 
 </body></html>
