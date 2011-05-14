@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>MileageMonkey 0.95015</title>
+<title>MileageMonkey 0.95016</title>
 <style>
 TABLE {
         FONT-FAMILY: sans-serif ; font-size: 8pt
@@ -145,6 +145,7 @@ function clearall()
   findElement('routearea').innerHTML = "";
   findElement('helparea').innerHTML = "";
   findElement('maparea').src = "";
+  findElement('gckls2_url').innerHTML = "";
   findElement('owestatus').innerHTML = "&nbsp;";
   clear_awards();
 }
@@ -155,7 +156,10 @@ function clearall()
 function setmap(route)
 {
   var gcmap = findElement('maparea');
-  window.open("http://gc.kls2.com/cgi-bin/gcmap?PATH="+route+"&PATH-UNITS=mi&RANGE_STYLE=best",'maparea','');
+  var baseurl = "http://gc.kls2.com/cgi-bin/";
+  var opts = "?PATH="+route+"&PATH-UNITS=mi&RANGE_STYLE=best";
+  findElement('gckls2_url').innerHTML = "<a href=\"" + baseurl + "gc" + opts + "\" target=\"_blank\">Click to open GC map in new window</a>";
+  window.open(baseurl + "gcmap" + opts,'maparea','');
 }
 
 function setemap(earnProg, mapper, map, str)
@@ -1050,6 +1054,7 @@ function mapify(apt) {
 function set_gmap(apt) {
 	var lat = citycodes[apt][1];
 	var long = citycodes[apt][2];
+	var countryCode = find_country(apt);
 
 	if ((lat != null) && (long != null) && GBrowserIsCompatible()) {
 		var map = new GMap2(document.getElementById("map_canvas"));
@@ -1074,7 +1079,8 @@ function set_gmap(apt) {
         // to the given index.
         function createMarker(point, airportCode) {
 //          var aptIcon = new GIcon(baseIcon);
-          var aptIcon = new GIcon(G_DEFAULT_ICON);
+			var aptIcon = new GIcon(G_DEFAULT_ICON);
+			var airportCodeLC = airportCode.toLowerCase();
 
           // Set up our GMarkerOptions object
           markerOptions = { icon:aptIcon, title: airportCode };
@@ -1082,10 +1088,16 @@ function set_gmap(apt) {
 
           GEvent.addListener(marker, "click", function() {
             marker.openInfoWindowHtml(
-            	"Location: <b>" + airportCode + "</b><br>" +
-            	"<a href=\"http://www.flightstats.com/go/Airport/airportDetails.do?airportCode=" + airportCode + "\" target=\"_blank\">FlightStats.com</a><br>" +
-            	"<a href=\"http://gc.kls2.com/airport/" + airportCode + "\" target=\"_blank\">gc.kls2.com</a><br>" +
-            	"<a href=\"http://en.wikipedia.org/wiki/" + airportCode + "\" target=\"_blank\">Wikipedia</a><br>"
+            	"Location: <b>" + airportCode + "</b>; Country: <b>" + countryCode + "</b><hr>" +
+            	"Google search: " + airportCode + " + (" +
+            			"<a href=\"http://www.google.com/search?q=" + airportCode + "+airport&hl=en\" target=\"_blank\">airport</a>, " +
+            			"<a href=\"http://www.google.com/search?q=" + airportCode + "+hotel&hl=en\" target=\"_blank\">hotel</a>" +
+            			")<br>" +
+            	"<a href=\"http://www.theairdb.com/airport/" + airportCode + ".html\" target=\"_blank\">theAirDB</a> " +
+            	"<a href=\"http://www.airlinequality.com/Airports/Airport_forum/" + airportCodeLC + ".htm\" target=\"_blank\">SkyTrax reviews</a> " +
+            	"<a href=\"http://www.flightstats.com/go/Airport/airportDetails.do?airportCode=" + airportCode + "\" target=\"_blank\">FlightStats.com</a> " +
+            	"<a href=\"http://gc.kls2.com/airport/" + airportCode + "\" target=\"_blank\">gc.kls2.com</a> " +
+            	"<a href=\"http://en.wikipedia.org/wiki/" + airportCode + "\" target=\"_blank\">Wikipedia</a> "
             	);
           });
           return marker;
@@ -1665,7 +1677,7 @@ function initialize() {
   <TBODY>
 <tr bgcolor="#eeffee">
 <td colspan=5>
-<b>MileageMonkey v0.95015 (based on JPH's <a href="http://slfft.allhyper.com/0.9/award.htm">0.9</a> &amp;
+<b>MileageMonkey v0.95016 (based on JPH's <a href="http://slfft.allhyper.com/0.9/award.htm">0.9</a> &amp;
 <a href="http://slfft.allhyper.com/1.1/award.htm">1.1</a> versions) /
 <a href="javascript:toggleLayer('info');" title="">Tool information</a> /
 <a href="javascript:toggleLayer('changes');" title="">Change log</a> /
@@ -1700,6 +1712,19 @@ Parts copyright &copy; 2006-2007 <a href="http://www.flyertalk.com/forum/private
 <table border=0 bgcolor="#ffff99"><tr><td>
 <b>Changelog:</b>
 <ul>
+<hr><li><u><b>v0.95016 (2008/02/23):</b></u>
+<li>Added link to permit GC map to be opened in a new window/tab (thanks <b>Mwenenzi</b>)
+<li>Added link to <b>christep</b>'s data files (thanks <b>Mwenenzi</b>)
+<li>Updated link to MarkDu's OW Files
+<li>Added ORD-EZE & back  (thanks <b>Mwenenzi</b>)
+<li>Added additional links to main page (to visa advisory pages from VS and DL), and also from the google map marker pop-up
+	to additional info sites - theAirDB, SkyTrax, and google searches for the airport &amp; hotels
+<li>Added a bunch more <b>one</b>world links, including the wonderful new interactive map (thanks <b>serfty</b>)
+<li>Added HKG-KTM &amp; v.v (thanks
+		<b><a href="http://www.flyertalk.com/forum/showthread.php?p=9357064&postcount=132" target="_blank">skunker</a></b>)
+<li>Added SYD-EZE &amp; v.v (thanks
+		<b><a href="http://www.flyertalk.com/forum/showthread.php?p=9398857&postcount=136" target="_blank">Kiwi Flyer</a></b>)
+
 <hr><li><u><b>v0.95015 (2007/12/09):</b></u>
 <li>Travel via point of origin no longer permitted; O/D open-jaw no longer permitted within South America, or Bangladesh-SIN/BKK (thanks
 		<b><a href="http://www.flyertalk.com/forum/showthread.php?p=8840368&postcount=98" target="_blank">Mwenenzi</a></b> &amp;
@@ -1875,7 +1900,8 @@ var sc_security="b9b2dc33";
 
     </td>
     <td rowspan=7>Scroll down this page for more detail after hitting <b>Go!</b><br>
-    	Maps generated by the <A href="http://gc.kls2.com/">Great Circle Mapper</A>&nbsp;- copyright © <A href="http://www.kls2.com/~karl/">Karl L. Swartz</A>.<br>
+    	Map generated by the <A href="http://gc.kls2.com/">Great Circle Mapper</A>&nbsp;- copyright © <A href="http://www.kls2.com/~karl/">Karl L. Swartz</A>.<br>
+		<div id="gckls2_url"></div>
         <IFRAME id=maparea name=maparea src="" frameBorder=0 width=510 height=300>Go Away</IFRAME>
         <div id="map_canvas" style="width: 500px; height: 300px"></div>
         <div id="map_title"  style="width: 500px"></div>
@@ -1941,16 +1967,26 @@ var sc_security="b9b2dc33";
  <TR>
     <TH class=award>OWE Information</TH>
     <TD colspan=3>
-    Official OneWorld links:<br>&nbsp;&nbsp;&nbsp;&nbsp;
-     <a href="http://www.oneworld.com/ow/timetables/" target="_blank">Timetables &amp; Planner</a>&nbsp;&nbsp;
+    Official <b>one</b>world links:<br>&nbsp;&nbsp;&nbsp;&nbsp;
+     <a href="http://www.oneworld.com/" target="_blank">Home page</a>&nbsp;&nbsp;
+     <a href="http://www.oneworld.com/ow/flight-info" target="_blank">Flight Info</a>&nbsp;&nbsp;
+     <a href="http://www.innovata-llc.com/onw/rtw/default.asp?show=RTW" target="_blank">Planner</a>&nbsp;&nbsp;
      <a href="http://www.oneworld.com/ow/air-travel-options" target="_blank">Fare rules &amp; prices</a>&nbsp;&nbsp;
-     <a href="http://www.oneworld.com/products/details.cfm?ObjectID=21" target="_blank">OWE Info</a>
+     <a href="http://www.oneworld.com/products/details.cfm?ObjectID=21" target="_blank">OWE Info</a>&nbsp;&nbsp;
+	 <a href="http://www.innovata-llc.com/onw/default.asp?show=MAP" target="_blank">Interactive Map</a>&nbsp;&nbsp;
+	 <a href="http://www.oneworld.com/ow/airports-and-destinations" target="_blank">Airports &amp; Destinations</a>&nbsp;&nbsp;
      <br>
     Other links:<br>&nbsp;&nbsp;&nbsp;&nbsp;
      WBT: (<a href="http://qsi.cc/users/wbt/RTW%20Fares.xls" target="_blank">fares</a>,
            <a href="http://qsi.cc/users/wbt/oneworldStarFile.txt" target="_blank">starfile</a>)&nbsp;&nbsp;
-     <a href="http://www.hardlink.com/~markdu/OWFiles/" target="_blank">MarkDu's OWFiles</a>
-     <br>
+	 <a href="http://www.christen.demon.co.uk/CXRule/" target="_blank">christep's CX files</a>&nbsp;&nbsp;
+     <a href="http://www.jeah.net/~markdu/OWFiles/" target="_blank">MarkDu's OWFiles</a>
+     <br>&nbsp;&nbsp;&nbsp;&nbsp;
+    Visa info pages from:
+		<a href="http://www.oneworld.com/ow/airports-and-destinations/visa-and-health-information" target="_blank"><b>one</b>world</a>&nbsp;&nbsp;
+	 	<a href="http://www.virgin-atlantic.com/en/gb/passengerinformation/healthandvisainformation/index.jsp" target="_blank">VS</a>&nbsp;&nbsp;
+		<a href="http://www.delta.com/planning_reservations/plan_flight/international_travel_information/visa_passport_information/index.jsp" target="_blank">DL</a>&nbsp;&nbsp;
+	 <br>
 
     <input onclick="javascript:list_countries();" type=submit value="List Country Codes"></td>
 	</TR>
