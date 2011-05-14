@@ -3646,4 +3646,7 @@ flight["SAT-LAX"] = "SAT|LAX|0x00e0";
 flight["LAX-SAT"] = "LAX|SAT|0x00e0";
 flight["SJO-LAX"] = "SJO|LAX|0x00e0";
 flight["LAX-SJO"] = "LAX|SJO|0x00e0";
+flight["ESB-LHR"] = "ESB|LHR|0x00e0";
+flight["LHR-ESB"] = "LHR|ESB|0x00e0";
+flight["DRW-BOM"] = "DRW|BOM|0x0060";
 
