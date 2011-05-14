@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>MileageMonkey 0.95010</title>
+<title>MileageMonkey 0.95011</title>
 <style>
 TABLE {
         FONT-FAMILY: sans-serif ; font-size: 8pt
@@ -16,7 +16,7 @@ TD.award {
 	COLOR: white; BACKGROUND-COLOR: navy
 }
 TD.gray {
-        BACKGROUND-COLOR: #afafaf
+        BACKGROUND-COLOR: #afafaf ; color: #cc3333
 }
 TR.green {
 	DISPLAY: none; BACKGROUND-COLOR: gold
@@ -154,11 +154,11 @@ function setemap(earnProg, mapper, map, str)
   }
 }
 
-function getEarningProg(id)
+function getRadioSetting(id)
 {
   var radio_array = document.getElementsByName(id);
   for(var i=0, len = radio_array.length; i < len; i++) {
-    if (radio_array[i].checked == true) {
+  if (radio_array[i].checked == true) {
       return radio_array[i].value;
     }
   }
@@ -170,7 +170,7 @@ function getEarningProg(id)
 //===============================================
 function setearn()
 {
-  var earnProg = getEarningProg('earn');
+  var earnProg = getRadioSetting('earn');
 
   if (earnProg == "aa")    setemap(earnProg, aamap, 1, aa_help2);
   if (earnProg == "ba")    setemap(earnProg, findmap, ba_tcmap, ba_help);
@@ -364,7 +364,7 @@ function findzone2(program, airport, country)
   for(var i=0; i<zmap.length; i++) {
     var rc = matchlist2(zmap[i], airport, country);
     if (rc == 0) {
-      return i; // found airport match, we're done
+      return i; // found airport match, we are done
     }
     else if (rc == 1) {
       mc = i;   // found country match, keep searching
@@ -515,9 +515,9 @@ function add_award(y,j,f,descr, airline, dist)
   naward++;
 }
 
-function tdstr(val)
+function Ctdstr(val, class_available)
 {
-  return "<td" + (val < 0 ? " class=gray" : "") + ">" + Math.abs(val) + "</td>";
+  return "<td" + (class_available ? "" : " class=gray") + ">" + Math.abs(val) + "</td>";
 }
 
 //========================================
@@ -572,10 +572,17 @@ function show_awards(sumit)
   var nj=0;
   var nf=0;
   var nd=0;
+  var linecount = 0;
 
   if (naward == 0) {
     return;
   }
+
+  var filter = "";
+//  if(sumit) {
+  	filter = getRadioSetting('cabins');
+//  }
+
   /* Nice: Add ability to sort awards */
   var tstr = "<table border=1><td><table>";
   tstr += "<th onclick='javascript:sortme(sorty);'>econ</th>";
@@ -585,27 +592,44 @@ function show_awards(sumit)
   tstr += "<th onclick='javascript:sortme(sortm);'>Distance</th>";
   tstr += "<th onclick='javascript:sortme(sortdsc);'>Description</th>";
   for(var i=0; i<naward; i++) {
-    var tc = tblcolor[i % 2];
-    tstr += "<tr class=" + tc + ">";
+    var tc = tblcolor[linecount % 2];
+    var newline = "<tr class=" + tc + ">";
 
     ny += Math.abs(award_tab[i][0]);
     nj += Math.abs(award_tab[i][1]);
     nf += Math.abs(award_tab[i][2]);
     nd += award_tab[i][5];
 
-    tstr += tdstr(award_tab[i][0]);
-    tstr += tdstr(award_tab[i][1]);
-    tstr += tdstr(award_tab[i][2]);
+	var desc1 = flight[award_tab[i][4]]; // get classes of service from flight data
+	var desc = desc1.split("|")[2];			// extract just the "---", "fjy", "-jy" etc. part
+	var hasY = (desc.indexOf("y") >= 0) ? 1 : 0;
+	var hasJ = (desc.indexOf("j") >= 0) ? 1 : 0;
+	var hasF = (desc.indexOf("f") >= 0) ? 1 : 0;
 
-    tstr += "<td>" + award_tab[i][3] + "</td>";
-    tstr += "<td>" + award_tab[i][5] + "</td>";
-    tstr += "<td>" + award_tab[i][4] + "</td>";
+    newline += Ctdstr(award_tab[i][0], hasY);
+    newline += Ctdstr(award_tab[i][1], hasJ);
+    newline += Ctdstr(award_tab[i][2], hasF);
 
-    tstr += "</tr>";
+    newline += "<td>" + award_tab[i][3] + "</td>";
+    newline += "<td>" + award_tab[i][5] + "</td>";
+    newline += "<td>" + award_tab[i][4] + "</td>";
+    newline += "</tr>";
+
+	if(
+		(filter == "")	||
+		((filter == "y") && hasY) ||
+		((filter == "j") && hasJ) ||
+		((filter == "f") && hasF) )
+	{
+	   	tstr += newline;
+	   	++linecount;
+	}
+
   }
   if (sumit) {
     tstr += "<tr><td>" + ny + "</td><td>" + nj + "</td><td>" + nf + "</td><td>&nbsp;</td><td>"+nd+"</td></tr>";
   }
+  tstr += "<tr><td colspan=6>" + linecount + " entries</td></tr>";
   tstr += "</table></td></table>";
   award.innerHTML = tstr;
 }
@@ -1077,7 +1101,7 @@ function validateowe()
     }
 
     /* Check if flight exists A->B */
-    var flt = flight_exists(cities[i][0], cities[i][1], "AA|BA|CX|AY|IB|QF|LA|EI", 0);
+    var flt = flight_exists(cities[i][0], cities[i][1], "AA|BA|CX|AY|IB|QF|LA|JL|JO|RJ|MA|XL", 0);
     if (flt == 0) {
       addlog("<b>Error!!! No oneworld service exists " + cities[i][0] + "-" + cities[i][1]);
       return -1;
@@ -1335,6 +1359,16 @@ bring it more up to date with current schedules/rules.
 <div id="changes" style="display: none">
 Please report any problems on <a href="http://www.flyertalk.com/forum/showthread.php?p=5822073#post5822073" target="_blank">the FT thread.</a>
 <ul>
+<li><u><b>v0.95011 (2007/04/02):</b></u>
+<li>New flights database - supplied by <b>hauteboy</b> (thanks!)
+<li>Added 11 new cities to database: AAC,ADE, AQJ, NKM, OGN, PCL, RJL, SOB, UEO, UKB, WOL
+<li>Added some experimental functionality to highlight routes which don't have all cabins available.  Useful when
+planning an AONEx or DONEx to avoid routes which have no A or D services.
+<li>Moved SNA from IL to CA (incorrect coords in city DB) (thanks <b>medicus</b>)
+<li>Removed a bunch of duplicates from the city DB
+<li>Added override for class designations for sectors, and added F onto some routes (NRT :- SIN,SFO,FRA,CDG,GRU;
+HKG :- SYD,MEL,JNB; LHR :- CAI,TLV,EWR,PHL,MCT) (thanks <b>WearyBizTrvlr</b>)
+<li>Added filtering of OWEPlanner output by cabin class
 <li><u><b>v0.95010 (2007/01/22):</b></u>
 <li>Added "Link to this itinerary" functionality
 <li>Added HEL-DXB & vv. (thanks <b>barking frog</b>)
@@ -1417,7 +1451,7 @@ var sc_security="b9b2dc33";
 
 </td></tr></table>
 <P><hr>
-MileageMonkey v0.95010 (based on JPH's <a href="http://slfft.allhyper.com/0.9/award.htm">0.9</a> &amp;
+MileageMonkey v0.95011 (based on JPH's <a href="http://slfft.allhyper.com/0.9/award.htm">0.9</a> &amp;
 <a href="http://slfft.allhyper.com/1.1/award.htm">1.1</a> with additions suggested by various FTers)
 <p>This utility will calculate the # of miles needed for a Frequent Flyer award
 </p><p>
@@ -1473,6 +1507,11 @@ modifications made in this particular version.</em>
         <tr><td>Less than X miles:</td><td><input id=owplanlt size=4></td></tr>
 	<tr><td>From:</td><td><input id=owplanfrom size=4></td></tr>
 	<tr><td>To:</td><td><input id=owplanto size=4></td></tr>
+	<tr><td colspan=2>
+		<input id=cabins type=radio CHECKED value="y" name="cabins">Show all sectors<br>
+		<input id=cabins type=radio value="j" name="cabins">Only sectors with J<br>
+		<input id=cabins type=radio value="f" name="cabins">Only sectors with F<br>
+	</td></tr>
 	<tr><td colspan=2><input onclick="javascript:list_countries();" type=submit value="List Country Codes"></td></tr>
 	</table>
     <TD><INPUT onclick="javascript:oweplanner();"  type=submit value=Submit></td>
