@@ -46,13 +46,13 @@ partnermap["aa oneworld"] = [
   [ -1, -1, "AA|BA|LA|LP|EI|IB|AY|CX|QF" ],
 ];
 partnermap["qf oneworld"] = [
-  [ -1, -1, "AA|BA|LA|LP|EI|IB|AY|CX|QF" ],
+  [ -1, -1, "AA|BA|LA|LP|EI|IB|AY|CX|QF|XL" ],
 ];
 partnermap["qf select (r/t)"] = [
- [ -1, -1, "QF|4N|FJ|AA|AO|FQ|BA|BN|JQ|NC|YE|UQ|PH|XR|CQ" ],
+ [ -1, -1, "QF|4N|FJ|AA|AO|FQ|BA|BN|JQ|NC|YE|UQ|PH|QantasLink|XR|CQ" ],
 ];
 partnermap["qf other (r/t)"] = [
-  [ -1, -1, "EI|CX|AY|IB|LA|PX|AZ|LY|SK|SA|LX|US" ]
+  [ -1, -1, "AZ|CC|LY|LX|PX|SA|SK|TL|US" ]
 ];
 partnermap["dl"] = [
  [ -1, -1, "DL|AM|AF|AZ|KE" ]
@@ -229,10 +229,11 @@ var owe_tc3       = owe_asia+"|"+owe_swp;
  *    0x01 : from in alist and to in blist
  *    0x02 : from in blist and to in alist
  *    0x04 : from in alist and to not in alist
- *    0x08 : N/A
+ *    0x08 : if triggered, this rule is a warning only (doesn't terminate checking process)
  *    0x10 : display message in log
  *    0x20 : transatlantic
  *    0x40 : transpacific
+ *    0x80 : from in alist & to in blist & next also in blist
  *   0x100 : europe
  *   0x200 : africa
  *   0x400 : asia
@@ -245,15 +246,15 @@ var owe_tc3       = owe_asia+"|"+owe_swp;
  *   descr: Description of rule
  */
 var owe_rulemap = [
- [ 0x04, "***", "", 1, "Travel via original point of origin not permitted" ], /* filled in with origin airport */
  [ 0x04, "***", "", 1, "One intl departure/arrival from country of origin" ], /* filled in with origin country */
  [ 0x01, "ANC", owe_tc1, 1, "N.America - Anchorage" ],       /* one flight from ANC */
  [ 0x02, "ANC", owe_tc1, 1, "N.America - Anchorage" ],       /* one flight to ANC */
  [ 0x03, owe_hawaii, "us|ca|pr|vi", 1, "N.America - Hawaii" ],  /* max one segment to hawaii */ 
  [ 0x13, owe_eastcoast, owe_westcoast, 1, "North America Transcon" ],  /* max one transcon */
  [ 0x03, "gb",  owe_longhaul, 2, "UK <--> Middle East/Eastern Europe/North Africa" ],  /* max two longhaul segments from the UK */
- [ 0x03, "PER", "SYD|CNS|BNE", 1, "Sydney/Cairns/Brisbane - Perth" ], /* max one segment to perth */
+ [ 0x03, "PER", "SYD|CNS|BNE|MEL", 1, "Sydney/Cairns/Brisbane/Melbourne - Perth" ], /* max one segment to perth */
  [ 0x03, "DRW", "MEL|SYD", 1, "Melbourne/Sydney - Darwin" ], /* max one segment to darwin */
+ [ 0x03, "BME", "MEL|SYD", 1, "Melbourne/Sydney - Broome" ], /* max one segment to broome */
 
  /* Intra-Continent segment limits */
  [ 0x13, owe_namerica, owe_namerica, 6, "North America" ],
@@ -268,7 +269,7 @@ var owe_rulemap = [
  [ 0x03, owe_tc2, owe_tc3, 1, "No backtracking: TC2-TC3" ],   /* max one segment from tc2-tc3 */
  [ 0x43, owe_tc3, owe_tc1, 1, "No backtracking: TC3-TC1" ],   /* max one segment from tc3-tc1 (transpacific) */
 
- [ 3, owe_europe,     owe_africa2, 1, "Ghana/Nigeria transit" ],
+ [ 3, owe_europe,     owe_africa2, 1, "Ghana/Nigeria/Kenya/Uganda/Tanzania transit (second EUR entry?)" ],
 
  /* Max entry/exit per continent */
  [ 0x03, owe_europe,   owe_tc1+"|"+owe_tc3+"|"+owe_africa,   4, "Europe entry/exit" ],
@@ -276,7 +277,15 @@ var owe_rulemap = [
  [ 0x03, owe_namerica, owe_tc2+"|"+owe_tc3+"|"+owe_samerica, 4, "North America entry/exit" ],
  [ 0x03, owe_africa,   owe_tc1+"|"+owe_tc3+"|"+owe_europe,   2, "Africa entry/exit" ],
  [ 0x03, owe_swp,      owe_tc1+"|"+owe_tc2+"|"+owe_asia,     2, "Southwest Pacific entry/exit" ],
- [ 0x03, owe_samerica, owe_tc2+"|"+owe_tc3+"|"+owe_namerica, 2, "South America entry/exit" ]
+ [ 0x03, owe_samerica, owe_tc2+"|"+owe_tc3+"|"+owe_namerica, 2, "South America entry/exit" ],
+
+/* Check for continent entries and then subsequent sector - to detect violations of 
+ * 2nd entry to continent for transit only (e.g. "transit without stopover": LHR-SIN-SYD=OK, LHR-BKK-SIN-SYD=NOT OK).
+ * alist: continent we're arriving from
+ * blist: continent we're testing for transit
+ */
+ [ 0x98, owe_tc1+"|"+owe_tc2+"|"+owe_swp, owe_asia, 1, "intercontinental entry to Asia without immediate transit & departure" ],
+ [ 0x98, owe_tc2+"|"+owe_tc3+"|"+owe_samerica, owe_namerica, 1, "intercontinental entry to North America without immediate transit & departure" ]
 
 ];
 
@@ -638,7 +647,7 @@ var nwa_dkb = "NW|KL|CO|MA|UX|XT|A6|DL";
 var nwa_org = "NW|DL|9J|CO|5J|GA|MH|KL|JL";
 var nwa_ltb = "MH|GA";
 
-partnermap["nw.old"] = [
+partnermap["nw"] = [
  [ 0, -1, nwa_red ],
  [ 1, -1, nwa_red ],
  [ 2, -1, nwa_red ],
@@ -652,149 +661,6 @@ partnermap["nw.old"] = [
  [ 10, -1, nwa_ltg ],
  [ 11, -1, nwa_ltg ],
  [ 12, -1, nwa_ltb ]
-];
-
-zonemap["nw.old"] = [
-  /* 0: North America */
-    "us|ca",
-  /* 1: Caribbean */
-    carib,
-  /* 2: Hawaii */
-    hawaii,
-  /* 3: Japan */
-    "jp",
-  /* 4: Apac/Micronesia */
-    "cn|mn|kr|tw|ph|vn|kh|la|th|my|sg|id|mm",
-  /* 5: Mexico */
-    "mx",
-  /* 6: Central America */
-    c_amer,
-  /* 7: South America */
-    "co|ve|sr|gy|gf|ec|pe|bo|py|br|uy|ar|cl",
-  /* 8: Europe */
-    "ie|gb|pt|es|fr|be|nl|lu|de|dk|no|se|fi|ru|ee|lv|lt|by|ua|md|bg|ro|mk|gr|al|yu|hr|ba|si|sk|cz|hu|it|ch",
-  /* 9: India */
-    "bd|np|in|pk|lk",
-  /*10: Africa */
-    "dz|ao|bj|bw|bf|bi|cm|cv|cf|td|cg|gq|er|et|ga|gm|gh|gn|gw|ci|ke|ls|lr|ly|mg|mw|ml|mr|mu|ma|mz|na|ne|"+
-    "ng|zr|re|rw|sn|sc|sl|so|za|sd|sz|tz|tg|tn|ug|zm|zw",
-  /*11: Middle East */
-    "bh|qa|ae|om|ye|sa|ir|iq|lb|sy|jo|kw|kz|kg|tj|uz|tm|af|az|am|ge",
-  /*12: Oz/Nz/SWP */
-    "au|nz"
-];
-
-awardmap["nw.old"] = [
-  /* North America -> XXX */
-  [ 0, 0, 25, "N/A", 45 ],
-  [ 0, 1, 35, "N/A", 60 ],
-  [ 0, 2, 35, "N/A", 75 ],
-  [ 0, 3, 60, 90, 120 ],
-  [ 0, 4, 60, 90, 120 ],
-  [ 0, 4, 60, 90, 120, "Delta Business Elite" ],
-  [ 0, 5, 35, "N/A", 60 ],
-  [ 0, 5, 35, "N/A", 60, "Delta BusinessElite" ],
-  [ 0, 5, 35, "N/A", 60 ],
-  [ 0, 6, 35, "N/A", 60, "Delta BusinessElite" ],
-  [ 0, 7, 35, "*", 70 ],
-  [ 0, 7, 35, "*", 70, "Delta: Northern South America" ],
-  [ 0, 7, 50, "*", 90, "Delta: Southern South America" ],
-  [ 0, 8, 50, 80, 100 ],
-  [ 0, 9, 90,120, 120 ],
-  [ 0,10, 90,120, 120 ],
-  [ 0,11, 90,120, 120 ],
-  [ 0,12, 80,110, 140 ],
-
-  /* Caribbean -> XXX */
-  [ 1, 2, 35, "N/A", 75 ],
-  [ 1, 3, 60, 90, 120 ],
-  [ 1, 4, 60, 90, 120 ],
-  [ 1, 7, 35, "*", 70 ],
-  [ 1, 8, 50, 80, 100 ],
-  [ 1, 9, 90,120, 120 ],
-  [ 1,10, 90,120, 120 ],
-  [ 1,11, 90,120, 120 ],
-  [ 1,12, 80,110, 140 ],
-
-  /* Hawaii -> XXX */
-  [ 2, 2, 5, "N/A", 10 ],
-  [ 2, 3, 40, 60, 80 ],
-  [ 2, 4, 40, 60, 80 ],
-  [ 2, 5, 35, "N/A", 75 ],
-  [ 2, 6, 35, "N/A", 75 ],
-  [ 2, 7, 35, "*", 70 ],
-  [ 2, 8, 70, 100, 120 ],
-  [ 2, 9,110, 140, 140 ],
-  [ 2,10,110, 140, 140 ],
-  [ 2,11,110, 140, 140 ],
-  [ 2,12, 80, 110, 140 ],
-  
-  /* Japan -> XXX */
-  [ 3, 3, 15, "N/A", 19 ],
-  [ 3, 4, 20, 30, 60 ],
-  [ 3, 5, 60, 90, 120 ],
-  [ 3, 6, 60, 90, 120 ],
-  [ 3, 7, 90,140, 140 ],
-  [ 3, 8, 60,100, 140 ],
-  [ 3, 9,100,140, 180 ],
-  [ 3,10,100,140, 180 ],
-  [ 3,11,100,140, 180 ],
-  [ 3,12, 50, 85, 125 ],
-
-  /* Asia Pacific/Micronesia -> XXX */
-  [ 4, 4, 20, 30, 60 ],
-  [ 4, 5, 60, 90, 120 ],
-  [ 4, 6, 60, 90, 120 ],
-  [ 4, 7, 90,140, 140 ],
-  [ 4, 8, 60,100, 140 ],
-  [ 4, 9,100,140, 180 ],
-  [ 4,10,100,140, 180 ],
-  [ 4,11,100,140, 180 ],
-  [ 4,12, 50, 85, 125 ],
-
-  /* Mexico -> XXX */
-  [ 5, 7, 35, "*", 70 ],
-  [ 5, 8, 50, 80, 100 ],
-  [ 5, 9, 90,120, 120 ],
-  [ 5,10, 90,120, 120 ],
-  [ 5,11, 90,120, 120 ],
-  [ 5,12, 80,110, 140 ],
-
-  /* Central America -> XXX */
-  [ 6, 6, 15, "N/A", 20 ],
-  [ 6, 7, 20, "N/A", 40 ],
-  [ 6, 8, 50, 80, 100 ],
-  [ 6, 9, 90,120, 120 ],
-  [ 6,10, 90,120, 120 ],
-  [ 6,11, 90,120, 120 ],
-  [ 6,12, 80,110, 140 ],
-
-  /* South America -> XXX */
-  [ 7, 7, 20, "N/A", 40 ],
-  [ 7, 8, 90, 140, 140 ],
-  [ 7, 9,120, 160, 200 ],
-  [ 7,10,120, 160, 200 ],
-  [ 7,11,120, 160, 200 ],
-
-  /* Europe -> XXX */
-  [ 8, 8, 25, 50, 50 ],
-  [ 8, 9, 50, 80, 100 ],
-  [ 8,10, 50, 80, 100 ],
-  [ 8,11, 50, 80, 100 ],
-  [ 8,12, 80,120, 160 ],
-
-  /* India -> XXX */
-  [ 9, 9, 25, 50, "N/A" ],
-  [ 9,12,120,160, 200 ],
-
-  /* Africa -> XXX */
-  [ 10, 10, 25, 50, "N/A", "on Kenya Airways" ],
-  [ 10, 12, 120,160, 200 ],
-
-  /* Mideast -> XXX */
-  [ 11, 12, 120, 160, 200 ]
-
-  /* Australia/New Zealand/South Pacific -> XXX */
 ];
 
 zonemap["nw"] = [

@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>MileageMonkey 0.95011</title>
+<title>MileageMonkey 0.95012</title>
 <style>
 TABLE {
         FONT-FAMILY: sans-serif ; font-size: 8pt
@@ -601,7 +601,7 @@ function show_awards(sumit)
     nd += award_tab[i][5];
 
 	var desc1 = flight[award_tab[i][4]]; // get classes of service from flight data
-	var desc = desc1.split("|")[2];			// extract just the "---", "fjy", "-jy" etc. part
+	var desc = (desc1 == undefined) ? "" : desc1.split("|")[2];			// extract just the "---", "fjy", "-jy" etc. part
 	var hasY = (desc.indexOf("y") >= 0) ? 1 : 0;
 	var hasJ = (desc.indexOf("j") >= 0) ? 1 : 0;
 	var hasF = (desc.indexOf("f") >= 0) ? 1 : 0;
@@ -922,7 +922,11 @@ function showrt()
 //=============================
 function showp2p()
 {
-  var citylist = getTextValue('citylist');
+  var citylist = getcitylist('citylist');
+
+// replace ',' with '-'; we don't treat surface sectors specially here
+  citylist = citylist.replace(/,/g, "-");
+
   var cities   = citylist.split("-");
 
   showtrip(cities, fPP);
@@ -963,14 +967,16 @@ function numstr(num)
 
 var owe_flag;
 
-function check_owe_rules(from, to, seg)
+function check_owe_rules(from, to, to2, seg)
 {
   var fc = find_country(from);
   var tc = find_country(to);
+  var tc2= "";
+  if(to2 != null) tc2 = find_country(to2);
   var pfx = "";
 
   seg++;
-  //addlog("checkrule: from:" + fc + ":" + from + " to:" + tc + ":" + to);
+  //addlog("check_owe_rules: from:" + fc + ":" + from + " to:" + tc + ":" + to + " to2:" + to2);
   for(var i=0; i<owe_rulemap.length; i++) {
     if (owe_rulemap[i] == null) continue;
 
@@ -990,18 +996,29 @@ function check_owe_rules(from, to, seg)
       b = matchrule(to,   tc, trule);
       if (a && b) rc=1;
     }
+
     if (flag & 2) {
       /* Check if rule matches to <- from */
       a = matchrule(from, fc, trule);
       b = matchrule(to,   tc, frule);
       if (a && b) rc=1;
     }
+
     if (flag & 4) {
       /* Check if rule matches from && !to */
       a = matchrule(from, fc, frule);
       b = !matchrule(to,  tc, frule);
       if (a && b) rc=1;
     }
+
+    if (flag & 0x80) {
+      /* Check if rule matches from -> to */
+      a = matchrule(from, fc, frule);
+      b = matchrule(to,   tc, trule);
+      var c = matchrule(to2, tc2, trule);
+      if (a && b && c) rc = 1;
+    }
+
     if (rc == 1) {
       owe_count[i]++;
       owe_flag |= flag;
@@ -1011,9 +1028,17 @@ function check_owe_rules(from, to, seg)
         addlog(pfx+seg + ": " + from + "-" + to + ": " + numstr(owe_count[i]) + " of " + ocount + " (" + odesc + ")");
         pfx="*";
       }
-      /* Rule violated... stop processing */
+
+      /* If rule is violated... stop processing */
       if (owe_count[i] > ocount) {
-        return i;
+      	var err = (flag & 0x08) ? "<b>Possible rule violation!!!!" : "<b>Rule violated!!!!";
+      	err += " [" + from + "-" + to;
+		if(flag & 0x80) {
+           err += "-" + to2;
+        }
+        addlog(err + "] Max " + owe_rulemap[i][3] +" segment(s): " + owe_rulemap[i][4] + "</b>");
+
+        if(!(flag & 0x08)) return i;
       }
     }
   }
@@ -1081,6 +1106,8 @@ function validateowe()
   if (cities.length > 20) {
     addlog("<b>Rule violated!!! Maximum segment length is 20!</b>");
     return -1;
+  } else if (cities.length > 16) {
+  	addlog("<b>Potential problem!!! E-tickets could be restricted to 16 segments.</b>");
   }
 
   /* Reset rule error count */
@@ -1089,14 +1116,24 @@ function validateowe()
     owe_count[i] = 0;
   }
 
-  /* Setup fixup for rules - no transit of original point or country */
+  /* Setup fixup for rules - no transit of original country */
   owe_rulemap[0][1] = map_country(cities[0][0]);
 
   /* --== Validate rules for each city pair.. ==-- */
   for(var i=0; i<cities.length; i++) {
-    var badrule = check_owe_rules(cities[i][0], cities[i][1], i);
+    var nextcity = null;
+
+	// if we have another sector after this one, check for the transit rules AAA-BBB-CCC
+    if(i < (cities.length - 1)) {
+		// what is the next city ... which field we choose depends if we have a surface sector
+    	if(cities[i][1] == cities[i+1][0])
+    		nextcity = cities[i+1][1];  // not a surface sector, choose next-to
+    	else
+    		nextcity = cities[i+1][0];	// a surface sector, choose next-from
+    }
+
+    var	badrule = check_owe_rules(cities[i][0], cities[i][1], nextcity, i);
     if (badrule >= 0) {
-      addlog("<b>Rule violated!!!! [" + cities[i][0] + "-" + cities[i][1] + "] Max " + owe_rulemap[badrule][3] +" segment(s): " + owe_rulemap[badrule][4] + "</b>");
       return -1;
     }
 
@@ -1104,7 +1141,7 @@ function validateowe()
     var flt = flight_exists(cities[i][0], cities[i][1], "AA|BA|CX|AY|IB|QF|LA|JL|JO|RJ|MA|XL", 0);
     if (flt == 0) {
       addlog("<b>Error!!! No oneworld service exists " + cities[i][0] + "-" + cities[i][1]);
-      return -1;
+//      return -1;
     }
 
     /* Calculate distance A->B and # of points/miles earned */
@@ -1116,6 +1153,7 @@ function validateowe()
     }
     tdist += dist;
   }
+
 
   /* Ok.. routing is valid.. check end rules here
    *   Must start/end in same region
@@ -1357,8 +1395,19 @@ with updates to
 bring it more up to date with current schedules/rules.
 
 <div id="changes" style="display: none">
-Please report any problems on <a href="http://www.flyertalk.com/forum/showthread.php?p=5822073#post5822073" target="_blank">the FT thread.</a>
 <ul>
+<li><u><b>v0.95012 (2007/04/13):</b></u>
+<li>Added rule; if two entries to Asia or N.America occur, check that one is a transit (no intra-continent sectors) and
+warn if detected
+<li>When using "link to" function; perform "submit" automatically so that map & validation is done at time of page load
+<li>For point-point checks, permit more flexible entry (like OWE section) - i.e. whitespace, "//", -xAAA etc.
+<li>When "No oneworld service" is suspected, treat it as a warning and not a fatal error
+<li>Re-added the following from the original 0.95 which got lost in 0.95009
+<ul>
+	<li>Added MEL to restricted list (CNS/BNE/SYD) of transcons to PER
+	<li>Added MEL/SYD restriction to BME
+</ul>
+<li>Added MIA-ANC (thanks <b>vxmike</b>)
 <li><u><b>v0.95011 (2007/04/02):</b></u>
 <li>New flights database - supplied by <b>hauteboy</b> (thanks!)
 <li>Added 11 new cities to database: AAC,ADE, AQJ, NKM, OGN, PCL, RJL, SOB, UEO, UKB, WOL
@@ -1451,7 +1500,7 @@ var sc_security="b9b2dc33";
 
 </td></tr></table>
 <P><hr>
-MileageMonkey v0.95011 (based on JPH's <a href="http://slfft.allhyper.com/0.9/award.htm">0.9</a> &amp;
+MileageMonkey v0.95012 (based on JPH's <a href="http://slfft.allhyper.com/0.9/award.htm">0.9</a> &amp;
 <a href="http://slfft.allhyper.com/1.1/award.htm">1.1</a> with additions suggested by various FTers)
 <p>This utility will calculate the # of miles needed for a Frequent Flyer award
 </p><p>
@@ -1531,7 +1580,11 @@ modifications made in this particular version.</em>
 // read cookie and set frequent flyer earning program preference
 loadearn();
 var qs = new Querystring();
-owecitylist.innerHTML = qs.get('owe');
+var loadcitylist = qs.get('owe');
+if(loadcitylist.length > 4) {
+	owecitylist.innerHTML = loadcitylist;
+	validateowe();
+}
 </script>
 
 </body></html>

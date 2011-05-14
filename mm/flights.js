@@ -2682,6 +2682,7 @@ flight["MFE-SLC"] = "MFE|SLC|f-y|30Mar0";
 flight["MGA-JFK"] = "MGA|JFK|-jy|30Mar0";
 flight["MGA-MIA"] = "MGA|MIA|-jy|30Mar0";
 flight["MHH-MIA"] = "MHH|MIA|--y|30Mar0";
+flight["MIA-ANC"] = "MIA|ANC|f-y|30Mar0";
 flight["MIA-ATL"] = "MIA|ATL|f-y|30Mar0";
 flight["MIA-AUA"] = "MIA|AUA|-jy|30Mar0";
 flight["MIA-BCN"] = "MIA|BCN|-jy|30Mar0";
