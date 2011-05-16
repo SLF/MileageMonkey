@@ -34,7 +34,7 @@ var owe_longhaul  = owe_mideast + "|" +
 
 
 var owe_namerica  = "us|ca|mx|bz|gt|sv|hn|ni|cr|pa|aw|tt|gd|bb|lc|mq|dm|" +
-						"gp|ag|kn|an|vg|vi|pr|do|ht|jm|cu|ky|bs|bm|ai|tc";
+						"gp|bl|mf|ag|kn|cw|bq|sx|vg|vi|pr|do|ht|jm|cu|ky|bs|bm|ai|tc";
 var owe_samerica  = "co|ve|ec|pe|bo|cl|br|py|uy|ar|fk";
 var owe_europe    = "ie|gb|is|no|se|fi|dk|ru|ee|lv|lt|by|ua|am|az|ge|md|" +
 						"ro|bg|tr|gr|mk|al|yu|ba|hr|si|hu|sk|cz|pl|de|ch|it|" +

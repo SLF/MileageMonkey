@@ -10,7 +10,7 @@ var hawaii   = "HNL|OGG|KOA|LIH";
 var c_amer   = "bz|gt|hn|sv|ni|cr|pa";
 var n_samer  = "co|ve|ec|pe";
 var s_samer  = "bo|py|br|uy|ar|cl";
-var carib    = "aw|tt|bb|gd|vc|lc|mq|dm|gp|ag|ms|kn|an|vg|vi|pr|do|ht|cu|ky|jm|tc|bs";
+var carib    = "aw|tt|bb|gd|vc|lc|mq|dm|gp|bl|mf|ag|ms|kn|bq|cw|sx|vg|vi|pr|do|ht|cu|ky|jm|tc|bs";
 var mideast  = "sy|lb|il|jo|sa|ye|om|ae|bh|qa|kw|iq|ir";
 var seasia   = "vn|la|kh|th|my|sg|id|bn|tl";
 
@@ -558,7 +558,7 @@ zonemap["aa"] = [
   /* 0: North America */
     "us|ca",
   /* 1: Mexico/Caribbean/Bahamas/Bermuda */
-    "bs|bm|mx|ag|aw|bs|bb|vg|cu|dm|do|ky|gd|gp|ht|jm|mq|ms|pr|kn|lc|vc|tt|vi|vg",
+    "bs|bm|mx|ag|aw|bs|bb|vg|cu|dm|do|ky|gd|gp|bl|mf|ht|jm|mq|ms|pr|kn|lc|vc|tt|vi|vg",
   /* 2: Hawaii */
     hawaii,
   /* 3: Central America/Northern South America */
@@ -627,7 +627,7 @@ partnermap["aa all"] = [
 
 zonemap["aa all"] = [ 
   /* 0: North America */ 
-    "us|ca|mx|bm|bs|ag|aw|ai|bb|vg|ky|cu|dm|do|gd|gp|ht|jm|mq|an|pr|lc|vc|kn|tc|tt|vi",
+    "us|ca|mx|bm|bs|ag|aw|ai|bb|vg|ky|cu|dm|do|gd|gp|bl|mf|ht|jm|mq|bq|cw|sx|pr|lc|vc|kn|tc|tt|vi",
   /* 1: Central America/South America 1 */
     "bz|co|cr|sv|ec|gt|hn|ni|pa|pe|ve",
   /* 2: South America 2 */
@@ -929,7 +929,7 @@ zonemap["dl skyteam"] = [
   /* 1: Hawaii */
     hawaii,
   /* 2: Mexico/Caribbean/Bermuda */
-    "mx|bm|ag|aw|bs|bb|vg|cu|dm|do|ky|gd|gp|ht|jm|mq|ms|pr|kn|lc|vc|tt|vi",
+    "mx|bm|ag|aw|bs|bb|vg|cu|dm|do|ky|gd|gp|bl|mf|ht|jm|mq|ms|pr|kn|lc|vc|tt|vi",
   /* 3: Central America */
     "bz|cr|sv|gt|hn|ni|pa",
   /* 4: Northern South America */
