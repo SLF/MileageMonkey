@@ -2348,8 +2348,6 @@ countrycodes["BM"] = [ "nam", "nam", "bermuda" ];
 /* Caribbean */
 countrycodes["TT"] = [ "nam", "nam", "trinidad & tobago" ];
 countrycodes["VI"] = [ "nam", "nam", "us virgin islands" ];
-countrycodes["AN"] = [ "nam", "nam", "netherlands antillies" ];
-countrycodes["GP"] = [ "nam", "nam", "guadeloupe" ];
 countrycodes["GD"] = [ "nam", "nam", "grenada" ];
 countrycodes["BB"] = [ "nam", "nam", "barbados" ];
 countrycodes["LC"] = [ "nam", "nam", "st. lucia" ];
@@ -2369,6 +2367,13 @@ countrycodes["VG"] = [ "nam", "nam", "british virgin islands" ];
 countrycodes["MQ"] = [ "nam", "nam", "martinique" ];
 countrycodes["KY"] = [ "nam", "nam", "caymans" ];
 countrycodes["TC"] = [ "nam", "nam", "turks and caicos" ];
+countrycodes["GP"] = [ "nam", "nam", "guadeloupe" ];		/* Split to GP,BL,MF */
+countrycodes["MF"] = [ "nam", "nam", "st. martin" ];
+countrycodes["BL"] = [ "nam", "nam", "st. barts" ];
+countrycodes["AN"] = [ "nam", "nam", "netherlands antillies" ];  /* split to CW,BQ,SX */
+countrycodes["SX"] = [ "nam", "nam", "st. maarten" ];
+countrycodes["CW"] = [ "nam", "nam", "curacao" ];
+countrycodes["BQ"] = [ "nam", "nam", "bonaire, statia, saba" ];
 
 /* South america */
 countrycodes["CO"] = [ "sam", "sam", "colombia" ];
@@ -2417,19 +2422,21 @@ countrycodes["BY"] = [ "eur", "eur", "belarus" ];
 countrycodes["MD"] = [ "eur", "eur", "moldova" ];
 countrycodes["HU"] = [ "eur", "eur", "hungary" ];
 countrycodes["AL"] = [ "eur", "eur", "albania" ];
-countrycodes["HR"] = [ "eur", "eur", "croatia" ];
-countrycodes["BA"] = [ "eur", "eur", "bosnia" ];
-countrycodes["SI"] = [ "eur", "eur", "slovenia" ];
 countrycodes["TR"] = [ "eur", "eur", "turkey" ];
-countrycodes["YU"] = [ "eur", "eur", "yugoslavia" ];
 countrycodes["UA"] = [ "eur", "eur", "ukraine" ];
 countrycodes["RO"] = [ "eur", "eur", "romania" ];
 countrycodes["BG"] = [ "eur", "eur", "bulgaria" ];
 countrycodes["GR"] = [ "eur", "eur", "greece" ];
-countrycodes["MK"] = [ "eur", "eur", "macedonia" ];
 countrycodes["RU"] = [ "eur", "eur", "russia" ];
 countrycodes["CY"] = [ "eur", "eur", "cyprus" ];
 countrycodes["MT"] = [ "eur", "eur", "malta" ];
+countrycodes["YU"] = [ "eur", "eur", "yugoslavia" ];  /* Split to MK,RS,HR,BA,SI,ME */
+countrycodes["MK"] = [ "eur", "eur", "macedonia" ];
+countrycodes["RS"] = [ "eur", "eur", "serbia" ];
+countrycodes["HR"] = [ "eur", "eur", "croatia" ];
+countrycodes["BA"] = [ "eur", "eur", "bosnia" ];
+countrycodes["SI"] = [ "eur", "eur", "slovenia" ];
+countrycodes["ME"] = [ "eur", "eur", "montenegro" ];
 
 /* Middle East */
 countrycodes["QA"] = [ "asa", "eur", "qatar" ];
@@ -2563,3 +2570,4 @@ countrycodes["RE"] = [ "afr", "afr", "reunion" ];
 countrycodes["KM"] = [ "afr", "afr", "comoros" ];
 countrycodes["SZ"] = [ "afr", "afr", "swaziland" ];
 countrycodes["SO"] = [ "afr", "afr", "somalia" ];
+
