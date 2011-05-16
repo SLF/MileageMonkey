@@ -1,0 +1,110 @@
+//===========================================================================
+// overrides.txt
+// this file permits overrides to be applied to the raw flight data, which may be
+// deficient on some way, e.g.:
+//   a seasonal route missing
+//   a new service not yet listed
+//   a mistake
+//===========================================================================
+
+
+
+// added 10 Apr 2010
+flight["ORD-HKG"] = "CX77A";
+flight["HKG-ORD"] = "CX77A";
+
+
+// QF
+flight["SYD-PER"] = "QF744";
+flight["PER-SYD"] = "QF744";
+
+
+
+// added 21 Oct 2008
+
+// CX
+
+// these CX services are provided on 77A eqpt., which is manually added
+// below. The OW timetable shows them as 773 (2-class)
+remove HKG-JFK|CX773
+remove JFK-HKG|CX773
+remove HKG-YYZ|CX773
+remove YYZ-HKG|CX773
+flight["HKG-YYZ"] = "CX77A";
+flight["YYZ-HKG"] = "CX77A";
+flight["HKG-JFK"] = "CX77A";
+flight["JFK-HKG"] = "CX77A";
+
+// AA
+flight["ORD-ANC"] = "AA757";
+flight["ANC-ORD"] = "AA757";
+
+
+// JL
+flight["FUK-FSZ"] = "JLEMJ";
+flight["FSZ-FUK"] = "JLEMJ";
+
+flight["CTS-FSZ"] = "JLEMJ";
+flight["FSZ-CTS"] = "JLEMJ";
+
+// BA
+flight["LCY-GVA"] = "BAAR1";
+flight["GVA-LCY"] = "BAAR1";
+
+flight["LCY-LYS"] = "BAAR1";
+flight["LYS-LCY"] = "BAAR1";
+
+// AY
+//flight["IST-HEL"] = "AY319";
+//flight["HEL-IST"] = "AY319";
+
+
+
+
+// these flights are in the OW TT (online) but not in the dump, so need to be added to the latest dump
+
+//flight["BGI-BOS"] = "AA757";
+
+
+// added 4 Jul 2008
+//
+//flight["JFK-SJO"] = "AAAB6";
+//flight["SJO-JFK"] = "AAAB6";
+
+//flight["CCS-EZE"] = "LP763";
+// no EZE-CCS that I can find
+
+flight["YUL-UVF"] = "AA738";
+// YUL-UVF is summer.  No UVF-YUL.
+
+
+flight["LAX-YUL"] = "AAM80";
+//flight["YUL-LAX"] = "AAM80";
+// can't find YUL-LAX anymore
+
+//flight["SCL-YYZ"] = "LA763";
+//flight["JFK-YYZ"] = "LA763";
+
+//flight["YYZ-SCL"] = "LA763";
+//flight["YYZ-JFK"] = "LA763";
+
+
+
+// specify routes to be removed entirely here.  
+// This removes ALL services on this route, not just one carrier
+// Syntax:   removeall SRC-DST
+
+// operated by Finncomm (non OW)
+removeall HEL-TKU
+removeall HEL-TLL
+removeall HEL-TMP
+removeall TKU-HEL
+removeall TLL-HEL
+removeall TMP-HEL
+
+// specify flights to be removed entirely here.  Useful if a service is no longer
+// operating between these cities, and it's still in the DB
+// Syntax:   remove SRC-DST|YY123
+//remove LHR-STR|CX737
+//remove DUS-LHR|CX319
+//remove LAX-AUS|CXM83
