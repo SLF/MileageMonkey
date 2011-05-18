@@ -1,0 +1,1206 @@
+;============ USAirways
+@US & Canada
+@Hawaii
+@Caribbean
+@Mexico & Central America
+Mexico, Belize, Guatemala, El Salvador, Honduras, Nicaragua, Costa Rica, Panama
+@South America
+Colombia, Venezuela, Guyana, Suriname, French Guiana, Brazil, Paraguay, Uruguay, Argentina, Chile, Bolivia, Peru, Ecuador
+@Europe
+@North Asia
+China, Hong Kong, Japan, Kazakhstan, Kyrgyzstan, Macau, Mongolia, S. Korea, Taiwan, Tajikistan, Turkmenistan, Uzbekistan
+@South & Central Asia
+Afghanistan, Bangladesh, Brunei, Cambodia, Chagos, India, Indonesia, Laos, Malaysia, Maldives, Myanmar, Nepal, Pakistan, Philippines, Singapore, Sri Lanka, Thailand, Vietnam
+@South Pacific
+@Middle East
+@Africa
+Economy  25 40 35 35 60 60 60 80 80 80 70
+Business 50 70 NA NA 100 100 90 120 110 120 110
+First    50 70 60 60 125 125 120 160 140 180 150
+
+Economy  40 10 40 40 60 60 60 80 80 80 80
+Business 70 NA 70 70 100 100 90 120 120 120 120
+First    70 	 90 90 125 125 120 160 160 180 160
+
+Economy  35 40 35 35 60 60 60 60 80 80 80
+Business NA 70 40 40 100 100 90 90 120 120 120
+First    60 90 60 60 125 125 120 120 150 180 160
+
+Economy  35 40 35 35 60 60 60 60 80 80 80
+Business NA 70 40 40 100 100 90 90 120 120 120
+First    60 90 60 60 125 125 120 120 150 180 160
+
+Economy  60 60 60 60 25 70 90 90 80 80 110
+Business 100 100 100 100 30 100 120 120 120 120 140
+First    125 125 125 125 40 130 150 150 150 150 180
+
+Economy  60 60 60 60 70 25 60 70 100 40 60
+Business 100 100 100 100 100 45 80 90 120 60 75
+First    125 125 125 125 130 NA 100 110 150 80 100
+
+Economy  60 60 60 60 90 60 25 40 70 80 70
+Business 90 90 90 90 120 80 30 60 90 120 110
+First    120 120 120 120 150 100 40 80 120 180 150
+
+Economy  80 80 60 60 90 70 40 25 70 50 70
+Business 120 120 90 90 120 90 60 30 90 75 90
+First    160 160 120 120 150 110 80 40 120 100 120
+
+Economy  80 80 80 80 80 100 70 70 25 80 100
+Business 110 120 120 120 120 120 90 90 30 120 130
+First    140 160 150 150 150 150 120 120 40 150 160
+
+Economy  80 80 80 80 80 40 80 50 80 30 70
+Business 120 120 120 120 120 60 120 75 120 35 90
+First    180 180 180 180 150 80 180 100 150 45 120
+
+Economy  70 80 80 80 110 60 70 70 100 70 35
+Business 110 120 120 120 140 75 110 90 130 90 50
+First    150 160 160 160 180 100 150 120 160 120 100
+!
+
+;================== Continental SaverPass/*A
+@Mainland US, Alaska and Canada
+Mainland U.S., Alaska and Canada
+@Hawaii
+Hawaii
+@Mexico
+Mexico
+@Central America
+Belize, Costa Rica, El Salvador, Guatemala, Honduras, Nicaragua, Panama
+@Caribbean
+Antigua, Aruba, Bahamas, Barbados, Barbuda, Bermuda, Cayman Islands, Cuba, Dominican Republic, Guadeloupe, Grenada, Haiti, Jamaica, Martinique, Netherland/Dutch
+Antilles, Puerto Rico, St. Kitts-Nevis, St. Lucia, Trinidad and Tobago, Turks and Caicos Islands, Virgin Islands (U.S. and British)
+@Northern South America
+Colombia, Ecuador, French Guiana, Guyana, Peru, Surinam, Venezuela
+@Southern South America
+Argentina, Bolivia, Brazil, Chile, Paraguay, Uruguay
+@Europe
+Albania, Armenia, Austria, Belgium, Belarus, Bosnia and Herzegovina, Bulgaria, Croatia, Cyprus, Czech Republic, Denmark, Estonia, Finland, France, Germany, Greece,
+Greenland, Hungary, Iceland, Ireland, Italy, Latvia, Lithuania, Luxembourg, Macedonia, Malta, Moldova, Montenegro, Netherlands, Northern Ireland, Norway, Poland,
+Portugal, Romania, Russia, Serbia, Scotland, Spain, Slovakia, Slovenia, Sweden, Switzerland, Turkey, United Kingdom, Ukraine, Wales
+@Northern Africa
+Algeria, Canary Islands, Egypt, Libya, Morocco, Tunisia
+@Central and Southern Africa
+Angola, Benin, Botswana, Burkina Faso, Burundi, Cameroon, Central African Republic, Chad, Comoros, Congo, Cote D'lvoire, Democratic Republic of Congo, Djibouti,
+Equatorial Guinea, Eritrea, Ethiopia, Gabon, Gambia, Ghana, Guinea, Guinea-Bissau, Kenya, Lesotho, Liberia, Madagascar, Malawi, Mali, Mauritania, Mauritius,
+Mozambique, Namibia, Niger, Nigeria, Reunion Island, Rwanda, Sao Tome and Principe, Senegal, Seychelles, Sierra Leone, Somalia, South Africa, Sudan, Swaziland,
+Tanzania, Togo, Uganda, Zambia, Zimbabwe
+@Middle East
+Afghanistan, Azerbaijan, Bahrain, Egypt, Georgia, Iran, Iraq, Israel, Jordan, Kuwait, Lebanon, Oman, Qatar, Saudi Arabia, Syria, Turkey, United Arab Emirates, Yemen
+@Central Asia
+India, Kazakhstan, Kyrgyzstan, Maldives, Nepal, Pakistan, Sri Lanka, Tajikistan, Turkmenistan, Uzbekistan
+@South Asia
+Bangladesh, Bhutan, Brunei, Borneo, Cambodia, Federated States of Micronesia, Guam, Hong Kong, Indonesia, Laos, Macau, Malaysia, Marshall Islands, Myanmar,
+Northern Mariana Islands, Palau, Papua New Guinea, Philippines, Singapore, Thailand, Vietnam
+@North Asia
+China (Mainland), Mongolia, South Korea, Taiwan
+@Japan
+Japan
+@Oceania
+American Samoa, Cook Islands, Federated States of Micronesia, Fiji, French Polynesia, Guam, Marshall Islands, New Caledonia, Northern Mariana Islands, Palau,
+Tahiti, Tonga, Vanuatu, Western Samoa
+E 20^/25* 40 35 35 35 35 55 55 75 90 75 80 65 65 65 60/80*** 80
+B 50* 80 60 60 60 70 100 105 115 125 115/170*** 120 125 125 125 120 135
+F 70 100 80 80 80 90 135 135 145 160 145 160 145 145 135 150 160
+
+E 10 40 40 40 45 55 70 90 110 80 90 40 50 45 40/80*** 80
+B - 80 80 80 90 100 120 130 150 120/170*** 130 65 70 65 80/120*** 135
+F - 100 100 100 120 135 135 170 180 160 170 85 100 95 170 160
+
+E 35 20/35** 20/35** 20/35** 40/50** 55 80 90 80 90 65 65 60 60/90*** 90
+B 60 40/60** 40/60** 40/60** 80/100** 105 120 130 120/170*** 130 125 125 120 120/130*** 130
+F 80 80 80 80 120 135 160 180 160 170 160 135 160 170 170
+
+E 15/35** 20/35** 20 40 55 80 90 80 90 65 65 60 60/90*** 90
+B 20/60** 40/60** 40 80 100 120 130 120/170*** 130 125 125 120 120/130*** 130
+F 80 80 60 100 140 180 180 160 170 160 135 160 170 170
+
+E 20/35** 20/35** 40/50** 55 80 90 80 90 65 65 60 60/90*** 90
+B 40/60** 40/60** 80/100** 105 120 130 120/170*** 130 125 125 120 120/130*** 130
+F 80 80 110 135 160 180 160 170 160 135 160 170 170
+
+E 20**** 40 80 90 110 90 120 95 95 95 90 90
+B 40 80 130 130 160 140/170*** 160 140 140 140 140 140
+F 50 90 160 170 200 180 210 180 180 180 190 180
+
+E 25 90 110 60/110** 120 120 95 95 95 110 90
+B 40 140 160 90/160** 160/170*** 160 140 140 140 150 140
+F 50 160 200 140/200** 180 210 180 180 180 190 180
+
+E 25 40 50 35 60 80 80 80 110 110
+B 45 55 80/100*** 55/80*** 100/120*** 120 120 120 170 150
+F 60 80 100 80 120 160 160 160 200 180
+
+E 25 45 45 70 70 80 80 100 100
+B 50 70 70 100 100 120 100 150 150
+F 70 90 90 140 140 160 120 200 200
+
+E 25 70 80 80 80 80 100 100
+B 50 90 120 120 120 100 150 150
+F 70 120 160 160 160 120 200 200
+
+E 30 40 60 60 90 80 100
+B 45 70 90 90 135 120 150
+F 60 90 120 120 175 150 200
+
+E 30 50 50 50 70 60
+B 45 80 80 80 100 90
+F 60 100 110 110 130 120
+
+E 25 20 40 35/70*** 35/60***
+B 30 30 60 50/90*** 50/90***
+F 60 65 80 120 120
+
+E 25 25 35/70*** 35/70***
+B 40 40 50/100*** 50/100***
+F 60 55 130 130
+
+E 15 25/70*** 35/50***
+B - 40/90*** 50/80***
+F - 120 110
+
+E 25/35*** 35
+B 40/50*** 50
+F 70 70
+
+E 35
+B 50
+F 70
+!
+
+;======================== New Continental SaverPass
+Economy  10*/12.5^ 25 20 40 17.5 35 17.5 35 17.5 35 20 40 30 55 30 55 40 70 40 80 40 75 40 70 32.5 65 32.5 65 32.5 65 35 65 40 80
+Business 25^ 50 40 80 30 60 30 60 30 60 35 70 50 125 50 125 60 135 60 140 60/85*** 150 60 150 60 150 60 150 60 150 60 150 67.5 150
+First    35 70 50 100 40 80 40 80 40 80 45 90 67.5 147.5 67.5 147.5 75 150 75 150 75 160 80 160 70 160 70 160 67.5 160 75 160 80 160
+
+Economy  5 10 20 40 20 40 20 40 22.5 40 30 60 32.5 60 45 90 50 100 40 90 40 80 25 45 25 45 22.5 50 30 50 35 80
+Business 7.5 15 37.5 75 37.5 75 37.5 75 45 75 50 125 57.5 125 65 150 75 150 60/85*** 150 60 140 37.5 80 37.5 80 32.5 80 55 150 62.5 150
+First    10 20 47.5 95 47.5 95 47.5 95 60 100 67.5 147.5 67.5 147.5 85 160 90 180 80 160 80 160 50 100 50 100 47.5 100 75 160 72.5 165
+
+Economy  17.5 35 10**/ 17.5 20**/ 35 10**/17.5 20**/35 10**/20 20**/35 20**/25 40**/60 32.5 60 40 80 42.5 80 40 80 45 70 32.5 65 32.5 65 32.5 65 40 75 45 80
+Business 30 60 20**/ 30 40**/ 60 20**/30 40**/60 20**/32.5 40**/60 40**/50 80**/125 52.5 125 60 150 62.5 150 60/85*** 150 65 150 62.5 150 62.5 150 60 150 62.5 150 65 150
+First    40 80 40 87.5 40 87.5 40 87.5 60 140 67.5 140 80 162.5 80 162.5 80 160 85 160 80 160 70 160 70 160 85 160 85 165
+
+Economy  7.5**/17.5 15**/35 10**/17.5 20**/35 10/17.5 20/25 20 40 32.5 60 40 80 42.5 80 40 70 45 70 32.5 65 35 65 32.5 65 40 75 45 75
+Business 10**/30 20**/60 20**/30 40**/60 20/30 40/45 40 80 52.5 125 60 150 62.5 150 60/85*** 150 65 150 62.5 150 62.5 150 62.5 150 62.5 150 65 150
+First    40 87.5 40 87.5 40 70 50 110 70 140 80 162.5 80 162.5 80 160 85 160 80 160 80 160 75 160 85 160 85 160
+
+Economy  10**/17.5 20**/35 10**/17.5 20**/35 20**/30 40**/50 27.5 50 40 75 45 80 40 80 45 70 32.5 65 32.5 65 32.5 65 45 75 45 75
+Business 20**/30 40**/60 20**/30 40**/60 40**/50 80**/125 52.5 125 60 150 65 150 60/85*** 150 65 150 62.5 150 62.5 150 60 150 65 150 65 150
+First    40 75 40 75 62.5 140 67.5 137.5 80 160 85 160 80 160 85 165 70 160 67.5 160 67.5 160 85 160 85 160
+
+Economy  7.5****/10 15****/20 20 40 40 60 45 80 55 80 45 80 50 80 42.5 70 42.5 70 42.5 70 45 70 45 70
+Business 20 40 40 80 65 140 65 150 80 150 70/85*** 150 75 150 67.5 140 67.5 140 67.5 140 70 140 70 140
+First    25 50 45 90 80 160 85 160 100 160 90 160 95 160 82.5 160 82.5 160 82.5 160 95 160 90 160
+
+Economy  12.5 25 47.5 80 55 100 30**/60 100 60 100 60 100 47.5 80 47.5 80 47.5 80 55 100 50 100
+Business 20 40 70 140 80 150 45**/87.5 150 80/85*** 150 80 150 70 140 70 140 70 140 75 140 70 140
+First    25 50 80 190 100 180 70**/107.5 180 95 180 105 180 90 190 90 190 90 190 95 180 90 180
+
+Economy  12.5 25 17.5 60 30 60 17.5 60 30 60 50 87.5 45 87.5 45 90 55 100 55 100
+Business 20 45 30 90 45/50*** 90 27.5/40*** 90 50/60*** 100 62.5 130 65 140 60 130 85 150 75 150
+First    30 60 45 120 60 120 40 120 60 120 80 190 80 190 80 170 100 200 90 200
+
+Economy  15 45 22.5 60 22.5 60 35 60 35 105 40 105 40 105 50 100 50 100
+Business 25 65 35 90 35 90 50 90 50 145 60 145 50 145 75 150 75 150
+First    35 85 45 120 45 120 70 120 70 170 80 170 60 170 100 200 100 200
+
+Economy  12.5 25 35 80 40 80 40 80 40 90 40 90 50 100 50 100
+Business 25 50 45 120 60 120 60 120 60 120 50 120 75 150 75 150
+First    35 70 60 150 80 160 80 160 80 160 60 160 100 200 100 200
+
+Economy  15 30 20 60 37.5 90 37.5 90 45 90 40 90 45 90
+Business 22.5 45 35 90 50 135 50 135 67.5 135 60 135 67.5 135
+First    30 60 45 120 65 175 65 175 87.5 175 75 175 87.5 175
+
+Economy  15 30 25 50 25 50 25 50 35 70 30 60
+Business 22.5 45 40 80 40 80 40 80 50 100 45 90
+First    30 60 50 100 55 110 55 110 65 130 60 120
+
+Economy  12.5 25 15 35 15 30 17.5 50 30 70
+Business 17.5 35 22.5 42.5 30 40 32.5 80 45 100
+First    30 55 32.5 60 40 60 60 110 60 130
+
+Economy  12.5 25 10 25 20 50 35 70
+Business 20 35 20 35 32.5 80 50 100
+First    30 55 27.5 55 65 110 65 130
+
+Economy  6 15 12.5 35 25 50
+Business 15 30 20 50 40 80
+First    22.5 45 35 70 55 110
+
+Economy  12.5 35 17.5 35
+Business 20 50 25 50
+First    35 70 35 70
+
+Economy  17.5 35
+Business 25 50
+First    35 70
+!
+
+;======================== New Continental *A
+Economy  12.5 20 17.5 17.5 17.5 20 30 30 40 40 40 40 32.5 32.5 32.5 35 40
+Business 25 40 30 30 30 35 50 50 60 60 60 60 60 60 60 60 67.5
+First    35 50 40 40 40 45 67.5 67.5 75 75 75 80 70 70 67.5 75 80
+
+Economy  5 20 20 20 22.5 30 32.5 45 50 40 40 25 25 22.5 30 35
+Business 7.5 37.5 37.5 37.5 45 50 57.5 65 75 60 60 37.5 37.5 32.5 55 62.5
+First    10 47.5 47.5 47.5 60 67.5 67.5 85 90 80 80 50 50 47.5 75 72.5
+
+Economy  17.5 17.5 17.5 20 25 32.5 40 42.5 40 45 32.5 32.5 32.5 40 45
+Business 30 30 30 32.5 50 52.5 60 62.5 60 65 62.5 62.5 60 62.5 65
+First    40 40 40 40 60 67.5 80 80 80 85 80 70 70 85 85
+
+Economy  17.5 17.5 17.5 20 32.5 40 42.5 40 45 32.5 35 32.5 40 45
+Business 30 30 30 40 52.5 60 62.5 60 65 62.5 62.5 62.5 62.5 65
+First    40 40 40 50 70 80 80 80 85 80 80 75 85 85
+
+Economy  17.5 17.5 30 27.5 40 45 40 45 32.5 32.5 32.5 45 45
+Business 30 30 50 52.5 60 65 60 65 62.5 62.5 60 65 65
+First    40 40 62.5 67.5 80 85 80 85 70 67.5 67.5 85 85
+
+Economy  10 20 40 45 55 45 50 42.5 42.5 42.5 45 45
+Business 20 40 65 65 80 70 75 67.5 67.5 67.5 70 70
+First    25 45 80 85 100 90 95 82.5 82.5 82.5 95 90
+
+Economy  12.5 47.5 55 60 60 60 47.5 47.5 47.5 55 50
+Business 20 70 80 87.5 80 80 70 70 70 75 70
+First    25 80 100 107.5 95 105 90 90 90 95 90
+
+Economy  12.5 17.5 30 17.5 30 50 45 45 55 55
+Business 20 30 45 27.5 50 62.5 65 60 85 75
+First    30 45 60 40 60 80 80 80 100 90
+
+Economy  15 22.5 22.5 35 35 40 40 50 50
+Business 25 35 35 50 50 60 50 75 75
+First    35 45 45 70 70 80 60 100 100
+
+Economy  12.5 35 40 40 40 40 50 50
+Business 25 45 60 60 60 50 75 75
+First    35 60 80 80 80 60 100 100
+
+Economy  15 20 37.5 37.5 45 40 45
+Business 22.5 35 50 50 67.5 60 67.5
+First    30 45 65 65 87.5 75 87.5
+
+Economy  15 25 25 25 35 30
+Business 22.5 40 40 40 50 45
+First    30 50 55 55 65 60
+
+Economy  12.5 15 15 17.5 30
+Business 17.5 22.5 30 32.5 45
+First    30 32.5 40 60 60
+
+Economy  12.5 10 20 30
+Business 20 20 32.5 50
+First    30 27.5 65 65
+
+Economy  6 12.5 25
+Business 15 20 40
+First    22.5 35 55
+
+Economy  12.5 17.5
+Business 20 25
+First    35 35
+
+Economy  17.5
+Business 25
+First    35
+!
+
+;============ American Airlines
+@North America
+U.S. (including Hawaii Alaska), Canada, Mexico, Bermuda, The Bahamas the Caribbean. 
+@Central/South America Zone 1
+Belize, Colombia, Costa Rica, Ecuador, El Salvador, Guatemala, Honduras, Nicaragua, Panama, Peru, Venezuela 
+@South America Zone 2
+Argentina, Bolivia, Brazil, Chile (excluding Easter Island), Paraguay, Uruguay 
+@Europe
+Albania, Armenia, Austria, Azerbaijan, Belarus, Belgium, Bosnia-Herzegovinia, Bulgaria, Canary Islands, Croatia, Cyprus, Czech Republic, Denmark, Estonia, Finland, France, Georgia, Germany, Gibraltar, Greece, Greenland, Hungary, Iceland, Ireland, Italy, Latvia, Lithuania, Luxembourg, Macedonia, Malta, Moldova, Montenegro, Netherlands, Norway, Poland, Portugal, Romania, Russia, Serbia, Slovakia, Slovenia, Spain, Sweden, Switzerland, Turkey, Ukraine, United Kingdom, Yugoslavia 
+@Indian Sub-Continent / Middle East
+Afghanistan, Bahrain, Bangladesh, Egypt, India, Iran, Iraq, Israel, Jordan, Kazakhstan, Kuwait, Kyrgyzstan, Lebanon, Maldives, Nepal, Oman, Pakistan, Qatar, Saudi Arabia, Syria, Tajikistan, Turkmenistan, the United Arab Emirates, Uzbekistan 
+@Africa
+Algeria, Angola, Benin, Botswana, Burkina Faso, Burundi, Cameroon, Cape Verde, Central African Republic, Chad, Democratic Republic of Congo, Equatorial Guinea, Eritrea, Ethiopia, Gabon, Gambia, Ghana, Guinea, Guinea Bissau, Ivory Coast, Kenya, Lesotho, Liberia, Libya, Madagascar, Malawi, Mali, Mauritania, Mauritius, Melilla, Morocco, Mozambique, Namibia, Niger, Nigeria, Republic of Congo, Reunion, Rwanda, Senegal, Seychelles, Sierra Leone, Somalia, South Africa, Sudan, Swaziland, Tanzania, Togo, Tunisia, Uganda, Zambia, Zimbabwe 
+@Asia 1
+Japan, Korea, Mongolia
+@Asia 2
+Bhutan, Brunei, Cambodia, China, Guam, Hong Kong, Indonesia, Laos, Malaysia, Myanmar, the Philippines, Saipan, Singapore, Sri Lanka, Taiwan, Thailand, Vietnam 
+@South Pacific
+Australia, Easter Island, Fiji, French Polynesia, New Caledonia, New Zealand, Papua New Guinea, Republic of Tonga, Republic of Vanuatu, American Samoa Samoa 
+
+Economy  0
+Business 0
+First    0
+
+Economy  17.5	15
+Business 30	30
+First    40	NA
+
+Economy  20	NA	NA
+Economy  30	20	12.5
+Business 50	32.5	22.5
+First    62.5	40	30
+
+Economy  20*	NA	NA	NA
+Economy  30*	45*	50*	10
+Business 50*	55*	70*	20
+First    62.5*	70*	90*	NA
+
+Economy  45*	60*	67.5*	20	17.5
+Business 67.5*	82.5*	90*	30	25
+First    90*	102.5*	110*	40	35
+
+Economy  37.5*	67.5*	75*	30	30	10
+Business 75*	90*	97.5*	37.5	45	17.5
+First    100*	110*	117.5*	50	NA	NA
+
+Economy  25^	0	0	NA	NA	NA	NA
+Economy  32.5^	0	0	32.5	22.5	30	10
+Business 50^	0	0	52.5	30	50	20
+First    62.5^	0	0	70	45	70	30
+
+Economy  35^	0	0	35	22.5	30	20	15
+Business 55^	0	0	52.5	30	50	30	22.5
+First    67.5^	0	0	70	45	70	40	32.5
+
+Economy  37.5^	40^	37.5^	45	30	37.5	30	25	20
+Business 62.5^	65^	50^	60	45	50	45	35	30
+First    72.5^	75^	75^	80	60	75	60	45	42.5
+!
+
+;======================= Lufthansa
+;; One-way = *0.5 (LH/Adria/etc)
+@Europe
+Albania, Austria, Belarus, Belgium, Bosnia-Herzegovina, Bulgaria, Croatia, Cyprus, Denmark (excl. Greenland), Czech Republic, Estonia, Finland, France, Germany, Great Britain , Greece, Hungary, Iceland, Ireland, Italy, Latvia, Lithuania, Luxembourg, Macedonia , Malta, Moldova, Montenegro, Netherlands, Norway, Poland, Portugal (excl. Azores, Madeira), Romania, Russia, Serbia, Slovakia, Slovenia, Spain (incl. Balearics but excl. Canaries), Sweden, Switzerland, Turkey, Ukraine
+@North America
+Canada, Greenland, USA (excl. Hawaii)
+@Hawaii
+Hawaii
+@Central America, Caribbean
+Antigua, Aruba, Bahamas, Barbados, Belize, Bermuda, Cayman Islands, Costa Rica, Cuba, Dominican Republic, El Salvador, Grenada, Guadeloupe, Guatemala, Haiti, Jamaica, Martinique, Mexico, Netherlands Antilles , Nicaragua, Panama, Puerto Rico, St. Kitts-Nevis, St. Lucia, St. Maarten, Trinidad & Tobago, Turks & Caicos Islands, Virgin Islands
+@South America
+Argentina, Bolivia, Brazil, Chile, Colombia, Ecuador, French Guiana, Paraguay, Peru, Uruguay, Venezuela
+@Middle East, Caucasus, north/central Africa
+Algeria, Armenia, Azerbaijan, Azores, Bahrain, Benin, Burkina Faso, Burundi, the Cameroons, Canary Islands, Cape Verde, Congo, Djibouti, Egypt, Equatorial Guinea, Eritrea, Ethiopia, Gabon, Gambia, Georgia, Ghana, Guinea, Guinea Bissau, Iraq, Iran, Israel, Ivory Coast, Jordan, Kenya, Kuwait, Lebanon, Liberia, Libya, Madeira, Morocco, Niger, Nigeria, Oman, Qatar, Rwanda, Sao Tomé and Principe, Saudi-Arabia, Senegal, Sierra Leone, Sudan, Syria, Tanzania, Togo, Tunisia, Uganda, United Arab Emirates, Yemen
+@Southern Africa
+Angola, Botswana, Lesotho, Madagascar, Malawi, Mauritius, Mozambique, Namibia, Seychelles, South Africa, Swaziland, Zambia, Zimbabwe
+@India
+Bangladesh, Bhutan, India, Maldives, Nepal, Pakistan, Sri Lanka
+@South-east Asia
+Brunei, Cambodia, Indonesia, Laos, Malaysia, Myanmar (Burma), Palau Islands, Philippines, Singapore, Thailand, Vietnam
+@Central Asia/Far East
+Kazakhstan, Kyrgyzstan, Mongolia, Tadzhikistan, Turkmenistan, Uzbekistan, China (incl. Hong Kong & Macau), Japan, South Korea, Taiwan
+@Australia, New Zealand, Oceania
+Australia (incl. Tasmania), Cook Islands, Fiji, Guam, Mariana Islands, Micronesia, New Caledonia, New Zealand, Norfolk Islands, Papua New Guinea, Samoa, Tahiti (incl. French Polynesia), Tonga
+
+Economy 30 60 100 70 80 40 60 60 80 80 100
+Business 45 105 185 120 135 70 105 105 135 135 185
+First 170 290 190 210 125 170 170 210 210 290
+
+Economy 30 40 35 60 80 100 100 80 80 80
+Business 55 70 60 105 135 185 185 135 135 135
+First 75 125 85 170 210 290 290 210 210 210
+
+Economy - 60 80 100 100 100 60 40 40
+Business - 105 135 185 185 185 105 70 70
+First - 170 210 290 290 290 170 125 125
+
+Economy 30 35 100 100 100 100 100 80
+Business 55 60 165 165 185 185 185 135
+First 75 85 230 230 290 290 290 210
+
+Economy 30 100 60 100 100 100 80
+Business 55 185 105 185 185 185 135
+First 75 290 170 290 290 290 210
+
+Economy 30 40 30 60 80 100
+Business 55 70 55 105 135 185
+First 75 125 75 170 210 290
+
+Economy 30 60 80 100 100
+Business 55 105 135 185 185
+First 75 170 210 290 290
+
+Economy - 40 40 80
+Business - 70 70 135
+First - 125 125 210
+
+Economy 30 40 60
+Business 55 70 105
+First 75 125 170
+
+Economy 30 60
+Business 55 105
+First 75 170
+
+Economy 30
+Business 55
+First 75
+!
+
+;========================================= Delta
+@Continental US, Alaska Canada
+us, us-ak, ca
+Within Continental US, Alaska Canada  	12.5  	20  	30  	22.5  	40  	50
+To Hawaii 	20 	32.5 	45 	37.5/42.5* 	67.5/72.5* 	90/95*
+To Caribbean 	17.5 	25 	35 	30 	50 	70
+To Mexico 	17.5 	25 	35 	30 	50 	70
+To Central America 	17.5 	30 	40 	30 	50 	70
+To Northern South America 	22.5 	35 	50 	45 	65 	90
+To Southern South America 	30 	45 	62.5 	50 	100 	162.5
+To Europe 	30 	45 	62.5 	50 	100 	162.5
+To Africa 	40 	65 	80 	60 	115 	175
+To Middle East 	40 	65 	80 	60 	115 	175
+To South Asian Subcontinent 	40 	65 	80 	60 	115 	175
+To Northern Asia 	35 	60 	80 	60 	110 	170
+To Southeast Asia 	40 	65 	87.5 	60 	120 	185
+To Southwest Pacific 	50 	70 	95 	75 	120 	185
+To South Africa 	50 	75 	100 	70 	125 	190
+
+@Caribbean
+Anguilla, Antigua Barbuda, Aruba, Bahamas, Barbados, Bermuda, Bonaire, Saint Eustatius, Saba, British Virgin Islands, Cayman Islands, Cuba, Curacao, Dominica, Dominican Republic, Grenada, Guadeloupe, Guyana, Haiti, Jamaica, Martinique, Montserrat, Saint Kitts Nevis, Saint Lucia, Saint Maarten, Saint Vincent The Grenadines, Trinidad Tobago, Turks Caicos Islands, US Virgin Islands, Puerto Rico
+Within Caribbean  	17.5  	25  	35  	30  	50  	70
+To Continental US, Alaska Canada 	17.5 	25 	35 	30 	50 	70
+To Hawaii 	22.5 	30 	40 	40 	60 	80
+To Mexico 	17.5 	25 	35 	30 	50 	70
+To Central America 	17.5 	30 	40 	30 	50 	70
+To Northern South America 	22.5 	35 	50 	45 	65 	90
+To Southern South America 	30 	45 	62.5 	50 	100 	170
+To Europe 	30 	45 	62.5 	50 	100 	170
+To Africa 	40 	65 	95 	60 	115 	185
+To Middle East 	40 	65 	95 	60 	115 	185
+To South Asian Subcontinent 	40 	65 	95 	60 	115 	185
+To Northern Asia 	40 	65 	85 	60 	120 	185
+To Southeast Asia 	40 	65 	85 	60 	120 	185
+To Southwest Pacific 	50 	70 	95 	75 	120 	185
+To South Africa 	50 	75 	100 	70 	125 	190
+
+@Central America
+Belize, Costa Rica, El Salvador, Guatemala, Honduras, Nicaragua, Panama
+Within Central America  	7.5  	-  	-  	10  	-  	-
+To Continental US, Alaska Canada 	17.5 	30 	40 	30 	50 	70
+To Hawaii 	22.5 	32.5 	42.5 	40 	60 	80
+To Caribbean 	17.5 	30 	40 	30 	50 	70
+To Mexico 	17.5 	30 	40 	30 	50 	70
+To Northern South America 	10 	- 	- 	15 	- 	-
+To Southern South America 	22.5 	- 	- 	32.5 	- 	-
+To Europe 	30 	45 	62.5 	50 	100 	175
+To Africa 	40 	65 	95 	60 	115 	185
+To Middle East 	40 	65 	95 	60 	115 	185
+To South Asian Subcontinent 	40 	65 	95 	60 	115 	185
+To Northern Asia 	40 	65 	85 	60 	120 	185
+To Southeast Asia 	40 	65 	85 	60 	120 	185
+To Southwest Pacific 	50 	70 	95 	75 	120 	185
+To South Africa 	50 	75 	100 	70 	125 	190
+
+@Mexico
+Mexico
+Within Mexico  	10  	17.5  	27.5  	20  	37.5  	45
+To Continental US, Alaska Canada 	17.5 	25 	35 	30 	50 	70
+To Hawaii 	22.5 	30 	40 	40 	60 	80
+To With Caribbean 	17.5 	25 	35 	30 	50 	70
+To Central America 	17.5 	30 	40 	30 	50 	70
+To Northern South America 	22.5 	35 	50 	45 	65 	90
+To Southern South America 	30 	45 	62.5 	50 	100 	170
+To Europe 	30 	45 	62.5 	50 	100 	170
+To Africa 	40 	65 	95 	60 	115 	185
+To Middle East 	40 	65 	95 	60 	115 	185
+To South Asian Subcontinent 	40 	65 	95 	60 	115 	185
+To Northern Asia 	40 	65 	85 	60 	120 	185
+To Southeast Asia 	40 	65 	85 	60 	120 	185
+To Southwest Pacific 	50 	70 	95 	75 	120 	185
+To South Africa 	50 	75 	100 	70 	125 	190
+
+@Hawaii
+us-hi
+Within Hawaii  	5  	7.5  	-  	-  	-  	-
+To Continental US, Alaska Canada 	20 	32.5 	45 	37.5 / 42.5* 	67.5 / 72.5* 	90 / 95*
+To Caribbean 	22.5 	30 	40 	40 	60 	80
+To Mexico 	22.5 	30 	40 	40 	60 	80
+To Central America 	22.5 	32.5 	42.5 	40 	60 	80
+To Northern South America 	27.5 	40 	55 	55 	75 	100
+To Southern South America 	35 	50 	67.5 	60 	110 	180
+To Europe 	35 	50 	67.5 	60 	110 	180
+To Africa 	45 	70 	100 	70 	125 	190
+To Middle East 	45 	70 	100 	70 	125 	190
+To South Asian Subcontinent 	45 	70 	100 	70 	125 	190
+To Northern Asia 	20 	45 	65 	35 	70 	150
+To Southeast Asia 	25 	50 	70 	40 	75 	160
+To Southwest Pacific 	50 	70 	95 	75 	120 	185
+To South Africa 	55 	80 	105 	80 	135 	200
+
+@Northern South America
+Bolivia, Colombia, Ecuador, Peru, Venezuela, French Guiana, Suriname
+Within Northern South America  	10  	-  	-  	15  	-  	-
+To Continental US, Alaska Canada 	22.5 	35 	50 	45 	65 	90
+To Hawaii 	27.5 	40 	55 	55 	75 	100
+To Caribbean 	22.5 	35 	50 	45 	65 	90
+To Mexico 	22.5 	35 	50 	45 	65 	90
+To Central America 	10 	- 	- 	15 	- 	-
+To Southern South America 	22.5 	- 	- 	32.5 	- 	-
+To Europe 	40 	60 	75 	60 	110 	185
+To Africa 	50 	75 	105 	75 	125 	195
+To Middle East 	50 	75 	105 	75 	125 	195
+To South Asian Subcontinent 	50 	75 	105 	75 	125 	195
+To Northern Asia 	50 	75 	105 	75 	125 	195
+To Southeast Asia 	50 	75 	105 	75 	125 	195
+To Southwest Pacific 	50 	75 	105 	75 	125 	195
+To South Africa 	60 	85 	110 	85 	135 	200
+
+@Southern South America
+Argentina, Brazil, Chile, Paraguay, Uruguay 
+Within Southern South America  	10  	-  	-  	15  	-  	-
+To Continental US, Alaska Canada 	30 	45 	62.5 	50 	100 	162.5
+To Hawaii 	35 	50 	67.5 	60 	110 	180
+To Caribbean 	30 	45 	62.5 	50 	100 	170
+To Mexico 	30 	45 	62.5 	50 	100 	170
+To Central America 	22.5 	- 	- 	32.5 	- 	-
+To Northern South America 	22.5 	- 	- 	32.5 	- 	-
+To Europe 	50 	80 	100 	75 	115 	190
+To Africa 	60 	80 	110 	80 	130 	200
+To Middle East 	60 	80 	110 	80 	130 	200
+To South Asian Subcontinent 	60 	80 	110 	80 	130 	200
+To Northern Asia 	60 	80 	110 	80 	130 	200
+To Southeast Asia 	60 	80 	110 	80 	130 	200
+To Southwest Pacific 	60 	80 	110 	90 	130 	200
+To South Africa 	70 	90 	115 	90 	140 	205
+
+@South Africa
+South Africa
+Within Africa  	30  	45  	62.5  	50  	100  	175
+To Continental US, Alaska Canada 	50 	75 	100 	70 	125 	190
+To Hawaii 	55 	80 	105 	80 	135 	200
+To Caribbean 	50 	75 	100 	70 	125 	190
+To Mexico 	50 	75 	100 	70 	125 	190
+To Central America 	50 	75 	100 	70 	125 	190
+To Northern South America 	60 	85 	110 	85 	135 	200
+To Southern South America 	70 	90 	115 	90 	140 	205
+To Europe 	35 	- 	- 	50 	- 	-
+To Middle East 	40 	- 	- 	60 	- 	-
+To South Asian Subcontinent 	40 	- 	- 	60 	- 	-
+To Northern Asia 	50 	- 	- 	75 	- 	-
+To Southeast Asia 	60 	- 	- 	90 	- 	-
+To Southwest Pacific 	60 	- 	- 	90 	- 	-
+
+@Africa
+Angola, Benin, Botswana, Burkina Faso, Burundi, Cameroon, Cape Verde, Central African Republic, Chad, Comoros, Congo (Brazzaville), Congo (Kinshasa), Cote d'Ivoire, Djibouti, Equatorial Guinea, Eritrea, Ethiopia, Gabon, Gambia, Ghana, Guinea, Guinea Bissau, Libyan Arab Jamahirija, Kenya, Lesotho, Liberia, Madagascar, Malawi, Mali, Mauritania, Mauritius, Mayotte, Mozambique, Namibia, Niger, Nigeria, Reunion, Rwanda, Sao Tome Principe, Senegal, Seychelles, Sierra Leone, Somalia, Swaziland, Tanzania, United Republic of, Togo, Uganda, Zambia, Zimbabwe, Sudan, South Africa
+Within Africa  	30  	45  	62.5  	50  	100  	175
+To Continental US, Alaska Canada 	40 	65 	80 	60 	115 	175
+To Hawaii 	45 	70 	100 	70 	125 	190
+To Caribbean 	40 	65 	95 	60 	115 	185
+To Mexico 	40 	65 	95 	60 	115 	185
+To Central America 	40 	65 	95 	60 	115 	185
+To Northern South America 	50 	75 	105 	75 	125 	195
+To Southern South America 	60 	80 	110 	80 	130 	200
+To Europe 	35 	- 	- 	50 	- 	-
+To Middle East 	40 	- 	- 	60 	- 	-
+To South Asian Subcontinent 	40 	- 	- 	60 	- 	-
+To Northern Asia 	50 	- 	- 	75 	- 	-
+To Southeast Asia 	60 	- 	- 	90 	- 	-
+To Southwest Pacific 	60 	- 	- 	90 	- 	-
+
+@Europe
+Albania, Algeria, Andorra, Armenia, Austria, Azerbaijan, Belarus, Belgium, Bosnia Herzegovina, Bulgaria, Croatia, Cyprus, Czech Republic, Denmark (excluding Greenland), Estonia, Faroe Islands, Finland, France, Georgia, Germany, Gibraltar, Greece, Hungary, Iceland, Ireland, Italy, Latvia, Liechtenstein, Lithuania, Luxembourg, Macedonia, The Former Yugoslav Republic of, Malta, Moldova, Republic of, Montenegro, Monaco, Morocco, Netherlands, Norway, Poland, Portugal (including Azores Madeira), Romania, Russia, San Marino, Serbia, Slovakia, Slovenia, Spain (including Canary Islands), Svalbard & Jan Mayen Island, Sweden, Switzerland, Tunisia, Turkey, Ukraine, United Kingdom, Vatican City
+Within Europe  	12.5  	20  	30  	22.5  	40  	50
+To Continental US, Alaska Canada 	30 	45 	62.5 	50 	100 	162.5
+To Hawaii 	35 	50 	67.5 	60 	110 	180
+To Caribbean 	30 	45 	62.5 	50 	100 	170
+To Mexico 	30 	45 	62.5 	50 	100 	170
+To Central America 	30 	45 	62.5 	50 	100 	175
+To Northern South America 	40 	60 	75 	60 	110 	185
+To Southern South America 	50 	80 	100 	75 	115 	190
+To Africa 	35 	- 	- 	50 	- 	-
+To Middle East 	20 	- 	- 	30 	- 	-
+To South Asian Subcontinent 	35 	42.5 	55 	40 	60 	75
+To Northern Asia 	40 	- 	- 	60 	- 	-
+To Southeast Asia 	40 	- 	- 	60 	- 	-
+To Southwest Pacific 	50 	- 	- 	75 	- 	-
+To South Africa 	35 	- 	- 	50 	- 	-
+Within France  	10  	-  	-  	22.5  	-  	-
+Within Italy 	10 	- 	- 	22.5 	- 	-
+Czech Republic to/from Slovakia 	7.5 	- 	- 	12.5 	- 	-
+Europe to/from Algeria, Morocco, Tunisia 	15 	- 	- 	22.5 	- 	-
+
+@Middle East
+Bahrain, Egypt, Iran, Islamic Republic of, Iraq, Israel, Jordan, Kuwait, Lebanon, Occupied Palestinian Territory, Oman, Qatar, Saudi Arabia, Syrian Arab Republic, United Arab Emirates (composed of Abu Dhabi, Ajman, Dubai, Fujairah, Ras El Khaimah, Sharjah, Umm Al Qaiwain), Yemen, Republic of, Kazakhstan, Kyrgyzstan, Uzbekistan 
+Within Middle East  	40  	-  	-  	60  	-  	-
+To Continental US, Alaska Canada 	40 	65 	80 	60 	115 	175
+To Hawaii 	45 	70 	100 	70 	125 	190
+To Caribbean 	40 	65 	95 	60 	115 	185
+To Mexico 	40 	65 	95 	60 	115 	185
+To Central America 	40 	65 	95 	60 	115 	185
+To Northern South America 	50 	75 	105 	75 	125 	195
+To Southern South America 	60 	80 	110 	80 	130 	200
+To Europe 	20 	- 	- 	30 	- 	-
+To Africa 	40 	- 	- 	60 	- 	-
+To South Asian Subcontinent 	40 	- 	- 	60 	- 	-
+To Northern Asia 	40 	- 	- 	60 	- 	-
+To Southeast Asia 	40 	- 	- 	60 	- 	-
+To Southwest Pacific 	55 	- 	- 	85 	- 	-
+
+@South Asian Subcontinent
+Afghanistan, Bangladesh, Bhutan, British Indian Ocean Territory, India, Nepal, Pakistan, Maldives, Sri Lanka
+Within South Asian Subcontinent  	17.5  	-  	-  	25  	-  	-
+To Continental US, Alaska Canada 	40 	65 	80 	60 	115 	175
+To Hawaii 	45 	70 	100 	70 	125 	190
+To Caribbean 	40 	65 	95 	60 	115 	185
+To Mexico 	40 	65 	95 	60 	115 	185
+To Central America 	40 	65 	95 	60 	115 	185
+To Northern South America 	50 	75 	105 	75 	125 	195
+To Southern South America 	60 	80 	110 	80 	130 	200
+To Europe 	35 	42.5 	55 	40 	60 	75
+To Africa 	40 	- 	- 	60 	- 	-
+To Middle East 	40 	- 	- 	60 	- 	-
+To Northern Asia 	25 	- 	- 	35 	- 	-
+To Southeast Asia 	25 	- 	- 	35 	- 	-
+To Southwest Pacific 	45 	- 	- 	70 	- 	-
+
+@Northern Asia
+Japan, Korea, Republic of, Korea, Democratic People's Republic of, China, Hong Kong SAR, Taiwan, Province of, Micronesia, Philippines
+Within Northern Asia  	12.5  	20  	30  	22.5  	30  	40
+To Continental US, Alaska Canada 	35 	60 	80 	60 	110 	170
+To Hawaii 	20 	45 	65 	35 	70 	150
+To Caribbean 	40 	65 	85 	60 	120 	185
+To Mexico 	40 	65 	85 	60 	120 	185
+To Central America 	40 	65 	85 	60 	120 	185
+To Northern South America 	50 	75 	105 	75 	125 	195
+To Southern South America 	60 	80 	110 	80 	130 	200
+To Europe 	40 	- 	- 	60 	- 	-
+To Africa 	50 	- 	- 	75 	- 	-
+To Middle East 	40 	- 	- 	60 	- 	-
+To South Asian Subcontinent 	25 	- 	- 	35 	- 	-
+To Southeast Asia 	22.5 	40 	50 	35 	55 	75
+To Southwest Pacific 	35 	- 	- 	55 	- 	-
+Japan to/from Korea  	7.5  	20  	30  	15  	30  	40
+Within Korea 	5 	7.5 	- 	6 	9 	-
+Within China	6 	- 	- 	7.5 	- 	-		(Short Haul)
+Within China	15 	- 	- 	17.5 	- 	-		(Med Haul)
+Within China	30 	- 	- 	45 	- 	-		(Long Haul)
+
+@Southeast Asia
+Brunei Darussalam, Cambodia, Indonesia, Laos, People's Democratic Republic of, Macau SAR, Malaysia, Mongolia, Myanmar, Singapore, Tajikistan, Thailand, Timor Leste, Turkmenistan, Vietnam, Papua New Guinea
+Within Southeast Asia  	22.5  	40  	50  	35  	55  	75
+To Continental US, Alaska Canada 	40 	65 	87.5 	60 	120 	185
+To Hawaii 	25 	50 	70 	40 	75 	160
+To Caribbean 	40 	65 	85 	60 	120 	185
+To Mexico 	40 	65 	85 	60 	120 	185
+To Central America 	40 	65 	85 	60 	120 	185
+To Northern South America 	50 	75 	105 	75 	125 	195
+To Southern South America 	60 	80 	110 	80 	130 	200
+To Europe 	40 	- 	- 	60 	- 	-
+To Africa 	60 	- 	- 	90 	- 	-
+To Middle East 	40 	- 	- 	60 	- 	-
+To South Asian Subcontinent 	25 	- 	- 	35 	- 	-
+To Northern Asia 	22.5 	40 	50 	35 	55 	75
+To Southwest Pacific 	40 	- 	- 	60 	- 	-
+Within Vietnam 	12.5 	- 	- 	20 	- 	-
+
+@Southwest Pacific
+American Samoa, Australia, Christmas Islands, Cocos (Keeling) Islands, Cook Islands, Fiji, French Polynesia, Kiribati, Nauru, New Caledonia, New Zealand, Niue, Norfolk Island, Pitcaim, Samoa, Solomon Islands, Tokelau, Tongo, Tuvalu, Vanuatu, Wallis Futuna Islands
+Within Southwest Pacific  	30  	-  	-  	45  	-  	-
+To Continental US, Alaska Canada 	50 	70 	95 	75 	120 	185
+To Hawaii 	50 	70 	95 	75 	120 	185
+To Caribbean 	50 	70 	95 	75 	120 	185
+To Mexico 	50 	70 	95 	75 	120 	185
+To Central America 	50 	70 	95 	75 	120 	185
+To Northern South America 	50 	75 	105 	75 	125 	195
+To Southern South America 	60 	80 	110 	90 	130 	200
+To Europe 	50 	- 	- 	75 	- 	-
+To Africa 	60 	- 	- 	90 	- 	-
+To Middle East 	55 	- 	- 	85 	- 	-
+To South Asian Subcontinent 	45 	- 	- 	70 	- 	-
+To Northern Asia 	35 	- 	- 	55 	- 	-
+To Southeast Asia 	40 	- 	- 	60 	- 	-
+!
+
+;;========================== BMI Diamond club
+;; First = *2.5	; $*2.5
+;; Business = *1.5 ; $*1.5
+;; LH First = 10,000 per sector
+;; Connecting flights for journeys where the final destination is within zone 1 or zone 2 : 7500 miles or (4000 miles + £30) 
+;; One-way = *0.5 ; $*0.5
+@Zone 1
+UK, Austria, Belgium, France, Germany, Luxembourg, Netherlands, Republic of Ireland, Switzerland	
+
+9000*
+(4500 + £40)
+	
+
+12000*
+(6000 + £70)
+	
+
+45000
+(25000 + £140)
+	
+
+50000
+(25000 + £170)
+	
+
+40000
+(20000 + £140)
+	
+
+50000
+(25000 + £170)
+	
+
+80000
+(40000 + £270)
+	
+
+70000
+(35000 + £240)
+	
+
+100000
+(50000 + £340)
+	
+
+50000
+(25000 + £170)
+	
+
+80000
+(40000 + £270)
+	
+
+-
+
+@Zone 2
+Armenia, Belarus, Bosnia-Herzegovina, Bulgaria, Croatia, Cyprus, Czech Republic, Denmark, Estonia, Finland, Georgia, Greece, Hungary, Italy, Latvia, Lithuania, Macedonia, Malta, Moldavia, Montenegro, Morocco, Norway, Poland, Portugal, Romania, Russia, Serbia, Slovenia, Spain (including Balearics), Sweden, Turkey, Ukraine, Yugoslavia	
+
+-
+	
+
+20000*
+(10000 + £70)
+	
+
+50000
+(25000 + £170)
+	
+
+50000
+(25000 + £170)
+	
+
+30000
+(15000 + £100)
+	
+
+50000
+(25000 + £170)
+	
+
+80000
+(40000 + £270)
+	
+
+50000
+(25000 + £170)
+	
+
+100000
+(50000 + £340)
+	
+
+40000
+(20000 + £140)
+	
+
+80000
+(40000 + £270)
+	
+
+-
+
+@Zone 3
+Belize, Canada, Costa Rica, El Salvador, Greenland, Guatemala, Honduras, Mexico, Panama, USA	
+
+-
+	
+
+-
+	
+
+30000
+(15000 + £100)
+	
+
+40000
+(20000 + £140)
+	
+
+80000
+(40000 + £270)
+	
+
+100000
+(50000 + £340)
+	
+
+100000
+(50000 + £340)
+	
+
+80000
+(40000 + £270)
+	
+
+80000
+(40000 + £270)
+	
+
+80000
+(40000 + £270)
+	
+
+40000
+(20000 + £140)
+	
+
+-
+
+@Zone 4
+Antigua, Argentina, Bahamas, Barbados, Bermuda, Bolivia, Brazil, Caribbean, Chile, Colombia, Cuba, Martinique, Paraguay, Peru, Puerto Rico, St Lucia, St Thomas, Uruguay, Venezuela	
+
+-
+	
+
+-
+	
+
+-
+	
+
+30000
+(15000 + £100)
+	
+
+80000
+(40000 + £270)
+	
+
+80000
+(40000 + £270)
+	
+
+100000
+(50000 + £340)
+	
+
+100000
+(50000 + £340)
+	
+
+80000
+(40000 + £270)
+	
+
+80000
+(40000 + £270)
+	
+
+50000
+(25000 + £170)
+	
+
+-
+
+@Zone 5
+Azerbaijan, Cameroon, Cape Verde, Egypt, Eritrea, Ethiopia, Ghana, Guinea Bissea, Iran, Israel, Jordan, Kazakhstan, Kenya, Kuwait, Kyrgyzstan, Lebanon, Libya, Nigeria, Oman, Rwanda, Saudi Arabia, Senegal, Sierra Leone, Somalia, Sudan, Syria, Tanzania, Tripoli, Tunisia, Uganda, United Arab Emirates, Yemen	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+20000
+(10000 + £70)
+	
+
+30000
+(15000 + £100)
+	
+
+50000
+(25000 + £170)
+	
+
+80000
+(40000 + £270)
+	
+
+100000
+(50000 + £340)
+	
+
+40000
+(20000 + £140)
+	
+
+100000
+(50000 + £340)
+	
+
+-
+
+@Zone 6
+Angola, Cote d`Ivoire, Mozambique, Namibia, Sao Tome Island, South Africa, Zimbabwe	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+20000
+(10000 + £70)
+	
+
+50000
+(25000 + £170)
+	
+
+80000
+(40000 + £270)
+	
+
+80000
+(40000 + £270)
+	
+
+50000
+(25000 + £170)
+	
+
+100000
+(50000 + £340)
+	
+
+-
+
+@Zone 7
+Bangladesh, Borneo, Brunei, Burma, Cambodia, Indonesia, Laos, Malaysia, Myanmar, The Philippines, Singapore, Sri Lanka, Thailand, Vietnam	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+20000
+(10000 + £70)
+	
+
+30000
+(15000 + £100)
+	
+
+50000
+(25000 + £170)
+	
+
+30000
+(15000 + £100)
+	
+
+80000
+(40000 + £270)
+	
+
+-
+
+@Zone 8
+China, Hong Kong, Japan, South Korea, Taiwan, Turkmenistan, Uzbekistan	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+30000
+(15000 + £100)
+	
+
+50000
+(25000 + £170)
+	
+
+40000
+(20000 + £140)
+	
+
+50000
+(25000 + £170)
+	
+
+-
+
+@Zone 9
+Australia (including Tasmania), Cook Islands, Fiji, French Polynesia, Guam, New Caledonia, New Zealand, Norfolk Islands, Tonga, Western Samoa	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+30000
+(15000 + £100)
+	
+
+80000
+(40000 + £270)
+	
+
+50000
+(25000 + £170)
+	
+
+-
+
+@Zone 10
+India, Maldives, Nepal, Pakistan	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+30000
+(15000 + £100)
+	
+
+80000
+(40000 + £270)
+	
+
+-
+
+@Zone 11
+Hawaii
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+200000
+(100000 + £680
+
+-
+	
+
