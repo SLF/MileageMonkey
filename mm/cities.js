@@ -2368,7 +2368,7 @@ countrycodes["PR"] = [ "nam", "nam", "puerto rico" ];
 countrycodes["VG"] = [ "nam", "nam", "british virgin islands" ];
 countrycodes["MQ"] = [ "nam", "nam", "martinique" ];
 countrycodes["KY"] = [ "nam", "nam", "caymans" ];
-countrycodes["TC"] = [ "nam", "nam", "turks and caicos" ];
+countrycodes["TC"] = [ "nam", "nam", "turks & caicos" ];
 countrycodes["GP"] = [ "nam", "nam", "guadeloupe" ];		/* Split to GP,BL,MF */
 countrycodes["MF"] = [ "nam", "nam", "st. martin" ];
 countrycodes["BL"] = [ "nam", "nam", "st. barts" ];
@@ -2395,6 +2395,7 @@ countrycodes["BR"] = [ "sam", "sam", "brazil" ];
 countrycodes["FK"] = [ "sam", "sam", "falklands" ];
 
 /* Europe */
+countrycodes["AD"] = [ "eur", "eur", "andorra" ];
 countrycodes["FO"] = [ "eur", "eur", "faroe" ];
 countrycodes["GI"] = [ "eur", "eur", "gibraltar" ];
 countrycodes["GL"] = [ "eur", "eur", "greenland" ];
@@ -2471,10 +2472,11 @@ countrycodes["LB"] = [ "asa", "eur", "lebanon" ];
 /* asia */
 countrycodes["AM"] = [ "asa" ,"eur", "armenia" ];
 countrycodes["AZ"] = [ "asa", "eur", "azerbaijan" ];
+countrycodes["AZ-NX"] = [ "asa", "eur", "nakhchivan" ];
 countrycodes["GE"] = [ "asa", "eur", "georgia" ];
 countrycodes["JP"] = [ "asa", "asa", "japan" ];
-countrycodes["KR"] = [ "asa", "asa", "s. korea" ];
-countrycodes["KP"] = [ "asa", "asa", "n. korea" ];
+countrycodes["KR"] = [ "asa", "asa", "south korea" ];
+countrycodes["KP"] = [ "asa", "asa", "north korea" ];
 countrycodes["MN"] = [ "asa", "asa", "mongolia" ];
 countrycodes["CN"] = [ "asa", "asa", "china" ];
 countrycodes["TW"] = [ "asa", "asa", "taiwan" ];
@@ -2538,6 +2540,8 @@ countrycodes["NF"] = [ "swp", "swp", "norfolk island" ];
 countrycodes["AS"] = [ "swp", "swp", "american samoa" ];
 countrycodes["VU"] = [ "swp", "swp", "vanuatu" ];
 countrycodes["WF"] = [ "swp", "swp", "wallis & futuna" ];
+countrycodes["TK"] = [ "swp", "swp", "tokelau" ];
+countrycodes["PN"] = [ "swp", "swp", "pitcairn" ];
 
 /* africa */
 countrycodes["EG"] = [ "afr", "eur", "egypt" ];
@@ -2569,7 +2573,7 @@ countrycodes["CF"] = [ "afr", "afr", "central african republic" ];
 countrycodes["ER"] = [ "afr", "afr", "eritrea" ];
 countrycodes["ET"] = [ "afr", "afr", "ethiopia" ];
 countrycodes["DJ"] = [ "afr", "afr", "djibouti" ];
-countrycodes["GQ"] = [ "afr", "afr", "eq. guinea" ];
+countrycodes["GQ"] = [ "afr", "afr", "equatorial guinea" ];
 countrycodes["GA"] = [ "afr", "afr", "gabon" ];
 countrycodes["CG"] = [ "afr", "afr", "congo" ];
 countrycodes["CD"] = [ "afr", "afr", "dem. congo" ];
@@ -2597,4 +2601,6 @@ countrycodes["RE"] = [ "afr", "afr", "reunion" ];
 countrycodes["KM"] = [ "afr", "afr", "comoros" ];
 countrycodes["SZ"] = [ "afr", "afr", "swaziland" ];
 countrycodes["SO"] = [ "afr", "afr", "somalia" ];
-
+countrycodes["SH"] = [ "afr", "afr", "st. helena" ];
+countrycodes["AC"] = [ "afr", "afr", "ascencion" ];
+countrycodes["TA"] = [ "afr", "afr", "tristan de cunha" ];
