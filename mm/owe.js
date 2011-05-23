@@ -37,7 +37,7 @@ var owe_namerica  = "us|ca|mx|bz|gt|sv|hn|ni|cr|pa|aw|tt|gd|bb|lc|mq|dm|" +
 						"gp|bl|mf|ag|kn|cw|bq|sx|vg|vi|pr|do|ht|jm|cu|ky|bs|bm|ai|tc";
 var owe_samerica  = "co|ve|ec|pe|bo|cl|br|py|uy|ar|fk";
 var owe_europe    = "ie|gb|is|no|se|fi|dk|ru|ee|lv|lt|by|ua|am|az|ge|md|" +
-						"ro|bg|tr|gr|mk|al|yu|ba|hr|si|hu|sk|cz|pl|de|ch|it|" +
+						"ro|bg|tr|gr|mk|al|yu|ba|hr|si|rs|me|hu|sk|cz|pl|de|ch|it|" +
 						"mt|pt|es|gi|fr|be|nl|lu|ma|dz|tn|eg|cy|at|sd|"+owe_mideast;
 
 // owe_africa2 handles the second permissible European entry from some African countries - 

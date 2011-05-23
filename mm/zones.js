@@ -5,8 +5,6 @@
 // If the list starts with '!', implies NOT in list
 
 // Define some commonly used lists
-var canaries = "SPC|VDE|GMZ|TFN|TFS|LPA|FUE|ACE";
-var hawaii   = "HNL|OGG|KOA|LIH";
 var c_amer   = "bz|gt|hn|sv|ni|cr|pa";
 var n_samer  = "co|ve|ec|pe";
 var s_samer  = "bo|py|br|uy|ar|cl";
@@ -212,15 +210,15 @@ distmap["ba oneworld"] = [
 //
 //==============================================
 var ba_europe1    = "be|fr|de|ie|lu|nl|ch|gb";
-var ba_europe2    = "at|hr|cz|dk|gi|hu|it|lv|no|pl|pt|es|se|yu";
-var ba_europe3    = "bg|cy|ee|fi|gr|il|ly|lt|fnc|mt|ma|ro|ru|tn|tr|ua|"+canaries;
+var ba_europe2    = "at|hr|cz|dk|gi|hu|it|lv|no|pl|pt|pt-20|pt-30|es|se|yu";
+var ba_europe3    = "bg|cy|ee|fi|gr|il|ly|lt|fnc|mt|ma|ro|ru|tn|tr|ua|es-cn";
 var ba_midcasia   = "am|az|bh|eg|ge|ir|kz|kw|kg|lb|om|qa|sa|sy|tj|ae|uz|ye|jo";
 var ba_westafrica = "gm|gn|gh|ci|lr|ng|sn|sl";
 var ba_ecsafrica  = "ao|bw|cm|dj|et|er|ke|mw|mu|na|rw|sc|za|sd|tz|cg|ug|zm|zw";
-var ba_namerica   = "us|bm|ca";
+var ba_namerica   = "us|us-ak|bm|ca";
 var ba_samerica   = "ar|bo|br|cl|ec|py|pe|uy";
 var ba_fareast    = "mm|cn|id|hk|jp|kr|my|ph|sg|tw|th|vn";
-var ba_cbncamhi   = "ag|bs|bb|ky|co|gd|jm|mx|lc|tt|ve|"+hawaii;
+var ba_cbncamhi   = "ag|bs|bb|ky|co|gd|jm|mx|lc|tt|ve|us-hi";
 var ba_sasia      = "bd|in|mv|pk|lk";
 var ba_swp        = "au|nz";
 
@@ -556,11 +554,11 @@ partnermap["aa"] = [
 
 zonemap["aa"] = [
   /* 0: North America */
-    "us|ca",
+    "us|ca|us-ak",
   /* 1: Mexico/Caribbean/Bahamas/Bermuda */
     "bs|bm|mx|ag|aw|bs|bb|vg|cu|dm|do|ky|gd|gp|bl|mf|ht|jm|mq|ms|pr|kn|lc|vc|tt|vi|vg",
   /* 2: Hawaii */
-    hawaii,
+    "us-hi",
   /* 3: Central America/Northern South America */
     "BZE|GUA|SAL|SJO|TGU|SAP|MGA|PTY|BOG|GYE|UIO|LIM|CCS|MAR",
   /* 4: Southern South America */
@@ -627,14 +625,14 @@ partnermap["aa all"] = [
 
 zonemap["aa all"] = [ 
   /* 0: North America */ 
-    "us|ca|mx|bm|bs|ag|aw|ai|bb|vg|ky|cu|dm|do|gd|gp|bl|mf|ht|jm|mq|bq|cw|sx|pr|lc|vc|kn|tc|tt|vi",
+    "us|ca|us-ak|mx|bm|bs|ag|aw|ai|bb|vg|ky|cu|dm|do|gd|gp|bl|mf|ht|jm|mq|bq|cw|sx|pr|lc|vc|kn|tc|tt|vi",
   /* 1: Central America/South America 1 */
     "bz|co|cr|sv|ec|gt|hn|ni|pa|pe|ve",
   /* 2: South America 2 */
     "ar|bo|br|cl|py|uy",
   /* 3: Europe */
     "al|am|at|az|by|be|ba|bg|hr|cy|cz|dk|ee|fi|fr|de|ge|gi|gr|gl|hu|is|ie|it|lv|"+
-    "lt|lu|mk|mt|md|nl|no|pl|pt|ro|ru|sk|si|es|se|ch|tr|ua|gb|yu|"+canaries,
+    "lt|lu|mk|mt|md|nl|no|pl|pt|pt-20|pt-30|ro|ru|sk|si|es|en-cn|se|ch|tr|ua|gb|yu|es-cn",
   /* 4: Indian Subcontinent/Middle East */
     "af|bh|bd|eg|in|ir|iq|il|jo|kz|kg|kw|lb|om|pk|sa|sy|tj|tm|ae|uz",
   /* 5: Africa */
@@ -647,7 +645,7 @@ zonemap["aa all"] = [
   /* 8: South Pacific */
     "au|IPC|fj|pf|nc|nz|pg|to|ws",
   /* 9: Hawaii */
-    hawaii
+    "us-hi",
 ];
 
 var aa_all_soff = " offpeak: Mar1-May31; Aug16-Nov30";  // south america off season
@@ -724,9 +722,9 @@ awardmap["aa all"] = [
    *  -10 - both countries must be equal   (and in same zone?)
    *  -11 - both countries must be in list (and in same zone?)
    */
-  [ -11, "us|ca", 25, 45, 60 ],
+  [ -11, "us|ca|us-ak", 25, 45, 60 ],
   [ -11, "au|nz", 20, 35, 55 ],
-  [ -10, "ar|br|cl|fj|fi|ie|jp|mx|pe|es|ch|tr|gb", 20, 35, 55 ],
+  [ -10, "ar|br|cl|fj|fi|ie|jp|mx|pe|es|en-cn|ch|tr|gb", 20, 35, 55 ],
 ];
 
 //==============================================
@@ -736,11 +734,11 @@ awardmap["aa all"] = [
 //==============================================
 zonemap["co"] = [
   /* 0: Lower48/Canada/Alaska */
-    "us|ca",
+    "us|ca|us-ak",
   /* 1: Carib/Central America/Mexico */
     carib+"|mx|"+c_amer,
   /* 2: Hawaii */
-    hawaii,
+    "us-hi",
   /* 3: Asia */
     "jp|cn|hk|ph|tw|vn|la|kh|th|my|sg|bn|mm|gu",
   /* 4: Northern South America */
@@ -839,7 +837,7 @@ partnermap["dl jm"] = [
 ];
 zonemap["dl jm"] = [
  /* 0: US/Canada */
-   "us|ca",
+   "us|ca|us-ak",
  /* 1: Caribbean */
    "",
  /* 2: Europe */
@@ -857,7 +855,7 @@ partnermap["dl av" ] = [
 ];
 zonemap["dl av"] = [
  /* 0: US/Canada */
-   "us|ca",
+   "us|ca|us-ak",
  /* 1: Colombia */
    "co",
  /* 2: Carib/Lima */
@@ -925,9 +923,9 @@ partnermap["dl skyteam"] = [
 
 zonemap["dl skyteam"] = [
   /* 0: Lower 48/Canada/Alaska */
-    "us|ca",
+    "us|ca|us-ak",
   /* 1: Hawaii */
-    hawaii,
+    "us-hi",
   /* 2: Mexico/Caribbean/Bermuda */
     "mx|bm|ag|aw|bs|bb|vg|cu|dm|do|ky|gd|gp|bl|mf|ht|jm|mq|ms|pr|kn|lc|vc|tt|vi",
   /* 3: Central America */
@@ -938,8 +936,8 @@ zonemap["dl skyteam"] = [
     "ar|bo|br|cl|py|uy",
   /* 6: Europe */
     "al|ad|at|by|be|ba|bg|hr|cy|cz|dk|ee|fi|fr|de|gr|hu|is|ie|it|lv|li|lt|"+
-    "lu|mk|mt|md|mo|nl|no|pl|pt|ro|"+
-    "ru|sm|sk|si|es|se|ch|tr|ua|gb|va|yu",
+    "lu|mk|mt|md|mo|nl|no|pl|pt|pt-20|pt-30|ro|"+
+    "ru|sm|sk|si|es|es-cn|se|ch|tr|ua|gb|va|yu",
   /* 7: North Africa */
     "dz|eg|ly|ma|tn",
   /* 8: North Asia */
@@ -1099,9 +1097,9 @@ partnermap["ua star"] = [
 
 zonemap["ua star"] = [
   /* 0: North America */
-    "us|ca",
+    "us|ca|us-ak",
   /* 1: Hawaii */
-    hawaii,
+    "us-hi",
   /* 2: Caribbean */
     "ag|aw|bs|bb|bz|bm|do|mq|pr|lc|vi",
   /* 3: Central America */
@@ -1110,7 +1108,7 @@ zonemap["ua star"] = [
     "ar|bo|br|cl|co|ec|py|pe|uy|ve",
   /* 5: Europe */
     "al|at|by|be|ba|bg|hr|cy|cz|dk|gb|ee|fi|fr|de|gr|hu|ie|it|kz|lv|lt|lu|"+
-    "mk|mt|md|nl|no|pl|pt|ro|ru|si|es|se|ch|tr|tm|ua|yu",
+    "mk|mt|md|nl|no|pl|pt|pt-20|pt-30|ro|ru|si|es|es-cn|se|ch|tr|tm|ua|yu",
   /* 6: Japan */
     "jp",
   /* 7: North Asia */
@@ -1126,7 +1124,7 @@ zonemap["ua star"] = [
   /* 12: Middle East */
     "az|eg|ir|il|jo|kw|lb|om|sa|sy|ae|uz|ye",
   /* 13: Africa */
-    "er|et|gh|ci|ke|ma|na|ng|za|sd|zw|"+canaries
+    "er|et|gh|ci|ke|ma|na|ng|za|sd|zw|es-cn",
 ];
 
 awardmap["ua star"] = [
