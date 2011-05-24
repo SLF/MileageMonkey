@@ -1620,7 +1620,7 @@ function valid_field(str)
   if (str == "") {
     return str;
   }
-  if (str.length == 2) {
+  if (countrycodes[str] != null) {
     /* value is a country code.. convert to lowercase */
     return str.toLowerCase();
   }
