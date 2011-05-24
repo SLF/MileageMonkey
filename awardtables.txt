@@ -1,3 +1,492 @@
+;;========================== BMI Diamond club
+;; First = *2.5	; $*2.5
+;; Business = *1.5 ; $*1.5
+;; LH First = 10,000 per sector
+;; Connecting flights for journeys where the final destination is within zone 1 or zone 2 : 7500 miles or (4000 miles + #30) 
+;; One-way = *0.5 ; $*0.5
+@Zone 1
+UK, Austria, Belgium, France, Germany, Luxembourg, Netherlands, Republic of Ireland, Switzerland	
+
+9000*
+(4500 + #40)
+	
+
+12000*
+(6000 + #70)
+	
+
+45000
+(25000 + #140)
+	
+
+50000
+(25000 + #170)
+	
+
+40000
+(20000 + #140)
+	
+
+50000
+(25000 + #170)
+	
+
+80000
+(40000 + #270)
+	
+
+70000
+(35000 + #240)
+	
+
+100000
+(50000 + #340)
+	
+
+50000
+(25000 + #170)
+	
+
+80000
+(40000 + #270)
+	
+
+-
+
+@Zone 2
+Armenia, Belarus, Bosnia-Herzegovina, Bulgaria, Croatia, Cyprus, Czech Republic, Denmark, Estonia, Finland, Georgia, Greece, Hungary, Italy, Latvia, Lithuania, Macedonia, Malta, Moldavia, Montenegro, Morocco, Norway, Poland, Portugal, Romania, Russia, Serbia, Slovenia, Spain, Balearic Islands, Sweden, Turkey, Ukraine, Yugoslavia	
+
+-
+	
+
+20000*
+(10000 + #70)
+	
+
+50000
+(25000 + #170)
+	
+
+50000
+(25000 + #170)
+	
+
+30000
+(15000 + #100)
+	
+
+50000
+(25000 + #170)
+	
+
+80000
+(40000 + #270)
+	
+
+50000
+(25000 + #170)
+	
+
+100000
+(50000 + #340)
+	
+
+40000
+(20000 + #140)
+	
+
+80000
+(40000 + #270)
+	
+
+-
+
+@Zone 3
+Belize, Canada, Costa Rica, El Salvador, Greenland, Guatemala, Honduras, Mexico, Panama, USA	
+
+-
+	
+
+-
+	
+
+30000
+(15000 + #100)
+	
+
+40000
+(20000 + #140)
+	
+
+80000
+(40000 + #270)
+	
+
+100000
+(50000 + #340)
+	
+
+100000
+(50000 + #340)
+	
+
+80000
+(40000 + #270)
+	
+
+80000
+(40000 + #270)
+	
+
+80000
+(40000 + #270)
+	
+
+40000
+(20000 + #140)
+	
+
+-
+
+@Zone 4
+Antigua, Argentina, Bahamas, Barbados, Bermuda, Bolivia, Brazil, Caribbean, Chile, Colombia, Cuba, Martinique, Paraguay, Peru, Puerto Rico, St. Lucia, St Thomas, Uruguay, Venezuela	
+
+-
+	
+
+-
+	
+
+-
+	
+
+30000
+(15000 + #100)
+	
+
+80000
+(40000 + #270)
+	
+
+80000
+(40000 + #270)
+	
+
+100000
+(50000 + #340)
+	
+
+100000
+(50000 + #340)
+	
+
+80000
+(40000 + #270)
+	
+
+80000
+(40000 + #270)
+	
+
+50000
+(25000 + #170)
+	
+
+-
+
+@Zone 5
+Azerbaijan, Cameroon, Cape Verde, Egypt, Eritrea, Ethiopia, Ghana, Guinea-Bissau, Iran, Israel, Jordan, Kazakhstan, Kenya, Kuwait, Kyrgyzstan, Lebanon, Libya, Nigeria, Oman, Rwanda, Saudi Arabia, Senegal, Sierra Leone, Somalia, Sudan, Syria, Tanzania, Tripoli, Tunisia, Uganda, United Arab Emirates, Yemen	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+20000
+(10000 + #70)
+	
+
+30000
+(15000 + #100)
+	
+
+50000
+(25000 + #170)
+	
+
+80000
+(40000 + #270)
+	
+
+100000
+(50000 + #340)
+	
+
+40000
+(20000 + #140)
+	
+
+100000
+(50000 + #340)
+	
+
+-
+
+@Zone 6
+Angola, Cote d`Ivoire, Mozambique, Namibia, Sao Tome Island, South Africa, Zimbabwe	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+20000
+(10000 + #70)
+	
+
+50000
+(25000 + #170)
+	
+
+80000
+(40000 + #270)
+	
+
+80000
+(40000 + #270)
+	
+
+50000
+(25000 + #170)
+	
+
+100000
+(50000 + #340)
+	
+
+-
+
+@Zone 7
+Bangladesh, Borneo, Brunei, Burma, Cambodia, Indonesia, Laos, Malaysia, Myanmar, Philippines, Singapore, Sri Lanka, Thailand, Vietnam	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+20000
+(10000 + #70)
+	
+
+30000
+(15000 + #100)
+	
+
+50000
+(25000 + #170)
+	
+
+30000
+(15000 + #100)
+	
+
+80000
+(40000 + #270)
+	
+
+-
+
+@Zone 8
+China, Hong Kong, Japan, South Korea, Taiwan, Turkmenistan, Uzbekistan	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+30000
+(15000 + #100)
+	
+
+50000
+(25000 + #170)
+	
+
+40000
+(20000 + #140)
+	
+
+50000
+(25000 + #170)
+	
+
+-
+
+@Zone 9
+Australia, Tasmania, Cook Islands, Fiji, French Polynesia, Guam, New Caledonia, New Zealand, Norfolk Island, Tonga, Samoa	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+30000
+(15000 + #100)
+	
+
+80000
+(40000 + #270)
+	
+
+50000
+(25000 + #170)
+	
+
+-
+
+@Zone 10
+India, Maldives, Nepal, Pakistan	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+30000
+(15000 + #100)
+	
+
+80000
+(40000 + #270)
+	
+
+-
+
+@Zone 11
+Hawaii
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+
+-
+	
+-
+
+-
+
+!
+
 ;============ USAirways
 @US & Canada
 @Hawaii
@@ -8,7 +497,7 @@ Mexico, Belize, Guatemala, El Salvador, Honduras, Nicaragua, Costa Rica, Panama
 Colombia, Venezuela, Guyana, Suriname, French Guiana, Brazil, Paraguay, Uruguay, Argentina, Chile, Bolivia, Peru, Ecuador
 @Europe
 @North Asia
-China, Hong Kong, Japan, Kazakhstan, Kyrgyzstan, Macau, Mongolia, S. Korea, Taiwan, Tajikistan, Turkmenistan, Uzbekistan
+China, Hong Kong, Japan, Kazakhstan, Kyrgyzstan, Macau, Mongolia, South Korea, Taiwan, Tajikistan, Turkmenistan, Uzbekistan
 @South & Central Asia
 Afghanistan, Bangladesh, Brunei, Cambodia, Chagos, India, Indonesia, Laos, Malaysia, Maldives, Myanmar, Nepal, Pakistan, Philippines, Singapore, Sri Lanka, Thailand, Vietnam
 @South Pacific
@@ -72,18 +561,18 @@ Belize, Costa Rica, El Salvador, Guatemala, Honduras, Nicaragua, Panama
 Antigua, Aruba, Bahamas, Barbados, Barbuda, Bermuda, Cayman Islands, Cuba, Dominican Republic, Guadeloupe, Grenada, Haiti, Jamaica, Martinique, Netherland/Dutch
 Antilles, Puerto Rico, St. Kitts-Nevis, St. Lucia, Trinidad and Tobago, Turks and Caicos Islands, Virgin Islands (U.S. and British)
 @Northern South America
-Colombia, Ecuador, French Guiana, Guyana, Peru, Surinam, Venezuela
+Colombia, Ecuador, French Guiana, Guyana, Peru, Suriname, Venezuela
 @Southern South America
 Argentina, Bolivia, Brazil, Chile, Paraguay, Uruguay
 @Europe
-Albania, Armenia, Austria, Belgium, Belarus, Bosnia and Herzegovina, Bulgaria, Croatia, Cyprus, Czech Republic, Denmark, Estonia, Finland, France, Germany, Greece,
+Albania, Armenia, Austria, Belgium, Belarus, Bosnia-Herzegovina, Bulgaria, Croatia, Cyprus, Czech Republic, Denmark, Estonia, Finland, France, Germany, Greece,
 Greenland, Hungary, Iceland, Ireland, Italy, Latvia, Lithuania, Luxembourg, Macedonia, Malta, Moldova, Montenegro, Netherlands, Northern Ireland, Norway, Poland,
 Portugal, Romania, Russia, Serbia, Scotland, Spain, Slovakia, Slovenia, Sweden, Switzerland, Turkey, United Kingdom, Ukraine, Wales
 @Northern Africa
 Algeria, Canary Islands, Egypt, Libya, Morocco, Tunisia
 @Central and Southern Africa
 Angola, Benin, Botswana, Burkina Faso, Burundi, Cameroon, Central African Republic, Chad, Comoros, Congo, Cote D'lvoire, Democratic Republic of Congo, Djibouti,
-Equatorial Guinea, Eritrea, Ethiopia, Gabon, Gambia, Ghana, Guinea, Guinea-Bissau, Kenya, Lesotho, Liberia, Madagascar, Malawi, Mali, Mauritania, Mauritius,
+Eq. Guinea, Eritrea, Ethiopia, Gabon, Gambia, Ghana, Guinea, Guinea-Bissau, Kenya, Lesotho, Liberia, Madagascar, Malawi, Mali, Mauritania, Mauritius,
 Mozambique, Namibia, Niger, Nigeria, Reunion Island, Rwanda, Sao Tome and Principe, Senegal, Seychelles, Sierra Leone, Somalia, South Africa, Sudan, Swaziland,
 Tanzania, Togo, Uganda, Zambia, Zimbabwe
 @Middle East
@@ -92,14 +581,14 @@ Afghanistan, Azerbaijan, Bahrain, Egypt, Georgia, Iran, Iraq, Israel, Jordan, Ku
 India, Kazakhstan, Kyrgyzstan, Maldives, Nepal, Pakistan, Sri Lanka, Tajikistan, Turkmenistan, Uzbekistan
 @South Asia
 Bangladesh, Bhutan, Brunei, Borneo, Cambodia, Federated States of Micronesia, Guam, Hong Kong, Indonesia, Laos, Macau, Malaysia, Marshall Islands, Myanmar,
-Northern Mariana Islands, Palau, Papua New Guinea, Philippines, Singapore, Thailand, Vietnam
+Northern Marianas, Palau, Papua New Guinea, Philippines, Singapore, Thailand, Vietnam
 @North Asia
-China (Mainland), Mongolia, South Korea, Taiwan
+China, Mongolia, South Korea, Taiwan
 @Japan
 Japan
 @Oceania
-American Samoa, Cook Islands, Federated States of Micronesia, Fiji, French Polynesia, Guam, Marshall Islands, New Caledonia, Northern Mariana Islands, Palau,
-Tahiti, Tonga, Vanuatu, Western Samoa
+American Samoa, Cook Islands, Federated States of Micronesia, Fiji, French Polynesia, Guam, Marshall Islands, New Caledonia, Northern Marianas, Palau,
+Tahiti, Tonga, Vanuatu, Samoa
 E 20^/25* 40 35 35 35 35 55 55 75 90 75 80 65 65 65 60/80*** 80
 B 50* 80 60 60 60 70 100 105 115 125 115/170*** 120 125 125 125 120 135
 F 70 100 80 80 80 90 135 135 145 160 145 160 145 145 135 150 160
@@ -311,23 +800,23 @@ First    35
 
 ;============ American Airlines
 @North America
-U.S. (including Hawaii Alaska), Canada, Mexico, Bermuda, The Bahamas the Caribbean. 
+USA, Alaska, Hawaii, Canada, Mexico, Bermuda, The Bahamas the Caribbean. 
 @Central/South America Zone 1
 Belize, Colombia, Costa Rica, Ecuador, El Salvador, Guatemala, Honduras, Nicaragua, Panama, Peru, Venezuela 
 @South America Zone 2
 Argentina, Bolivia, Brazil, Chile (excluding Easter Island), Paraguay, Uruguay 
 @Europe
-Albania, Armenia, Austria, Azerbaijan, Belarus, Belgium, Bosnia-Herzegovinia, Bulgaria, Canary Islands, Croatia, Cyprus, Czech Republic, Denmark, Estonia, Finland, France, Georgia, Germany, Gibraltar, Greece, Greenland, Hungary, Iceland, Ireland, Italy, Latvia, Lithuania, Luxembourg, Macedonia, Malta, Moldova, Montenegro, Netherlands, Norway, Poland, Portugal, Romania, Russia, Serbia, Slovakia, Slovenia, Spain, Sweden, Switzerland, Turkey, Ukraine, United Kingdom, Yugoslavia 
+Albania, Armenia, Austria, Azerbaijan, Belarus, Belgium, Bosnia-Herzegovina, Bulgaria, Canary Islands, Croatia, Cyprus, Czech Republic, Denmark, Estonia, Finland, France, Georgia, Germany, Gibraltar, Greece, Greenland, Hungary, Iceland, Ireland, Italy, Latvia, Lithuania, Luxembourg, Macedonia, Malta, Moldova, Montenegro, Netherlands, Norway, Poland, Portugal, Romania, Russia, Serbia, Slovakia, Slovenia, Spain, Sweden, Switzerland, Turkey, Ukraine, United Kingdom, Yugoslavia 
 @Indian Sub-Continent / Middle East
-Afghanistan, Bahrain, Bangladesh, Egypt, India, Iran, Iraq, Israel, Jordan, Kazakhstan, Kuwait, Kyrgyzstan, Lebanon, Maldives, Nepal, Oman, Pakistan, Qatar, Saudi Arabia, Syria, Tajikistan, Turkmenistan, the United Arab Emirates, Uzbekistan 
+Afghanistan, Bahrain, Bangladesh, Egypt, India, Iran, Iraq, Israel, Jordan, Kazakhstan, Kuwait, Kyrgyzstan, Lebanon, Maldives, Nepal, Oman, Pakistan, Qatar, Saudi Arabia, Syria, Tajikistan, Turkmenistan, United Arab Emirates, Uzbekistan 
 @Africa
-Algeria, Angola, Benin, Botswana, Burkina Faso, Burundi, Cameroon, Cape Verde, Central African Republic, Chad, Democratic Republic of Congo, Equatorial Guinea, Eritrea, Ethiopia, Gabon, Gambia, Ghana, Guinea, Guinea Bissau, Ivory Coast, Kenya, Lesotho, Liberia, Libya, Madagascar, Malawi, Mali, Mauritania, Mauritius, Melilla, Morocco, Mozambique, Namibia, Niger, Nigeria, Republic of Congo, Reunion, Rwanda, Senegal, Seychelles, Sierra Leone, Somalia, South Africa, Sudan, Swaziland, Tanzania, Togo, Tunisia, Uganda, Zambia, Zimbabwe 
+Algeria, Angola, Benin, Botswana, Burkina Faso, Burundi, Cameroon, Cape Verde, Central African Republic, Chad, Democratic Republic of Congo, Eq. Guinea, Eritrea, Ethiopia, Gabon, Gambia, Ghana, Guinea, Guinea-Bissau, Ivory Coast, Kenya, Lesotho, Liberia, Libya, Madagascar, Malawi, Mali, Mauritania, Mauritius, Melilla, Morocco, Mozambique, Namibia, Niger, Nigeria, Republic of Congo, Reunion, Rwanda, Senegal, Seychelles, Sierra Leone, Somalia, South Africa, Sudan, Swaziland, Tanzania, Togo, Tunisia, Uganda, Zambia, Zimbabwe 
 @Asia 1
 Japan, Korea, Mongolia
 @Asia 2
-Bhutan, Brunei, Cambodia, China, Guam, Hong Kong, Indonesia, Laos, Malaysia, Myanmar, the Philippines, Saipan, Singapore, Sri Lanka, Taiwan, Thailand, Vietnam 
+Bhutan, Brunei, Cambodia, China, Guam, Hong Kong, Indonesia, Laos, Malaysia, Myanmar, Philippines, Saipan, Singapore, Sri Lanka, Taiwan, Thailand, Vietnam 
 @South Pacific
-Australia, Easter Island, Fiji, French Polynesia, New Caledonia, New Zealand, Papua New Guinea, Republic of Tonga, Republic of Vanuatu, American Samoa Samoa 
+Australia, Easter Island, Fiji, French Polynesia, New Caledonia, New Zealand, Papua New Guinea, Tonga, Vanuatu, American Samoa, Samoa 
 
 Economy  0
 Business 0
@@ -372,7 +861,7 @@ First    72.5^	75^	75^	80	60	75	60	45	42.5
 ;======================= Lufthansa
 ;; One-way = *0.5 (LH/Adria/etc)
 @Europe
-Albania, Austria, Belarus, Belgium, Bosnia-Herzegovina, Bulgaria, Croatia, Cyprus, Denmark (excl. Greenland), Czech Republic, Estonia, Finland, France, Germany, Great Britain , Greece, Hungary, Iceland, Ireland, Italy, Latvia, Lithuania, Luxembourg, Macedonia , Malta, Moldova, Montenegro, Netherlands, Norway, Poland, Portugal (excl. Azores, Madeira), Romania, Russia, Serbia, Slovakia, Slovenia, Spain (incl. Balearics but excl. Canaries), Sweden, Switzerland, Turkey, Ukraine
+Albania, Austria, Belarus, Belgium, Bosnia-Herzegovina, Bulgaria, Croatia, Cyprus, Denmark, Czech Republic, Estonia, Finland, France, Germany, Great Britain , Greece, Hungary, Iceland, Ireland, Italy, Latvia, Lithuania, Luxembourg, Macedonia , Malta, Moldova, Montenegro, Netherlands, Norway, Poland, Portugal (excl. Azores, Madeira), Romania, Russia, Serbia, Slovakia, Slovenia, Spain (incl. Balearics but excl. Canaries), Sweden, Switzerland, Turkey, Ukraine
 @North America
 Canada, Greenland, USA (excl. Hawaii)
 @Hawaii
@@ -382,17 +871,17 @@ Antigua, Aruba, Bahamas, Barbados, Belize, Bermuda, Cayman Islands, Costa Rica, 
 @South America
 Argentina, Bolivia, Brazil, Chile, Colombia, Ecuador, French Guiana, Paraguay, Peru, Uruguay, Venezuela
 @Middle East, Caucasus, north/central Africa
-Algeria, Armenia, Azerbaijan, Azores, Bahrain, Benin, Burkina Faso, Burundi, the Cameroons, Canary Islands, Cape Verde, Congo, Djibouti, Egypt, Equatorial Guinea, Eritrea, Ethiopia, Gabon, Gambia, Georgia, Ghana, Guinea, Guinea Bissau, Iraq, Iran, Israel, Ivory Coast, Jordan, Kenya, Kuwait, Lebanon, Liberia, Libya, Madeira, Morocco, Niger, Nigeria, Oman, Qatar, Rwanda, Sao Tomé and Principe, Saudi-Arabia, Senegal, Sierra Leone, Sudan, Syria, Tanzania, Togo, Tunisia, Uganda, United Arab Emirates, Yemen
+Algeria, Armenia, Azerbaijan, Azores, Bahrain, Benin, Burkina Faso, Burundi, the Cameroons, Canary Islands, Cape Verde, Congo, Djibouti, Egypt, Eq. Guinea, Eritrea, Ethiopia, Gabon, Gambia, Georgia, Ghana, Guinea, Guinea-Bissau, Iraq, Iran, Israel, Ivory Coast, Jordan, Kenya, Kuwait, Lebanon, Liberia, Libya, Madeira, Morocco, Niger, Nigeria, Oman, Qatar, Rwanda, Sao Tomé and Principe, Saudi-Arabia, Senegal, Sierra Leone, Sudan, Syria, Tanzania, Togo, Tunisia, Uganda, United Arab Emirates, Yemen
 @Southern Africa
 Angola, Botswana, Lesotho, Madagascar, Malawi, Mauritius, Mozambique, Namibia, Seychelles, South Africa, Swaziland, Zambia, Zimbabwe
 @India
 Bangladesh, Bhutan, India, Maldives, Nepal, Pakistan, Sri Lanka
 @South-east Asia
-Brunei, Cambodia, Indonesia, Laos, Malaysia, Myanmar (Burma), Palau Islands, Philippines, Singapore, Thailand, Vietnam
+Brunei, Cambodia, Indonesia, Laos, Malaysia, Myanmar (Burma), Palau, Philippines, Singapore, Thailand, Vietnam
 @Central Asia/Far East
-Kazakhstan, Kyrgyzstan, Mongolia, Tadzhikistan, Turkmenistan, Uzbekistan, China (incl. Hong Kong & Macau), Japan, South Korea, Taiwan
+Kazakhstan, Kyrgyzstan, Mongolia, Tadzhikistan, Turkmenistan, Uzbekistan, Hong Kong, Macau, China, Japan, South Korea, Taiwan
 @Australia, New Zealand, Oceania
-Australia (incl. Tasmania), Cook Islands, Fiji, Guam, Mariana Islands, Micronesia, New Caledonia, New Zealand, Norfolk Islands, Papua New Guinea, Samoa, Tahiti (incl. French Polynesia), Tonga
+Australia (incl. Tasmania), Cook Islands, Fiji, Guam, Mariana Islands, Micronesia, New Caledonia, New Zealand, Norfolk Island, Papua New Guinea, Samoa, Tahiti (incl. French Polynesia), Tonga
 
 Economy 30 60 100 70 80 40 60 60 80 80 100
 Business 45 105 185 120 135 70 105 105 135 135 185
@@ -459,7 +948,7 @@ To Southwest Pacific 	50 	70 	95 	75 	120 	185
 To South Africa 	50 	75 	100 	70 	125 	190
 
 @Caribbean
-Anguilla, Antigua Barbuda, Aruba, Bahamas, Barbados, Bermuda, Bonaire, Saint Eustatius, Saba, British Virgin Islands, Cayman Islands, Cuba, Curacao, Dominica, Dominican Republic, Grenada, Guadeloupe, Guyana, Haiti, Jamaica, Martinique, Montserrat, Saint Kitts Nevis, Saint Lucia, Saint Maarten, Saint Vincent The Grenadines, Trinidad Tobago, Turks Caicos Islands, US Virgin Islands, Puerto Rico
+Anguilla, Antigua Barbuda, Aruba, Bahamas, Barbados, Bermuda, Bonaire, St. Eustatius, Saba, British Virgin Islands, Cayman Islands, Cuba, Curacao, Dominica, Dominican Republic, Grenada, Guadeloupe, Guyana, Haiti, Jamaica, Martinique, Montserrat, St. Kitts Nevis, St. Lucia, St. Maarten, St. Vincent The Grenadines, Trinidad & Tobago, Turks Caicos Islands, US Virgin Islands, Puerto Rico
 Within Caribbean  	17.5  	25  	35  	30  	50  	70
 To Continental US, Alaska Canada 	17.5 	25 	35 	30 	50 	70
 To Hawaii 	22.5 	30 	40 	40 	60 	80
@@ -584,7 +1073,7 @@ To Southeast Asia 	60 	- 	- 	90 	- 	-
 To Southwest Pacific 	60 	- 	- 	90 	- 	-
 
 @Africa
-Angola, Benin, Botswana, Burkina Faso, Burundi, Cameroon, Cape Verde, Central African Republic, Chad, Comoros, Congo (Brazzaville), Congo (Kinshasa), Cote d'Ivoire, Djibouti, Equatorial Guinea, Eritrea, Ethiopia, Gabon, Gambia, Ghana, Guinea, Guinea Bissau, Libyan Arab Jamahirija, Kenya, Lesotho, Liberia, Madagascar, Malawi, Mali, Mauritania, Mauritius, Mayotte, Mozambique, Namibia, Niger, Nigeria, Reunion, Rwanda, Sao Tome Principe, Senegal, Seychelles, Sierra Leone, Somalia, Swaziland, Tanzania, United Republic of, Togo, Uganda, Zambia, Zimbabwe, Sudan, South Africa
+Angola, Benin, Botswana, Burkina Faso, Burundi, Cameroon, Cape Verde, Central African Republic, Chad, Comoros, Congo (Brazzaville), Congo (Kinshasa), Cote d'Ivoire, Djibouti, Eq. Guinea, Eritrea, Ethiopia, Gabon, Gambia, Ghana, Guinea, Guinea-Bissau, Libyan Arab Jamahirija, Kenya, Lesotho, Liberia, Madagascar, Malawi, Mali, Mauritania, Mauritius, Mayotte, Mozambique, Namibia, Niger, Nigeria, Reunion, Rwanda, Sao Tome Principe, Senegal, Seychelles, Sierra Leone, Somalia, Swaziland, Tanzania, United Republic of, Togo, Uganda, Zambia, Zimbabwe, Sudan, South Africa
 Within Africa  	30  	45  	62.5  	50  	100  	175
 To Continental US, Alaska Canada 	40 	65 	80 	60 	115 	175
 To Hawaii 	45 	70 	100 	70 	125 	190
@@ -601,7 +1090,7 @@ To Southeast Asia 	60 	- 	- 	90 	- 	-
 To Southwest Pacific 	60 	- 	- 	90 	- 	-
 
 @Europe
-Albania, Algeria, Andorra, Armenia, Austria, Azerbaijan, Belarus, Belgium, Bosnia Herzegovina, Bulgaria, Croatia, Cyprus, Czech Republic, Denmark (excluding Greenland), Estonia, Faroe Islands, Finland, France, Georgia, Germany, Gibraltar, Greece, Hungary, Iceland, Ireland, Italy, Latvia, Liechtenstein, Lithuania, Luxembourg, Macedonia, The Former Yugoslav Republic of, Malta, Moldova, Republic of, Montenegro, Monaco, Morocco, Netherlands, Norway, Poland, Portugal (including Azores Madeira), Romania, Russia, San Marino, Serbia, Slovakia, Slovenia, Spain (including Canary Islands), Svalbard & Jan Mayen Island, Sweden, Switzerland, Tunisia, Turkey, Ukraine, United Kingdom, Vatican City
+Albania, Algeria, Andorra, Armenia, Austria, Azerbaijan, Belarus, Belgium, Bosnia-Herzegovina, Bulgaria, Croatia, Cyprus, Czech Republic, Denmark, Estonia, Faroe Islands, Finland, France, Georgia, Germany, Gibraltar, Greece, Hungary, Iceland, Ireland, Italy, Latvia, Liechtenstein, Lithuania, Luxembourg, Macedonia, Malta, Moldova, Montenegro, Monaco, Morocco, Netherlands, Norway, Poland, Portugal, Azores, Madeira, Romania, Russia, San Marino, Serbia, Slovakia, Slovenia, Spain, Canary Islands, Svalbard & Jan Mayen Island, Sweden, Switzerland, Tunisia, Turkey, Ukraine, United Kingdom, Vatican City
 Within Europe  	12.5  	20  	30  	22.5  	40  	50
 To Continental US, Alaska Canada 	30 	45 	62.5 	50 	100 	162.5
 To Hawaii 	35 	50 	67.5 	60 	110 	180
@@ -623,7 +1112,7 @@ Czech Republic to/from Slovakia 	7.5 	- 	- 	12.5 	- 	-
 Europe to/from Algeria, Morocco, Tunisia 	15 	- 	- 	22.5 	- 	-
 
 @Middle East
-Bahrain, Egypt, Iran, Islamic Republic of, Iraq, Israel, Jordan, Kuwait, Lebanon, Occupied Palestinian Territory, Oman, Qatar, Saudi Arabia, Syrian Arab Republic, United Arab Emirates (composed of Abu Dhabi, Ajman, Dubai, Fujairah, Ras El Khaimah, Sharjah, Umm Al Qaiwain), Yemen, Republic of, Kazakhstan, Kyrgyzstan, Uzbekistan 
+Bahrain, Egypt, Iran, Iraq, Israel, Jordan, Kuwait, Lebanon, Occupied Palestinian Territory, Oman, Qatar, Saudi Arabia, Syria, United Arab Emirates, Yemen, Kazakhstan, Kyrgyzstan, Uzbekistan 
 Within Middle East  	40  	-  	-  	60  	-  	-
 To Continental US, Alaska Canada 	40 	65 	80 	60 	115 	175
 To Hawaii 	45 	70 	100 	70 	125 	190
@@ -657,7 +1146,7 @@ To Southeast Asia 	25 	- 	- 	35 	- 	-
 To Southwest Pacific 	45 	- 	- 	70 	- 	-
 
 @Northern Asia
-Japan, Korea, Republic of, Korea, Democratic People's Republic of, China, Hong Kong SAR, Taiwan, Province of, Micronesia, Philippines
+Japan, South Korea, North Korea, China, Hong Kong, Taiwan, Micronesia, Philippines
 Within Northern Asia  	12.5  	20  	30  	22.5  	30  	40
 To Continental US, Alaska Canada 	35 	60 	80 	60 	110 	170
 To Hawaii 	20 	45 	65 	35 	70 	150
@@ -679,7 +1168,7 @@ Within China	15 	- 	- 	17.5 	- 	-		(Med Haul)
 Within China	30 	- 	- 	45 	- 	-		(Long Haul)
 
 @Southeast Asia
-Brunei Darussalam, Cambodia, Indonesia, Laos, People's Democratic Republic of, Macau SAR, Malaysia, Mongolia, Myanmar, Singapore, Tajikistan, Thailand, Timor Leste, Turkmenistan, Vietnam, Papua New Guinea
+Brunei Darussalam, Cambodia, Indonesia, Laos, Macau, Malaysia, Mongolia, Myanmar, Singapore, Tajikistan, Thailand, Timor Leste, Turkmenistan, Vietnam, Papua New Guinea
 Within Southeast Asia  	22.5  	40  	50  	35  	55  	75
 To Continental US, Alaska Canada 	40 	65 	87.5 	60 	120 	185
 To Hawaii 	25 	50 	70 	40 	75 	160
@@ -697,7 +1186,7 @@ To Southwest Pacific 	40 	- 	- 	60 	- 	-
 Within Vietnam 	12.5 	- 	- 	20 	- 	-
 
 @Southwest Pacific
-American Samoa, Australia, Christmas Islands, Cocos (Keeling) Islands, Cook Islands, Fiji, French Polynesia, Kiribati, Nauru, New Caledonia, New Zealand, Niue, Norfolk Island, Pitcaim, Samoa, Solomon Islands, Tokelau, Tongo, Tuvalu, Vanuatu, Wallis Futuna Islands
+American Samoa, Australia, Christmas Island, Cocos (Keeling) Islands, Cook Islands, Fiji, French Polynesia, Kiribati, Nauru, New Caledonia, New Zealand, Niue, Norfolk Island, Pitcaim, Samoa, Solomon Islands, Tokelau, Tonga, Tuvalu, Vanuatu, Wallis Futuna Islands
 Within Southwest Pacific  	30  	-  	-  	45  	-  	-
 To Continental US, Alaska Canada 	50 	70 	95 	75 	120 	185
 To Hawaii 	50 	70 	95 	75 	120 	185
@@ -713,494 +1202,4 @@ To South Asian Subcontinent 	45 	- 	- 	70 	- 	-
 To Northern Asia 	35 	- 	- 	55 	- 	-
 To Southeast Asia 	40 	- 	- 	60 	- 	-
 !
-
-;;========================== BMI Diamond club
-;; First = *2.5	; $*2.5
-;; Business = *1.5 ; $*1.5
-;; LH First = 10,000 per sector
-;; Connecting flights for journeys where the final destination is within zone 1 or zone 2 : 7500 miles or (4000 miles + £30) 
-;; One-way = *0.5 ; $*0.5
-@Zone 1
-UK, Austria, Belgium, France, Germany, Luxembourg, Netherlands, Republic of Ireland, Switzerland	
-
-9000*
-(4500 + £40)
-	
-
-12000*
-(6000 + £70)
-	
-
-45000
-(25000 + £140)
-	
-
-50000
-(25000 + £170)
-	
-
-40000
-(20000 + £140)
-	
-
-50000
-(25000 + £170)
-	
-
-80000
-(40000 + £270)
-	
-
-70000
-(35000 + £240)
-	
-
-100000
-(50000 + £340)
-	
-
-50000
-(25000 + £170)
-	
-
-80000
-(40000 + £270)
-	
-
--
-
-@Zone 2
-Armenia, Belarus, Bosnia-Herzegovina, Bulgaria, Croatia, Cyprus, Czech Republic, Denmark, Estonia, Finland, Georgia, Greece, Hungary, Italy, Latvia, Lithuania, Macedonia, Malta, Moldavia, Montenegro, Morocco, Norway, Poland, Portugal, Romania, Russia, Serbia, Slovenia, Spain (including Balearics), Sweden, Turkey, Ukraine, Yugoslavia	
-
--
-	
-
-20000*
-(10000 + £70)
-	
-
-50000
-(25000 + £170)
-	
-
-50000
-(25000 + £170)
-	
-
-30000
-(15000 + £100)
-	
-
-50000
-(25000 + £170)
-	
-
-80000
-(40000 + £270)
-	
-
-50000
-(25000 + £170)
-	
-
-100000
-(50000 + £340)
-	
-
-40000
-(20000 + £140)
-	
-
-80000
-(40000 + £270)
-	
-
--
-
-@Zone 3
-Belize, Canada, Costa Rica, El Salvador, Greenland, Guatemala, Honduras, Mexico, Panama, USA	
-
--
-	
-
--
-	
-
-30000
-(15000 + £100)
-	
-
-40000
-(20000 + £140)
-	
-
-80000
-(40000 + £270)
-	
-
-100000
-(50000 + £340)
-	
-
-100000
-(50000 + £340)
-	
-
-80000
-(40000 + £270)
-	
-
-80000
-(40000 + £270)
-	
-
-80000
-(40000 + £270)
-	
-
-40000
-(20000 + £140)
-	
-
--
-
-@Zone 4
-Antigua, Argentina, Bahamas, Barbados, Bermuda, Bolivia, Brazil, Caribbean, Chile, Colombia, Cuba, Martinique, Paraguay, Peru, Puerto Rico, St Lucia, St Thomas, Uruguay, Venezuela	
-
--
-	
-
--
-	
-
--
-	
-
-30000
-(15000 + £100)
-	
-
-80000
-(40000 + £270)
-	
-
-80000
-(40000 + £270)
-	
-
-100000
-(50000 + £340)
-	
-
-100000
-(50000 + £340)
-	
-
-80000
-(40000 + £270)
-	
-
-80000
-(40000 + £270)
-	
-
-50000
-(25000 + £170)
-	
-
--
-
-@Zone 5
-Azerbaijan, Cameroon, Cape Verde, Egypt, Eritrea, Ethiopia, Ghana, Guinea Bissea, Iran, Israel, Jordan, Kazakhstan, Kenya, Kuwait, Kyrgyzstan, Lebanon, Libya, Nigeria, Oman, Rwanda, Saudi Arabia, Senegal, Sierra Leone, Somalia, Sudan, Syria, Tanzania, Tripoli, Tunisia, Uganda, United Arab Emirates, Yemen	
-
--
-	
-
--
-	
-
--
-	
-
--
-	
-
-20000
-(10000 + £70)
-	
-
-30000
-(15000 + £100)
-	
-
-50000
-(25000 + £170)
-	
-
-80000
-(40000 + £270)
-	
-
-100000
-(50000 + £340)
-	
-
-40000
-(20000 + £140)
-	
-
-100000
-(50000 + £340)
-	
-
--
-
-@Zone 6
-Angola, Cote d`Ivoire, Mozambique, Namibia, Sao Tome Island, South Africa, Zimbabwe	
-
--
-	
-
--
-	
-
--
-	
-
--
-	
-
--
-	
-
-20000
-(10000 + £70)
-	
-
-50000
-(25000 + £170)
-	
-
-80000
-(40000 + £270)
-	
-
-80000
-(40000 + £270)
-	
-
-50000
-(25000 + £170)
-	
-
-100000
-(50000 + £340)
-	
-
--
-
-@Zone 7
-Bangladesh, Borneo, Brunei, Burma, Cambodia, Indonesia, Laos, Malaysia, Myanmar, The Philippines, Singapore, Sri Lanka, Thailand, Vietnam	
-
--
-	
-
--
-	
-
--
-	
-
--
-	
-
--
-	
-
--
-	
-
-20000
-(10000 + £70)
-	
-
-30000
-(15000 + £100)
-	
-
-50000
-(25000 + £170)
-	
-
-30000
-(15000 + £100)
-	
-
-80000
-(40000 + £270)
-	
-
--
-
-@Zone 8
-China, Hong Kong, Japan, South Korea, Taiwan, Turkmenistan, Uzbekistan	
-
--
-	
-
--
-	
-
--
-	
-
--
-	
-
--
-	
-
--
-	
-
--
-	
-
-30000
-(15000 + £100)
-	
-
-50000
-(25000 + £170)
-	
-
-40000
-(20000 + £140)
-	
-
-50000
-(25000 + £170)
-	
-
--
-
-@Zone 9
-Australia (including Tasmania), Cook Islands, Fiji, French Polynesia, Guam, New Caledonia, New Zealand, Norfolk Islands, Tonga, Western Samoa	
-
--
-	
-
--
-	
-
--
-	
-
--
-	
-
--
-	
-
--
-	
-
--
-	
-
--
-	
-
-30000
-(15000 + £100)
-	
-
-80000
-(40000 + £270)
-	
-
-50000
-(25000 + £170)
-	
-
--
-
-@Zone 10
-India, Maldives, Nepal, Pakistan	
-
--
-	
-
--
-	
-
--
-	
-
--
-	
-
--
-	
-
--
-	
-
--
-	
-
--
-	
-
--
-	
-
-30000
-(15000 + £100)
-	
-
-80000
-(40000 + £270)
-	
-
--
-
-@Zone 11
-Hawaii
-
--
-	
-
--
-	
-
--
-	
-
--
-	
-
--
-	
-
--
-	
-
--
-	
-
--
-	
-
--
-	
-
--
-	
-
-200000
-(100000 + £680
-
--
-	
 
