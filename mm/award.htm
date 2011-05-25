@@ -1620,24 +1620,24 @@ function valid_field(str)
   if (str == "") {
     return str;
   }
-  if (countrycodes[str] != null) {
+  var lstr = str.toLowerCase();
+  var ustr = str.toUpperCase();
+  if (countrycodes[ustr] != null) {
     /* value is a country code.. convert to lowercase */
-    return str.toLowerCase();
+    return lstr;
   }
-  if (str.length == 3) {
+  if (citycodes[ustr] != null) {
     /* Check if city name is not valid */
-    if (!validate([ str ])) { return -1; }
     return str;
   }
   if (str.length == 4) {
     /* Value is a continent code */
-    str = str.toLowerCase();
-    if (str == "~nam") { return str; }
-    if (str == "~sam") { return str; }
-    if (str == "~afr") { return str; }
-    if (str == "~eur") { return str; }
-    if (str == "~swp") { return str; }
-    if (str == "~asa") { return str; }
+    if (lstr == "~nam") { return lstr; }
+    if (lstr == "~sam") { return lstr; }
+    if (lstr == "~afr") { return lstr; }
+    if (lstr == "~eur") { return lstr; }
+    if (lstr == "~swp") { return lstr; }
+    if (lstr == "~asa") { return lstr; }
     alert("Unknown continent: "+str+"\nUse one of:~nam|~sam|~afr|~eur|~swp|~asa");
   }
   return -1;
@@ -1668,8 +1668,8 @@ function matchlone(code, fi)
    */
   fi = fi.toUpperCase();
   if (code == "") { return 1; }
-  if (code.length == 2 && code == cc) { return 1; }
-  if (code.length == 4 && code == tc) { return 1; }
+  if (code == cc) { return 1; }
+  if (code == tc) { return 1; }
 
 	  /* Didn't match country.. check synonyms */
   var fsi = new Array;
