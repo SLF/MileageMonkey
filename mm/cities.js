@@ -3023,7 +3023,7 @@ citycodes["NAA"] = [ "AU", -30.3208, 149.8261 ];
 citycodes["NAE"] = [ "BJ", 10.3833, 1.3667 ];
 citycodes["NAG"] = [ "IN", 21.0919, 79.0483 ];
 citycodes["NAH"] = [ "ID", 3.6832, 125.5280 ];
-citycodes["NAJ"] = [ "AZ", 39.1888, 45.4584 ];
+citycodes["NAJ"] = [ "AZ-NX", 39.1888, 45.4584 ];
 citycodes["NAK"] = [ "TH", 14.9494, 102.3156 ];
 citycodes["NAL"] = [ "RU", 43.5133, 43.6378 ];
 citycodes["NAN"] = [ "FJ", -17.7564, 177.4436 ];
@@ -5408,6 +5408,18 @@ citycodes["ZYZ"] = [ "BE", 51.2167, 4.4167 ];
 citycodes["ZZO"] = [ "--", 50.6683, 142.7600 ];
 citycodes["ZZU"] = [ "MW", -11.4448, 34.0118 ];
 citycodes["ZZV"] = [ "US", 39.9445, -81.8921 ];
+
+var countrysyns = new Array;
+countrysyns["US"] = "US|US-AK|US-HI";
+countrysyns["ES"] = "ES|ES-IB|ES-CN|ES-ML";
+countrysyns["NO"] = "NO|SJ";
+countrysyns["FI"] = "FI|AX";
+countrysyns["GB"] = "GB|GG|JE|IM";
+countrysyns["PT"] = "PT|PT-20|PT-30";
+countrysyns["MU"] = "MU|MU-RO";
+countrysyns["MY"] = "MY|MY-12|MY-13";
+countrysyns["AO"] = "AO|AO-CAB";
+countrysyns["AZ"] = "AZ|AZ-NX";
 
 /* These are synonyms for cities. If more than one exists, use primary airport
  * first to match better flights (eg. LHR has preference over LGW)

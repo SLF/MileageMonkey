@@ -1671,6 +1671,13 @@ function matchlone(code, fi)
   if (code == cc) { return 1; }
   if (code == tc) { return 1; }
 
+  /* Match country synonyms */
+  var clist = countrysyns[code.toUpperCase()];
+  if (clist != null) {
+    if (matchlist(clist, cc.toUpperCase()) >= 0) {
+      return 1;
+    }
+  }
 	  /* Didn't match country.. check synonyms */
   var fsi = new Array;
   fsi = get_synlist(code);
