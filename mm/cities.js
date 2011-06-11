@@ -340,7 +340,7 @@ citycodes["BBU"] = [ "RO", 44.5035, 26.1036 ];
 citycodes["BBW"] = [ "US", 41.4367, -99.6417 ];
 citycodes["BCA"] = [ "CU", 20.3647, -74.5067 ];
 citycodes["BCD"] = [ "PH", 10.6425, 122.9296 ];
-citycodes["BCH"] = [ "TP", -8.4854, 126.3993 ];
+citycodes["BCH"] = [ "TL", -8.4854, 126.3993 ];
 citycodes["BCI"] = [ "AU", -23.5650, 145.3094 ];
 citycodes["BCL"] = [ "CR", 10.7687, -83.5856 ];
 citycodes["BCM"] = [ "RO", 46.5219, 26.9103 ];
@@ -5532,6 +5532,7 @@ countrycodes["PY"] = [ "sam", "sam", "paraguay" ];
 countrycodes["UY"] = [ "sam", "sam", "uruguay" ];
 countrycodes["BR"] = [ "sam", "sam", "brazil" ];
 countrycodes["FK"] = [ "sam", "sam", "falkland islands" ];
+countrycodes["AQ"] = [ "sam", "sam", "antarctica" ];
 
 /* Europe */
 countrycodes["AD"] = [ "eur", "eur", "andorra" ];
@@ -5592,6 +5593,7 @@ countrycodes["ME"] = [ "eur", "eur", "montenegro" ];
 countrycodes["SJ"] = [ "eur", "eur", "svalbard" ];
 countrycodes["SM"] = [ "eur", "eur", "san marino" ];
 countrycodes["VA"] = [ "eur", "eur", "vatican city" ];
+countrycodes["MC"] = [ "eur", "eur", "monaco" ];
 
 /* Middle East */
 countrycodes["QA"] = [ "asa", "eur", "qatar" ];
@@ -5614,6 +5616,7 @@ countrycodes["SY"] = [ "asa", "eur", "syria" ];
 countrycodes["JO"] = [ "asa", "eur", "jordan" ];
 countrycodes["IL"] = [ "asa", "eur", "israel" ];
 countrycodes["LB"] = [ "asa", "eur", "lebanon" ];
+countrycodes["PS"] = [ "asa", "eur", "palestine" ];
 
 /* asia */
 countrycodes["AM"] = [ "asa" ,"eur", "armenia" ];
@@ -5660,6 +5663,7 @@ countrycodes["TM"] = [ "asa", "eur", "turkmenistan" ];
 countrycodes["HK"] = [ "asa", "asa", "hong kong" ];
 countrycodes["MO"] = [ "asa", "asa", "macao" ];
 countrycodes["TL"] = [ "asa", "asa", "east timor" ];
+countrycodes["IO"] = [ "asa", "asa", "british indian ocean territory" ];
 
 /* Oceania */
 countrycodes["KI"] = [ "swp", "swp", "kiribati" ];
