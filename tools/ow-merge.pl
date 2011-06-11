@@ -86,7 +86,7 @@ init_cabins();
 @logs = undef;
 
 loadfile($inPrimary, 0);	# get database
-loadfile($inOverride, 1); # subsequent invocations are treated as "extras"
+loadfile($inOverride, 2); 	# subsequent invocations are treated as "extras"
 dumpfile($out1, $out2, "fl");
 
 
@@ -138,14 +138,16 @@ sub addService {
 	# $flight contains e.g.    "ABZ-LHR|BA319"
 	if(defined($known)) {
 		if($known =~ /$aircraft/) { # is this flight already included?
-			if($extras) {
+			if($extras == 2) {
 				print "warn: $flight:$aircraft is already in DB, ignoring (remove from override file $fin?)\n";
-			} else {
+			} elsif ($extras == 0) {
 				print "warn: $flight:$aircraft is already in DB, ignoring (duplicate in file $fin)\n";
+			} elsif ($extras == 1) {
+				# do nothing
 			}
 		} else {
 			$store{$citypair} .= "|" . $aircraft;
-			if($extras) {
+			if($extras > 1) {
 				print "note:  $flight was in DB as $known; adding new aircraft $aircraft\n";
 				elog("adding $aircraft to $citypair (from DB: $known), now=$store{$citypair}");
 			}
@@ -159,6 +161,11 @@ sub addService {
 # load/parse the flight file into something we can use more easily
 # this sub populates the following:
 #  %store - contains entries like "ABZ-LHR|BA319".  index is important, value of each entry is simply "1"
+#   fin - input filename
+#   extras -  how to handle errors with this source file
+#              0 = this is the primary source file, so be quite strict
+#              1 = this is additional flight data (i.e. previous months).  ignore duplicates etc.
+#              2 = this is the overrides file - report on issues
 #
 sub loadfile {
 	my($fin, $extras) = @_;
@@ -168,10 +175,14 @@ sub loadfile {
 		while(<IN>) {
 			next if m{^//};
 			next if /^\s*$/;
+			next if /^\s*#/;
 			next if /^var flight([_\w]+)? =/;
 			
 			if (/^\s*adjust\s*/) {
 				print "-ignored following line as we don't support 'adjust' at the moment (see get_cabins() in this script instead):\n\t$_\n";
+			} elsif ( /^extras\s*$/ && !$extras)  { # subsequent entries in this data file are "additional" (extras).  e.g. older timetable data
+				print "$fin: switching to extras mode\n";
+				$extras = 1;
 			} elsif ( /^\s*removeall\s*(\w\w\w\-\w\w\w)$/) {
 				if(defined($store{$1})) {
 					elog("removeall $1 (was $store{$1})");
@@ -316,7 +327,7 @@ sub load_cities {
 	foreach my $f ( split(/;/,$fin)) {
 		open(IN, "< $f") || die "couldn't open input file $f\n";
 		while(<IN>) {
-			if(/^\s*citycodes\[\"(\w\w\w)\"\]\s*=\s*\[\s*\"(\w\w)\"/) {
+			if(/^\s*citycodes\s*\[\s*\"(\w\w\w)\"\s*\]\s*=\s*\[\s*\"(\w\w\-\w\w|\w\w)\"/) {
 				if(defined($cities{$1})) {
 					print "duplicate city entries for $1:\n\t1:$_\n\t2:$cities{$1}\n";
 				}
@@ -325,7 +336,7 @@ sub load_cities {
 				++$ccount;
 			}
 
-			if(/^\s*countrycodes\[\"(\w\w)\"\]/) {
+			if(/^\s*countrycodes\s*\[\s*\"(\w\w\-\w\w|\w\w)\"\s*\]/) {
 				if(defined($country_def{$1})) {
 					print "duplicate country entries for $1:\n\t1:$_\n\t2:$country_def{$1}\n";
 				}

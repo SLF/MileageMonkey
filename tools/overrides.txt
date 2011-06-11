@@ -14,11 +14,6 @@ flight["ORD-HKG"] = "CX77A";
 flight["HKG-ORD"] = "CX77A";
 
 
-// QF
-flight["SYD-PER"] = "QF744";
-flight["PER-SYD"] = "QF744";
-
-
 
 // added 21 Oct 2008
 
@@ -34,10 +29,6 @@ flight["HKG-YYZ"] = "CX77A";
 flight["YYZ-HKG"] = "CX77A";
 flight["HKG-JFK"] = "CX77A";
 flight["JFK-HKG"] = "CX77A";
-
-// AA
-flight["ORD-ANC"] = "AA757";
-flight["ANC-ORD"] = "AA757";
 
 
 // JL
