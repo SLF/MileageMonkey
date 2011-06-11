@@ -25,6 +25,7 @@ remove HKG-JFK|CX773
 remove JFK-HKG|CX773
 remove HKG-YYZ|CX773
 remove YYZ-HKG|CX773
+remove MAN-LHR|CX320
 flight["HKG-YYZ"] = "CX77A";
 flight["YYZ-HKG"] = "CX77A";
 flight["HKG-JFK"] = "CX77A";
@@ -37,6 +38,8 @@ flight["FSZ-FUK"] = "JLEMJ";
 
 flight["CTS-FSZ"] = "JLEMJ";
 flight["FSZ-CTS"] = "JLEMJ";
+remove SJU-JFK|JL737
+
 
 // BA
 flight["LCY-GVA"] = "BAAR1";

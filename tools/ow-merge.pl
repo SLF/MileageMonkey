@@ -520,6 +520,7 @@ sub init_cabins {
 	$cabins{"AY319"} = "jy"; 
 	$cabins{"AY320"} = "jy"; 
 	$cabins{"AY321"} = "jy"; 
+	$cabins{"AY330"} = "jy"; 
 	$cabins{"AY333"} = "jy"; 
 	$cabins{"AY340"} = "jy"; 
 	$cabins{"AY343"} = "jy"; 
@@ -646,6 +647,7 @@ sub init_cabins {
 	$cabins{"QFDH8"} = "y";  
 	$cabins{"QFF50"} = "y";  
 	
+	$cabins{"RJ310"} = "jy"; 
 	$cabins{"RJ313"} = "jy"; 
 	$cabins{"RJ319"} = "jy"; 
 	$cabins{"RJ320"} = "jy"; 
@@ -656,6 +658,13 @@ sub init_cabins {
 	$cabins{"RJE75"} = "y";  
 	$cabins{"RJE95"} = "jy"; 
 	
+	$cabins{"S7310"} = "jy";
+	$cabins{"S7319"} = "jy";
+	$cabins{"S7320"} = "jy";
+	$cabins{"S7734"} = "jy";
+	$cabins{"S7738"} = "jy";
+	$cabins{"S7763"} = "jy";
+
 	$cabins{"XL763"} = "y";  
 }
 
