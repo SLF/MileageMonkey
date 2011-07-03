@@ -470,6 +470,9 @@ function findzone2(program, airport, country)
   if (zmap === null) {
     return -1;
   }
+  if (zmap === undefined) {
+  	return -1;
+  }
   var mc = -1;
   for(var i=0; i<zmap.length; i++) {
     var rc = matchlist2(zmap[i], airport, country);
