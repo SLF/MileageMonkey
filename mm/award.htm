@@ -40,6 +40,9 @@ TR.ceven {
 <script language="javascript" src="zones.js"   type="text/javascript"></script>
 <script language="javascript" src="owe.js"     type="text/javascript"></script>
 
+<!--plusone used to make Google +1 button show in AddThis...hopefully this won't be required forever-->
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+
 <script language="javascript" type="text/javascript">
 
 var primeloc = "http://www.slfft.org/mm/award.htm"; // needed by AddThis later
@@ -1190,7 +1193,7 @@ function setlinks()
 	var at_link = primeloc + at_params;
 
 	var sharelinkloc = findElement('sharelink');
-	sharelinkloc.innerHTML = '<a href="' + at_params + '">Link to this itinerary</a>';
+	sharelinkloc.innerHTML = '<a href="' + at_params + '">Link to itinerary</a>';
     window.addthis.update("share", "url", at_link); // update the AddThis share URL
     showLayer('sharing',1);
 }
@@ -2130,11 +2133,19 @@ and on these mirror(s):
 <a class="addthis_button_preferred_2"></a>
 <a class="addthis_button_preferred_3"></a>
 <a class="addthis_button_preferred_4"></a>
-<a class="addthis_button_preferred_5"></a>
+<a class="addthis_button_google_plusone" g:plusone:size="small" g:plusone:count="false"></a>
 <a class="addthis_button_compact"></a>
 </div>
-<script type="text/javascript">var addthis_config = {"data_track_clickback":true,"data_track_addressbar":true};</script>
+<script type="text/javascript">
+var addthis_config = {"data_track_clickback":true,"data_track_addressbar":true};
+var addthis_share = {
+	templates:	{
+		twitter: "I'm planning my RTW trip {{url}} with @MileageMonkey"
+	}
+}
+</script>
 <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4e21713b49636564"></script>
+
 <!-- AddThis Button END -->
 </td><td>
 <div id="sharelink"></div>
