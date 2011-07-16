@@ -553,6 +553,7 @@ function scanzone(from, to, program, scale)
   for(i=0; i<am.length; i++) {
     var amap = am[i];
     if (amap === null) { continue; }
+    if (amap === undefined) { continue; }
 
     /* Check each entry in the award map for a from<->to match */
     if ((amap[0] == fz && amap[1] == tz))
