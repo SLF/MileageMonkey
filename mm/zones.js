@@ -75,14 +75,7 @@ var qf_scmap = [
 ];
 
 /* Qantas awards map */
-distmap["qf select (r/t)"] = [
- [ 2000,  20, 30, 40 ],
- [ 5400,  30, 45, 60 ],
- [ 10000, 50,100,125 ],
- [ 17500, 80,160,200 ],
- [ 30000,110,220,275 ]
-];
-distmap["qf.new select (o/w)"] = [
+distmap["qf select (o/w)"] = [
  [ 600,  8, 16, 24 ],
  [ 1200, 12, 24, 36 ],
  [ 2400, 18, 36, 54 ],
@@ -95,14 +88,7 @@ distmap["qf.new select (o/w)"] = [
  [ 15000,64,128, 192 ]
 ];
 
-distmap["qf other (r/t)"] = [
- [ 2000, 25, 45, 65 ],
- [ 5400, 40, 60, 80 ],
- [ 10000,65,105,135 ],
- [ 17500,95,170,230 ],
- [ 30000,125,235,290 ]
-];
-distmap["qf.new other (o/w)"] = [
+distmap["qf other (o/w)"] = [
  [ 600,  10, 18, 26 ],
  [ 1200, 14, 26, 38 ],
  [ 2400, 20, 38, 56 ],
@@ -116,13 +102,6 @@ distmap["qf.new other (o/w)"] = [
 ];
 
 distmap["qf oneworld"] = [
- [ 2000, 30, 60, 90 ],
- [ 5400, 50, 80, 110 ],
- [ 10000,70, 110, 150 ],
- [ 17500,100,175, 250 ],
- [ 35000,130,240, 300 ]
-];
-distmap["qf.new oneworld"] = [
  [ 1200, 32.5,62.5,92.5 ],
  [ 2400, 42.5,82.5,112.5 ],
  [ 4800, 57.5,112.5,167.5 ],
@@ -1287,10 +1266,8 @@ var dist_award_zones = [
  [ fOW|fRT|fPP|fZN, 1, 1, "ba oneworld" ],
 
  [ 0xE,      1, 1, "qf oneworld" ],
- [ fRT|fZN,, 1, 1, "qf select (r/t)" ],
- [ fRT|fZN,  1, 1, "qf other (r/t)" ],
- [ fOW|fZN,  1, 1, "qf.new select (o/w)" ],
- [ fRT|fZN,  1, 1, "qf.new select (o/w)" ],
+ [ fOW|fZN,  1, 1, "qf select (o/w)" ],
+ [ fRT|fZN,  1, 1, "qf select (o/w)" ],
 
  // Asiamiles R/T: based on one-way distance: tdist *= 0.5
  [ fOW|fPP|fZN, 1, 1,   "asiamiles ow" ],
