@@ -866,6 +866,62 @@ Business 62.5^	65^	50^	60	45	50	45	35	30
 First    72.5^	75^	75^	80	60	75	60	45	42.5
 !
 
+;============ American Airlines
+^AAoneworld
+Distance Zone 1
+Total Trip Miles = 0 to 1500 	Miles Required
+Economy Class 	30000
+Business Class 	60000
+First Class 	80000
+
+Distance Zone 2
+Total Trip Miles = 1501 - 4000 	Miles Required
+Economy Class 	35000
+Business Class 	75000
+First Class 	100000
+
+Distance Zone 3
+Total Trip Miles = 4001 - 9000 	Miles Required
+Economy Class 	60000
+Business Class 	80000
+First Class 	100000
+
+Distance Zone 4
+Total Trip Miles = 9001 - 10000 	Miles Required
+Economy Class 	70000
+Business Class 	90000
+First Class 	120000
+
+Distance Zone 5
+Total Trip Miles = 10001 - 14000 	Miles Required
+Economy Class 	90000
+Business Class 	115000
+First Class 	150000
+
+Distance Zone 6
+Total Trip Miles = 14001 - 20000 	Miles Required
+Economy Class 	100000
+Business Class 	130000
+First Class 	180000
+
+Distance Zone 7
+Total Trip Miles = 20001 - 25000 	Miles Required
+Economy Class 	120000
+Business Class 	150000
+First Class 	230000
+
+Distance Zone 8
+Total Trip Miles = 25001 - 35000 	Miles Required
+Economy Class 	140000
+Business Class 	190000
+First Class 	280000
+
+Distance Zone 9
+Total Trip Miles = 35001 - 50000 	Miles Required
+Economy Class 	160000
+Business Class 	220000
+First Class 	330000 
+
 ;======================= Lufthansa
 ^LH
 ;; One-way = *0.5 (LH/Adria/etc)
@@ -1216,312 +1272,351 @@ To Southeast Asia 	40 	- 	- 	60 	- 	-
 ;========================================= British Airways
 ^BAone
 @Europe 1
-Belgium, Channel Islands, France, Germany, Ireland, Luxembourg, Netherlands, Switzerland, United Kingdom (including domestic routes)
+Belgium; Channel Islands; France; Germany; Ireland; Luxembourg; Netherlands; Switzerland; United Kingdom (including domestic routes)
 Domestic 	Europe 1 	Europe 2 	Europe 3 / North Africa 	Western Russia
-9,000 	9,000 	15,000 	20,000 	20,000
+9000 	9000 	15000 	20000 	20000
 Eastern Russia 	Middle East and Central Asia 	West Africa 	Central and South Africa 	North America
-55,000 	40,000 	40,000 	50,000 	50,000
+55000 	40000 	40000 	50000 	50000
 Caribbean /
 Central America /
 Hawaii 	South Asia 	South America 	Far East 	South West Pacific
-50,000 	50,000 	70,000 	80,000 	100,000
+50000 	50000 	70000 	80000 	100000
 
 @Europe 2
-Austria, Croatia, Czech Republic, Denmark, Gibraltar, Hungary, Italy, Latvia, Montenegro, Norway, Poland, Portugal, Serbia, Spain (including Balearics), Sweden
+Austria; Croatia; Czech Republic; Denmark; Gibraltar; Hungary; Italy; Latvia; Montenegro; Norway; Poland; Portugal; Serbia; Spain (including Balearics); Sweden
 Domestic 	Europe 1 	Europe 2 	Europe 3 / North Africa 	Western Russia
-9,000 	15,000 	20,000 	20,000 	20,000
+9000 	15000 	20000 	20000 	20000
 Eastern Russia 	Middle East and Central Asia 	West Africa 	Central and South Africa 	North America
-50,000 	50,000 	40,000 	60,000 	60,000
+50000 	50000 	40000 	60000 	60000
 Caribbean /
 Central America /
 Hawaii 	South Asia 	South America 	Far East 	South West Pacific
-60,000 	50,000 	70,000 	70,000 	90,000
+60000 	50000 	70000 	70000 	90000
 
 @Europe 3 / North Africa
-Algeria, Bulgaria, Canary Islands, Cyprus, Estonia, Finland, Greece, Iceland, Israel, Libya, Lithuania, Madeira, Malta, Moldova, Morocco, Romania, Tunisia, Turkey, Ukraine
+Algeria; Bulgaria; Canary Islands; Cyprus; Estonia; Finland; Greece; Iceland; Israel; Libya; Lithuania; Madeira; Malta; Moldova; Morocco; Romania; Tunisia; Turkey; Ukraine
 Domestic 	Europe 1 	Europe 2 	Europe 3 / North Africa 	Western Russia
-9,000 	20,000 	20,000 	25,000 	25,000
+9000 	20000 	20000 	25000 	25000
 Eastern Russia 	Middle East and Central Asia 	West Africa 	Central and South Africa 	North America
-35,000 	45,000 	45,000 	70,000 	65,000
+35000 	45000 	45000 	70000 	65000
 Caribbean /
 Central America /
 Hawaii 	South Asia 	South America 	Far East 	South West Pacific
-70,000 	50,000 	80,000 	60,000 	100,000
+70000 	50000 	80000 	60000 	100000
 
 @Western Russia
-Adler/Sochi, Anapa, Astrakhan, Chelyabinsk, Ekaterinburg, Kazan, Krasnodar, Kurgan, Makhahkala, Mineralnye Vody, Moscow, Nizhnevartovsk, Nizhniy Novgorod, Omsk, Perm, Rostov, Samara, St Petersburg, Syktyvkar, Tyumen, Ufa, Vladikavkaz, Volgograd
+Adler/Sochi; Anapa; Astrakhan; Chelyabinsk; Ekaterinburg; Kazan; Krasnodar; Kurgan; Makhahkala; Mineralnye Vody; Moscow; Nizhnevartovsk; Nizhniy Novgorod; Omsk; Perm; Rostov; Samara; St Petersburg; Syktyvkar; Tyumen; Ufa; Vladikavkaz; Volgograd
 Europe 1 	Europe 2 	Europe 3 / North Africa 	Western Russia 	Eastern Russia
-20,000 	20,000 	25,000 	15,000 	35,000
+20000 	20000 	25000 	15000 	35000
 Middle East and Central Asia 	West Africa 	Central and South Africa 	North America 	Caribbean /
 Central America /
 Hawaii
-45,000 	45,000 	70,000 	65,000 	70,000
+45000 	45000 	70000 	65000 	70000
 South Asia 	South America 	Far East 	South West Pacific 	 
-50,000 	80,000 	60,000 	100,000
+50000 	80000 	60000 	100000
 
 @Eastern Russia
-Barnaul, Blagoveschensk, Bratsk, Chita, Irkutsk, Kaliningrad, Kemerovo, Kharbarovsk, Krasnojarsk, Magadan, Nadym, Norilsk, Novokuznetsk, Novosibirsk, Novy Urengoy, Petropavlovsk-Kamchats, Surgut, Tomsk, Ulan-ude, Vladivostok, Yakutsk, Yuzhno-Sakhalinsk
+Barnaul; Blagoveschensk; Bratsk; Chita; Irkutsk; Kaliningrad; Kemerovo; Kharbarovsk; Krasnojarsk; Magadan; Nadym; Norilsk; Novokuznetsk; Novosibirsk; Novy Urengoy; Petropavlovsk-Kamchats; Surgut; Tomsk; Ulan-ude; Vladivostok; Yakutsk; Yuzhno-Sakhalinsk
 Europe 1 	Europe 2 	Europe 3 / North Africa 	Western Russia 	Eastern Russia
-55,000 	50,000 	35,000 	35,000 	25,000
+55000 	50000 	35000 	35000 	25000
 Middle East and Central Asia 	West Africa 	Central and South Africa 	North America 	Caribbean /
 Central America /
 Hawaii
-50,000 	45,000 	70,000 	65,000 	70,000
+50000 	45000 	70000 	65000 	70000
 South Asia 	South America 	Far East 	South West Pacific 	 
-50,000 	80,000 	60,000 	100,000 	 
+50000 	80000 	60000 	100000 	 
 
 @Middle East and Central Asia
-Armenia, Azerbaijan, Bahrain, Egypt, Georgia, Iran, Jordan, Kazakhstan, Kuwait, Kyrgyzstan, Lebanon, Oman, Qatar, Saudi Arabia, Syria, Tajikistan, Turkmenistan, UAE, Uzbekistan, Yemen
+Armenia; Azerbaijan; Bahrain; Egypt; Georgia; Iran; Jordan; Kazakhstan; Kuwait; Kyrgyzstan; Lebanon; Oman; Qatar; Saudi Arabia; Syria; Tajikistan; Turkmenistan; UAE; Uzbekistan; Yemen
 Domestic 	Europe 1 	Europe 2 	Europe 3 / North Africa 	Western Russia
-9,000 	40,000 	50,000 	45,000 	45,000
+9000 	40000 	50000 	45000 	45000
 Eastern Russia 	Middle East and Central Asia 	West Africa 	Central and South Africa 	North America
-50,000 	25,000 	45,000 	45,000 	80,000
+50000 	25000 	45000 	45000 	80000
 Caribbean /
 Central America /
 Hawaii 	South Asia 	South America 	Far East 	South West Pacific
-90,000 	30,000 	110,000 	60,000 	80,000
+90000 	30000 	110000 	60000 	80000
 
 @West Africa
-Gambia, Ghana, Guinea, Ivory Coast, Liberia, Nigeria, Senegal, Sierra Leone
+Gambia; Ghana; Guinea; Ivory Coast; Liberia; Nigeria; Senegal; Sierra Leone
 Domestic 	Europe 1 	Europe 2 	Europe 3 / North Africa 	Western Russia
-  	40,000 	40,000 	45,000 	45,000
+  	40000 	40000 	45000 	45000
 Eastern Russia 	Middle East and Central Asia 	West Africa 	Central and South Africa 	North America
-45,000 	45,000 	25,000 	35,000 	80,000
+45000 	45000 	25000 	35000 	80000
 Caribbean /
 Central America /
 Hawaii 	South Asia 	South America 	Far East 	South West Pacific
-90,000 	50,000 	80,000 	80,000 	100,000
+90000 	50000 	80000 	80000 	100000
 
 @Central and South Africa
-Angola, Botswana, Cameroon, Djibouti, Eritrea, Ethiopia, Kenya, Malawi, Mauritius, Namibia, Rwanda, Seychelles, South Africa, Sudan, Tanzania, The Democratic Republic of Congo, Uganda, Zambia, Zimbabwe
+Angola; Botswana; Cameroon; Djibouti; Eritrea; Ethiopia; Kenya; Malawi; Mauritius; Namibia; Rwanda; Seychelles; South Africa; Sudan; Tanzania; The Democratic Republic of Congo; Uganda; Zambia; Zimbabwe
 Domestic 	Europe 1 	Europe 2 	Europe 3 / North Africa 	Western Russia
-20,000 	50,000 	60,000 	70,000 	70,000
+20000 	50000 	60000 	70000 	70000
 Eastern Russia 	Middle East and Central Asia 	West Africa 	Central and South Africa 	North America
-70,000 	45,000 	35,000 	25,000 	90,000
+70000 	45000 	35000 	25000 	90000
 Caribbean /
 Central America /
 Hawaii 	South Asia 	South America 	Far East 	South West Pacific
-90,000 	50,000 	70,000 	70,000 	70,000
+90000 	50000 	70000 	70000 	70000
 
 @North America
-Bermuda, Canada, USA
+Bermuda; Canada; USA
 Domestic 	Europe 1 	Europe 2 	Europe 3 / North Africa 	Western Russia
-25,000 	50,000 	60,000 	65,000 	65,000
+25000 	50000 	60000 	65000 	65000
 Eastern Russia 	Middle East and Central Asia 	West Africa 	Central and South Africa 	North America
-65,000 	80,000 	80,000 	90,000 	25,000
+65000 	80000 	80000 	90000 	25000
 Caribbean /
 Central America /
 Hawaii 	South Asia 	South America 	Far East 	South West Pacific
-35,000 	80,000 	40,000 	50,000 	80,000
+35000 	80000 	40000 	50000 	80000
 
 @Caribbean / Central America / Hawaii
-Antigua, Bahamas, Barbados, Cayman Islands, Colombia, Grenada, Hawaii, Jamaica, Mexico, St.Lucia, Trinidad and Tobago, Venezuela
+Antigua; Bahamas; Barbados; Cayman Islands; Colombia; Grenada; Hawaii; Jamaica; Mexico; St.Lucia; Trinidad and Tobago; Venezuela
 Domestic 	Europe 1 	Europe 2 	Europe 3 / North Africa 	Western Russia
-18,000 	50,000 	60,000 	70,000 	70,000
+18000 	50000 	60000 	70000 	70000
 Eastern Russia 	Middle East and Central Asia 	West Africa 	Central and South Africa 	North America
-70,000 	90,000 	90,000 	90,000 	35,000
+70000 	90000 	90000 	90000 	35000
 Caribbean /
 Central America /
 Hawaii 	South Asia 	South America 	Far East 	South West Pacific
-35,000 	90,000 	50,000 	50,000 	75,000
+35000 	90000 	50000 	50000 	75000
 
 @South Asia
-Bangladesh, India, Maldives, Nepal, Pakistan, Sri Lanka
+Bangladesh; India; Maldives; Nepal; Pakistan; Sri Lanka
 Domestic 	Europe 1 	Europe 2 	Europe 3 / North Africa 	Western Russia
-20,000 	50,000 	50,000 	50,000 	50,000
+20000 	50000 	50000 	50000 	50000
 Eastern Russia 	Middle East and Central Asia 	West Africa 	Central and South Africa 	North America
-50,000 	30,000 	50,000 	50,000 	80,000
+50000 	30000 	50000 	50000 	80000
 Caribbean /
 Central America /
 Hawaii 	South Asia 	South America 	Far East 	South West Pacific
-90,000 	25,000 	120,000 	40,000 	70,000
+90000 	25000 	120000 	40000 	70000
 
 @South America
-Argentina, Bolivia, Brazil, Chile, Ecuador, Paraguay, Peru, Uruguay
+Argentina; Bolivia; Brazil; Chile; Ecuador; Paraguay; Peru; Uruguay
 Domestic 	Europe 1 	Europe 2 	Europe 3 / North Africa 	Western Russia
-20,000 	70,000 	70,000 	80,000 	80,000
+20000 	70000 	70000 	80000 	80000
 Eastern Russia 	Middle East and Central Asia 	West Africa 	Central and South Africa 	North America
-80,000 	110,000 	80,000 	70,000 	40,000
+80000 	110000 	80000 	70000 	40000
 Caribbean /
 Central America /
 Hawaii 	South Asia 	South America 	Far East 	South West Pacific
-50,000 	120,000 	25,000 	140,000 	75,000
+50000 	120000 	25000 	140000 	75000
 
 @Far East
-Burma, China, Hong Kong, Indonesia, Japan, Korea, Malaysia, Philippines, Singapore, Taiwan, Thailand, Vietnam
+Burma; China; Hong Kong; Indonesia; Japan; Korea; Malaysia; Philippines; Singapore; Taiwan; Thailand; Vietnam
 Domestic 	Europe 1 	Europe 2 	Europe 3 / North Africa 	Western Russia
-15,000 	80,000 	70,000 	60,000 	60,000
+15000 	80000 	70000 	60000 	60000
 Eastern Russia 	Middle East and Central Asia 	West Africa 	Central and South Africa 	North America
-60,000 	60,000 	80,000 	70,000 	50,000
+60000 	60000 	80000 	70000 	50000
 Caribbean /
 Central America /
 Hawaii 	South Asia 	South America 	Far East 	South West Pacific
-50,000 	40,000 	140,000 	40,000 	50,000
+50000 	40000 	140000 	40000 	50000
 
 @South West Pacific
-Australia, New Zealand and surrounding islands
+Australia; New Zealand and surrounding islands
 Domestic 	Europe 1 	Europe 2 	Europe 3 / North Africa 	Western Russia
-30,000 	100,000 	90,000 	100,000 	100,000
+30000 	100000 	90000 	100000 	100000
 Eastern Russia 	Middle East and Central Asia 	West Africa 	Central and South Africa 	North America
-100,000 	80,000 	100,000 	70,000 	80,000
+100000 	80000 	100000 	70000 	80000
 Caribbean /
 Central America /
 Hawaii 	South Asia 	South America 	Far East 	South West Pacific
-75,000 	70,000 	75,000 	50,000 	50,000
+75000 	70000 	75000 	50000 	50000
 
 ;========================================= British Airways
 ^BAtwo
 ;EI|AS|IT
 @Europe 1
-Belgium, Channel Islands, France, Germany, Ireland, Luxembourg, Netherlands, Switzerland, United Kingdom (including domestic routes)
+Belgium; Channel Islands; France; Germany; Ireland; Luxembourg; Netherlands; Switzerland; United Kingdom (including domestic routes)
 UK Domestic 	Europe 1 	Europe 2 	Europe 3 / North Africa 	Western Russia
-9,000 	9,000 	15,000 	20,000 	20,000
+9000 	9000 	15000 	20000 	20000
 Eastern Russia 	Middle East and Central Asia 	West Africa 	Central and South Africa 	North America
-55,000 	40,000 	40,000 	50,000 	50,000
+55000 	40000 	40000 	50000 	50000
 Caribbean
 / Central America / Hawaii 	South Asia 	South America 	Far East 	South West Pacific
-50,000 	50,000 	70,000 	80,000 	100,000
+50000 	50000 	70000 	80000 	100000
 
 @Europe 2
-Austria, Croatia, Czech Republic, Denmark, Gibraltar, Hungary, Italy, Latvia, Montenegro, Norway, Poland, Portugal, Serbia, Spain (including Balearics), Sweden
+Austria; Croatia; Czech Republic; Denmark; Gibraltar; Hungary; Italy; Latvia; Montenegro; Norway; Poland; Portugal; Serbia; Spain (including Balearics); Sweden
 UK Domestic 	Europe 1 	Europe 2 	Europe 3 / North Africa 	Western Russia
-X 	15,000 	25,000 	30,000 	20,000
+X 	15000 	25000 	30000 	20000
 Eastern Russia 	Middle East and Central Asia 	West Africa 	Central and South Africa 	North America
-50,000 	50,000 	50,000 	60,000 	60,000
+50000 	50000 	50000 	60000 	60000
 Caribbean
 / Central America / Hawaii 	South Asia 	South America 	Far East 	South West Pacific
-60,000 	60,000 	80,000 	90,000 	110,000
+60000 	60000 	80000 	90000 	110000
 
 @Europe 3 / North Africa
-Algeria, Bulgaria, Canary Islands, Cyprus, Estonia, Finland, Greece, Iceland, Israel, Libya, Lithuania, Madeira, Malta, Moldova, Morocco, Romania, Tunisia, Turkey, Ukraine
+Algeria; Bulgaria; Canary Islands; Cyprus; Estonia; Finland; Greece; Iceland; Israel; Libya; Lithuania; Madeira; Malta; Moldova; Morocco; Romania; Tunisia; Turkey; Ukraine
 UK Domestic 	Europe 1 	Europe 2 	Europe 3 / North Africa 	Western Russia
-X 	20,000 	30,000 	35,000 	25,000
+X 	20000 	30000 	35000 	25000
 Eastern Russia 	Middle East and Central Asia 	West Africa 	Central and South Africa 	North America
-35,000 	55,000 	55,000 	65,000 	65,000
+35000 	55000 	55000 	65000 	65000
 Caribbean
 / Central America / Hawaii 	South Asia 	South America 	Far East 	South West Pacific
-65,000 	65,000 	85,000 	95,000 	115,000
+65000 	65000 	85000 	95000 	115000
 
 @Western Russia
-Adler/Sochi, Anapa, Astrakhan, Chelyabinsk, Ekaterinburg, Kazan, Krasnodar, Kurgan, Makhahkala, Mineralnye Vody, Moscow, Nizhnevartovsk, Nizhniy Novgorod, Omsk, Perm, Rostov, Samara, St Petersburg, Syktyvkar, Tyumen, Ufa, Vladikavkaz, Volgograd
+Adler/Sochi; Anapa; Astrakhan; Chelyabinsk; Ekaterinburg; Kazan; Krasnodar; Kurgan; Makhahkala; Mineralnye Vody; Moscow; Nizhnevartovsk; Nizhniy Novgorod; Omsk; Perm; Rostov; Samara; St Petersburg; Syktyvkar; Tyumen; Ufa; Vladikavkaz; Volgograd
 UK Domestic 	Europe 1 	Europe 2 	Europe 3 / North Africa 	Western Russia
-X 	20,000 	20,000 	25,000 	15,000
+X 	20000 	20000 	25000 	15000
 Eastern Russia 	Middle East and Central Asia 	West Africa 	Central and South Africa 	North America
-35,000 	55,000 	55,000 	65,000 	65,000
+35000 	55000 	55000 	65000 	65000
 Caribbean
 / Central America / Hawaii 	South Asia 	South America 	Far East 	South West Pacific
-65,000 	65,000 	85,000 	95,000 	115,000
+65000 	65000 	85000 	95000 	115000
 
 @Eastern Russia
-Barnaul, Blagoveschensk, Bratsk, Chita, Irkutsk, Kaliningrad, Kemerovo, Kharbarovsk, Krasnojarsk, Magadan, Nadym, Norilsk, Novokuznetsk, Novosibirsk, Novy Urengoy, Petropavlovsk-Kamchats, Surgut, Tomsk, Ulan-ude, Vladivostok, Yakutsk, Yuzhno-Sakhalinsk
+Barnaul; Blagoveschensk; Bratsk; Chita; Irkutsk; Kaliningrad; Kemerovo; Kharbarovsk; Krasnojarsk; Magadan; Nadym; Norilsk; Novokuznetsk; Novosibirsk; Novy Urengoy; Petropavlovsk-Kamchats; Surgut; Tomsk; Ulan-ude; Vladivostok; Yakutsk; Yuzhno-Sakhalinsk
 UK Domestic 	Europe 1 	Europe 2 	Europe 3 / North Africa 	Western Russia
-X 	55,000 	50,000 	35,000 	35,000
+X 	55000 	50000 	35000 	35000
 Eastern Russia 	Middle East and Central Asia 	West Africa 	Central and South Africa 	North America
-25,000 	70,000 	70,000 	80,000 	80,000
+25000 	70000 	70000 	80000 	80000
 Caribbean
 / Central America / Hawaii 	South Asia 	South America 	Far East 	South West Pacific
-80,000 	80,000 	100,000 	110,000 	130,000
+80000 	80000 	100000 	110000 	130000
 
 @Middle East and Central Asia
-Armenia, Azerbaijan, Bahrain, Egypt, Georgia, Iran, Jordan, Kazakhstan, Kuwait, Kyrgyzstan, Lebanon, Oman, Qatar, Saudi Arabia, Syria, Tajikistan, Turkmenistan, UAE, Uzbekistan, Yemen
+Armenia; Azerbaijan; Bahrain; Egypt; Georgia; Iran; Jordan; Kazakhstan; Kuwait; Kyrgyzstan; Lebanon; Oman; Qatar; Saudi Arabia; Syria; Tajikistan; Turkmenistan; UAE; Uzbekistan; Yemen
 UK Domestic 	Europe 1 	Europe 2 	Europe 3 / North Africa 	Western Russia
-X 	40,000 	50,000 	55,000 	55,000
+X 	40000 	50000 	55000 	55000
 Eastern Russia 	Middle East and Central Asia 	West Africa 	Central and South Africa 	North America
-70,000 	70,000 	70,000 	80,000 	80,000
+70000 	70000 	70000 	80000 	80000
 Caribbean
 / Central America / Hawaii 	South Asia 	South America 	Far East 	South West Pacific
-80,000 	80,000 	100,000 	110,000 	130,000
+80000 	80000 	100000 	110000 	130000
 
 @West Africa
-Gambia, Ghana, Guinea, Ivory Coast, Liberia, Nigeria, Senegal, Sierra Leone
+Gambia; Ghana; Guinea; Ivory Coast; Liberia; Nigeria; Senegal; Sierra Leone
 UK Domestic 	Europe 1 	Europe 2 	Europe 3 / North Africa 	Western Russia
-X 	40,000 	50,000 	55,000 	55,000
+X 	40000 	50000 	55000 	55000
 Eastern Russia 	Middle East and Central Asia 	West Africa 	Central and South Africa 	North America
-70,000 	70,000 	70,000 	80,000 	80,000
+70000 	70000 	70000 	80000 	80000
 Caribbean
 / Central America / Hawaii 	South Asia 	South America 	Far East 	South West Pacific
-80,000 	80,000 	100,000 	110,000 	130,000
+80000 	80000 	100000 	110000 	130000
 
 @Central and South Africa
-Angola, Botswana, Cameroon, Djibouti, Eritrea, Ethiopia, Kenya, Malawi, Mauritius, Namibia, Rwanda, Seychelles, South Africa, Sudan, Tanzania, The Democratic Republic of Congo, Uganda, Zambia, Zimbabwe
+Angola; Botswana; Cameroon; Djibouti; Eritrea; Ethiopia; Kenya; Malawi; Mauritius; Namibia; Rwanda; Seychelles; South Africa; Sudan; Tanzania; The Democratic Republic of Congo; Uganda; Zambia; Zimbabwe
 UK Domestic 	Europe 1 	Europe 2 	Europe 3 / North Africa 	Western Russia
-18,000 	50,000 	60,000 	65,000 	65,000
+18000 	50000 	60000 	65000 	65000
 Eastern Russia 	Middle East and Central Asia 	West Africa 	Central and South Africa 	North America
-80,000 	80,000 	80,000 	80,000 	90,000
+80000 	80000 	80000 	80000 	90000
 Caribbean
 / Central America / Hawaii 	South Asia 	South America 	Far East 	South West Pacific
-90,000 	90,000 	110,000 	120,000 	140,000
+90000 	90000 	110000 	120000 	140000
 
 @North America
-Bermuda, Canada, USA
+Bermuda; Canada; USA
 UK Domestic 	Europe 1 	Europe 2 	Europe 3 / North Africa 	Western Russia
-X 	50,000 	60,000 	65,000 	65,000
+X 	50000 	60000 	65000 	65000
 Eastern Russia 	Middle East and Central Asia 	West Africa 	Central and South Africa 	North America
-80,000 	80,000 	80,000 	90,000 	X
+80000 	80000 	80000 	90000 	X
 Caribbean
 / Central America / Hawaii 	South Asia 	South America 	Far East 	South West Pacific
-X 	90,000 	50,000 	120,000 	140,000
+X 	90000 	50000 	120000 	140000
 
 @Caribbean / Central America / Hawaii
-Antigua, Bahamas, Barbados, Cayman Islands, Colombia, Grenada, Hawaii, Jamaica, Mexico, St.Lucia, Trinidad and Tobago, Venezuela
+Antigua; Bahamas; Barbados; Cayman Islands; Colombia; Grenada; Hawaii; Jamaica; Mexico; St.Lucia; Trinidad and Tobago; Venezuela
 UK Domestic 	Europe 1 	Europe 2 	Europe 3 / North Africa 	Western Russia
-X 	50,000 	60,000 	65,000 	65,000
+X 	50000 	60000 	65000 	65000
 Eastern Russia 	Middle East and Central Asia 	West Africa 	Central and South Africa 	North America
-80,000 	80,000 	80,000 	90,000 	X
+80000 	80000 	80000 	90000 	X
 Caribbean
 / Central America / Hawaii 	South Asia 	South America 	Far East 	South West Pacific
-X 	90,000 	X 	120,000 	140,000
+X 	90000 	X 	120000 	140000
 
 @South Asia
-Bangladesh, India, Maldives, Nepal, Pakistan, Sri Lanka
+Bangladesh; India; Maldives; Nepal; Pakistan; Sri Lanka
 UK Domestic 	Europe 1 	Europe 2 	Europe 3 / North Africa 	Western Russia
-X 	50,000 	60,000 	65,000 	65,000
+X 	50000 	60000 	65000 	65000
 Eastern Russia 	Middle East and Central Asia 	West Africa 	Central and South Africa 	North America
-80,000 	80,000 	80,000 	90,000 	90,000
+80000 	80000 	80000 	90000 	90000
 Caribbean
 / Central America / Hawaii 	South Asia 	South America 	Far East 	South West Pacific
-90,000 	X 	110,000 	120,000 	140,000
+90000 	X 	110000 	120000 	140000
 
 
 @South America
-Argentina, Bolivia, Brazil, Chile, Ecuador, Paraguay, Peru, Uruguay
+Argentina; Bolivia; Brazil; Chile; Ecuador; Paraguay; Peru; Uruguay
 UK Domestic 	Europe 1 	Europe 2 	Europe 3 / North Africa 	Western Russia
-X 	70,000 	80,000 	85,000 	85,000
+X 	70000 	80000 	85000 	85000
 Eastern Russia 	Middle East and Central Asia 	West Africa 	Central and South Africa 	North America
-100,000 	100,000 	100,000 	110,000 	50,00
+100000 	100000 	100000 	110000 	5000
 Caribbean
 / Central America / Hawaii 	South Asia 	South America 	Far East 	South West Pacific
-X 	110,000 	25,000 	140,000 	160,000
+X 	110000 	25000 	140000 	160000
 
 @Far East
-Burma, China, Hong Kong, Indonesia, Japan, Korea, Malaysia, Philippines, Singapore, Taiwan, Thailand, Vietnam
+Burma; China; Hong Kong; Indonesia; Japan; Korea; Malaysia; Philippines; Singapore; Taiwan; Thailand; Vietnam
 UK Domestic 	Europe 1 	Europe 2 	Europe 3 / North Africa 	Western Russia
-X 	80,000 	90,000 	95,000 	95,000
+X 	80000 	90000 	95000 	95000
 Eastern Russia 	Middle East and Central Asia 	West Africa 	Central and South Africa 	North America
-110,000 	110,000 	110,000 	120,000 	120,000
+110000 	110000 	110000 	120000 	120000
 Caribbean
 / Central America / Hawaii 	South Asia 	South America 	Far East 	South West Pacific
-120,000 	120,000 	140,000 	X 	50,000
+120000 	120000 	140000 	X 	50000
 
 @South West Pacific
-Australia, New Zealand and surrounding islands
+Australia; New Zealand and surrounding islands
 UK Domestic 	Europe 1 	Europe 2 	Europe 3 / North Africa 	Western Russia
-X 	100,000 	110,000 	115,000 	115,000
+X 	100000 	110000 	115000 	115000
 Eastern Russia 	Middle East and Central Asia 	West Africa 	Central and South Africa 	North America
-130,000 	130,000 	130,000 	140,000 	140,000
+130000 	130000 	130000 	140000 	140000
 Caribbean
 / Central America / Hawaii 	South Asia 	South America 	Far East 	South West Pacific
-140,000 	140,000 	160,000 	50,000 	X
+140000 	140000 	160000 	50000 	X
 
 ;===================================
 ^BAoneworld
 ;AA|CX|AY|IB|JL|LA|MA|MX|QF|RJ|S7
-0 - 1,500 	30,000
-1,501 - 4,000 	35,000
-4,001 - 9,000 	60,000
-9,001 - 10,000 	70,000
-10,001 - 14,000 	90,000
-14,001 - 20,000 	100,000
-20,001 - 25,000 	120,000
-25,001 - 35,000 	140,000
-35,001 - 50,000 	160,000
+0 - 1500 		30000
+1501 - 4000 		35000
+4001 - 9000 		60000
+9001 - 10000 		70000
+10001 - 14000 	90000
+14001 - 20000 	100000
+20001 - 25000 	120000
+25001 - 35000 	140000
+35001 - 50000 	160000
+
+;===================================
+^QFclassic
+1 	0-600 		8000 	12000 	16000 	24000
+2 	601-1200 	12000 	18000 	24000 	36000
+3 	1201-2400 	18000 	27000 	36000 	54000
+4 	2401-3600 	25000 	37000 	50000 	75000
+5 	3601-4800 	30000 	45000 	60000 	90000
+6 	4801-5800 	36000 	54000 	72000 	108000
+7 	5801-7000 	42000 	63000 	84000 	126000
+8 	7001-8400 	48000 	72000 	96000 	144000
+9 	8401-9600 	56000 	84000 	112000	168000
+10 	9601-15000 	64000 	96000 	128000	192000 
+
+;===================================
+^QFpartnerclassic
+1 	0-600 		10000 	15000 	18000 	26000
+2 	601-1200 	14000 	21000 	26000 	38000
+3 	1201-2400 	20000 	30000 	38000 	56000
+4 	2401-3600 	28000 	42000 	53000 	78000
+5 	3601-4800 	35000 	52500 	65000 	95000
+6 	4801-5800 	42000 	63000 	78000 	114000
+7 	5801-7000 	50000 	75000 	92000 	134000
+8 	7001-8400 	56000 	84000 	104000	152000
+9 	8401-9600 	65000 	97000 	121000	177000
+10 	9601-15000 	75000 	112500  139000	203000 
+
+;===================================
+^QFoneworld
+1	0-1200 		30000	60000	90000	
+2	1201-2400 	40000	80000	120000	
+3	2401-4800 	55000	110000	165000	
+4	4801-7200 	75000	150000	225000	
+5	7201-9600 	85000	170000	255000	
+6	9601-11600 	100000	200000	300000	
+7	11601-14000 	110000	220000	330000	
+8	14001-16800 	120000	240000	360000	
+9	16801-19200 	130000	260000	390000	
+10	19201-35000 	140000	280000	420000	
