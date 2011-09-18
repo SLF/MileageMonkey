@@ -6,6 +6,8 @@ logs/
 build/
 tools/cmd.lnk
 tools/Makefile
+tools/README.txt
+tools/update.bat
 
 # 3rd party tools should be downloaded yourself.  See README file in 3party directory
 3party/*/
