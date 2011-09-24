@@ -1864,10 +1864,10 @@ function owehelp()
 {
   alert("This function tests if a OWE itinerary is valid. Enter a list of cities, eg. LHR-JFK-SYD-LHR." +
   	"You may also use open jaws, eg. LHR-LAX,JFK-SYD,MEL-LHR\n\n" +
-  	"Other syntax options permitted are\n* whitespace (spaces, tabs, line breaks) is ignored\n* '//' " +
+  	"Other syntax options permitted are\n* whitespace (spaces, tabs, line breaks) is ignored\n* '//' or ';' " +
   	"may be used to designate a surface sector in addition to ','\n"+
-  	"* '-xAAA' may be used to indicate a transit at AAA (this is ignored by the tool but is useful for your planning purposes)\n" +
-  	"* '-oAAA' may be used to indicate a stopover at AAA (this is ignored by the tool but is useful for your planning purposes)\n" +
+  	"* '-xAAA' may be used to indicate a transit at AAA (this is ignored by the tool but may be useful for your planning purposes)\n" +
+  	"* '-oAAA' may be used to indicate a stopover at AAA (this is ignored by the tool but may be useful for your planning purposes)\n" +
   	"\nThus, another valid itinerary is:  CAI-oLHR//LGW-xMCO-oMIA-  oSFO   ,LAX-oHKG-LHR-DXB\n\n" +
   	"The 'Ignore Errors' option will override the validator's rule checks, allowing the itinerary to be fully parsed. " +
   	"This should only be used if you suspect an error in the validator, but still want your itinerary to be displayed.\n\n"
@@ -1991,7 +1991,7 @@ function initialize() {
   <TBODY>
 <tr bgcolor="#eeffee">
 <td colspan=5>
-<b>MileageMonkey v0.95032 (based on JPH's <a href="http://slfft.allhyper.com/0.9/award.htm">0.9</a> &amp;
+<b>MileageMonkey v0.95033 (based on JPH's <a href="http://slfft.allhyper.com/0.9/award.htm">0.9</a> &amp;
 <a href="http://slfft.allhyper.com/1.1/award.htm">1.1</a> versions) /
 <a href="javascript:toggleLayer('info');" title="">Copyright &copy; &amp; Tool information</a> /
 <a href="changelog.htm" target="_blank" title="">Change log</a> /
