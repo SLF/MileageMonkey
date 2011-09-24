@@ -1119,6 +1119,8 @@ function getcitylist(id)
   citylist = citylist.replace(/\s/g, "");
 // permit "//" in addition to "," indicating a surface sector
   citylist = citylist.replace(/\/\//g, ",");
+// permit ";" in addition to "," indicating a surface sector
+  citylist = citylist.replace(/;/g, ",");
 // permit -xXXX and -oXXX to indicate transit/stopover
   citylist = citylist.replace(/\-[oxOX](\w\w\w)/g, "-$1");
 
@@ -1557,6 +1559,9 @@ function validateowe()
     owe_count[i] = 0;
   }
 
+  /* Duplicate sector check */
+  var sectors = new Array;
+
   /* Setup fixup for rules - no transit of original point or country */
   owe_rulemap[0][1] = get_primcitysyn(cities[0][0]);
   owe_rulemap[1][1] = map_country(cities[0][0]);
@@ -1583,21 +1588,25 @@ function validateowe()
       if(!ignoreerrs) { return -1; }
     }
 
+
+	var sector = "";
+
 	// if it's a surface sector, we don't need to check a flight exists :)
 
 	if(cities[i][2] == ",") {
 	      var s = find_owe_continent(cities[i][0])+"-"+find_owe_continent(cities[i][1]);
 	      var flt1 = cities[i][0] + "," + cities[i][1];
-	      add_award(0, 0, 0, flt1, s, 0);
+	      sector =   cities[i][0] + "-" + cities[i][1];
+		  add_award(0, 0, 0, flt1, s, 0);
 	} else {
 	    /* Check if flight exists A->B */
-	    var flt2 = flight_exists(cities[i][0], cities[i][1], "AA/AY/BA/CX/EG/IB/JC/JL/JO/KA/LA/LP/MA/NU/QF/RJ/XL/4M", 0);
-	    if (flt2 == 0) {
+	    sector = flight_exists(cities[i][0], cities[i][1], "AA/AY/BA/CX/EG/IB/JC/JL/JO/KA/LA/LP/MA/NU/QF/RJ/XL/4M", 0);
+	    if (sector == 0) {
 	      addlog("<b>Error!!! No oneworld service exists " + cities[i][0] + "-" + cities[i][1]);
 		  ++fatalerr;
 	      setowestatus(1,1);
 	      if(!ignoreerrs) { return -1; }
-	      flt2 = cities[i][0] + "-" + cities[i][1];
+	      sector = cities[i][0] + "-" + cities[i][1];
 	    }
 
 	    /* Calculate distance A->B and # of points/miles earned */
@@ -1605,9 +1614,20 @@ function validateowe()
 	    var eamap = earn_mapper(earn_map, dist);
 	    if (eamap != null) {
 	      var sx = find_owe_continent(cities[i][0])+"-"+find_owe_continent(cities[i][1]);
-	      add_award(eamap[1],eamap[3],eamap[4], flt2, sx, dist);
+	      add_award(eamap[1],eamap[3],eamap[4], sector, sx, dist);
 	    }
 	    tdist += dist;
+	 }
+
+	// now do duplicate sector processing
+	if(sector != "") {
+		 if((sectors[sector] === null) || (sectors[sector] === undefined)) {
+	 		sectors[sector] = 1;	// remember in case we see this sector again
+	 	} else {
+	 		++fatalerr;
+		 	addlog("<b>Error!!!   Duplicate sector " + sector);
+			setowestatus(1,1);
+	 	}
 	 }
   }
 
@@ -2196,11 +2216,11 @@ var addthis_share = {
 		    <td align="right">From:</td><td><input id=owplanfrom size=4></td></tr>
         <tr><td align="right">Less than X miles:</td><td><input id=owplanlt size=4></td>
 		    <td align="right">To:</td><td><input id=owplanto size=4></td></tr>
-		<tr><td colspan=2>&nbsp;<br>
-			Require specific cabin:<br>
-			Any:<input id="cabins" type="radio" CHECKED value="y" name="cabins">&nbsp;&nbsp;
-			Pr. Econ:<input id="cabins" type="radio" value="p" name="cabins">&nbsp;&nbsp;
-			Bus.:<input id="cabins" type="radio" value="j" name="cabins">&nbsp;&nbsp;
+		<tr><td align="left" colspan=4>Require specific cabin:</td></tr>
+		<tr><td align="right" colspan=4>
+			Any:<input id="cabins" type="radio" CHECKED value="y" name="cabins">&nbsp;|&nbsp;&nbsp;
+			Pr. Econ:<input id="cabins" type="radio" value="p" name="cabins">&nbsp;|&nbsp;&nbsp;
+			Bus.:<input id="cabins" type="radio" value="j" name="cabins">&nbsp;|&nbsp;&nbsp;
 			First:<input id="cabins" type="radio" value="f" name="cabins">
 		</td></tr>
 	</table>

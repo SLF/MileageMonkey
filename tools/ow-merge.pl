@@ -531,6 +531,7 @@ sub init_cabins {
 	$cabins{"AYM11"} = "jy"; 
 	
 	$cabins{"BA142"} = "jy"; 
+	$cabins{"BA146"} = "jy"; 
 	$cabins{"BA318"} = "jy"; 
 	$cabins{"BA319"} = "jy"; 
 	$cabins{"BA320"} = "jy"; 
