@@ -2,24 +2,24 @@
 <html><head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <title>MileageMonkey</title>
-<style>
+<style type="text/css">
 TABLE {
         FONT-FAMILY: sans-serif ; font-size: 8pt
 }
 TH {
-	WIDTH: 40px; COLOR: white; HEIGHT: 30px; BACKGROUND-COLOR: navy
+	WIDTH: 40px; COLOR: white; HEIGHT: 30px; BACKGROUND-COLOR: #000080
 }
 TD.cities {
         FONT-FAMILY: courier
 }
 TD.award {
-	COLOR: white; BACKGROUND-COLOR: navy
+	COLOR: white; BACKGROUND-COLOR: #000080
 }
 TD.gray {
         BACKGROUND-COLOR: #afafaf ; color: #cc3333
 }
 TR.green {
-	DISPLAY: none; BACKGROUND-COLOR: gold
+	DISPLAY: none; BACKGROUND-COLOR: #FFD700
 }
 TR.coddx {
 	BACKGROUND-COLOR: #adbee7
@@ -28,10 +28,10 @@ TR.cevenx {
 	BACKGROUND-COLOR: #badcfc
 }
 TR.codd {
-	BACKGROUND-COLOR: gold
+	BACKGROUND-COLOR: #FFD700
 }
 TR.ceven {
-	BACKGROUND-COLOR: goldenrod
+	BACKGROUND-COLOR: #DAA520
 }
 </style>
 
@@ -46,15 +46,12 @@ var primeloc = "http://www.slfft.org/mm/award.htm"; // needed by AddThis later
 var host=window.location.host;
 
 
-var apikey={
-    'slfft.org':     'ABQIAAAABEV2yaMMjE_f4-tw0ZRh7BRCIXOWMLzpV6CUqT9MJySkZqgXvBTIkQdPI_vtjtDOdZheLJ4q_ztWHQ'
-		,
-    'www.slfft.org': 'ABQIAAAABEV2yaMMjE_f4-tw0ZRh7BRCIXOWMLzpV6CUqT9MJySkZqgXvBTIkQdPI_vtjtDOdZheLJ4q_ztWHQ'
-		,
-    'mileagemonkey.net':     'ABQIAAAABEV2yaMMjE_f4-tw0ZRh7BS356nhPNpwJXwbk-TtBWmbOInrhhQS4QWpFBx6POMrjIworpoT55kJtQ'
-		,
+var apikey = {
+    'slfft.org':     'ABQIAAAABEV2yaMMjE_f4-tw0ZRh7BRCIXOWMLzpV6CUqT9MJySkZqgXvBTIkQdPI_vtjtDOdZheLJ4q_ztWHQ',
+    'www.slfft.org': 'ABQIAAAABEV2yaMMjE_f4-tw0ZRh7BRCIXOWMLzpV6CUqT9MJySkZqgXvBTIkQdPI_vtjtDOdZheLJ4q_ztWHQ',
+    'mileagemonkey.net':     'ABQIAAAABEV2yaMMjE_f4-tw0ZRh7BS356nhPNpwJXwbk-TtBWmbOInrhhQS4QWpFBx6POMrjIworpoT55kJtQ',
     'www.mileagemonkey.net': 'ABQIAAAABEV2yaMMjE_f4-tw0ZRh7BS356nhPNpwJXwbk-TtBWmbOInrhhQS4QWpFBx6POMrjIworpoT55kJtQ'
-  }[host];
+}[host];
 
 document.write(
   '<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=' + apikey +
@@ -1893,7 +1890,7 @@ function oweplanhelp()
     "allowing you to make the best use of a AONEx ticket by choosing routes with F. "+
     "Note that this is only an approximation; the data is incomplete - if you notice a "+
     "discrepancy (e.g. a route on which F is offered but it is shown as Y & J only), please report this.\n" +
-    "\nThe 'Map' button will take the city in the 'From' box and produce a Google Map of the location"
+    "\nThe 'Map' button will take the city in the 'From' box and produce a Google map of the location"
     );
 }
 
@@ -1993,35 +1990,41 @@ function initialize() {
   <TBODY>
 <tr bgcolor="#eeffee">
 <td colspan=5>
-<b>MileageMonkey v0.95034 /
-<a href="javascript:toggleLayer('info');" title="">Copyright &copy; &amp; Tool information</a> /
-<a href="changelog.htm" target="_blank" title="">Change log</a> /
-Discussion: (
+<table border=0><tr>
+<td><a href="http://www.slfft.org/mm/award.htm" target="_blank"><b>Mileage Monkey</b></a>
+v0.95034
+(<a href="http://www.mileagemonkey.net/mm/award.htm" target="_blank">mirror site</a>)
+|</td><td>
+<a href="javascript:toggleLayer('info');" title="">Copyright &copy; &amp; Tool information</a>
+|</td><td>
+<a href="changelog.htm" target="_blank" title="">Change log</a>
+|</td><td>
+Discussion:
 <a href="http://www.flyertalk.com/forum/showthread.php?p=6954703#post6954703" target="_blank">FT</a>
 <a href="http://milepoint.com/forums/threads/mileage-monkey.2683/" target="_blank">MP</a>
 <a href="http://www.australianfrequentflyer.com.au/community/your-questions/mileage-monkey-status-updates-29380.html" target="_blank">AFF</a>
-) /
-
+|</td><td>
 <!-- Twitter button-->
 <a href="http://www.twitter.com/MileageMonkey" target="_blank"><img src="http://twitter-badges.s3.amazonaws.com/t_mini-b.png"
 	alt="Follow MileageMonkey on Twitter" title="Follow MileageMonkey on Twitter" border=0></a>
-
+</td><td>
 <!-- Google +1 button -->
 <g:plusone size="small" count="false" href="http://www.slfft.org/mm/award.htm"></g:plusone>
-
+</td><td>
 <!-- Facebook Like button -->
 <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.slfft.org%2Fmm%2Faward.htm&amp;send=false&amp;layout=button_count&amp;width=100&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0"
 style="border:none; overflow:hidden; width:100px; height:21px;" allowTransparency="true"></iframe>
 <!-- end Facebook like button -->
+</td>
+</tr></table>
 
-</b>
 <div id="info" style="display: none">
 <br>
 <b>This utility will calculate the # of miles needed for a Frequent Flyer award, and also help plan a OneWorld Explorer ticket</b><br>
 &nbsp;<br>
 <em>
 Jordan Hargrave originally wrote this tool, and most of the clever stuff is his doing.
-<a href="http://www.flyertalk.com/forum/private.php?do=newpm&u=41952" target="_blank">SLF</a>
+<a href="http://www.flyertalk.com/forum/private.php?do=newpm&amp;u=41952" target="_blank">SLF</a>
 has been maintaining
 it in recent times with updated flight schedules, changes to OWE rules and some feature enhancements.
 
@@ -2030,7 +2033,7 @@ the latest developments of Mileage Monkey on Twitter - news will be posted there
 
 <br>&nbsp;<br>
 Copyright &copy; 2004-2008 by <a href="mailto:jordan_hargrave%3Cdelete%20me%20nospam%3E@hotmail.com">Jordan Hargrave</a>, All Rights Reserved.<br>
-Parts copyright &copy; 2006-2011 <a href="http://www.flyertalk.com/forum/private.php?do=newpm&u=41952" target="_blank">SLF</a>
+Parts copyright &copy; 2006-2011 <a href="http://www.flyertalk.com/forum/private.php?do=newpm&amp;u=41952" target="_blank">SLF</a>
 
 <br>Page counter:
 <!-- Start of StatCounter Code -->
@@ -2041,9 +2044,11 @@ var sc_partition=16;
 var sc_security="b9b2dc33";
 </script>
 
-<script type="text/javascript" language="javascript" src="http://www.statcounter.com/counter/counter.js"></script><noscript><a href="http://www.statcounter.com/" target="_blank"><img  src="http://c17.statcounter.com/counter.php?sc_project=1722342&java=0&security=b9b2dc33&invisible=0" alt="website stat" border="0"></a> </noscript>
+<script type="text/javascript" language="javascript" src="http://www.statcounter.com/counter/counter.js"></script>
+<noscript><a href="http://www.statcounter.com/" target="_blank"><img
+src="http://c17.statcounter.com/counter.php?sc_project=1722342&amp;java=0&amp;security=b9b2dc33&amp;invisible=0" alt="website stat" border="0"></a> </noscript>
 <!-- End of StatCounter Code -->
-
+</em>
 </div>
   </td>
 </tr>
@@ -2071,21 +2076,7 @@ google_ad_height = 60;
 <script type="text/javascript"
 src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script>
-</tr></td>
-
-
-
-<tr bgcolor="#eeffee"><div id="important" style="display: none">
-<td colspan=5>
-<table border=0 width="100%"><tr><td align="left">
-<b>Mileage Monkey</b> lives at:
-<a href="http://www.slfft.org/mm/award.htm" target="_blank"><b>slfft.org</b></a>,
-and on these mirror(s):
-<a href="http://www.mileagemonkey.net/mm/award.htm" target="_blank">mileagemonkey.net</a>.
-</td>
-<td align="right">Scroll down this page for more detail after hitting <b>Go!</b></td></tr>
-</table>
-</div></tr>
+</td></tr>
 
 
 
@@ -2102,10 +2093,12 @@ and on these mirror(s):
     </td>
     <TD rowspan=2>&nbsp;&nbsp;&nbsp;
     	<INPUT onclick="javascript:showaward(fOW); return false;" type=submit value="One-way">
-    	<INPUT onclick="javascript:showaward(fRT); return false;" type=submit value="Return"></td>
+    	<INPUT onclick="javascript:showaward(fRT); return false;" type=submit value="Return">
+    </td>
+    </tr>
 	</table>
    </td><td>
-    	<INPUT onclick=javascript:awardhelp(); type=submit value="?"></TD>
+    	<INPUT onclick="javascript:awardhelp();" type=submit value="?">
 
     </td>
     <td rowspan=8 valign="top">
@@ -2118,39 +2111,39 @@ and on these mirror(s):
 
   <TR>
     <TH class=award>Earning Preference</TH>
-    <TD colSpan=2><INPUT id=earn type=radio CHECKED value="qf" name="earn">QF
-                  <INPUT id=earn type=radio value="ba" name="earn">BA
-<!--                  <INPUT id=earn type=radio value="ib" name="earn">IB -->
-                 <INPUT id=earn type=radio value="la" name="earn">LA
-                  <INPUT id=earn type=radio value="aa" name="earn">AA
+    <TD colSpan=2><INPUT type=radio CHECKED value="qf" name="earn">QF
+                  <INPUT type=radio value="ba" name="earn">BA
+<!--                  <INPUT type=radio value="ib" name="earn">IB -->
+                 <INPUT type=radio value="la" name="earn">LA
+                  <INPUT type=radio value="aa" name="earn">AA
                   </TD>
-    <TD><INPUT onclick=javascript:ephelp(); type=submit value="?">
+    <TD><INPUT onclick="javascript:ephelp();" type=submit value="?">
                   </tr>
 
 <TR>
     <TH class=award>oneworld status</TH>
-    <TD colSpan=2><INPUT id=elite type=radio value="emerald" name="elite">Emerald
-                  <INPUT id=elite type=radio value="sapphire" name="elite">Sapphire
-                  <INPUT id=elite type=radio value="ruby" name="elite">Ruby
-                  <INPUT id=elite type=radio CHECKED value="base" name="elite">Base
+    <TD colSpan=2><INPUT type=radio value="emerald" name="elite">Emerald
+                  <INPUT type=radio value="sapphire" name="elite">Sapphire
+                  <INPUT type=radio value="ruby" name="elite">Ruby
+                  <INPUT type=radio CHECKED value="base" name="elite">Base
                   </TD>
-    <TD><INPUT onclick=javascript:elitehelp(); type=submit value="?">
+    <TD><INPUT onclick="javascript:elitehelp();" type=submit value="?">
 </tr>
 
 <tr><TH class=award>Point-to-Point</TH>
     <TD colSpan=2>Enter list of airports:<BR>eg: lhr-jfk-lax-syd-hkg-lhr<BR>
     <TEXTAREA id=citylist rows=3 cols=25></TEXTAREA></TD>
 
-    <TD><INPUT onclick=javascript:showp2p(); type=submit value="Go!"><br>
-    	<INPUT onclick=javascript:awardhelp(); type=submit value="?">
+    <TD><INPUT onclick="javascript:showp2p();" type=submit value="Go!" title="Scroll page down for more after hitting Go!"><br>
+    	<INPUT onclick="javascript:awardhelp();" type=submit value="?">
     </TD>
 </TR>
 
 <tr>
 <TH class=award>Sharing</TH>
 <td colspan=2>
-<table border=0><tr><td>
 <div id="sharing" style="display: none">
+<table border=0><tr><td>
  <!-- AddThis Button BEGIN -->
 <div class="addthis_toolbox addthis_default_style "
 		addthis:title="I'm planning my RTW trip with @MileageMonkey "
@@ -2189,13 +2182,12 @@ var addthis_share = {
 <!-- AddThis Button END -->
 </td><td>
 <div id="sharelink"></div>
-</td>
- </div>
-</tr>
+</td></tr>
 </table>
+ </div>
 </td>
 
-<TD><INPUT onclick=javascript:sharehelp(); type=submit value="?"><br>
+<TD><INPUT onclick="javascript:sharehelp();" type=submit value="?"><br>
 		</td>
 
 </tr>
@@ -2209,9 +2201,9 @@ var addthis_share = {
 	<input id="ignoreerrors" type="checkbox" name="ignoreerrors">Ignore errors (for expert users!)<br>
     </TD>
 
-    <TD><INPUT onclick=javascript:validateowe(); type=submit value="Go!"><br>
+    <TD><INPUT onclick="javascript:validateowe();" type=submit value="Go!" title="Scroll page down for more after hitting Go!"><br>
     	<div id="owestatus">&nbsp;&nbsp;&nbsp;</div><br>
-    	<INPUT onclick=javascript:owehelp(); type=submit value="?"><br>
+    	<INPUT onclick="javascript:owehelp();" type=submit value="?"><br>
 		</td>
   </TR>
 
@@ -2229,17 +2221,17 @@ var addthis_share = {
 		    <td align="right">To:</td><td><input id=owplanto size=4></td></tr>
 		<tr><td align="left" colspan=4>Require specific cabin:</td></tr>
 		<tr><td align="right" colspan=4>
-			Any:<input id="cabins" type="radio" CHECKED value="y" name="cabins">&nbsp;|&nbsp;&nbsp;
-			Pr. Econ:<input id="cabins" type="radio" value="p" name="cabins">&nbsp;|&nbsp;&nbsp;
-			Bus.:<input id="cabins" type="radio" value="j" name="cabins">&nbsp;|&nbsp;&nbsp;
-			First:<input id="cabins" type="radio" value="f" name="cabins">
+			Any:<input type="radio" CHECKED value="y" name="cabins">&nbsp;|&nbsp;&nbsp;
+			Pr. Econ:<input type="radio" value="p" name="cabins">&nbsp;|&nbsp;&nbsp;
+			Bus.:<input type="radio" value="j" name="cabins">&nbsp;|&nbsp;&nbsp;
+			First:<input type="radio" value="f" name="cabins">
 		</td></tr>
 	</table>
 	</td>
     <TD>
-    	<INPUT onclick="javascript:oweplanner();"  type=submit value="Go!"><br>
+    	<INPUT onclick="javascript:oweplanner();"  type=submit value="Go!" title="Scroll page down for more after hitting Go!"><br>
     	<INPUT onclick="javascript:oweplanhelp();" type=submit value="?"><br>
-    	<input onclick="javascript:owemapfrom();" type=submit value="Map"<br>
+    	<input onclick="javascript:owemapfrom();" type=submit value="Map" title="Generate a map for the 'From' airport"><br>
     	</TD></TR>
 
  <TR>
