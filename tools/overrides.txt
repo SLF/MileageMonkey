@@ -42,6 +42,11 @@ remove SJU-JFK|JL737
 
 
 // BA
+remove LHR-ICN|BA777
+remove ICN-LHR|BA777
+remove LGW-SSH|BA777
+remove SSH-LGW|BA777
+
 flight["LCY-GVA"] = "BAAR1";
 flight["GVA-LCY"] = "BAAR1";
 
