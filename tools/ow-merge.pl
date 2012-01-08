@@ -502,6 +502,9 @@ sub init_cabins {
 # Note: AA entries here should reflect "jy" for two cabin planes, not "fy".  This anomaly
 # is handled above in domestic_us() where "fy" is reported for two cabin domestic services
 # We need "jy" when those same aircraft operate routes outside the US
+
+	$cabins{"4M318"} = "y"; 
+
 	$cabins{"AA738"} = "jy"; 
 	$cabins{"AA757"} = "jy"; 
 	$cabins{"AA762"} = "fjy";
@@ -517,6 +520,9 @@ sub init_cabins {
 	$cabins{"AAM83"} = "jy"; 
 	$cabins{"AASF3"} = "y";  
 	
+	$cabins{"AYAT5"} = "y"; 
+	$cabins{"AYAT7"} = "y"; 
+	$cabins{"AYATR"} = "y"; 
 	$cabins{"AY319"} = "jy"; 
 	$cabins{"AY320"} = "jy"; 
 	$cabins{"AY321"} = "jy"; 
@@ -546,6 +552,9 @@ sub init_cabins {
 	$cabins{"BA777"} = "fjpy";
 	$cabins{"BAAR1"} = "jy";  
 	$cabins{"BAAR8"} = "jy"; 
+	$cabins{"BAAT4"} = "y"; 
+	$cabins{"BAAT7"} = "y"; 
+	$cabins{"BAATR"} = "y"; 
 	$cabins{"BAD38"} = "y";  
 	$cabins{"BADHT"} = "y";  
 	$cabins{"BAE70"} = "jy";
@@ -555,6 +564,7 @@ sub init_cabins {
 	$cabins{"BASF3"} = "y";  
 	
 	$cabins{"CX319"} = "y";  
+	$cabins{"CX321"} = "y";  
 	$cabins{"CX330"} = "jy"; 
 	$cabins{"CX333"} = "fjy";
 	$cabins{"CX343"} = "jy"; 
@@ -575,6 +585,7 @@ sub init_cabins {
 	$cabins{"IBAT7"} = "y";  
 	$cabins{"IBCR2"} = "y";  
 	$cabins{"IBCR9"} = "y";  
+	$cabins{"IBCRK"} = "jy";  
 	$cabins{"IBDH3"} = "y";  
 	$cabins{"IBM88"} = "y";  
 	
@@ -591,6 +602,8 @@ sub init_cabins {
 	$cabins{"JL777"} = "fjpy";
 	$cabins{"JLAB6"} = "y";  
 	$cabins{"JLCRJ"} = "y";  
+	$cabins{"JLE70"} = "y";  
+	$cabins{"JLEMJ"} = "y";  
 	$cabins{"JLM81"} = "y";  
 	$cabins{"JLM90"} = "y";  
 	
@@ -602,8 +615,11 @@ sub init_cabins {
 	$cabins{"KA320"} = "jy"; 
 	$cabins{"KA321"} = "jy"; 
 	$cabins{"KA330"} = "fjy";
+	$cabins{"KA738"} = "jy"; 
 	$cabins{"KA773"} = "fjy";
 	
+	$cabins{"LADH2"} = "y";  
+	$cabins{"LADH4"} = "y";  
 	$cabins{"LA318"} = "y";  
 	$cabins{"LA319"} = "y";  
 	$cabins{"LA320"} = "y";  
@@ -612,9 +628,11 @@ sub init_cabins {
 	$cabins{"LA343"} = "fjy";
 	$cabins{"LA763"} = "jy";  
 	
+	$cabins{"LP318"} = "y";  
 	$cabins{"LP319"} = "y";  
 	$cabins{"LP763"} = "jy"; 
 	
+	$cabins{"MA100"} = "y";  
 	$cabins{"MA736"} = "y";  
 	$cabins{"MA738"} = "jy"; 
 	$cabins{"MA73G"} = "y";  
@@ -653,6 +671,7 @@ sub init_cabins {
 	$cabins{"RJ319"} = "jy"; 
 	$cabins{"RJ320"} = "jy"; 
 	$cabins{"RJ321"} = "jy"; 
+	$cabins{"RJ32S"} = "jy"; 
 	$cabins{"RJ330"} = "jy"; 
 	$cabins{"RJ340"} = "jy"; 
 	$cabins{"RJ342"} = "jy"; 
@@ -666,6 +685,8 @@ sub init_cabins {
 	$cabins{"S7738"} = "jy";
 	$cabins{"S7763"} = "jy";
 
+	$cabins{"XL318"} = "y";  
+	$cabins{"XL320"} = "y";  
 	$cabins{"XL763"} = "y";  
 }
 

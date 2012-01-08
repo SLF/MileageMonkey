@@ -26,10 +26,24 @@ remove JFK-HKG|CX773
 remove HKG-YYZ|CX773
 remove YYZ-HKG|CX773
 remove MAN-LHR|CX320
+remove HAM-LHR|CX320
+remove LHR-HAM|CX320
+remove DUR-JNB|CX733
+remove HND-KMJ|CX73H
+remove YOW-YYZ|CX73W
+remove KMJ-HND|CX767
+remove LHR-ARN|CX320
+remove MUC-LHR|CX320
+
+
+
 flight["HKG-YYZ"] = "CX77A";
 flight["YYZ-HKG"] = "CX77A";
 flight["HKG-JFK"] = "CX77A";
 flight["JFK-HKG"] = "CX77A";
+
+// IB
+
 
 
 // JL
