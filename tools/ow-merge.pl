@@ -22,6 +22,8 @@ use strict;
 
 ######################################################################################
 
+my $debug = 0;
+
 ### input files to this script
 my $inPrimary = "oneworld-x-fldump.txt"; 	# raw timetable data
 my $inOverride = "overrides.txt";			# contains adds/moves/changes which need to be applied
@@ -41,21 +43,29 @@ if(! -d $outdir) {
 
 ######################################################################################
 
+### DEFUNCT airlines
+# define any airlines which are defunct - all flights will be removed.  initialize
+# with zero count - we output the total # flights removed
+my %defunct = (
+	MA	=> 0,
+	MX	=> 0,
+);
+
 my %ow = ( 
 	"4M" => "LAN Argentina",
 	AA => "American Airlines", 
+	AB => "Air Berlin",
 	AY => "Finnair",
 	BA => "British Airways",
 	CX => "Cathay Pacific",
 	IB => "Iberia",
+	HG => "Niki",
 	JC => "JAL Express",
 	JL => "JAL",
 	JO => "JALways",
 	KA => "Dragonair",
 	LA => "LAN",
 	LP => "LAN Peru",
-	MA => "Malev",
-	MX => "Mexicana",
 	NU => "Japan Transocean Air",
 	QF => "Qantas",
 	RJ => "Royal Jordanian",
@@ -89,13 +99,19 @@ loadfile($inPrimary, 0);	# get database
 loadfile($inOverride, 2); 	# subsequent invocations are treated as "extras"
 dumpfile($out1, $out2, "fl");
 
+print ">>> Defunct airlines (all flights removed)\n";
+foreach my $k (sort keys %defunct) {
+	print "$k - $defunct{$k} flights removed\n";
+}
+print "\n";
+
 
 my $header = 1;
 foreach my $k (sort keys %unknown_cities) {
 	next if $k eq "";
 	if($header == 1) {
 		$header = 2;
-		print "Unknown cities (referenced in flights but not found in cities.js):\n";
+		print "!!! ERROR - unknown cities (referenced in flights but not found in cities.js):\n";
 	}
 	print $k, " ";
 }
@@ -128,8 +144,14 @@ sub addService {
 
 	my($airline) = substr($aircraft,0,2);
 	
+	if(defined($defunct{$airline})) {
+		++$defunct{$airline};
+		print "dropping defunct: $citypair, $aircraft, $extras\n" if $debug;
+		return;
+	}
+	
 	if(!defined($ow{uc($airline)})) {
-		warn "Airline $airline isn't in oneworld!!!, ignoring:\n\t$_\n";
+		warn "Airline $airline isn't in oneworld!!!, ignoring ($citypair, $aircraft, $extras):\n\t$_\n";
 		return;
 	}
 
@@ -496,8 +518,12 @@ sub domestic {
 # update the below to correct any defaults...
 ############
 
+# http://www.planespotters.net/Airline/
+
 sub init_cabins {
-	$cabins{"4M763"} = "y";
+	$cabins{"4M318"} = "y";
+	$cabins{"4M320"} = "y";
+	$cabins{"4M763"} = "jy";
 
 # Note: AA entries here should reflect "jy" for two cabin planes, not "fy".  This anomaly
 # is handled above in domestic_us() where "fy" is reported for two cabin domestic services
@@ -519,7 +545,19 @@ sub init_cabins {
 	$cabins{"AAM80"} = "jy"; 
 	$cabins{"AAM83"} = "jy"; 
 	$cabins{"AASF3"} = "y";  
-	
+
+# http://www.planespotters.net/Airline/Air-Berlin
+	$cabins{"AB738"} = "y";
+	$cabins{"AB320"} = "y";		# most are y only, D-ALTK is jy
+	$cabins{"AB321"} = "y";
+	$cabins{"AB319"} = "y";
+	$cabins{"AB73G"} = "y";
+	$cabins{"AB332"} = "jy";	# some are y only, some jy
+	$cabins{"AB333"} = "y";		# unknown ... guessing y
+	$cabins{"ABDH4"} = "y";
+	$cabins{"ABE90"} = "y";
+
+# http://www.planespotters.net/Airline/Finnair	
 	$cabins{"AYAT5"} = "y"; 
 	$cabins{"AYAT7"} = "y"; 
 	$cabins{"AYATR"} = "y"; 
@@ -530,26 +568,27 @@ sub init_cabins {
 	$cabins{"AY333"} = "jy"; 
 	$cabins{"AY340"} = "jy"; 
 	$cabins{"AY343"} = "jy"; 
-	$cabins{"AY75W"} = "jy"; 
-	$cabins{"AYE70"} = "y";  
+	$cabins{"AY75W"} = "y"; 
+	$cabins{"AYE70"} = "jy";  
 	$cabins{"AYE90"} = "y";  
-	$cabins{"AYER4"} = "y";  
-	$cabins{"AYM11"} = "jy"; 
-	
+#	$cabins{"AYER4"} = "y";  
+#	$cabins{"AYM11"} = "jy"; 
+
+# http://www.planespotters.net/Airline/British-Airways
 	$cabins{"BA142"} = "jy"; 
 	$cabins{"BA146"} = "jy"; 
-	$cabins{"BA318"} = "jy"; 
+	$cabins{"BA318"} = "j";  # CWLCY LCY-JFK
 	$cabins{"BA319"} = "jy"; 
 	$cabins{"BA320"} = "jy"; 
 	$cabins{"BA321"} = "jy"; 
 	$cabins{"BA732"} = "jy"; 
 	$cabins{"BA733"} = "jy"; 
 	$cabins{"BA734"} = "jy"; 
-	$cabins{"BA735"} = "jy"; 
 	$cabins{"BA744"} = "fjpy";
-	$cabins{"BA757"} = "jy";  
 	$cabins{"BA767"} = "jpy"; 
-	$cabins{"BA777"} = "fjpy";
+	$cabins{"BA777"} = "fjpy"; # F not on all
+
+# below aren't BA mainline
 	$cabins{"BAAR1"} = "jy";  
 	$cabins{"BAAR8"} = "jy"; 
 	$cabins{"BAAT4"} = "y"; 
@@ -563,17 +602,27 @@ sub init_cabins {
 	$cabins{"BAJ31"} = "y";  
 	$cabins{"BASF3"} = "y";  
 	
-	$cabins{"CX319"} = "y";  
-	$cabins{"CX321"} = "y";  
+# http://www.planespotters.net/Airline/Cathay-Pacific
+#	$cabins{"CX319"} = "y";  
+#	$cabins{"CX321"} = "y";  
 	$cabins{"CX330"} = "jy"; 
 	$cabins{"CX333"} = "fjy";
-	$cabins{"CX343"} = "jy"; 
+	$cabins{"CX343"} = "fjy";  # 343s have mixed config, some jy, some fjy
 	$cabins{"CX346"} = "fjy";
-	$cabins{"CX737"} = "y";  
+#	$cabins{"CX737"} = "y";  
 	$cabins{"CX744"} = "fjy";
-	$cabins{"CX773"} = "jy"; 
+	$cabins{"CX772"} = "jy";	# 777-200s are all jy
+	$cabins{"CX773"} = "jy"; 	# 777-300 are all jy, 777-300(ER) are fjy, shown as 77A?
 	$cabins{"CX777"} = "fjy";
 	$cabins{"CX77A"} = "fjy";
+	$cabins{"CX77W"} = "fjy";
+
+	$cabins{"HG320"} = "y"; 
+	$cabins{"HG321"} = "y";
+	$cabins{"HG738"} = "y";
+	$cabins{"HG73G"} = "y";
+	$cabins{"HGE90"} = "y"; 
+	$cabins{"HGDH4"} = "y"; 
 	
 	$cabins{"IB319"} = "jy"; 
 	$cabins{"IB320"} = "jy"; 
@@ -600,6 +649,7 @@ sub init_cabins {
 	$cabins{"JL767"} = "jy"; 
 	$cabins{"JL773"} = "fjpy";
 	$cabins{"JL777"} = "fjpy";
+	$cabins{"JL787"} = "fjpy";
 	$cabins{"JLAB6"} = "y";  
 	$cabins{"JLCRJ"} = "y";  
 	$cabins{"JLE70"} = "y";  
@@ -612,25 +662,29 @@ sub init_cabins {
 	$cabins{"JO767"} = "jy"; 
 	$cabins{"JO777"} = "jy"; 
 	
+# http://www.planespotters.net/Airline/DragonAir
 	$cabins{"KA320"} = "jy"; 
 	$cabins{"KA321"} = "jy"; 
 	$cabins{"KA330"} = "fjy";
+	$cabins{"KA333"} = "fjy";	# 333 is a mix of jy, fjy
 	$cabins{"KA738"} = "jy"; 
 	$cabins{"KA773"} = "fjy";
-	
+
+# http://www.planespotters.net/Airline/LAN-Airlines
 	$cabins{"LADH2"} = "y";  
 	$cabins{"LADH4"} = "y";  
 	$cabins{"LA318"} = "y";  
 	$cabins{"LA319"} = "y";  
 	$cabins{"LA320"} = "y";  
 	$cabins{"LA32S"} = "y";  
-	$cabins{"LA340"} = "fjy";
-	$cabins{"LA343"} = "fjy";
+	$cabins{"LA340"} = "jy";
+	$cabins{"LA343"} = "jy";
+	$cabins{"LA737"} = "y"; 	# Poss. Lan Colombia (not yet a OW affiliate as of Mar 2012)
 	$cabins{"LA763"} = "jy";  
-	
+
+# 	http://www.planespotters.net/Airline/Lan-Peru
 	$cabins{"LP318"} = "y";  
 	$cabins{"LP319"} = "y";  
-	$cabins{"LP763"} = "jy"; 
 	
 	$cabins{"MA100"} = "y";  
 	$cabins{"MA736"} = "y";  

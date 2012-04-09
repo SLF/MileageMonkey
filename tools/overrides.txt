@@ -7,11 +7,47 @@
 //   a mistake
 //===========================================================================
 
+// 25 Mar 2012
+remove NCE-LHR|CX320
+remove HND-MYJ|CX73H
+remove KMJ-HND|CX73H
+remove MYJ-HND|CX73H
+remove YYZ-YOW|CX73W
+remove DUS-LHR|CX319
+remove HEL-MXP|CX319
+remove PRG-LHR|CX320
+remove TXL-LHR|CX320
+remove HKG-XMN|CX321
+remove MAN-LHR|CX321
+remove XMN-HKG|CX321
+remove ZRH-LHR|CX321
 
+# Mar 25 2012 TT wrong?  Not Op by LP, as LP don't have 763s
+remove LIM-MEX|LP763
+remove MEX-LIM|LP763
 
-// added 10 Apr 2010
-flight["ORD-HKG"] = "CX77A";
-flight["HKG-ORD"] = "CX77A";
+remove HKG-TPE|KA773
+remove TPE-HKG|KA773
+
+# KA don't have 738s, this is old
+remove HKG-TSN|KA738
+remove TSN-HKG|KA738
+
+# Op by IB
+remove LHR-MAD|BA346
+remove MAD-LHR|BA346
+
+remove IQQ-SCL|LP320
+remove IQQ-SCL|4M320
+
+// these are from April 2011
+remove AKJ-HND|CXM90
+remove AOJ-HND|CXM90
+remove HND-AKJ|CXM90
+remove HND-AXT|CXM90
+remove HND-HIJ|CXM90
+remove KCZ-HND|CXM90
+remove MYJ-HND|CXM90
 
 
 
@@ -19,7 +55,7 @@ flight["HKG-ORD"] = "CX77A";
 
 // CX
 
-// these CX services are provided on 77A eqpt., which is manually added
+// these CX services are provided on 77W eqpt.
 // below. The OW timetable shows them as 773 (2-class)
 remove HKG-JFK|CX773
 remove JFK-HKG|CX773
@@ -37,10 +73,6 @@ remove MUC-LHR|CX320
 
 
 
-flight["HKG-YYZ"] = "CX77A";
-flight["YYZ-HKG"] = "CX77A";
-flight["HKG-JFK"] = "CX77A";
-flight["JFK-HKG"] = "CX77A";
 
 // IB
 
@@ -61,45 +93,9 @@ remove ICN-LHR|BA777
 remove LGW-SSH|BA777
 remove SSH-LGW|BA777
 
-flight["LCY-GVA"] = "BAAR1";
-flight["GVA-LCY"] = "BAAR1";
-
-flight["LCY-LYS"] = "BAAR1";
-flight["LYS-LCY"] = "BAAR1";
 
 // AY
-//flight["IST-HEL"] = "AY319";
-//flight["HEL-IST"] = "AY319";
 
-
-
-
-// these flights are in the OW TT (online) but not in the dump, so need to be added to the latest dump
-
-//flight["BGI-BOS"] = "AA757";
-
-
-// added 4 Jul 2008
-//
-//flight["JFK-SJO"] = "AAAB6";
-//flight["SJO-JFK"] = "AAAB6";
-
-//flight["CCS-EZE"] = "LP763";
-// no EZE-CCS that I can find
-
-flight["YUL-UVF"] = "AA738";
-// YUL-UVF is summer.  No UVF-YUL.
-
-
-flight["LAX-YUL"] = "AAM80";
-//flight["YUL-LAX"] = "AAM80";
-// can't find YUL-LAX anymore
-
-//flight["SCL-YYZ"] = "LA763";
-//flight["JFK-YYZ"] = "LA763";
-
-//flight["YYZ-SCL"] = "LA763";
-//flight["YYZ-JFK"] = "LA763";
 
 
 
