@@ -53,8 +53,9 @@ var earn_map    = qf_scmap;
 var earn_help   = qf_help;
 var earn_elite  = "base";  // or ruby, sapphire, emerald
 
-var at_oweparams = "";
-var at_p2pparams = "";
+var 
+	at_oweparams = "",
+	at_p2pparams = "";
 
 function findElement(id)
 {
@@ -262,9 +263,7 @@ function loadearn()
 //=============================
 function deg2rad(deg)
 {
-  with (Math) {
-    return deg * PI / 180.0;
-  }
+    return deg * Math.PI / 180.0;
 }
 
 /* Searches MAP structure.. format is
@@ -1110,8 +1109,10 @@ function showaward(flag)
 // requires that "at_oweparams" and "at_p2pparams" are pre-set with "escaped" HTML
 function setlinks()
 {
-	var at_params = "?";
-	var need_amp = 0;
+	var 
+		at_params = "?",
+		need_amp = 0,
+		param;
 
 	if(at_oweparams.length > 2) {
 		if(need_amp) { at_params += "&"; }
@@ -1123,11 +1124,47 @@ function setlinks()
 		at_params += "p2p=" + at_p2pparams;
 		need_amp = 1;
 	}
+	
+// handle OWE Planner section
+	param = getTextValue('owplanfrom');
+	if(param.length > 1) {
+		if(need_amp) { at_params += "&"; }
+		at_params += "owplanfrom=" + escape(param);
+		need_amp = 1;
+	}
+	param = getTextValue('owplanto');
+	if(param.length > 1) {
+		if(need_amp) { at_params += "&"; }
+		at_params += "owplanto=" + escape(param);
+		need_amp = 1;
+	}
+	param = getTextValue('owplangt');
+	if(param.length > 1) {
+		if(need_amp) { at_params += "&"; }
+		at_params += "owplangt=" + escape(param);
+		need_amp = 1;
+	}
+	param = getTextValue('owplanlt');
+	if(param.length > 1) {
+		if(need_amp) { at_params += "&"; }
+		at_params += "owplanlt=" + escape(param);
+		need_amp = 1;
+	}
+	
+	param = getRadioSetting('cabins');	// returns a text value; e.g. y,p,j, or f
+	if(param.length > 0) {
+		if(need_amp) { at_params += "&"; }
+		at_params += "cabins=" + escape(param);
+		need_amp = 1;
+	}
+	
+// end OWE Planner section
+	
 
 	var at_link = primeloc + at_params;
 
 	var sharelinkloc = findElement('sharelink');
-	sharelinkloc.innerHTML = '<a href="' + at_params + '">Link to itinerary</a>';
+	sharelinkloc.innerHTML = '<a href="' + at_params + '">Link to ...</a>';
     window.addthis.update("share", "url", at_link); // update the AddThis share URL
     showLayer('sharing',1);
 }
@@ -1698,6 +1735,7 @@ function oweplanner()
   clearall();
   setearn();
   sethelp("Click on table header to sort contents");
+  setlinks();
 
   /* --== Check input values ==-- */
   if (from == "" && to == "" && migt == "" && milt == "") {
@@ -1901,20 +1939,66 @@ function Querystring_get(key, default_) {
 function initialize() {
 	loadearn();
 	var qs = new Querystring();
-	var loadcitylist;
+	var param, field, needOWEPlanner;
 
-	loadcitylist = qs.get("p2p","");
-	if(loadcitylist.length > 4) {
-		var cl = findElement('citylist');
-		cl.innerHTML = loadcitylist;
+	param = qs.get("p2p","");
+	if(param.length > 4) {
+		field = findElement('citylist');
+		field.innerHTML = param;
 		showp2p();
 	}
 
-	loadcitylist = qs.get("owe","");
-	if(loadcitylist.length > 4) {
-		var ocl = findElement('owecitylist');
-		ocl.innerHTML = loadcitylist;
+	param = qs.get("owe","");
+	if(param.length > 4) {
+		field = findElement('owecitylist');
+		field.innerHTML = param;
 		validateowe();
 	}
+	
+// check the OWE planner section (5 inputs in total)
+	needOWEPlanner = 0;	// assume none present
+	param = qs.get("owplangt","");
+	if(param.length > 0) {
+		field = findElement('owplangt');
+		field.value = param;
+		needOWEPlanner = 1;
+	}
+
+	param = qs.get("owplanlt","");
+	if(param.length > 0) {
+		field = findElement('owplanlt');
+		field.value = param;
+		needOWEPlanner = 1;
+	}
+	
+	param = qs.get("owplanfrom","");
+	if(param.length > 1) {
+		field = findElement('owplanfrom');
+		field.value = param;
+		needOWEPlanner = 1;
+	}
+
+	param = qs.get("owplanto","");
+	if(param.length > 1) {
+		field = findElement('owplanto');
+		field.value = param;
+		needOWEPlanner = 1;
+	}
+	
+	param = qs.get("cabins","");
+	if(param.length > 0) {
+		var
+			i,
+			cabin_array = document.getElementsByName('cabins');
+		
+		for(i=0, len = cabin_array.length; i < len; i++) {
+			cabin_array[i].checked = (cabin_array[i].value == param) ? true : false;
+  		}
+		// don't need to set needOWEPlanner if only this item is selected
+	}
+
+	if(needOWEPlanner) { oweplanner(); }
+// end of OWE planner section
+	
 }
 //==================================================================================
