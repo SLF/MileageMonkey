@@ -9,9 +9,13 @@ set UPLOAD=..\upload
 @echo Before running this batch file, you may want to have updated files in ..\mm
 @echo such as changelog.htm, version.txt, award.js etc.
 @echo.
-@echo about to run scanow.pl
+@echo about to run ow-merge.pl
 @echo.
-rem perl ow-merge.pl
+perl ow-merge.pl
+
+@echo.
+@echo about to merge files
+@echo.
 
 cd %MMDIR%
 
