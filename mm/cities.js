@@ -370,6 +370,7 @@ citycodes["BEJ"] = [ "ID", 2.1533, 117.4311 ];
 citycodes["BEL"] = [ "BR", -1.3847, -48.4789 ];
 citycodes["BEN"] = [ "LY", 32.0975, 20.2708 ];
 citycodes["BEP"] = [ "IN", 15.1628, 76.8828 ];
+citycodes["BER"] = [ "DE", 52.366667,13.503333 ];
 citycodes["BES"] = [ "FR", 48.4472, -4.4217 ];
 citycodes["BET"] = [ "US-AK", 60.7798, -161.8380 ];
 citycodes["BEU"] = [ "AU", -24.3467, 139.4600 ];
@@ -3790,6 +3791,7 @@ citycodes["REX"] = [ "MX", 26.0083, -98.2283 ];
 citycodes["RFD"] = [ "US", 42.1954, -89.0972 ];
 citycodes["RFP"] = [ "PF", -16.7231, -151.4669 ];
 citycodes["RGA"] = [ "AR", -53.7775, -67.7500 ];
+citycodes["RGK"] = [ "RU", 51.966667,85.833333 ];
 citycodes["RGI"] = [ "PF", -14.9553, -147.6578 ];
 citycodes["RGL"] = [ "AR", -51.6089, -69.3128 ];
 citycodes["RGN"] = [ "MM", 16.9069, 96.1343 ];
@@ -5425,7 +5427,6 @@ countrysyns["AZ"] = "AZ|AZ-NX";
  * first to match better flights (eg. LHR has preference over LGW)
  */
 var citysyns = new Array;
-citysyns["BER"] = "THF|SXF|TXL";
 citysyns["BFS"] = "BHD";
 citysyns["BJS"] = "PEK";
 citysyns["BUE"] = "EZE|AEP";
