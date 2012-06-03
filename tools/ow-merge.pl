@@ -604,7 +604,7 @@ sub init_cabins {
 	
 # http://www.planespotters.net/Airline/Cathay-Pacific
 #	$cabins{"CX319"} = "y";  
-#	$cabins{"CX321"} = "y";  
+#	$cabins{"CX321"} = "jy";  
 	$cabins{"CX330"} = "jy"; 
 	$cabins{"CX333"} = "fjy";
 	$cabins{"CX343"} = "fjy";  # 343s have mixed config, some jy, some fjy

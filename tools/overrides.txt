@@ -10,24 +10,18 @@
 // 25 Mar 2012
 remove NCE-LHR|CX320
 remove HND-MYJ|CX73H
-remove KMJ-HND|CX73H
 remove MYJ-HND|CX73H
 remove YYZ-YOW|CX73W
 remove DUS-LHR|CX319
-remove HEL-MXP|CX319
 remove PRG-LHR|CX320
 remove TXL-LHR|CX320
 remove HKG-XMN|CX321
-remove MAN-LHR|CX321
 remove XMN-HKG|CX321
 remove ZRH-LHR|CX321
 
 # Mar 25 2012 TT wrong?  Not Op by LP, as LP don't have 763s
 remove LIM-MEX|LP763
 remove MEX-LIM|LP763
-
-remove HKG-TPE|KA773
-remove TPE-HKG|KA773
 
 # KA don't have 738s, this is old
 remove HKG-TSN|KA738
@@ -40,17 +34,6 @@ remove MAD-LHR|BA346
 remove IQQ-SCL|LP320
 remove IQQ-SCL|4M320
 
-// these are from April 2011
-remove AKJ-HND|CXM90
-remove AOJ-HND|CXM90
-remove HND-AKJ|CXM90
-remove HND-AXT|CXM90
-remove HND-HIJ|CXM90
-remove KCZ-HND|CXM90
-remove MYJ-HND|CXM90
-
-
-
 // added 21 Oct 2008
 
 // CX
@@ -61,13 +44,9 @@ remove HKG-JFK|CX773
 remove JFK-HKG|CX773
 remove HKG-YYZ|CX773
 remove YYZ-HKG|CX773
-remove MAN-LHR|CX320
 remove HAM-LHR|CX320
 remove LHR-HAM|CX320
-remove DUR-JNB|CX733
-remove HND-KMJ|CX73H
 remove YOW-YYZ|CX73W
-remove KMJ-HND|CX767
 remove LHR-ARN|CX320
 remove MUC-LHR|CX320
 
@@ -88,10 +67,6 @@ remove SJU-JFK|JL737
 
 
 // BA
-remove LHR-ICN|BA777
-remove ICN-LHR|BA777
-remove LGW-SSH|BA777
-remove SSH-LGW|BA777
 
 
 // AY
