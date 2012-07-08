@@ -1484,9 +1484,17 @@ function check_owe_endrules(from,to)
 //=========================================
 function map_country(apt)
 {
-  var fc = find_country(apt);
-  if (matchlist("us|ca|pr|vi", fc) >= 0) { return "us|ca|pr|vi"; }
-  if (matchlist("dk|se|no", fc) >= 0)    { return "dk|se|no"; }
+  var 	fc = find_country(apt),
+  		usacan = countrysyns["US"] + "|ca|pr|vi",
+  		csy, ufc;
+  		
+  usacan = usacan.toLowerCase();
+  ufc = fc.toUpperCase();
+  csy = countrysyns[ufc.substr(0,2)];
+
+  if (matchlist(usacan, fc) >= 0) 		{ return usacan; }
+  if (matchlist("dk|se|no", fc) >= 0)	{ return "dk|se|no"; }
+  if (matchlist(csy, fc) >= 0)			{ return csy; }
   return fc;
 }
 

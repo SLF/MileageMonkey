@@ -5422,6 +5422,9 @@ countrysyns["MU"] = "MU|MU-RO";
 countrysyns["MY"] = "MY|MY-12|MY-13";
 countrysyns["AO"] = "AO|AO-CAB";
 countrysyns["AZ"] = "AZ|AZ-NX";
+countrysyns["AE"] = "AE|AE-AZ|AE-AJ|AE-FU|AE-SH|AE-DU|AE-RK|AE-UQ";
+countrysyns["MY"] = "MY|MY-12|MY-13";
+countrysyns["ID"] = "ID|ID-JW|ID-KA|ID-MA|ID-IJ|ID-SL|ID-SM";
 
 /* These are synonyms for cities. If more than one exists, use primary airport
  * first to match better flights (eg. LHR has preference over LGW)

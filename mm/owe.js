@@ -145,7 +145,7 @@ var owe_rulemap = [
 /* Valid starting/ending zones for OWE explorers */
 var owe_end_rules = [
   "***",        /* within country of origin - replaced later */
-  "us|ca|pr|vi",/* between usa/canada */
+  "us|us-ak|us-hi|ca|pr|vi",/* between usa/canada */
   "dk|no|se",   /* Denmark/Norway/Sweden are considered one country */
   "hk|cn",      /* between hong kong/china */
   "my|sg",      /* between malaysia/singapore */
