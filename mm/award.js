@@ -370,6 +370,7 @@ function matchlist(zm, str)
 {
   var exclude = 0;
 
+  if(typeof(zm) == "undefined") { return -1; }
   if (zm === null) { return -1; }
 
   var zlist = zm.split('|');
