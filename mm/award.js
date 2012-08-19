@@ -368,8 +368,6 @@ function find_owe_continent(airport)
 //========================================================
 function matchlist(zm, str)
 {
-  var exclude = 0;
-
   if(typeof(zm) == "undefined") { return -1; }
   if (zm === null) { return -1; }
 
