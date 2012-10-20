@@ -2761,6 +2761,7 @@ citycodes["MGS"] = [ "CK", -21.8956, -157.9053 ];
 citycodes["MGT"] = [ "AU", -12.0944, 134.8936 ];
 citycodes["MGW"] = [ "US", 39.6431, -79.9164 ];
 citycodes["MGZ"] = [ "MM", 12.4475, 98.6258 ];
+citycodes["MHC"] = [ "CL", -42.488638,-73.775044 ];
 citycodes["MHD"] = [ "IR", 36.2342, 59.6450 ];
 citycodes["MHG"] = [ "DE", 49.4727, 8.5143 ];
 citycodes["MHH"] = [ "BS", 26.5114, -77.0835 ];
