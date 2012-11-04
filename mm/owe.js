@@ -52,7 +52,7 @@ var owe_africa_second_eur_entry = "gh|ke|ng|ug"; // if you change this, you need
 // owe_africa:  all African countries (just add the above two together)
 var owe_africa    = owe_africa2 + "|" + owe_africa_second_eur_entry;
 
-var owe_asia      = "af|pk|in|np|bd|bt|bn|mm|id|sg|mv|my|th|kh|la|vn|cn|mn|kr|jp|ph|tw|hk|lk";
+var owe_asia      = "af|pk|in|np|bd|bt|bn|gu|pw|mm|id|sg|mv|my|th|kh|la|vn|cn|mn|kr|jp|ph|tw|hk|lk";
 var owe_swp       = "au|nz|nc|pg|pf|to|ws";
 
 var owe_tc1       = owe_namerica+"|"+owe_samerica;
