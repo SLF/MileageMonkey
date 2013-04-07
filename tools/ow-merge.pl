@@ -66,6 +66,7 @@ my %ow = (
 	KA => "Dragonair",
 	LA => "LAN",
 	LP => "LAN Peru",
+	MH => "Malaysian",
 	NU => "Japan Transocean Air",
 	QF => "Qantas",
 	RJ => "Royal Jordanian",
