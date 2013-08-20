@@ -2258,6 +2258,7 @@ citycodes["KNF"] = [ "GB", 52.6484, 0.5504 ];
 citycodes["KNG"] = [ "ID", -3.6445, 133.6956 ];
 citycodes["KNH"] = [ "TW", 24.4319, 118.3594 ];
 citycodes["KNK"] = [ "US", 59.4331, -154.8037 ];
+citycodes["KNO"] = [ "ID", 3.637833,98.8705 ];
 citycodes["KNQ"] = [ "NC", -21.0533, 164.8378 ];
 citycodes["KNR"] = [ "IR", 27.8219, 52.3522 ];
 citycodes["KNS"] = [ "AU", -39.8775, 143.8833 ];

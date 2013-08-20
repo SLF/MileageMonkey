@@ -340,6 +340,9 @@ function calcdist(from,to)
 function find_country(airport)
 {
   var cpt = citycodes[airport];
+  if (typeof cpt == 'undefined') {
+  	return "xx";
+  }
   if (cpt === null) {
     return "xx";
   }
@@ -352,6 +355,9 @@ function find_country(airport)
 function find_owe_continent(airport)
 {
   var cc = citycodes[airport];
+  if (typeof cc == 'undefined') {
+  	return "xx";
+  }
   if (cc === null) {
     return "xxx";
   }
