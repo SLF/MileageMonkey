@@ -1170,7 +1170,9 @@ function setlinks()
 
 	var sharelinkloc = findElement('sharelink');
 	sharelinkloc.innerHTML = '<a href="' + at_params + '">Link to ...</a>';
-    window.addthis.update("share", "url", at_link); // update the AddThis share URL
+	if(typeof window.addthis != 'undefined') {
+	   window.addthis.update("share", "url", at_link); // update the AddThis share URL
+	}
     showLayer('sharing',1);
 }
 
