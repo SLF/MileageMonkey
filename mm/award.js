@@ -1165,14 +1165,8 @@ function setlinks()
 	
 // end OWE Planner section
 	
-
-	var at_link = primeloc + at_params;
-
 	var sharelinkloc = findElement('sharelink');
 	sharelinkloc.innerHTML = '<a href="' + at_params + '">Link to ...</a>';
-	if(typeof window.addthis != 'undefined') {
-	   window.addthis.update("share", "url", at_link); // update the AddThis share URL
-	}
     showLayer('sharing',1);
 }
 
