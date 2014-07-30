@@ -61,6 +61,7 @@ my %ow = (
 	IB => "Iberia",
 	HG => "Niki",
 	JC => "JAL Express",
+	JJ => "TAM Airlines",
 	JL => "JAL",
 	JO => "JALways",
 	KA => "Dragonair",
@@ -69,8 +70,11 @@ my %ow = (
 	MH => "Malaysian",
 	NU => "Japan Transocean Air",
 	QF => "Qantas",
+	QR => "Qatar",
 	RJ => "Royal Jordanian",
 	S7 => "S7 Airlines",
+	UL => "Sri Lankan",
+	US => "US Airways",
 	XL => "Lan Ecuador"
 	);
 
