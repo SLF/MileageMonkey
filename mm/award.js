@@ -233,7 +233,7 @@ function loadearn()
 
   if(earnProg.length > 2) {
   	defElite = earnProg.substr(2);
-  	earnPref = earnProg.substr(0,2);
+//  	earnPref = earnProg.substr(0,2);
   }
 
   var radio_array;
@@ -663,6 +663,7 @@ function show_awards(sumit, cabins)
   var ndonex = 0; // special counter for DONEx (F in US instead of J)
   var nd=0;
   var linecount = 0;
+  var earnProg = getRadioSetting('earn');
 
   if (naward == 0) {
     return;
@@ -692,9 +693,15 @@ function show_awards(sumit, cabins)
   for(var i=0; i<naward; i++) {
     var tc = tblcolor[linecount % 2];
     var newline = "<tr class=" + tc + ">";
+	var route = award_tab[i][4];
+	var baCWLCY = 0;	// is this BA's special LCY-JFK service, and is the earn prog==BA?
+
+	if((earnProg == "ba") && ((route == "LCY-JFK") || (route == "JFK-LCY"))) {
+		baCWLCY = 1;
+	}
 
     ny += Math.abs(award_tab[i][0]);
-    nj += Math.abs(award_tab[i][1]);
+    nj += Math.abs(award_tab[i][baCWLCY ? 2 : 1]);
     nf += Math.abs(award_tab[i][2]);
     nd += award_tab[i][5];
 
@@ -703,12 +710,10 @@ function show_awards(sumit, cabins)
 	var hasJ = 1;
 	var hasF = 1;
 
+
 	var services = "";
 
-
-
 	if(cabins) {
-		var route = award_tab[i][4];
 		services = get_flight(route);
 
 		if(!isdefined(services)) {
@@ -724,14 +729,15 @@ function show_awards(sumit, cabins)
 			hasY = hasP = hasJ = hasF = 1;	// db format screwed up ...
 		}
 	}
-
+	
     newline += Ctdstr(award_tab[i][0], hasY);
-    newline += Ctdstr(award_tab[i][1], hasJ);
+    newline += Ctdstr(award_tab[i][baCWLCY ? 2 : 1], hasJ);
     newline += Ctdstr(award_tab[i][2], hasF);
 
-	// special calculation to add up credits for DONEx tickets using segments in US where no
-	// business class is sold, and cabin booked is First.
-	if(!hasJ && hasF) {
+	// special calculation to add up credits for DONEx tickets, two exception cases
+	// 1. using segments in US where no business class is sold, and cabin booked is First
+	// 2. BA operated LCY-JFK & vv; J-only cabin but earns F TPs on BA
+	if(	(!hasJ && hasF) || baCWLCY) {
 		ndonex += Math.abs(award_tab[i][2]);
 	} else {
 		ndonex += Math.abs(award_tab[i][1]);
