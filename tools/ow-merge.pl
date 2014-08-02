@@ -423,7 +423,7 @@ sub get_cabins {
 		# having given a one-time error, let's forge on ... assuming y-only
 	}
 	
-	if(($airline eq "AA") && domestic("us", $cfrom, $cto)) {
+	if((($airline eq "AA") || ($airline eq "US")) && domestic("us", $cfrom, $cto)) {
 		my ($c1) = $cabins{$service};
 		if($c1 eq "jy") {
 			return "fy";
@@ -533,9 +533,6 @@ sub init_cabins {
 # Note: AA entries here should reflect "jy" for two cabin planes, not "fy".  This anomaly
 # is handled above in domestic_us() where "fy" is reported for two cabin domestic services
 # We need "jy" when those same aircraft operate routes outside the US
-
-	$cabins{"4M318"} = "y"; 
-
 	$cabins{"AA319"} = "jy"; 
 	$cabins{"AA32B"} = "jy"; 
 	$cabins{"AA738"} = "jy"; 
@@ -785,23 +782,26 @@ sub init_cabins {
 	$cabins{"UL343"} = "jy";
 	$cabins{"ULCNC"} = "jy";
 	
-	$cabins{"US319"} = "fy";
-	$cabins{"US320"} = "fy";
-	$cabins{"US321"} = "fy";
+# Note: US entries here should reflect "jy" for two cabin planes, not "fy".  This anomaly
+# is handled above in domestic_us() where "fy" is reported for two cabin domestic services
+# We need "jy" when those same aircraft operate routes outside the US
+	$cabins{"US319"} = "jy";
+	$cabins{"US320"} = "jy";
+	$cabins{"US321"} = "jy";
 	$cabins{"US332"} = "jy";
 	$cabins{"US333"} = "jy";
-	$cabins{"US734"} = "fy";
+	$cabins{"US734"} = "jy";
 	$cabins{"US752"} = "jy";
 	$cabins{"US762"} = "jy";
-	$cabins{"USCR7"} = "fy";
-	$cabins{"USCR9"} = "fy";
+	$cabins{"USCR7"} = "jy";
+	$cabins{"USCR9"} = "jy";
 	$cabins{"USCRJ"} = "y";
 	$cabins{"USDH3"} = "y";
 	$cabins{"USDH8"} = "y";
-	$cabins{"USE70"} = "fy";
-	$cabins{"USE75"} = "fy";
-	$cabins{"USE90"} = "fy";
-	$cabins{"USERJ"} = "fy";
+	$cabins{"USE70"} = "jy";
+	$cabins{"USE75"} = "jy";
+	$cabins{"USE90"} = "jy";
+	$cabins{"USERJ"} = "jy";
 
 	$cabins{"XL319"} = "y";  
 	$cabins{"XL320"} = "y";  
