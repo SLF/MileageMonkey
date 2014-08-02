@@ -8,31 +8,33 @@
 //===========================================================================
 
 // 25 Mar 2012
-remove NCE-LHR|CX320
-remove HND-MYJ|CX73H
-remove MYJ-HND|CX73H
-remove YYZ-YOW|CX73W
-remove DUS-LHR|CX319
-remove PRG-LHR|CX320
-remove TXL-LHR|CX320
-remove HKG-XMN|CX321
-remove XMN-HKG|CX321
-remove ZRH-LHR|CX321
+#remove NCE-LHR|CX320
+#remove HND-MYJ|CX73H
+#remove MYJ-HND|CX73H
+#remove YYZ-YOW|CX73W
+#remove DUS-LHR|CX319
+#remove PRG-LHR|CX320
+#remove TXL-LHR|CX320
+#remove HKG-XMN|CX321
+#remove XMN-HKG|CX321
+#remove ZRH-LHR|CX321
 
 # Mar 25 2012 TT wrong?  Not Op by LP, as LP don't have 763s
-remove LIM-MEX|LP763
-remove MEX-LIM|LP763
+#remove LIM-MEX|LP763
+#remove MEX-LIM|LP763
 
 # KA don't have 738s, this is old
-remove HKG-TSN|KA738
-remove TSN-HKG|KA738
+#remove HKG-TSN|KA738
+#remove TSN-HKG|KA738
 
 # Op by IB
 remove LHR-MAD|BA346
 remove MAD-LHR|BA346
+remove LHR-MAD|BA333
+remove MAD-LHR|BA333
 
-remove IQQ-SCL|LP320
-remove IQQ-SCL|4M320
+#remove IQQ-SCL|LP320
+#remove IQQ-SCL|4M320
 
 // added 21 Oct 2008
 
@@ -40,15 +42,15 @@ remove IQQ-SCL|4M320
 
 // these CX services are provided on 77W eqpt.
 // below. The OW timetable shows them as 773 (2-class)
-remove HKG-JFK|CX773
-remove JFK-HKG|CX773
-remove HKG-YYZ|CX773
-remove YYZ-HKG|CX773
-remove HAM-LHR|CX320
-remove LHR-HAM|CX320
-remove YOW-YYZ|CX73W
-remove LHR-ARN|CX320
-remove MUC-LHR|CX320
+#remove HKG-JFK|CX773
+#remove JFK-HKG|CX773
+#remove HKG-YYZ|CX773
+#remove YYZ-HKG|CX773
+#remove HAM-LHR|CX320
+#remove LHR-HAM|CX320
+#remove YOW-YYZ|CX73W
+#remove LHR-ARN|CX320
+#remove MUC-LHR|CX320
 
 
 
@@ -63,7 +65,7 @@ flight["FSZ-FUK"] = "JLEMJ";
 
 flight["CTS-FSZ"] = "JLEMJ";
 flight["FSZ-CTS"] = "JLEMJ";
-remove SJU-JFK|JL737
+#remove SJU-JFK|JL737
 
 
 // BA
@@ -79,12 +81,12 @@ remove SJU-JFK|JL737
 // Syntax:   removeall SRC-DST
 
 // operated by Finncomm (non OW)
-removeall HEL-TKU
-removeall HEL-TLL
-removeall HEL-TMP
-removeall TKU-HEL
-removeall TLL-HEL
-removeall TMP-HEL
+#removeall HEL-TKU
+#removeall HEL-TLL
+#removeall HEL-TMP
+#removeall TKU-HEL
+#removeall TLL-HEL
+#removeall TMP-HEL
 
 // specify flights to be removed entirely here.  Useful if a service is no longer
 // operating between these cities, and it's still in the DB

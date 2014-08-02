@@ -536,17 +536,22 @@ sub init_cabins {
 
 	$cabins{"4M318"} = "y"; 
 
+	$cabins{"AA319"} = "jy"; 
+	$cabins{"AA32B"} = "jy"; 
 	$cabins{"AA738"} = "jy"; 
 	$cabins{"AA757"} = "jy"; 
 	$cabins{"AA762"} = "fjy";
 	$cabins{"AA763"} = "jy"; 
 	$cabins{"AA777"} = "fjy";
+	$cabins{"AA77W"} = "fjy";
 	$cabins{"AAAB6"} = "jy"; 
 	$cabins{"AAAT7"} = "y";  
 	$cabins{"AACR7"} = "jy"; 
+	$cabins{"AACRJ"} = "jy"; 
 	$cabins{"AAER3"} = "y";  
 	$cabins{"AAER4"} = "y";  
 	$cabins{"AAERD"} = "y";  
+	$cabins{"AAE75"} = "jy";  
 	$cabins{"AAM80"} = "jy"; 
 	$cabins{"AAM83"} = "jy"; 
 	$cabins{"AASF3"} = "y";  
@@ -561,6 +566,8 @@ sub init_cabins {
 	$cabins{"AB333"} = "y";		# unknown ... guessing y
 	$cabins{"ABDH4"} = "y";
 	$cabins{"ABE90"} = "y";
+	$cabins{"AB142"} = "y";
+	$cabins{"ABAT7"} = "y";
 
 # http://www.planespotters.net/Airline/Finnair	
 	$cabins{"AYAT5"} = "y"; 
@@ -569,6 +576,7 @@ sub init_cabins {
 	$cabins{"AY319"} = "jy"; 
 	$cabins{"AY320"} = "jy"; 
 	$cabins{"AY321"} = "jy"; 
+	$cabins{"AY32B"} = "jy"; 
 	$cabins{"AY330"} = "jy"; 
 	$cabins{"AY333"} = "jy"; 
 	$cabins{"AY340"} = "jy"; 
@@ -586,12 +594,16 @@ sub init_cabins {
 	$cabins{"BA319"} = "jy"; 
 	$cabins{"BA320"} = "jy"; 
 	$cabins{"BA321"} = "jy"; 
+	$cabins{"BA388"} = "fjpy"; 
 	$cabins{"BA732"} = "jy"; 
 	$cabins{"BA733"} = "jy"; 
 	$cabins{"BA734"} = "jy"; 
+	$cabins{"BA738"} = "jy"; 
 	$cabins{"BA744"} = "fjpy";
+	$cabins{"BA752"} = "jpy"; 
 	$cabins{"BA767"} = "jpy"; 
 	$cabins{"BA777"} = "fjpy"; # F not on all
+	$cabins{"BA788"} = "jpy";
 
 # below aren't BA mainline
 	$cabins{"BAAR1"} = "jy";  
@@ -606,6 +618,7 @@ sub init_cabins {
 	$cabins{"BAFRJ"} = "y";  
 	$cabins{"BAJ31"} = "y";  
 	$cabins{"BASF3"} = "y";  
+	$cabins{"BAS20"} = "y";  
 	
 # http://www.planespotters.net/Airline/Cathay-Pacific
 #	$cabins{"CX319"} = "y";  
@@ -622,6 +635,7 @@ sub init_cabins {
 	$cabins{"CX77A"} = "fjy";
 	$cabins{"CX77W"} = "fjy";
 
+	$cabins{"HG319"} = "y"; 
 	$cabins{"HG320"} = "y"; 
 	$cabins{"HG321"} = "y";
 	$cabins{"HG738"} = "y";
@@ -633,8 +647,10 @@ sub init_cabins {
 	$cabins{"IB320"} = "jy"; 
 	$cabins{"IB321"} = "jy"; 
 	$cabins{"IB32S"} = "y";  
+	$cabins{"IB333"} = "jy"; 
 	$cabins{"IB340"} = "jy"; 
 	$cabins{"IB342"} = "jy";
+	$cabins{"IB345"} = "jy"; 
 	$cabins{"IB346"} = "jy"; 
 	$cabins{"IBAT7"} = "y";  
 	$cabins{"IBCR2"} = "y";  
@@ -647,14 +663,25 @@ sub init_cabins {
 	$cabins{"JC73H"} = "y";  
 	$cabins{"JCM81"} = "y";  
 	
+	$cabins{"JJ319"} = "y";
+	$cabins{"JJ320"} = "jy";
+	$cabins{"JJ321"} = "y";
+	$cabins{"JJ330"} = "fjy";
+	$cabins{"JJ763"} = "jy";
+	$cabins{"JJ773"} = "fjy";
+	$cabins{"JJAT7"} = "y";
+	$cabins{"JJL4T"} = "y";
+
+	
 	$cabins{"JL734"} = "y";  
+	$cabins{"JL737"} = "y";  
 	$cabins{"JL73H"} = "y";  
 	$cabins{"JL744"} = "fjy";
 	$cabins{"JL747"} = "y";  
 	$cabins{"JL767"} = "jy"; 
 	$cabins{"JL773"} = "fjpy";
 	$cabins{"JL777"} = "fjpy";
-	$cabins{"JL787"} = "fjpy";
+	$cabins{"JL788"} = "fjpy";
 	$cabins{"JLAB6"} = "y";  
 	$cabins{"JLCRJ"} = "y";  
 	$cabins{"JLE70"} = "y";  
@@ -686,22 +713,18 @@ sub init_cabins {
 	$cabins{"LA343"} = "jy";
 	$cabins{"LA737"} = "y"; 	# Poss. Lan Colombia (not yet a OW affiliate as of Mar 2012)
 	$cabins{"LA763"} = "jy";  
+	$cabins{"LA787"} = "jy";  
 
 # 	http://www.planespotters.net/Airline/Lan-Peru
 	$cabins{"LP318"} = "y";  
-	$cabins{"LP319"} = "y";  
+	$cabins{"LP319"} = "y"; 
 	
-	$cabins{"MA100"} = "y";  
-	$cabins{"MA736"} = "y";  
-	$cabins{"MA738"} = "jy"; 
-	$cabins{"MA73G"} = "y";  
-	$cabins{"MA73H"} = "y";  
-	$cabins{"MA762"} = "jy"; 
-	$cabins{"MA763"} = "jy"; 
-	$cabins{"MADH4"} = "jy"; 
-	$cabins{"MAEM2"} = "y";  
-	$cabins{"MAF70"} = "y";  
-	$cabins{"MAS20"} = "y";  
+	$cabins{"MH333"} = "jy";  
+	$cabins{"MH380"} = "fjy";  
+	$cabins{"MH734"} = "jy";  
+	$cabins{"MH738"} = "jy";  
+	$cabins{"MH772"} = "jy";  
+
 	
 	$cabins{"NU734"} = "y";  
 	$cabins{"NU767"} = "jy"; 
@@ -725,6 +748,17 @@ sub init_cabins {
 	$cabins{"QFDH8"} = "y";  
 	$cabins{"QFF50"} = "y";  
 	
+	$cabins{"QR319"} = "jy";
+	$cabins{"QR320"} = "jy";
+	$cabins{"QR321"} = "jy";
+	$cabins{"QR332"} = "fjy";
+	$cabins{"QR333"} = "fjy";
+	$cabins{"QR346"} = "fjy";
+	$cabins{"QR77L"} = "jy";
+	$cabins{"QR77W"} = "jy";
+	$cabins{"QR788"} = "jy";
+
+
 	$cabins{"RJ310"} = "jy"; 
 	$cabins{"RJ313"} = "jy"; 
 	$cabins{"RJ319"} = "jy"; 
@@ -740,11 +774,36 @@ sub init_cabins {
 	$cabins{"S7310"} = "jy";
 	$cabins{"S7319"} = "jy";
 	$cabins{"S7320"} = "jy";
+	$cabins{"S7321"} = "jy";
 	$cabins{"S7734"} = "jy";
 	$cabins{"S7738"} = "jy";
 	$cabins{"S7763"} = "jy";
+	
+	$cabins{"UL320"} = "jy";
+	$cabins{"UL321"} = "jy";
+	$cabins{"UL332"} = "jy";
+	$cabins{"UL343"} = "jy";
+	$cabins{"ULCNC"} = "jy";
+	
+	$cabins{"US319"} = "fy";
+	$cabins{"US320"} = "fy";
+	$cabins{"US321"} = "fy";
+	$cabins{"US332"} = "jy";
+	$cabins{"US333"} = "jy";
+	$cabins{"US734"} = "fy";
+	$cabins{"US752"} = "jy";
+	$cabins{"US762"} = "jy";
+	$cabins{"USCR7"} = "fy";
+	$cabins{"USCR9"} = "fy";
+	$cabins{"USCRJ"} = "y";
+	$cabins{"USDH3"} = "y";
+	$cabins{"USDH8"} = "y";
+	$cabins{"USE70"} = "fy";
+	$cabins{"USE75"} = "fy";
+	$cabins{"USE90"} = "fy";
+	$cabins{"USERJ"} = "fy";
 
-	$cabins{"XL318"} = "y";  
+	$cabins{"XL319"} = "y";  
 	$cabins{"XL320"} = "y";  
 	$cabins{"XL763"} = "y";  
 }
