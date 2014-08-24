@@ -1868,9 +1868,10 @@ function oweplanhelp()
     "can get to (on OW services) from a given location/country/continent.\n"+
 	"\nYou may display all flights from/to a city by leaving one of the fields blank. eg. to display all flights from CMH, select CMH in the From: field, and leave To: blank.\n"+
 	"\nYou may test if a flight exists between two cities by specifying a value in both From: and To: fields.\n"+
-	"\nYou may display all flights to/from a country by specifying a country code instead of an airport code (eg. gr for Greece, gb for Great Britain, etc).\n"+
+	"\nYou may display all flights to/from a country by specifying a country code instead of an airport code (eg. gr for Greece, gb for Great Britain, etc). " +
+		"Note that as Russia is split across Asia and Europe, you need to use either 'ru-ue' (east of Urals) or 'ru-uw' (west of Urals) instead of 'ru'. \n"+
 	"\nSpecify continents by using one of the following: ~nam|~sam|~eur|~afr|~asa|~swp\n"+
-	"  for the different OWE regions. (note.. must enter value in From+To otherwise it may be very slow)\n"+
+	"  for the different OWE regions\n"+
 	"\nSort the results by clicking on the Miles or Description header\n"+
         "\nYou may also use an integer in the Greater than/Less than fields, e.g.:\n"+
         "Show all flights under 900 miles from SCL:      From:SCL Less than:900\n"+

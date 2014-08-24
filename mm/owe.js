@@ -2,8 +2,8 @@
  */ 
 
 var owe_hawaii    = "HNL|OGG|KOA|LIH";
-var owe_westcoast = "LAS|LAX|OAK|PDX|SAN|SFO|SJC|SEA|YVR|SNA|LGB";
-var owe_eastcoast = "BWI|BOS|FLL|BDL|MIA|EWR|JFK|LGA|MCO|PHL|SJU|YYZ|IAD|DCA";
+var owe_westcoast = "LAS|LAX|OAK|PHX|PDX|SAN|SFO|SJC|SEA|YVR|SNA|LGB";
+var owe_eastcoast = "BWI|BOS|CLT|CLE|FLL|HFD|BDL|MIA|EWR|JFK|LGA|MCO|PHL|PIT|RDU|SJU|YYZ|IAD|DCA|PBI";
 
 var owe_mideast   = "ae|bh|eg|il|iq|ir|jo|kw|lb|ly|om|qa|sa|sd|sy|ye";
 
@@ -36,7 +36,7 @@ var owe_longhaul  = owe_mideast + "|" +
 var owe_namerica  = "us|us-ak|us-hi|ca|mx|bz|gt|sv|hn|ni|cr|pa|aw|tt|gd|bb|lc|mq|dm|" +
 			"gp|bl|mf|ag|kn|cw|bq|sx|vg|vi|pr|do|ht|jm|cu|ky|bs|bm|ai|tc";
 var owe_samerica  = "co|ve|ec|pe|bo|cl|br|py|uy|ar|fk";
-var owe_europe    = "ie|gb|is|no|se|fi|dk|ru|ee|lv|lt|by|ua|am|az|ge|md|kz|kg|tj|tm|uz|" +
+var owe_europe    = "ie|gb|is|no|se|fi|dk|ru-uw|ee|lv|lt|by|ua|am|az|ge|md|" +
 			"ro|bg|tr|gr|mk|al|yu|ba|hr|si|rs|me|hu|sk|cz|pl|de|ch|it|" +
 			"mt|pt|pt-20|pt-30|es|es-cn|es-ib|gi|fr|be|nl|lu|ma|dz|tn|eg|cy|at|sd|"+owe_mideast;
 
@@ -52,7 +52,7 @@ var owe_africa_second_eur_entry = "gh|ke|ng|ug"; // if you change this, you need
 // owe_africa:  all African countries (just add the above two together)
 var owe_africa    = owe_africa2 + "|" + owe_africa_second_eur_entry;
 
-var owe_asia      = "af|pk|in|np|bd|bt|bn|gu|pw|mm|id|sg|mv|my|th|kh|la|vn|cn|mn|kr|jp|ph|tw|hk|lk";
+var owe_asia      = "af|pk|in|np|bd|bt|bn|gu|pw|mm|id|sg|ru-ue|mv|my|th|kh|la|vn|cn|mn|kr|jp|ph|tw|hk|lk|kz|kg|tj|tm|uz";
 var owe_swp       = "au|nz|nc|pg|pf|to|ws";
 
 var owe_tc1       = owe_namerica+"|"+owe_samerica;

@@ -351,19 +351,29 @@ sub load_cities {
 	my($ccount) = 0;
 	my($countrycount) = 0;
 	my($fin) = @_;
+
 	foreach my $f ( split(/;/,$fin)) {
 		open(IN, "< $f") || die "couldn't open input file $f\n";
 		while(<IN>) {
-			if(/^\s*citycodes\s*\[\s*\"(\w\w\w)\"\s*\]\s*=\s*\[\s*\"(\w\w\-\w\w|\w\w)\"/) {
+			if(/^\s*citycodes\s*\[\s*\"(\w\w\w)\"\s*\]\s*=\s*\[\s*\"(\w\w\-\w{2,3}|\w\w)\"\s*,\s*([\d\.\-]+)\s*,\s*([\d\.\-]+)/) {
 				if(defined($cities{$1})) {
 					print "duplicate city entries for $1:\n\t1:$_\n\t2:$cities{$1}\n";
 				}
-				$cities{$1} = lc($2);
+				my($city) = $1;
+				my($country) = lc($2);
+				my($lat) = $3;
+				my($long) = $4;
+				$cities{$1} = $country;
+				if($country =~ /^ru/) {
+					process_russian_city($city, $country, $lat, $long); # params=(city,country,latitude,longitude)
+				}
 				$country_ref{$2}++;
 				++$ccount;
+			} elsif (/^\s*citycodes/) {
+				warn "failed citycode parse:   $_";
 			}
 
-			if(/^\s*countrycodes\s*\[\s*\"(\w\w\-\w\w|\w\w)\"\s*\]/) {
+			if(/^\s*countrycodes\s*\[\s*\"(\w\w\-\w{2,3}|\w\w)\"\s*\]/) {
 				if(defined($country_def{$1})) {
 					print "duplicate country entries for $1:\n\t1:$_\n\t2:$country_def{$1}\n";
 				}
@@ -386,6 +396,43 @@ sub load_cities {
 
 
 }
+
+# process Russian cities.  OWE rules differ for cities according to which side of the Urals they are
+#  east => the city is in Asia
+#  west => the city is in Europe
+# Here we try to do this programatically, based on longitude 60 East being roughly where the Urals are
+# Some exceptions can be caught in here if needed
+sub process_russian_city {
+	my($city) = shift;
+	my($country) = shift;  # this should be 'ru-ue' (east of Urals) or 'ru-uw' (west of Urals)
+	my($lat) = shift;
+	my($long) = shift;
+	
+	my($is_east) = 0;  # assume city is west of Urals
+	my($msg) = ""; # assume we don't need to show a warning
+
+	if($long > 60) { # if further east than 60E, assume it's east of Urals
+		$is_east = 1;
+	}
+
+	if($country eq "ru") {	# it should be ru-ue or ru-uw (east or west of urals)
+		$msg .= "Country code is just 'ru', it should be 'ru-ue' (east of Urals) or 'ru-uw' (west of Urals). ";
+	}
+	
+	if( (($country eq "ru-ue") && $is_east) ||		# if it's marked as east, and we calculate it so
+		(($country eq "ru-uw") && ! $is_east) ) 	# or if it's marked as west and we agree
+	{
+		# actually do nothing :)
+	} else {
+		$msg = "Marked country ($country) disagrees with our longitude check east/west of Urals ($long) - exception in ow-merge.pl may be needed. ";
+	}
+	
+	if($msg gt "") {
+		warn "Russian city: $city,$country,$lat,$long : $msg\n\tOur guesstimate: " .
+			($is_east ? " (East" : " (West") . " of Urals)";
+	}
+}
+
 
 # check that cities for a flight exist in DB
 sub check_cities {
