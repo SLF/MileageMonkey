@@ -690,6 +690,7 @@ sub init_cabins {
 	$cabins{"IB319"} = "jy"; 
 	$cabins{"IB320"} = "jy"; 
 	$cabins{"IB321"} = "jy"; 
+	$cabins{"IB32B"} = "jy";
 	$cabins{"IB32S"} = "y";  
 	$cabins{"IB333"} = "jy"; 
 	$cabins{"IB340"} = "jy"; 
@@ -812,6 +813,7 @@ sub init_cabins {
 	$cabins{"RJ330"} = "jy"; 
 	$cabins{"RJ340"} = "jy"; 
 	$cabins{"RJ342"} = "jy"; 
+	$cabins{"RJ787"} = "jy";
 	$cabins{"RJE75"} = "y";  
 	$cabins{"RJE95"} = "jy"; 
 	
